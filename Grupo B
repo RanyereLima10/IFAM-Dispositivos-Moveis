@@ -1,1 +1,125 @@
 //Grupo B: Bruno, julio, Yuri e Cauã
+
+import React, { useState } from &#39;react&#39;;
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  StyleSheet,
+} from &#39;react-native&#39;;
+export default function App() {
+  const [mensagem, setMensagem] = useState(&quot;Boa sorte&quot;);
+  const [msg , setMsg] = useState(&quot;Boa sorte&quot;);
+  const [nome, setNome] = useState(&#39;&#39;);
+  const [alerta, setAlerta] = useState(&#39;&#39;);
+  function mostrarMensagem() {
+    if (nome === &#39;&#39;) {
+      setMensagem(&#39;Digite seu nome!&#39;);
+    } else {
+      setMensagem(&#39;Olá, &#39; + nome + &#39;! Seja bem-vindo ��&#39;);
+    }
+  }
+  function mudarMensagem() {
+    if (msg === &quot;Nunca desista dos seus objetivos!&quot;) {
+      setMsg(&#39;Boa sorte&#39;)
+    } else {
+        setMsg(&#39;Nunca desista dos seus objetivos!&#39;)
+      }
+   
+  }
+ 
+  function mostrarAlerta() {
+    if (alerta === &#39;&#39;){
+    setAlerta(&#39;Botão clicado&#39;)}
+  }
+  return (
+    &lt;View style={styles.container}&gt;
+      &lt;Text style={styles.titulo}&gt;
+        Meu Primeiro App
+      &lt;/Text&gt;
+      &lt;Text style={styles.alerta}&gt;{alerta}&lt;/Text&gt;
+
+      &lt;Text style={styles.texto}&gt;
+        Nome do aluno: Bruno Guilherme
+      &lt;/Text&gt;
+      &lt;Text style={styles.texto}&gt;
+        Curso: Informática
+      &lt;/Text&gt;
+      &lt;Text style={styles.motivacao}&gt;{msg}&lt;/Text&gt;
+      &lt;View style={styles.botoes}&gt;
+        &lt;Button
+          title=&quot;Mudar mensagem&quot;
+          onPress={mudarMensagem}
+        /&gt;
+      &lt;/View&gt;
+      &lt;TextInput
+        style={styles.input}
+        placeholder=&quot;Digite seu nome&quot;
+        onChangeText={setNome}
+      /&gt;
+      &lt;View style={styles.botoes}&gt;
+        &lt;Button
+          title=&quot;Mostrar mensagem&quot;
+          onPress={mostrarMensagem}
+        /&gt;
+        &lt;Button
+          title=&quot;Mostrar alerta&quot;
+          onPress={mostrarAlerta}
+        /&gt;
+      &lt;/View&gt;
+      &lt;Text style={styles.resultado}&gt;
+        {mensagem}
+      &lt;/Text&gt;
+    &lt;/View&gt;
+  );
+}
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: &#39;center&#39;,
+    padding: 20,
+    backgroundColor: &#39;#d0ebff&#39;
+  },
+  titulo: {
+
+    fontSize: 26,
+    fontWeight: &#39;bold&#39;,
+    marginBottom: 15,
+    textAlign: &#39;center&#39;,
+    color: &#39;#003366&#39;
+  },
+  texto: {
+    fontSize: 16,
+    marginBottom: 5,
+    textAlign: &#39;center&#39;
+  },
+  alerta: {
+    color: &#39;#FF0000&#39;,
+    fontSize: 25,
+    textAlign: &#39;center&#39;
+  },
+  motivacao: {
+    fontStyle: &#39;italic&#39;,
+    marginBottom: 15,
+    textAlign: &#39;center&#39;,
+    color: &#39;#555&#39;
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: &#39;#999&#39;,
+    padding: 10,
+    marginVertical: 10,
+    borderRadius: 8,
+    backgroundColor: &#39;#fff&#39;
+  },
+  botoes: {
+    marginVertical: 10
+  },
+  resultado: {
+    marginTop: 15,
+    fontSize: 18,
+    color: &#39;blue&#39;,
+    textAlign: &#39;center&#39;
+  }
+});
