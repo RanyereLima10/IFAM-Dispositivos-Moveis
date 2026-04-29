@@ -205,21 +205,28 @@ O aplicativo apresenta uma tela inicial com uma mensagem de boas-vindas e um bot
 Também foram aplicados conceitos de estilização utilizando o StyleSheet, permitindo a personalização de cores, alinhamento e formatação dos textos.
 A atividade contribuiu para o aprendizado dos principais componentes do React Native, como View, Text, Button e Alert, além de reforçar a lógica de programação e organização do código em aplicações móveis.
 
-import React from 'react';
-import { StyleSheet, Text, View, Button, Alert } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, Button } from 'react-native';
 
 export default function App() {
+  const [mensagem, setMensagem] = useState("Bem-vindo!");
+
+  const entrar = () => {
+    setMensagem("Seja bem-vindo ao app!!");
+  };
+
   return (
     <View style={styles.container}>
       
-      <Text style={styles.title}>Olá, seja bem-vindo(a)! </Text>
-      <Text style={styles.subtitle}>Clique no botão para continuar</Text>
+      <Text style={styles.welcomeText}>
+        {mensagem}
+      </Text>
 
       <Button 
-        title="Acessar" 
-        color="#FF8C00"
-        onPress={() => Alert.alert('Você entrou no app! ')} 
+        title="Entrar" 
+        onPress={entrar} 
       />
+
     </View>
   );
 }
@@ -227,20 +234,15 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1E1E2F', // fundo escuro
+    backgroundColor: '#2ADEB0',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  title: {
-    fontSize: 26,
-    marginBottom: 10,
-    fontWeight: 'bold',
-    color: '#FFFFFF',
-  },
-  subtitle: {
-    fontSize: 16,
+  welcomeText: {
+    fontSize: 24,
     marginBottom: 20,
-    color: '#CCCCCC',
+    fontWeight: 'bold',
+    color: '#FFFFFF'
   },
 });
 
