@@ -3272,3 +3272,167 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Yuri Lima Macedo
+DATA:  05/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição da Atividade: Nesta atividade, o aluno: yuri lima macedo deverá desenvolver uma aplicação mobile simples utilizando React Native, com o objetivo de compreender a estrutura básica de um aplicativo. O projeto deve conter uma tela inicial com uma mensagem de boas-vindas e pelo menos um botão interativo. Ao interagir com o botão, o aplicativo deve apresentar uma resposta na tela (ex: alerta, mudança de texto ou ação visual). Também devem ser aplicados conceitos de estilização utilizando StyleSheet, permitindo a personalização de cores, tamanhos e organização dos elementos. A atividade tem como objetivo reforçar o uso de componentes fundamentais como View, Text, Button e Alert, além de desenvolver a lógica de programação e organização do código.
+**********************************************************************/
+import React, { useState } from 'react';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+
+export default function App() {
+
+  const [nome, setNome] = useState("");
+  const [dataNasc, setDataNasc] = useState("");
+  const [mensagem, setMensagem] = useState("");
+
+  // Mostra nome + data de nascimento
+  const mostrarDados = () => {
+
+    if (!nome || !dataNasc) {
+      setMensagem("Preencha nome e data de nascimento!");
+      return;
+    }
+
+    setMensagem(`Olá, ${nome}! Você nasceu em ${dataNasc}.`);
+  };
+
+  return (
+    <View style={styles.container}>
+
+      <Text style={styles.titulo}>Digite seu nome:</Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Nome"
+        onChangeText={setNome}
+      />
+
+      <Text style={styles.titulo}>Data de nascimento:</Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="DD/MM/AAAA"
+        onChangeText={setDataNasc}
+      />
+
+      <Button title="Enviar" onPress={mostrarDados} />
+
+      <Text style={styles.resultado}>{mensagem}</Text>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 20
+  },
+
+  titulo: {
+    fontSize: 18,
+    marginBottom: 10
+  },
+
+  input: {
+    borderWidth: 1,
+    padding: 10,
+    marginBottom: 10
+  },
+
+  resultado: {
+    fontSize: 18,
+    marginTop: 20
+  }
+});
+
+exercicio 4:
+import React, { useState } from 'react';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+
+export default function App() {
+
+  // Estado para armazenar o nome digitado
+  const [nome, setNome] = useState("");
+
+  // Estado para armazenar o curso digitado
+  const [curso, setCurso] = useState("");
+
+  // Estado para exibir a mensagem final
+  const [mensagem, setMensagem] = useState("");
+
+  // Função chamada ao clicar no botão
+  const mostrarAluno = () => {
+
+    // Verifica se os campos estão vazios
+    if (!nome || !curso) {
+      setMensagem("Preencha nome e curso!");
+      return;
+    }
+
+    // Monta a mensagem final
+    setMensagem(`Aluno ${nome} do curso ${curso}`);
+  };
+
+  return (
+    <View style={styles.container}>
+
+      <Text style={styles.titulo}>Digite seu nome:</Text>
+
+      {/* Campo nome */}
+      <TextInput
+        style={styles.input}
+        placeholder="Nome"
+        onChangeText={setNome}
+      />
+
+      <Text style={styles.titulo}>Digite seu curso:</Text>
+
+      {/* Campo curso */}
+      <TextInput
+        style={styles.input}
+        placeholder="Curso"
+        onChangeText={setCurso}
+      />
+
+      {/* Botão */}
+      <Button title="Enviar" onPress={mostrarAluno} />
+
+      {/* Resultado */}
+      <Text style={styles.resultado}>{mensagem}</Text>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 20
+  },
+
+  titulo: {
+    fontSize: 18,
+    marginBottom: 10
+  },
+
+  input: {
+    borderWidth: 1,
+    padding: 10,
+    marginBottom: 10
+  },
+
+  resultado: {
+    fontSize: 18,
+    marginTop: 20
+  }
+});
