@@ -91,6 +91,162 @@ const styles = StyleSheet.create({
   },
 });
 
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Ana Moser M. de Oliveira
+DATA:  05/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição da Atividade: Formulários, Dados e Conexão com a Internet
+**********************************************************************/
+Boas Práticas em Formulários
+Formulários mobile devem ser simples e objetivos. Peça apenas o essencial
+
+import React, { useState } from 'react'; // Importa o React e o useState para guardar dados digitados
+
+import {
+  View, // Cria áreas na tela
+  Text, // Exibe textos
+  TextInput, // Campo para digitar
+  TouchableOpacity, // Botão clicável
+  StyleSheet, // Cria estilos
+  Alert // Mostra notificações
+} from 'react-native';
+
+export default function App() { // Função principal do aplicativo
+
+  // Variável para guardar o nome digitado
+  const [nome, setNome] = useState('');
+
+  // Variável para guardar o email digitado
+  const [email, setEmail] = useState('');
+
+  // Variável para guardar o CPF digitado
+  const [cpf, setCpf] = useState('');
+
+  // Função que verifica se os campos estão preenchidos
+  function validarFormulario() {
+
+    // Se nome, email ou cpf estiver vazio
+    if (nome === '' || email === '' || cpf === '') {
+
+      // Mostra alerta avisando
+      Alert.alert(
+        'Campos obrigatórios',
+        'Por favor, preencha todas as informações.'
+      );
+
+    } else {
+
+      // Se tudo estiver preenchido, mostra sucesso
+      Alert.alert(
+        'Sucesso!',
+        'Cadastro realizado com sucesso.'
+      );
+    }
+  }
+
+  // O que aparece na tela
+  return (
+
+    // Área principal
+    <View style={styles.container}>
+
+      {/* Título */}
+      <Text style={styles.titulo}>Inscreva-se</Text>
+
+      {/* Campo Nome */}
+      <TextInput
+        style={styles.input} // Aplica estilo
+        placeholder="Nome" // Texto dentro do campo
+        value={nome} // Liga ao estado nome
+        onChangeText={setNome} // Atualiza o valor digitado
+      />
+
+      {/* Campo Email */}
+      <TextInput
+        style={styles.input}
+        placeholder="E-mail"
+        value={email}
+        onChangeText={setEmail}
+        keyboardType="email-address" // Teclado para email
+      />
+
+      {/* Campo CPF */}
+      <TextInput
+        style={styles.input}
+        placeholder="CPF"
+        value={cpf}
+        onChangeText={setCpf}
+        keyboardType="numeric" // Teclado numérico
+      />
+
+      {/* Botão */}
+      <TouchableOpacity
+        style={styles.botao}
+        onPress={validarFormulario} // Quando clicar chama a função
+      >
+
+        <Text style={styles.textoBotao}>
+          Inscrever-se
+        </Text>
+
+      </TouchableOpacity>
+
+    </View>
+  );
+}
+
+// Área de estilos
+const styles = StyleSheet.create({
+
+  // Estilo da tela principal
+  container: {
+    flex: 1, // Ocupa toda a tela
+    justifyContent: 'center', // Centraliza verticalmente
+    padding: 20, // Espaço interno
+    backgroundColor: '#fff' // Fundo branco
+  },
+
+  // Estilo do título
+  titulo: {
+    fontSize: 28, // Tamanho da letra
+    fontWeight: 'bold', // Negrito
+    textAlign: 'center', // Centralizado
+    marginBottom: 30 // Espaço abaixo
+  },
+
+  // Estilo dos campos
+  input: {
+    borderWidth: 1, // Espessura da borda
+    borderColor: '#ccc', // Cor da borda
+    borderRadius: 8, // Borda arredondada
+    padding: 12, // Espaço interno
+    marginBottom: 15 // Espaço abaixo
+  },
+
+  // Estilo do botão
+  botao: {
+    backgroundColor: '#7B2CF5', // Cor roxa
+    padding: 15,
+    borderRadius: 8
+  },
+
+  // Estilo do texto do botão
+  textoBotao: {
+    color: '#fff', // Branco
+    textAlign: 'center',
+    fontWeight: 'bold'
+  }
+
+});
+
+
+
+
 **********************************************************************/
 
 INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
