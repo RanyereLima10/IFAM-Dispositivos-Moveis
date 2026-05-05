@@ -164,3 +164,42 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
 });
+
+
+Data:05/05/26
+Alunos: Ed, Davi, Rian e Ralisson
+trabalho 2°° bim atividade
+
+import React, { useState } from 'react';
+import { Text, View, Button, StyleSheet } from 'react-native';
+
+export default function App() {
+const [mensagem, setMensagem] = useState('Seja bem-vindo, aluno!');
+
+function mudarMensagem() {
+setMensagem('Você clicou no botão! 🚀');
+}
+
+return (
+<View style={styles.container}>
+<Text style={styles.texto}>{mensagem}</Text>
+
+<Button
+title="Clique aqui 👆"
+onPress={mudarMensagem}
+/>
+</View>
+);
+}
+
+const styles = StyleSheet.create({
+container: {
+flex: 1,
+justifyContent: 'center',
+alignItems: 'center',
+},
+texto: {
+fontSize: 20,
+marginBottom: 20,
+},
+});
