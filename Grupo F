@@ -258,5 +258,162 @@ fontSize: 16,
 textAlign: &#39;center&#39;,
 color: &#39;#333&#39;
 }
+});
 
+
+*******************************************************************************
+Data: 05/05/2026
+EXERCÍCIO 1 (Fácil)
+Objetivo:
+Mostrar “Olá, [nome]”
+JavaScript
+import React, { useState } from 'react';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+
+export default function App() {
+
+  const [nome, setNome] = useState('');
+  const [mensagem, setMensagem] = useState('');
+
+  function mostrarNome() {
+    setMensagem(`Olá, ${nome}`);
+  }
+
+  return (
+    <View style={styles.container}>
+
+      <TextInput
+        placeholder="Digite seu nome"
+        value={nome}
+        onChangeText={setNome}
+        style={styles.input}
+      />
+
+      <Button title="Mostrar" onPress={mostrarNome} />
+
+      <Text style={styles.texto}>{mensagem}</Text>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: { padding: 20 },
+  input: { borderWidth: 1, marginBottom: 10, padding: 8 },
+  texto: { marginTop: 10, fontSize: 18 }
+});
+
+Explicação:
+useState guarda o nome e a mensagem
+Quando clica no botão → executa mostrarNome
+A mensagem aparece na tela
+
+EXERCÍCIO 2
+Objetivo:
+Verificar idade
+JavaScript
+const [idade, setIdade] = useState('');
+const [mensagem, setMensagem] = useState('');
+
+function verificarIdade() {
+  if (idade >= 18) {
+    setMensagem("Maior de idade");
+  } else {
+    setMensagem("Menor de idade");
+  }
+}
+
+EXERCÍCIO 3
+Objetivo:
+Validar campo vazio
+JavaScript
+import { Alert } from 'react-native';
+
+function verificarNome() {
+  if (nome === '') {
+    Alert.alert("Erro", "Digite um nome!");
+  } else {
+    setMensagem(`Olá, ${nome}`);
+  }
+}
+
+Explicação:
+Alert.alert() → mostra aviso na tela
+Evita que o usuário envie vazio
+
+EXERCÍCIO 4
+Objetivo:
+Dois campos (nome + curso)
+JavaScript
+const [nome, setNome] = useState('');
+const [curso, setCurso] = useState('');
+const [mensagem, setMensagem] = useState('');
+
+function mostrarDados() {
+  setMensagem(`Aluno ${nome} do curso ${curso}`);
+}
+
+EXERCÍCIO 5 (DESAFIO)
+Objetivo:
+Nome + cidade + estilo
+JavaScript
+import React, { useState } from 'react';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+
+export default function App() {
+
+  const [nome, setNome] = useState('');
+  const [cidade, setCidade] = useState('');
+  const [mensagem, setMensagem] = useState('');
+
+  function mostrarMensagem() {
+    setMensagem(`Olá ${nome}, você mora em ${cidade}`);
+  }
+
+  return (
+    <View style={styles.container}>
+
+      <TextInput
+        placeholder="Nome"
+        value={nome}
+        onChangeText={setNome}
+        style={styles.input}
+      />
+
+      <TextInput
+        placeholder="Cidade"
+        value={cidade}
+        onChangeText={setCidade}
+        style={styles.input}
+      />
+
+      <Button title="Mostrar" onPress={mostrarMensagem} />
+
+      <Text style={styles.texto}>{mensagem}</Text>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center', // centraliza vertical
+    alignItems: 'center', // centraliza horizontal
+    padding: 20
+  },
+
+  input: {
+    borderWidth: 1,
+    width: '80%',
+    marginBottom: 10,
+    padding: 8
+  },
+
+  texto: {
+    marginTop: 15,
+    fontSize: 18,
+    color: 'blue', // muda cor
+    textAlign: 'center'
+  }
 });
