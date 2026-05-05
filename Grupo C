@@ -1,6 +1,9 @@
 // Grupo C: Alunos: Jasmin,Luana, Laura e Walter
 
-// Descrição: Esse código representa um aplicativo móvel básico desenvolvido com React Native. Ele é um excelente exemplo de um projeto inicial para estudantes de informática, pois cobre os conceitos fundamentais de desenvolvimento mobile. Estrutura Técnica:Componentes: Uso de View, Text, TextInput e Button.Estilização: Utiliza o StyleSheet para criar um design limpo, com cores suaves (azul acinzentado e branco) e bordas arredondadas nos elementos.
+// Descrição: Esse código representa um aplicativo móvel básico desenvolvido com React Native. 
+Ele é um excelente exemplo de um projeto inicial para estudantes de informática, pois cobre os conceitos fundamentais de
+desenvolvimento mobile. Estrutura Técnica:Componentes: Uso de View, Text, TextInput e Button.Estilização: Utiliza o StyleSheet para 
+criar um design limpo, com cores suaves (azul acinzentado e branco) e bordas arredondadas nos elementos.
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert, Platform } from 'react-native';
 
@@ -134,7 +137,9 @@ const styles = StyleSheet.create({
 
 // Data: 05.05.2026
 // Grupo C: Alunos: Jasmin,Luana, Laura e Walter
-// Descrição:Este é um aplicativo básico em React Native que exibe uma mensagem de boas-vindas centralizada em uma tela de fundo verde-água. Ele utiliza o hook useState para gerenciar o estado da mensagem. Inicialmente, exibe "Bem-vindo ao app!". Quando o usuário pressiona o botão "Entrar", a função entrar é chamada, atualizando o estado e alterando a mensagem para "Bem-vindo aluno!".
+// Descrição:Este é um aplicativo básico em React Native que exibe uma mensagem de boas-vindas 
+centralizada em uma tela de fundo verde-água. Ele utiliza o hook useState para gerenciar o estado da mensagem.
+Inicialmente, exibe "Bem-vindo ao app!". Quando o usuário pressiona o botão "Entrar", a função entrar é chamada, atualizando o estado e alterando a mensagem para "Bem-vindo aluno!".
 
 // Importa o React e o hook useState para gerenciar o estado do componente
 import React, { useState } from 'react';
