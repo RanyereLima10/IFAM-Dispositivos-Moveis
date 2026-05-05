@@ -1986,5 +1986,88 @@ const styles = StyleSheet.create({
   }
 });
 
+**********************************************************************************************************************************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO: Walter Isaías de Lima Silva
+DATA: 05 / 05 / 2026
+BIMESTRE: 2º Bimestre
+Descrição da Atividade:
+Este código representa um formulário de cadastro funcional que integra a captura de dados com a lógica de resposta do aplicativo. 
+Através do uso de estados, o app armazena o que o usuário digita nos campos de nome e e-mail em tempo real. 
+Ao clicar no botão, o sistema realiza uma validação para garantir que nenhum campo ficou vazio e, em seguida, simula uma conexão com um servidor externo, exibindo um ícone de carregamento para dar feedback visual ao usuário. 
+Após um breve intervalo, o aplicativo confirma o sucesso da operação com um alerta personalizado e limpa o formulário automaticamente, demonstrando na prática como funciona a interação entre o usuário, a lógica de programação e a interface visual.
+**********************************************************************************************************************************************************************************
 
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ActivityIndicator } from 'react-native';
 
+export default function App() {
+  const [nome, setNome] = useState('');
+  const [email, setEmail] = useState('');
+  const [carregando, setCarregando] = useState(false);
+
+  // Lógica de Validação e Simulação de Envio (Cliente-Servidor)
+  const salvarDados = () => {
+    if (nome === '' || email === '') {
+      Alert.alert("Erro", "Por favor, preencha todos os campos!");
+      return;
+    }
+
+    setCarregando(true);
+
+    // Simula uma conexão com servidor (espera 2 segundos)
+    setTimeout(() => {
+      setCarregando(false);
+      Alert.alert("Sucesso", `Bem-vindo, ${nome}! Seus dados foram sincronizados.`);
+      setNome('');
+      setEmail('');
+    }, 2000);
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titulo}>Cadastro Digital</Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Digite seu nome"
+        value={nome}
+        onChangeText={setNome} // Atualiza o estado em tempo real
+      />
+
+      <TextInput
+        style={styles.input}
+        placeholder="Seu melhor e-mail"
+        keyboardType="email-address"
+        value={email}
+        onChangeText={setEmail}
+      />
+
+      <TouchableOpacity 
+        style={styles.botao} 
+        onPress={salvarDados}
+        disabled={carregando}
+      >
+        {carregando ? (
+          <ActivityIndicator color="#FFF" />
+        ) : (
+          <Text style={styles.textoBotao}>CADASTRAR</Text>
+        )}
+      </TouchableOpacity>
+
+      <Text style={styles.rodape}>Os dados serão salvos via Persistência Local.</Text>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: { flex: 1, justifyContent: 'center', padding: 30, backgroundColor: '#fff' },
+  titulo: { fontSize: 24, fontWeight: 'bold', marginBottom: 20, color: '#333' },
+  input: { height: 50, borderWidth: 1, borderColor: '#ddd', borderRadius: 8, paddingHorizontal: 15, marginBottom: 15 },
+  botao: { backgroundColor: '#4CAF50', height: 50, borderRadius: 8, justifyContent: 'center', alignItems: 'center' },
+  textoBotao: { color: '#FFF', fontWeight: 'bold', fontSize: 16 },
+  rodape: { marginTop: 20, fontSize: 12, color: '#999', textAlign: 'center' }
+});
+**********************************************************************************************************************************************************************************
