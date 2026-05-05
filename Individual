@@ -366,8 +366,9 @@ Descrição da Atividade: Formulários, Dados e Conexão com a Internet/ parte 2
 **********************************************************************/
 Boas Práticas em Formulários
 adicionar cor de fundo e imagem
-import React, { useState } from 'react';
 
+
+import React, { useState } from 'react';
 import {
   View,
   Text,
