@@ -2339,5 +2339,128 @@ const styles = StyleSheet.create({
   }
 });
 
+**********************************************************************************************************************************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO: Christian Keven de Paiva Farias
+DATA: 05 / 05 / 2026
+BIMESTRE: 2º Bimestre
+Descrição da Atividade:
+Este código representa um formulário de cadastro funcional que integra a captura de dados com a lógica de resposta do aplicativo. 
+Através do uso de estados, o app armazena o que o usuário digita nos campos de nome e e-mail em tempo real. 
+Ao clicar no botão, o sistema realiza uma validação para garantir que nenhum campo ficou vazio e, em seguida, simula uma conexão com um servidor externo, exibindo um ícone de carregamento para dar feedback visual ao usuário. 
+Após um breve intervalo, o aplicativo confirma o sucesso da operação com um alerta personalizado e limpa o formulário automaticamente, demonstrando na prática como funciona a interação entre o usuário, a lógica de programação e a interface visual.
+**********************************************************************************************************************************************************************************
 
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 
+export default function App() {
+
+  // Estados que guardam os dados digitados
+  const [nome, setNome] = useState('');
+  const [email, setEmail] = useState('');
+  const [cpf, setCpf] = useState('');
+
+  // Estados que guardam mensagens de erro
+  const [erroNome, setErroNome] = useState('');
+  const [erroEmail, setErroEmail] = useState('');
+  const [erroCpf, setErroCpf] = useState('');
+
+  // Verifica se o email tem um formato básico válido
+  const validarEmail = (email) => /\S+@\S+\.\S+/.test(email);
+
+  // Verifica se o CPF tem 11 caracteres
+  const validarCPF = (cpf) => cpf.length === 11;
+
+  // Função chamada ao clicar no botão
+  const validar = () => {
+    let valido = true; // controla se pode enviar
+
+    // Validação do nome
+    if (nome.trim() === '') {
+      setErroNome('Preencha o nome');
+      valido = false;
+    } else {
+      setErroNome(''); // limpa erro se estiver ok
+    }
+
+    // Validação do email
+    if (email.trim() === '') {
+      setErroEmail('Preencha o email');
+      valido = false;
+    } else if (!validarEmail(email)) {
+      setErroEmail('Email inválido'); // formato incorreto
+      valido = false;
+    } else {
+      setErroEmail('');
+    }
+
+    // Validação do CPF
+    if (cpf.trim() === '') {
+      setErroCpf('Preencha o CPF');
+      valido = false;
+    } else if (!validarCPF(cpf)) {
+      setErroCpf('CPF deve ter 11 números');
+      valido = false;
+    } else {
+      setErroCpf('');
+    }
+
+    // Se todos os campos estiverem válidos
+    if (valido) {
+      Alert.alert('Sucesso', 'Formulário enviado');
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      
+      {/* Título da tela */}
+      <Text style={styles.titulo}>Formulário</Text>
+
+      {/* Campo de nome */}
+      <TextInput
+        style={styles.input}
+        placeholder="Nome"
+        value={nome} // valor ligado ao estado
+        onChangeText={setNome} // atualiza ao digitar
+      />
+      {erroNome !== '' && (
+        <Text style={styles.erro}>{erroNome}</Text> // mostra erro se existir
+      )}
+
+      {/* Campo de email */}
+      <TextInput
+        style={styles.input}
+        placeholder="Email"
+        value={email}
+        onChangeText={setEmail}
+        keyboardType="email-address" // teclado com @
+      />
+      {erroEmail !== '' && (
+        <Text style={styles.erro}>{erroEmail}</Text>
+      )}
+
+      {/* Campo de CPF */}
+      <TextInput
+        style={styles.input}
+        placeholder="CPF"
+        value={cpf}
+        onChangeText={setCpf}
+        keyboardType="numeric" // só números
+        maxLength={11} // limita tamanho
+      />
+      {erroCpf !== '' && (
+        <Text style={styles.erro}>{erroCpf}</Text>
+      )}
+
+      {/* Botão de envio */}
+      <TouchableOpacity style={styles.botao} onPress={validar}>
+        <Text style={styles.textoBotao}>Enviar</Text>
+      </TouchableOpacity>
+
+    </View>
+  );
+}
