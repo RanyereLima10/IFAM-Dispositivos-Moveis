@@ -623,6 +623,8 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
   },
 });
+
+************+***************************************************************
 INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
 DISCIPLINA: Dispositivos Móveis
 PROFESSOR: Ranyere Lima
@@ -707,6 +709,161 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     letterSpacing: 1,
+  },
+});
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Ana Moser M. de Oliveira
+DATA:  05/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição da Atividade: Formulários, Dados e Conexão com a Internet
+**********************************************************************/
+Boas Práticas em Formulários
+Formulários mobile devem ser simples e objetivos. Peça apenas o essencial
+
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, StatusBar } from 'react-native';
+
+export default function App() {
+
+  const [nome, setNome] = useState('');
+  const [email, setEmail] = useState('');
+  const [cpf, setCpf] = useState('');
+  const [nascimento, setNascimento] = useState('');
+
+  function handleSubmit() {
+
+    // Validação simples
+    if (nome === '' || email === '') {
+      Alert.alert("❌ Erro", "Nome e e-mail são obrigatórios!");
+      return;
+    }
+
+    // Simulação de envio (cliente-servidor)
+    Alert.alert(
+      "✅ Inscrição realizada!",
+      `Nome: ${nome}\nE-mail: ${email}\nCPF: ${cpf}\nNascimento: ${nascimento}`
+    );
+
+    // Aqui poderia salvar localmente ou enviar para API
+  }
+
+  return (
+    <View style={styles.container}>
+
+      <StatusBar barStyle="light-content" backgroundColor="#0F172A" />
+
+      <Text style={styles.title}>Formulário 📩</Text>
+
+      <Text style={styles.subtitle}>
+        Inscreva-se e receba novidades
+      </Text>
+
+      {/* Nome */}
+      <TextInput
+        style={styles.input}
+        placeholder="Nome"
+        placeholderTextColor="#94A3B8"
+        value={nome}
+        onChangeText={setNome}
+      />
+
+      {/* Email */}
+      <TextInput
+        style={styles.input}
+        placeholder="E-mail"
+        placeholderTextColor="#94A3B8"
+        value={email}
+        onChangeText={setEmail}
+        keyboardType="email-address"
+      />
+
+      {/* CPF */}
+      <TextInput
+        style={styles.input}
+        placeholder="CPF (opcional)"
+        placeholderTextColor="#94A3B8"
+        value={cpf}
+        onChangeText={setCpf}
+        keyboardType="numeric"
+      />
+
+      {/* Data de nascimento */}
+      <TextInput
+        style={styles.input}
+        placeholder="Data de nascimento (DD/MM/AAAA)"
+        placeholderTextColor="#94A3B8"
+        value={nascimento}
+        onChangeText={setNascimento}
+      />
+
+      {/* Botão */}
+      <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+        <Text style={styles.buttonText}>Inscrever-se</Text>
+      </TouchableOpacity>
+
+      {/* Indicadores visuais (validação simples) */}
+      <View style={styles.statusContainer}>
+        <Text style={{ color: nome && email ? 'green' : 'red' }}>
+          {nome && email ? '✔ Dados válidos' : '❌ Preencha os campos obrigatórios'}
+        </Text>
+      </View>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#0F172A',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 20,
+  },
+
+  title: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: '#F8FAFC',
+    marginBottom: 6,
+  },
+
+  subtitle: {
+    fontSize: 14,
+    color: '#94A3B8',
+    marginBottom: 25,
+  },
+
+  input: {
+    width: '100%',
+    backgroundColor: '#1E293B',
+    color: '#F8FAFC',
+    padding: 14,
+    borderRadius: 10,
+    marginBottom: 12,
+  },
+
+  button: {
+    backgroundColor: '#7C3AED',
+    paddingVertical: 15,
+    paddingHorizontal: 50,
+    borderRadius: 12,
+    marginTop: 10,
+  },
+
+  buttonText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+
+  statusContainer: {
+    marginTop: 15,
   },
 });
 
