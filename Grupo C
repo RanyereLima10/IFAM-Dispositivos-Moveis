@@ -132,9 +132,8 @@ const styles = StyleSheet.create({
   },
 });
 
-
+// Data: 05.05.2026
 // Grupo C: Alunos: Jasmin,Luana, Laura e Walter
-
 // Descrição:Este é um aplicativo básico em React Native que exibe uma mensagem de boas-vindas centralizada em uma tela de fundo verde-água. Ele utiliza o hook useState para gerenciar o estado da mensagem. Inicialmente, exibe "Bem-vindo ao app!". Quando o usuário pressiona o botão "Entrar", a função entrar é chamada, atualizando o estado e alterando a mensagem para "Bem-vindo aluno!".
 
 // Importa o React e o hook useState para gerenciar o estado do componente
