@@ -2160,3 +2160,142 @@ marginBottom: 10,
 borderRadius: 5,
 },
 });
+
+
+**********************************************************************/
+
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Laura Emanuelle Menezes de Lima Santos 
+DATA:  05/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição da Atividade: Este código em React Native consiste em um formulário de cadastro de matrícula que utiliza hooks (useState) para gerenciar o fluxo de dados e a interface. Ele apresenta dois campos de entrada (TextInput) para nome e e-mail, controlando o estado de cada um em tempo real. A lógica principal reside na função de validação, que verifica se os campos foram preenchidos corretamente, removendo espaços vazios e disparando mensagens de erro específicas em vermelho caso os dados estejam ausentes. Ao validar as informações com sucesso, o sistema limpa os campos automaticamente e exibe um feedback visual positivo em verde, informando o êxito da operação. A interface é estruturada através do StyleSheet, garantindo um layout centralizado, responsivo e com hierarquia visual clara entre títulos, campos de texto e mensagens de alerta.
+**********************************************************************/
+
+
+import React, { useState } from 'react'; // Importa o React e o hook useState para gerenciar estados
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native'; // Importa os componentes básicos e a API de estilos do React Native
+
+
+export default function App() { // Define e exporta o componente principal da aplicação
+  // Estados para armazenar os valores digitados nos campos
+  const [nome, setNome] = useState(""); // Estado que guarda o texto do nome
+  const [email, setEmail] = useState(""); // Estado que guarda o texto do e-mail
+
+
+  // Estados para gerenciar as mensagens de erro de cada campo
+  const [erroNome, setErroNome] = useState(""); // Estado para a mensagem de erro do nome
+  const [erroEmail, setErroEmail] = useState(""); // Estado para a mensagem de erro do e-mail
+
+
+  // Estado para armazenar a mensagem final de sucesso
+  const [mensagem, setMensagem] = useState(""); // Estado para exibir o feedback de cadastro concluído
+
+
+  // Função responsável por validar os dados e processar o "cadastro"
+  const validar = () => {
+    let valido = true; // Variável auxiliar para verificar se o formulário está correto
+
+
+    // Reseta as mensagens de erro e sucesso antes de iniciar uma nova validação
+    setErroNome(""); // Limpa erro do nome
+    setErroEmail(""); // Limpa erro do e-mail
+    setMensagem(""); // Limpa mensagem de sucesso anterior
+
+
+    // Validação do campo Nome: verifica se está vazio ou apenas com espaços
+    if (nome.trim() === "") {
+      setErroNome("Por favor, digite seu nome"); // Define a mensagem de erro se estiver vazio
+      valido = false; // Marca o formulário como inválido
+    }
+
+
+    // Validação do campo E-mail: verifica se está vazio ou apenas com espaços
+    if (email.trim() === "") {
+      setErroEmail("Por favor, digite seu email"); // Define a mensagem de erro se estiver vazio
+      valido = false; // Marca o formulário como inválido
+    }
+
+
+    // Se após as verificações a variável 'valido' continuar true, processa o sucesso
+    if (valido) {
+      setMensagem(`Cadastro realizado!\nBem-vindo, ${nome}!`); // Define a mensagem de boas-vindas
+      setNome(""); // Limpa o campo de entrada do nome
+      setEmail(""); // Limpa o campo de entrada do e-mail
+    }
+  };
+
+
+  return (
+    // View principal que serve como container da tela
+    <View style={styles.container}>
+      {/* Título da aplicação */}
+      <Text style={styles.titulo}>Cadastro Matricula</Text>
+
+
+      {/* Campo de entrada para o Nome */}
+      <TextInput
+        style={styles.input} // Aplica os estilos de borda e espaçamento
+        placeholder="Digite seu nome" // Texto de dica quando o campo está vazio
+        value={nome} // Vincula o valor do campo ao estado 'nome'
+        onChangeText={setNome} // Atualiza o estado 'nome' sempre que o usuário digita
+      />
+      {/* Exibe o texto de erro do nome apenas se a string não estiver vazia */}
+      {erroNome !== "" && <Text style={styles.erro}>{erroNome}</Text>}
+
+
+      {/* Campo de entrada para o E-mail */}
+      <TextInput
+        style={styles.input} // Aplica os estilos definidos
+        placeholder="Digite seu email" // Texto de dica
+        value={email} // Vincula o valor do campo ao estado 'email'
+        onChangeText={setEmail} // Atualiza o estado 'email' ao digitar
+      />
+      {/* Exibe o texto de erro do e-mail apenas se houver uma mensagem */}
+      {erroEmail !== "" && <Text style={styles.erro}>{erroEmail}</Text>}
+
+
+      {/* Botão que dispara a função de validação ao ser pressionado */}
+      <Button title="Cadastrar" onPress={validar} />
+
+
+      {/* Exibe a mensagem de sucesso se o cadastro for validado */}
+      {mensagem !== "" && (
+        <Text style={styles.sucesso}>{mensagem}</Text>
+      )}
+    </View>
+  );
+}
+
+
+// Objeto que define a estilização dos componentes usando StyleSheet
+const styles = StyleSheet.create({
+  container: {
+    flex: 1, // Faz o container ocupar a tela inteira
+    justifyContent: 'center', // Centraliza os elementos verticalmente
+    padding: 20 // Adiciona um espaçamento interno nas bordas
+  },
+  titulo: {
+    fontSize: 22, // Define o tamanho da fonte do título
+    marginBottom: 15 // Espaço abaixo do título
+  },
+  input: {
+    borderWidth: 1, // Espessura da borda do campo
+    padding: 10, // Espaçamento interno no campo de texto
+    marginBottom: 5 // Espaço abaixo de cada input
+  },
+  erro: {
+    color: 'red', // Cor vermelha para indicar erro
+    marginBottom: 10 // Espaçamento abaixo da mensagem de erro
+  },
+  sucesso: {
+    color: 'green', // Cor verde para indicar sucesso
+    marginTop: 15, // Espaçamento acima da mensagem
+    fontSize: 16 // Tamanho da fonte da mensagem de sucesso
+  }
+});
+
+
+
