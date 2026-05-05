@@ -170,9 +170,12 @@ const styles = StyleSheet.create({
   },
 });
 
-//Grupo A: Ana Moser, David Yuri, Fabiano Batista e Joaquim Henrique
-TRABALHO – 2º BIMESTRE
-1-Desafio modifique o app
+
+
+
+//Nomes: Ana Moser, David Yuri, Fabiano Batista e Joaquim Henrique
+Data: 05.05.2026
+Descrição: Desafio modifique o app
 
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Alert, StatusBar } from 'react-native';
