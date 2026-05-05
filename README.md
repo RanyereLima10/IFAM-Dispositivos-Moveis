@@ -29,7 +29,7 @@ A atividade tem como objetivo reforçar o uso de componentes fundamentais como V
 
 
 /**********************************************************************/
-/*******  INICIO EXEMPLO: Componente React – Data com rolagem *********/
+ *******  INICIO EXEMPLO: Componente React – Data com rolagem *********
 /**********************************************************************/
 
 import React, { useState } from "react";
@@ -109,5 +109,5 @@ const styles = {
 };
 
 /**********************************************************************/
-/******** FIM EXEMPLO: Componente React – Data com rolagem ************/
+ ******** FIM EXEMPLO: Componente React – Data com rolagem ************
 /**********************************************************************/
