@@ -1059,3 +1059,201 @@ const styles = StyleSheet.create({
   }
 });
 
+************************************************************************************************
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Amanda Medeiros lins
+DATA:  05/ 05 /2026
+Bimestre: 2º Bimestre
+Este código implementa um formulário de cadastro em React Native com validação em tempo real. O usuário preenche nome, e-mail, CPF e data de nascimento, e o sistema verifica automaticamente se os dados são válidos, mostrando indicadores visuais (✅ ou ❌) para cada campo.
+O botão de envio só é ativado quando todas as informações estão corretas. Ao clicar em Enviar, o app exibe uma mensagem de boas-vindas com o nome do usuário e apresenta um resumo com todos os dados inseridos na tela.
+**********************************************************************************************************************************************************************************
+// Importa o React e o useState (para guardar dados)
+import React, { useState } from 'react';
+
+// Importa os componentes do React Native
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+
+// Função principal do app
+export default function App() {
+
+  // Estado para guardar o nome digitado
+  const [nome, setNome] = useState('');
+
+  // Estado para guardar o email digitado
+  const [email, setEmail] = useState('');
+
+  // Função que valida os campos
+  function validar() {
+
+    // Se nome ou email estiver vazio
+    if (nome === '' || email === '') {
+      return false; // retorna falso (inválido)
+    }
+
+    // Se o email não tiver "@"
+    if (!email.includes('@')) {
+      return false; // inválido
+    }
+
+    return true; // se passou em tudo, válido
+  }
+
+  // Guarda o resultado da validação
+  const valido = validar();
+
+  // Retorno da tela (interface)
+  return (
+
+    // Container principal
+    <View style={styles.container}>
+
+      {/* CARD 1 (formulário sem validação) */}
+      <View style={styles.card}>
+
+        {/* Título */}
+        <Text style={styles.titulo}>Inscreva-se</Text>
+
+        {/* Campo nome */}
+        <TextInput style={styles.input} placeholder="Nome" />
+
+        {/* Campo email */}
+        <TextInput style={styles.input} placeholder="E-mail" />
+
+        {/* Campo CPF */}
+        <TextInput style={styles.input} placeholder="CPF" />
+
+        {/* Linha da data de nascimento */}
+        <View style={styles.linhaData}>
+
+          {/* Dia */}
+          <TextInput style={styles.data} placeholder="Dia" />
+
+          {/* Mês */}
+          <TextInput style={styles.data} placeholder="Mês" />
+
+          {/* Ano */}
+          <TextInput style={styles.data} placeholder="Ano" />
+
+        </View>
+
+        {/* Botão */}
+        <TouchableOpacity style={styles.botao}>
+          <Text style={styles.textoBotao}>Inscreva-se</Text>
+        </TouchableOpacity>
+
+        {/* X vermelho (erro) */}
+        <Text style={{ color: 'red', marginTop: 10 }}>❌</Text>
+
+      </View>
+
+      {/* CARD 2 (com validação) */}
+      <View style={styles.card}>
+
+        {/* Título */}
+        <Text style={styles.titulo}>Inscreva-se</Text>
+
+        {/* Campo nome com estado */}
+        <TextInput
+          style={styles.input}
+          placeholder="Nome"
+          value={nome} // valor ligado ao estado
+          onChangeText={setNome} // atualiza o estado
+        />
+
+        {/* Campo email com estado */}
+        <TextInput
+          style={styles.input}
+          placeholder="E-mail"
+          value={email}
+          onChangeText={setEmail}
+        />
+
+        {/* Botão */}
+        <TouchableOpacity style={styles.botao}>
+          <Text style={styles.textoBotao}>Inscreva-se</Text>
+        </TouchableOpacity>
+
+        {/* Se for válido mostra ✔️ */}
+        <Text style={{ color: 'green', marginTop: 10 }}>
+          {valido ? '✔️' : ''}
+        </Text>
+
+      </View>
+
+    </View>
+  );
+}
+
+// Estilos
+const styles = StyleSheet.create({
+
+  // Container principal
+  container: {
+    flex: 1, // ocupa toda a tela
+    flexDirection: 'row', // coloca os cards lado a lado
+    justifyContent: 'space-around', // espaço entre eles
+    alignItems: 'center', // centraliza verticalmente
+    backgroundColor: '#EEF1FF', // cor de fundo
+    padding: 10, // espaçamento interno
+  },
+
+  // Card (caixinha branca)
+  card: {
+    width: '45%', // largura de cada card
+    backgroundColor: '#fff', // cor branca
+    padding: 15, // espaçamento interno
+    borderRadius: 10, // bordas arredondadas
+    elevation: 3, // sombra (Android)
+  },
+
+  // Título
+  titulo: {
+    fontSize: 16, // tamanho da fonte
+    marginBottom: 10, // espaço abaixo
+    fontWeight: 'bold', // negrito
+  },
+
+  // Inputs (campos)
+  input: {
+    borderWidth: 1, // borda
+    borderColor: '#ccc', // cor da borda
+    borderRadius: 6, // borda arredondada
+    padding: 8, // espaço interno
+    marginBottom: 8, // espaço entre campos
+  },
+
+  // Linha da data
+  linhaData: {
+    flexDirection: 'row', // itens lado a lado
+    justifyContent: 'space-between', // espaço entre eles
+  },
+
+  // Campos de data
+  data: {
+    width: '30%', // largura menor
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 6,
+    padding: 8,
+  },
+
+  // Botão
+  botao: {
+    backgroundColor: '#7B5CFF', // cor lilás
+    padding: 10,
+    borderRadius: 8,
+    marginTop: 10,
+  },
+
+  // Texto do botão
+  textoBotao: {
+    color: '#fff', // branco
+    textAlign: 'center', // centralizado
+    fontWeight: 'bold',
+  },
+});
+
+
