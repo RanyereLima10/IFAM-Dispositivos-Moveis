@@ -2070,4 +2070,93 @@ const styles = StyleSheet.create({
   textoBotao: { color: '#FFF', fontWeight: 'bold', fontSize: 16 },
   rodape: { marginTop: 20, fontSize: 12, color: '#999', textAlign: 'center' }
 });
-**********************************************************************************************************************************************************************************
+*****************************************************************************
+
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO: Rakely da Silva de Souza
+DATA: 05 / 05 / 2026
+BIMESTRE: 2º Bimestre
+Descrição da Atividade:
+Este código representa um formulário de cadastro funcional que integra a captura de dados com a lógica de resposta do aplicativo. 
+Através do uso de estados, o app armazena o que o usuário digita nos campos de nome e e-mail em tempo real. 
+Ao clicar no botão, o sistema realiza uma validação para garantir que nenhum campo ficou vazio e, em seguida, simula uma conexão com um servidor externo, exibindo um ícone de carregamento para dar feedback visual ao usuário. 
+Após um breve intervalo, o aplicativo confirma o sucesso da operação com um alerta personalizado e limpa o formulário automaticamente, demonstrando na prática como funciona a interação entre o usuário, a lógica de programa*****************************************************************************************************
+
+
+import React, { useState } from 'react';
+import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
+
+export default function App() {
+const [nome, setNome] = useState('');
+const [email, setEmail] = useState('');
+const [cpf, setCpf] = useState('');
+const [data, setData] = useState('');
+
+const enviar = () => {
+if (!nome || !email || !cpf || !data) {
+Alert.alert("Erro", "Preencha todos os campos!");
+return;
+}
+
+Alert.alert("Sucesso", "Inscrição realizada!");
+};
+
+return (
+<View style={styles.container}>
+<Text style={styles.titulo}>Inscreva-se</Text>
+
+<TextInput
+style={styles.input}
+placeholder="Nome"
+value={nome}
+onChangeText={setNome}
+/>
+
+<TextInput
+style={styles.input}
+placeholder="E-mail"
+value={email}
+onChangeText={setEmail}
+/>
+
+<TextInput
+style={styles.input}
+placeholder="CPF"
+value={cpf}
+onChangeText={setCpf}
+/>
+
+<TextInput
+style={styles.input}
+placeholder="Data de Nascimento"
+value={data}
+onChangeText={setData}
+/>
+
+<Button title="Inscrever-se" onPress={enviar} />
+</View>
+);
+}
+
+const styles = StyleSheet.create({
+container: {
+flex: 1,
+justifyContent: 'center',
+padding: 20,
+},
+titulo: {
+fontSize: 24,
+marginBottom: 20,
+textAlign: 'center',
+},
+input: {
+borderWidth: 1,
+borderColor: '#ccc',
+padding: 10,
+marginBottom: 10,
+borderRadius: 5,
+},
+});
