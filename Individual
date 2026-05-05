@@ -3436,3 +3436,192 @@ const styles = StyleSheet.create({
     marginTop: 20
   }
 });
+
+
+/**********************************************************************/
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Adnei Wesley R. Guedes.
+DATA: 05 / 05 / 2026
+BIMESTRE: 2º Bimestre
+
+// Importa o React e o hook useState para gerenciar estado
+import React, { useState } from 'react';
+
+// Importa componentes básicos do React Native
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+
+// Função principal do app (componente funcional)
+export default function App() {
+
+  // Estados para armazenar os dados digitados
+  const [nome, setNome] = useState('');
+  const [email, setEmail] = useState('');
+  const [cpf, setCpf] = useState('');
+  const [dia, setDia] = useState('');
+  const [mes, setMes] = useState('');
+  const [ano, setAno] = useState('');
+
+  // Função chamada ao clicar no botão
+  const handleSubmit = () => {
+
+    // Monta a data de nascimento no formato dia/mês/ano
+    const data = `${dia}/${mes}/${ano}`;
+
+    // Exibe um alerta com os dados preenchidos
+    Alert.alert(
+      "Dados",
+      `Nome: ${nome}\nEmail: ${email}\nCPF: ${cpf}\nNascimento: ${data}`
+    );
+  };
+
+  // Retorno do componente (interface)
+  return (
+    // Container principal da tela
+    <View style={styles.container}>
+
+      {/* Título do formulário */}
+      <Text style={styles.title}>Inscreva-se</Text>
+
+      {/* Campo Nome */}
+      <Text style={styles.label}>Nome</Text>
+      <TextInput
+        style={styles.input} // estilo do campo
+        value={nome} // valor ligado ao estado
+        onChangeText={setNome} // atualiza o estado ao digitar
+      />
+
+      {/* Campo E-mail */}
+      <Text style={styles.label}>E-mail</Text>
+      <TextInput
+        style={styles.input}
+        value={email}
+        onChangeText={setEmail}
+        keyboardType="email-address" // teclado otimizado para e-mail
+      />
+
+      {/* Campo CPF */}
+      <Text style={styles.label}>CPF</Text>
+      <TextInput
+        style={styles.input}
+        value={cpf}
+        onChangeText={setCpf}
+        keyboardType="numeric" // teclado numérico
+      />
+
+      {/* Seção de data de nascimento */}
+      <Text style={styles.label}>Data de Nascimento</Text>
+
+      {/* Linha com os 3 campos de data */}
+      <View style={styles.row}>
+
+        {/* Campo Dia */}
+        <TextInput
+          style={styles.dateInput}
+          placeholder="Dia"
+          keyboardType="numeric"
+          maxLength={2} // limita a 2 dígitos
+          value={dia}
+          onChangeText={setDia}
+        />
+
+        {/* Campo Mês */}
+        <TextInput
+          style={styles.dateInput}
+          placeholder="Mês"
+          keyboardType="numeric"
+          maxLength={2}
+          value={mes}
+          onChangeText={setMes}
+        />
+
+        {/* Campo Ano */}
+        <TextInput
+          style={styles.dateInput}
+          placeholder="Ano"
+          keyboardType="numeric"
+          maxLength={4}
+          value={ano}
+          onChangeText={setAno}
+        />
+      </View>
+
+      {/* Botão de envio */}
+      <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+        <Text style={styles.buttonText}>Inscreva-se</Text>
+      </TouchableOpacity>
+
+    </View>
+  );
+}
+
+// Definição dos estilos do app
+const styles = StyleSheet.create({
+
+  // Container principal
+  container: {
+    flex: 1, // ocupa toda a tela
+    padding: 20, // espaçamento interno
+    backgroundColor: '#f5f5f5', // cor de fundo
+    justifyContent: 'center' // centraliza verticalmente
+  },
+
+  // Estilo do título
+  title: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
+
+  // Estilo dos rótulos (labels)
+  label: {
+    marginBottom: 5,
+    fontWeight: '600'
+  },
+
+  // Estilo padrão dos inputs
+  input: {
+    height: 45,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 6,
+    marginBottom: 15,
+    paddingHorizontal: 10,
+    backgroundColor: '#fff'
+  },
+
+  // Linha para agrupar inputs da data
+  row: {
+    flexDirection: 'row', // coloca os itens lado a lado
+    justifyContent: 'space-between',
+    marginBottom: 20
+  },
+
+  // Estilo dos campos de data
+  dateInput: {
+    flex: 1, // ocupa espaço igual entre eles
+    height: 45,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 6,
+    marginRight: 5,
+    paddingHorizontal: 10,
+    backgroundColor: '#fff',
+    textAlign: 'center' // centraliza o texto
+  },
+
+  // Estilo do botão
+  button: {
+    backgroundColor: '#6A0DAD',
+    padding: 15,
+    borderRadius: 8,
+  },
+
+  // Texto do botão
+  buttonText: {
+    color: '#fff',
+    textAlign: 'center',
+    fontWeight: 'bold'
+  }
+});
