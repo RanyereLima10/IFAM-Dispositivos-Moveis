@@ -1,4 +1,6 @@
-Alunos: Ed, Davi, Rian e Ralisson
+Alunos: Ed, Davi, Rian, Ralisson e Christian
+
+
 trabalho 1° bim
 import React, { useState } from 'react';
 import {
