@@ -4,6 +4,8 @@ Por favor, Não anexar arquivos ou textos diretamente aqui.
 A atividade deve ser entregue exclusivamente pelo GitHub, conforme as instruções fornecidas (pasta individual ou grupo)
 
 
+⚠️ Atenção, alunos:IMPORTANTE: Todo o código deve ser comentado linha por linha, explicando de forma clara o que cada parte do código faz. Códigos sem comentários não serão totalmente considerados na avaliação.
+
 
 ⚠️ Atenção, alunos:
 Segue um modelo de cabeçalho padrão já organizado + uma mensagem clara (pronto para copiar e usar nas atividades e grupos):
