@@ -4,18 +4,23 @@ Por favor, Não anexar arquivos ou textos diretamente aqui.
 A atividade deve ser entregue exclusivamente pelo GitHub, conforme as instruções fornecidas (pasta individual ou grupo)
 
 
-**********************************************************************/
 
-INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
-DISCIPLINA: Dispositivos Móveis
-PROFESSOR: Ranyere Lima
-ALUNO(A):Ed, Davi, Rian, Ralisson e Christian
-DATA:  xx/ xx /2026
-Bimestre: 2º Bimestre
-Descrição da Atividade:  <exemplo> - Nesta atividade foi desenvolvido um aplicativo simples utilizando React Native, com o objetivo de compreender a estrutura básica de um app mobile.
-O aplicativo apresenta uma tela inicial com uma mensagem de boas-vindas e um botão interativo que, ao ser pressionado, exibe um alerta na tela.
-Também foram aplicados conceitos de estilização com StyleSheet, permitindo a personalização de cores e textos.
-A atividade contribuiu para o aprendizado dos principais componentes, como View, Text, Button e Alert, além de reforçar a lógica de programação.</exemplo>
+⚠️ Atenção, alunos:
+Segue um modelo de cabeçalho padrão já organizado + uma mensagem clara (pronto para copiar e usar nas atividades e grupos):
 
-**********************************************************************/
+/**********************************************************************/
 
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA  
+DISCIPLINA: Dispositivos Móveis  
+PROFESSOR: Ranyere Lima  
+ALUNO(A): __________________________________________  
+DATA: ____ / ____ / 2026  
+BIMESTRE: 2º Bimestre  
+
+DESCRIÇÃO DA ATIVIDADE:  
+Nesta atividade, o(a) aluno(a) deverá desenvolver uma aplicação mobile simples utilizando React Native, com o objetivo de compreender a estrutura básica de um aplicativo.
+O projeto deve conter uma tela inicial com uma mensagem de boas-vindas e pelo menos um botão interativo. Ao interagir com o botão, o aplicativo deve apresentar uma resposta na tela (ex: alerta, mudança de texto ou ação visual).
+Também devem ser aplicados conceitos de estilização utilizando StyleSheet, permitindo a personalização de cores, tamanhos e organização dos elementos.
+A atividade tem como objetivo reforçar o uso de componentes fundamentais como View, Text, Button e Alert, além de desenvolver a lógica de programação e organização do código.
+
+/**********************************************************************/
