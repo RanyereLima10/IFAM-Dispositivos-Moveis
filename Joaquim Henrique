@@ -732,6 +732,129 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold'
   }
+});
+************+***************************************************************************+***************************************************************************+***************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Joaquim Henrique Andrade de Almeida 
+DATA:  12/ 05 /2026
+Bimestre: 2º Bimestre
+Atividade Prática Exercício 1
+************+***************************************************************************+***************************************************************************+***************************************************************
+
+import React from 'react';
+import { View, Text, StyleSheet, Image } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+
+      {/* IMAGEM */}
+      <Image
+        source={{ uri: 'https://reactnative.dev/img/tiny_logo.png' }}
+        style={styles.imagem}
+      />
+
+      <Text style={styles.titulo}>Atividade Prática 2</Text>
+
+      {/* ÍCONES */}
+      <View style={styles.linha}>
+        <CaixaIcone name="star" />
+        <CaixaIcone name="heart" />
+        <CaixaIcone name="rocket" />
+      </View>
+
+      {/* CORES PERSONALIZADAS */}
+      <View style={styles.linha}>
+        <CaixaCor cor="#4A90E2" />
+        <CaixaCor cor="#E94E77" />
+        <CaixaCor cor="#F5A623" />
+      </View>
+
+      {/* BORDAS ARREDONDADAS */}
+      <View style={styles.linha}>
+        <CaixaCor cor="#7ED321" round />
+        <CaixaCor cor="#9013FE" round />
+        <CaixaCor cor="#00BCD4" round />
+      </View>
+
+    </View>
+  );
+}
+
+/* COMPONENTE ÍCONE */
+function CaixaIcone({ name }) {
+  return (
+    <View style={styles.iconeBox}>
+      <Icon name={name} size={26} color="white" />
+    </View>
+  );
+}
+
+/* COMPONENTE CAIXA COLORIDA */
+function CaixaCor({ cor, round }) {
+  return (
+    <View
+      style={[
+        styles.caixa,
+        { backgroundColor: cor },
+        round && styles.round
+      ]}
+    />
+  );
+}
+
+const styles = StyleSheet.create({
+
+  container: {
+    flex: 1,
+    backgroundColor: '#121212',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20
+  },
+
+  imagem: {
+    width: 90,
+    height: 90,
+    marginBottom: 10
+  },
+
+  titulo: {
+    color: 'white',
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 20
+  },
+
+  linha: {
+    flexDirection: 'row',
+    marginBottom: 20
+  },
+
+  iconeBox: {
+    width: 60,
+    height: 60,
+    backgroundColor: '#4A90E2',
+    margin: 5,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+
+  caixa: {
+    width: 60,
+    height: 60,
+    margin: 5
+  },
+
+  round: {
+    borderRadius: 12
+  }
+
+});
 
 });
 
