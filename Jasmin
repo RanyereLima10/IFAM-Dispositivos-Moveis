@@ -242,7 +242,131 @@ const styles = StyleSheet.create({
     color: '#FFFFFF'
   },
 });
+*********************************************************************************************************************************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Jasmin Silva De Lima
+DATA:  05/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição:
+O aplicativo é um formulário de cadastro feito em React Native que coleta **nome e e-mail** do usuário. Ele usa **useState** para armazenar os dados e valida se os campos estão vazios ao clicar no botão.
+Se algum campo estiver vazio, aparece uma **mensagem de erro**. Se estiver tudo correto, o sistema mostra uma **mensagem de sucesso**, limpa os campos e simula o envio dos dados.
+O projeto trabalha conceitos básicos como **eventos (clique no botão), validação de dados, coleta de informações do usuário e feedback na tela.
+*********************************************************************************************************************************************************************************
+import React, { useState } from 'react';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
+export default function App() {
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
+
+  const [erroNome, setErroNome] = useState("");
+  const [erroEmail, setErroEmail] = useState("");
+  const [mensagem, setMensagem] = useState("");
+  const [statusEnvio, setStatusEnvio] = useState("");
+
+  const validarCadastro = () => {
+    // limpa mensagens
+    setErroNome("");
+    setErroEmail("");
+    setMensagem("");
+    setStatusEnvio("");
+
+    // mostra envio de dados
+    setStatusEnvio("Enviando dados...");
+
+    let valido = true;
+
+    if (nome.trim() === "") {
+      setErroNome("Digite seu nome");
+      valido = false;
+    }
+
+    if (email.trim() === "") {
+      setErroEmail("Digite seu e-mail");
+      valido = false;
+    }
+
+    // simula processamento
+    setTimeout(() => {
+      if (valido) {
+        setMensagem(`Cadastro realizado!\nBem-vindo, ${nome}!`);
+        setNome("");
+        setEmail("");
+      } else {
+        setMensagem("");
+      }
+
+      setStatusEnvio(""); // remove "enviando"
+    }, 1500);
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titulo}>Cadastro de Aluno</Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Nome"
+        value={nome}
+        onChangeText={setNome}
+      />
+      {erroNome !== "" && <Text style={styles.erro}>{erroNome}</Text>}
+
+      <TextInput
+        style={styles.input}
+        placeholder="E-mail"
+        value={email}
+        onChangeText={setEmail}
+      />
+      {erroEmail !== "" && <Text style={styles.erro}>{erroEmail}</Text>}
+
+      <Button title="Cadastrar" onPress={validarCadastro} />
+
+      {/* mensagem de envio */}
+      {statusEnvio !== "" && (
+        <Text style={styles.envio}>{statusEnvio}</Text>
+      )}
+
+      {/* sucesso */}
+      {mensagem !== "" && (
+        <Text style={styles.sucesso}>{mensagem}</Text>
+      )}
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 20
+  },
+  titulo: {
+    fontSize: 22,
+    marginBottom: 15
+  },
+  input: {
+    borderWidth: 1,
+    padding: 10,
+    marginBottom: 5
+  },
+  erro: {
+    color: 'red',
+    marginBottom: 10
+  },
+  sucesso: {
+    color: 'green',
+    marginTop: 15,
+    fontSize: 16
+  },
+  envio: {
+    color: 'blue',
+    marginTop: 10,
+    fontSize: 16
+  }
+});
 
 **********************************************************************/
 INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
