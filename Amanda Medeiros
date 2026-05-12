@@ -1,1 +1,97 @@
+**********************************************************************/
 
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Amanda Medeiros Lins
+DATA:  12/ 05 /2026
+Bimestre: 2º Bimestre
+Assunto: Arvorezinha
+**********************************************************************/
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+
+      <View style={styles.row}>
+        <Text style={[styles.letra, styles.a]}>A</Text>
+      </View>
+
+      
+      <View style={styles.row}>
+        <Text style={[styles.letra, styles.b]}>B</Text>
+        <Text style={[styles.letra, styles.c]}>C</Text>
+      </View>
+
+ 
+      <View style={styles.row}>
+        <Text style={[styles.letra, styles.d]}>D</Text>
+        <Text style={[styles.letra, styles.e]}>E</Text>
+        <Text style={[styles.letra, styles.f]}>F</Text>
+      </View>
+
+      <Text style={[styles.letra, styles.tronco]}>H</Text>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+
+  container: {
+    flex: 1,
+    backgroundColor: '#3C93FA',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+
+  letra: {
+    width: 60,
+    height: 60,
+    margin: 5,
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: 'white',
+    borderRadius: 15,
+    paddingTop: 10,
+  },
+
+  tronco: {
+    backgroundColor: 'brown',
+    width: 70,
+  },
+
+  a: {
+    backgroundColor: 'pink',
+  },
+
+  b: {
+    backgroundColor: '#F24F4F',
+  },
+
+  c: {
+    backgroundColor: '#FF8F5C',
+  },
+
+  d: {
+    backgroundColor: '#EEB72B',
+  },
+
+  e: {
+    backgroundColor: 'green',
+  },
+
+  f: {
+    backgroundColor: 'yellow',
+  },
+
+});
