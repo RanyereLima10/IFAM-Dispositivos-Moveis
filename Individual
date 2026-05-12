@@ -4907,3 +4907,77 @@ const styles = StyleSheet.create({
 
 });
 
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A):Rakely de Souza
+DATA:  12/ 05  /  2026
+Bimestre: 2º Bimestreeee
+**********************************************************************/
+
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+
+export default function App() {
+
+return (
+
+<View style={styles.container}>
+
+<View style={styles.linha}>
+<Text style={[styles.caixa, {backgroundColor: '#FFD6E0'}]}>A</Text>
+</View>
+
+<View style={styles.linha}>
+<Text style={[styles.caixa, {backgroundColor: '#FFE5B4'}]}>B</Text>
+<Text style={[styles.caixa, {backgroundColor: '#FFF3B0'}]}>C</Text>
+</View>
+
+<View style={styles.linha}>
+<Text style={[styles.caixa, {backgroundColor: '#D9F7BE'}]}>D</Text>
+<Text style={[styles.caixa, {backgroundColor: '#B5EAD7'}]}>E</Text>
+<Text style={[styles.caixa, {backgroundColor: '#C7CEEA'}]}>F</Text>
+</View>
+
+<View style={styles.linha}>
+<Text style={[styles.caixa, {backgroundColor: '#E2C2FF'}]}>G</Text>
+<Text style={[styles.caixa, {backgroundColor: '#FFDAC1'}]}>H</Text>
+<Text style={[styles.caixa, {backgroundColor: '#BDE0FE'}]}>I</Text>
+<Text style={[styles.caixa, {backgroundColor: '#F1C0E8'}]}>J</Text>
+</View>
+
+<View style={styles.linha}>
+<Text style={[styles.caixa, {backgroundColor: '#CDEAC0'}]}>K</Text>
+<Text style={[styles.caixa, {backgroundColor: '#A0E7E5'}]}>L</Text>
+</View>
+
+</View>
+
+);
+
+}
+
+const styles = StyleSheet.create({
+
+container: {
+flex: 1,
+justifyContent: 'center',
+alignItems: 'center'
+},
+
+linha: {
+flexDirection: 'row'
+},
+
+caixa: {
+color: '#555',
+padding: 20,
+margin: 5,
+fontSize: 20,
+fontWeight: 'bold',
+borderRadius: 10
+}
+
+});
