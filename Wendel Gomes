@@ -136,10 +136,10 @@ export default function App() {
   return (
     <View style={styles.container}>
 
-      {/* Foto */}
+      {/* Imagem no topo */}
       <Image
-        source={('./assets/imagim9.jpg')}
-        style={styles.foto}
+        source={{ uri: 'https://i.redd.it/8mntsmtdl8sb1.jpg' }}
+        style={styles.imagemTopo}
       />
 
       {/* Título */}
