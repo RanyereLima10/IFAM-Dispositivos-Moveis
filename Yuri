@@ -1,90 +1,4 @@
-//2 aula//
-INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
-DISCIPLINA: Dispositivos Móveis
-PROFESSOR: Ranyere Lima
-ALUNO(A): Yuri Lima Macedo
-DATA:  28/ 05 /2026
-Bimestre: 2º Bimestre
-Nesta atividade foi desenvolvido um aplicativo simples utilizando React Native, com o objetivo de compreender a estrutura básica de um app mobile.
-O aplicativo apresenta uma tela inicial com uma mensagem de boas-vindas e um botão interativo que, ao ser pressionado, exibe um alerta na tela.
-Também foram aplicados conceitos de estilização com StyleSheet, permitindo a personalização de cores e textos.
-A atividade contribuiu para o aprendizado dos principais componentes, como View, Text, Button e Alert, além de reforçar a lógica de programação.
-************+***************************************************************
 
-import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Alert, StatusBar } from 'react-native';
-
-export default function App() {
-
-  function handlePress() {
-    Alert.alert("Você clicou em Entrar!");
-  }
-
-  return (
-    <View style={styles.container}>
-      
-      <StatusBar barStyle="light-content" backgroundColor="#0F172A" />
-
-      {/* Título */}
-      <Text style={styles.title}>Bem-vindo</Text>
-
-      {/* Subtítulo */}
-      <Text style={styles.subtitle}>
-        Seu app começa aqui
-      </Text>
-
-      {/* Botão */}
-      <TouchableOpacity style={styles.button} onPress={handlePress}>
-        <Text style={styles.buttonText}>Entrar</Text>
-      </TouchableOpacity>
-
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#0F172A', // azul escuro moderno
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
-  },
-
-  title: {
-    fontSize: 34,
-    fontWeight: 'bold',
-    color: '#F8FAFC', // branco suave
-    marginBottom: 8,
-  },
-
-  subtitle: {
-    fontSize: 16,
-    color: '#94A3B8', // cinza moderno
-    marginBottom: 50,
-  },
-
-  button: {
-    backgroundColor: '#22C55E', // verde destaque (call to action)
-    paddingVertical: 16,
-    paddingHorizontal: 70,
-    borderRadius: 12,
-
-    // sombra
-    elevation: 6,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.25,
-    shadowRadius: 5,
-  },
-
-  buttonText: {
-    color: '#0F172A',
-    fontSize: 18,
-    fontWeight: 'bold',
-    letterSpacing: 1,
-  },
-});
 ************+***************************************************************
 INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
 DISCIPLINA: Dispositivos Móveis
@@ -466,3 +380,137 @@ const styles = StyleSheet.create({
     marginTop: 20
   }
 });
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Yuri Lima Macedo
+DATA:  05/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição da Atividade: Nesta atividade, o aluno: yuri lima macedo deverá desenvolver uma aplicação mobile simples utilizando React Native, com o objetivo de compreender a estrutura básica de um aplicativo. O CODIGO FOI FEITO EM GRUPO
+**********************************************************************/
+import React, { useState } from &#39;react&#39;;
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  StyleSheet,
+} from &#39;react-native&#39;;
+export default function App() {
+  const [mensagem, setMensagem] = useState(&quot;Boa sorte&quot;);
+  const [msg , setMsg] = useState(&quot;Boa sorte&quot;);
+  const [nome, setNome] = useState(&#39;&#39;);
+  const [alerta, setAlerta] = useState(&#39;&#39;);
+  function mostrarMensagem() {
+    if (nome === &#39;&#39;) {
+      setMensagem(&#39;Digite seu nome!&#39;);
+    } else {
+      setMensagem(&#39;Olá, &#39; + nome + &#39;! Seja bem-vindo ��&#39;);
+    }
+  }
+  function mudarMensagem() {
+    if (msg === &quot;Nunca desista dos seus objetivos!&quot;) {
+      setMsg(&#39;Boa sorte&#39;)
+    } else {
+        setMsg(&#39;Nunca desista dos seus objetivos!&#39;)
+      }
+   
+  }
+ 
+  function mostrarAlerta() {
+    if (alerta === &#39;&#39;){
+    setAlerta(&#39;Botão clicado&#39;)}
+  }
+  return (
+    &lt;View style={styles.container}&gt;
+      &lt;Text style={styles.titulo}&gt;
+        Meu Primeiro App
+      &lt;/Text&gt;
+      &lt;Text style={styles.alerta}&gt;{alerta}&lt;/Text&gt;
+
+      &lt;Text style={styles.texto}&gt;
+        Nome do aluno: Bruno Guilherme
+      &lt;/Text&gt;
+      &lt;Text style={styles.texto}&gt;
+        Curso: Informática
+      &lt;/Text&gt;
+      &lt;Text style={styles.motivacao}&gt;{msg}&lt;/Text&gt;
+      &lt;View style={styles.botoes}&gt;
+        &lt;Button
+          title=&quot;Mudar mensagem&quot;
+          onPress={mudarMensagem}
+        /&gt;
+      &lt;/View&gt;
+      &lt;TextInput
+        style={styles.input}
+        placeholder=&quot;Digite seu nome&quot;
+        onChangeText={setNome}
+      /&gt;
+      &lt;View style={styles.botoes}&gt;
+        &lt;Button
+          title=&quot;Mostrar mensagem&quot;
+          onPress={mostrarMensagem}
+        /&gt;
+        &lt;Button
+          title=&quot;Mostrar alerta&quot;
+          onPress={mostrarAlerta}
+        /&gt;
+      &lt;/View&gt;
+      &lt;Text style={styles.resultado}&gt;
+        {mensagem}
+      &lt;/Text&gt;
+    &lt;/View&gt;
+  );
+}
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: &#39;center&#39;,
+    padding: 20,
+    backgroundColor: &#39;#d0ebff&#39;
+  },
+  titulo: {
+
+    fontSize: 26,
+    fontWeight: &#39;bold&#39;,
+    marginBottom: 15,
+    textAlign: &#39;center&#39;,
+    color: &#39;#003366&#39;
+  },
+  texto: {
+    fontSize: 16,
+    marginBottom: 5,
+    textAlign: &#39;center&#39;
+  },
+  alerta: {
+    color: &#39;#FF0000&#39;,
+    fontSize: 25,
+    textAlign: &#39;center&#39;
+  },
+  motivacao: {
+    fontStyle: &#39;italic&#39;,
+    marginBottom: 15,
+    textAlign: &#39;center&#39;,
+    color: &#39;#555&#39;
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: &#39;#999&#39;,
+    padding: 10,
+    marginVertical: 10,
+    borderRadius: 8,
+    backgroundColor: &#39;#fff&#39;
+  },
+  botoes: {
+    marginVertical: 10
+  },
+  resultado: {
+    marginTop: 15,
+    fontSize: 18,
+    color: &#39;blue&#39;,
+    textAlign: &#39;center&#39;
+  }
+});
+
