@@ -89,3 +89,224 @@ const styles = StyleSheet.create({
 
 });
 
+
+
+************************************************************************************************
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Cauã Fonseca da Silveira Vieria
+DATA:  05/ 05 /2026
+Bimestre: 2º Bimestre
+Este código implementa um formulário de cadastro em React Native com validação em tempo real. O usuário preenche nome, e-mail, CPF e data de nascimento, e o sistema verifica automaticamente se os dados são válidos, mostrando indicadores visuais (✅ ou ❌) para cada campo.
+O botão de envio só é ativado quando todas as informações estão corretas. Ao clicar em Enviar, o app exibe uma mensagem de boas-vindas com o nome do usuário e apresenta um resumo com todos os dados inseridos na tela.
+**********************************************************************************************************************************************************************************
+import {
+  Text,
+  View,
+  TextInput,
+  StyleSheet,
+  TouchableOpacity
+} from 'react-native';
+import { useState } from 'react';
+
+export default function App() {
+  // Estados para armazenar os dados do formulário
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
+  const [cpf, setCpf] = useState("");
+  const [data, setData] = useState("");
+  const [enviado, setEnviado] = useState(false); // controla se já enviou
+
+  // Função para validar email (formato básico)
+  const validarEmail = (email) => /\S+@\S+\.\S+/.test(email);
+
+  // Função para validar CPF (com cálculo real)
+  const validarCPF = (cpf) => {
+    cpf = cpf.replace(/\D/g, ''); // remove caracteres não numéricos
+
+    // Verifica tamanho e sequência inválida
+    if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false;
+
+    let soma = 0, resto;
+
+    // Primeiro dígito verificador
+    for (let i = 1; i <= 9; i++)
+      soma += parseInt(cpf.substring(i - 1, i)) * (11 - i);
+
+    resto = (soma * 10) % 11;
+    if (resto === 10 || resto === 11) resto = 0;
+
+    if (resto !== parseInt(cpf.substring(9, 10))) return false;
+
+    // Segundo dígito verificador
+    soma = 0;
+    for (let i = 1; i <= 10; i++)
+      soma += parseInt(cpf.substring(i - 1, i)) * (12 - i);
+
+    resto = (soma * 10) % 11;
+    if (resto === 10 || resto === 11) resto = 0;
+
+    return resto === parseInt(cpf.substring(10, 11));
+  };
+
+  // Função para validar data + idade mínima
+  const validarData = (data) => {
+    const regex = /^\d{2}\/\d{2}\/\d{4}$/; // formato dd/mm/aaaa
+    if (!regex.test(data)) return false;
+
+    const [dia, mes, ano] = data.split('/').map(Number);
+    const hoje = new Date();
+    const nascimento = new Date(ano, mes - 1, dia);
+
+    // Verifica se a data realmente existe
+    if (
+      nascimento.getDate() !== dia ||
+      nascimento.getMonth() !== mes - 1 ||
+      nascimento.getFullYear() !== ano
+    ) return false;
+
+    // Calcula idade (mínimo 18 anos)
+    const idade = hoje.getFullYear() - ano;
+    return idade >= 18;
+  };
+
+  // Retorna ícone visual de status (válido ou inválido)
+  const statusCampo = (condicao) => (condicao ? "✅" : "❌");
+
+  // Verifica se todos os campos estão válidos
+  const tudoValido =
+    nome.trim() &&
+    validarEmail(email) &&
+    validarCPF(cpf) &&
+    validarData(data);
+
+  // Função chamada ao clicar no botão
+  const handleEnviar = () => {
+    if (tudoValido) {
+      setEnviado(true); // libera exibição dos dados
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Cadastro</Text>
+
+      {/* Campo Nome */}
+      <Text>Nome {statusCampo(nome.trim())}</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Digite seu nome"
+        value={nome}
+        onChangeText={setNome}
+      />
+
+      {/* Campo Email */}
+      <Text>Email {statusCampo(validarEmail(email))}</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Digite seu email"
+        value={email}
+        onChangeText={setEmail}
+        keyboardType="email-address"
+      />
+
+      {/* Campo CPF */}
+      <Text>CPF {statusCampo(validarCPF(cpf))}</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Digite seu CPF"
+        value={cpf}
+        onChangeText={setCpf}
+        keyboardType="numeric"
+      />
+
+      {/* Campo Data de Nascimento */}
+      <Text>Data de Nascimento (18+) {statusCampo(validarData(data))}</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="dd/mm/aaaa"
+        value={data}
+        onChangeText={setData}
+      />
+
+      {/* Botão personalizado */}
+      <TouchableOpacity
+        style={[
+          styles.botao,
+          { backgroundColor: tudoValido ? '#4CAF50' : '#999' }
+        ]}
+        disabled={!tudoValido}
+        onPress={handleEnviar}
+      >
+        <Text style={styles.botaoTexto}>
+          {tudoValido ? "Enviar ✅" : "Preencha tudo ❌"}
+        </Text>
+      </TouchableOpacity>
+
+      {/* Exibição dos dados após envio */}
+      {enviado && (
+        <View style={styles.resultadoBox}>
+          <Text style={styles.sucesso}>
+            🎉 Bem-vindo, {nome}!
+          </Text>
+
+          {/* Mostra todos os dados digitados */}
+          <Text style={styles.resultado}>📌 Nome: {nome}</Text>
+          <Text style={styles.resultado}>📧 Email: {email}</Text>
+          <Text style={styles.resultado}>🪪 CPF: {cpf}</Text>
+          <Text style={styles.resultado}>🎂 Nascimento: {data}</Text>
+        </View>
+      )}
+    </View>
+  );
+}
+
+// Estilos do app
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    justifyContent: 'center'
+  },
+  title: {
+    fontSize: 24,
+    marginBottom: 20,
+    textAlign: 'center'
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 10,
+    marginBottom: 10,
+    borderRadius: 8
+  },
+  botao: {
+    marginTop: 20,
+    padding: 15,
+    borderRadius: 10,
+    alignItems: 'center'
+  },
+  botaoTexto: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold'
+  },
+  resultadoBox: {
+    marginTop: 20,
+    padding: 15,
+    borderRadius: 10,
+    backgroundColor: '#f1f1f1'
+  },
+  sucesso: {
+    fontSize: 18,
+    color: 'green',
+    marginBottom: 10,
+    textAlign: 'center'
+  },
+  resultado: {
+    fontSize: 16,
+    marginBottom: 5
+  }
+});
