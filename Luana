@@ -379,6 +379,93 @@ const styles = StyleSheet.create({
   }
 });
 
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Luana Vitoria cordovil lima 
+DATA:  12/ 05 /2026
+Bimestre: 2º Bimestre
+Atividade 2°
+Descrição: Esse código cria uma tela no React Native com fundo preto, uma imagem com bordas arredondadas azuis, um ícone de estrela amarelo e uma caixa azul com texto amarelo.
+Foram utilizadas cores personalizadas, ícones e bordas arredondadas para deixar a interface mais bonita e organizada.
+**********************************************************************/
+
+import React from 'react';
+import { View, Text, StyleSheet, Image } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+      
+      <Text style={styles.titulo}>
+        Atividade Prática 2
+      </Text>
+
+      {/* Imagem */}
+      <Image
+        source={{
+          uri: 'https://reactnative.dev/img/tiny_logo.png',
+        }}
+        style={styles.imagem}
+      />
+
+      {/* Ícone */}
+      <Icon name="star" size={50} color="yellow" />
+
+      {/* Caixa colorida */}
+      <View style={styles.caixa}>
+        <Text style={styles.texto}>
+          Cores Preto, Azul e Amarelo
+        </Text>
+      </View>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'black',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 20,
+  },
+
+  titulo: {
+    fontSize: 28,
+    color: 'yellow',
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
+
+  imagem: {
+    width: 120,
+    height: 120,
+    borderRadius: 20,
+    marginBottom: 20,
+    borderWidth: 3,
+    borderColor: 'blue',
+  },
+
+  caixa: {
+    backgroundColor: 'blue',
+    padding: 20,
+    borderRadius: 15,
+    marginTop: 20,
+    width: 250,
+    alignItems: 'center',
+  },
+
+  texto: {
+    color: 'yellow',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+});
+
+
 
 
 
