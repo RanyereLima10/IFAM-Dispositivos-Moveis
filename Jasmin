@@ -191,6 +191,58 @@ const styles = StyleSheet.create({
   },
 });
 
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Jasmin Silva De Lima 
+DATA:  28/ 04 /2026
+Bimestre: 2º Bimestre
+Descrição da Atividade: Nesta atividade foi desenvolvido um aplicativo simples utilizando a biblioteca React Native, com o objetivo de compreender a estrutura básica de um app mobile.
+O aplicativo apresenta uma tela inicial com uma mensagem de boas-vindas e um botão interativo. Ao pressionar o botão, é exibido um alerta na tela, demonstrando o uso de eventos e interações com o usuário.
+Também foram aplicados conceitos de estilização utilizando o StyleSheet, permitindo a personalização de cores, alinhamento e formatação dos textos.
+A atividade contribuiu para o aprendizado dos principais componentes do React Native, como View, Text, Button e Alert, além de reforçar a lógica de programação e organização do código em aplicações móveis.
+
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, Button } from 'react-native';
+
+export default function App() {
+  const [mensagem, setMensagem] = useState("Bem-vindo!");
+
+  const entrar = () => {
+    setMensagem("Seja bem-vindo ao app!!");
+  };
+
+  return (
+    <View style={styles.container}>
+      
+      <Text style={styles.welcomeText}>
+        {mensagem}
+      </Text>
+
+      <Button 
+        title="Entrar" 
+        onPress={entrar} 
+      />
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#2ADEB0',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  welcomeText: {
+    fontSize: 24,
+    marginBottom: 20,
+    fontWeight: 'bold',
+    color: '#FFFFFF'
+  },
+});
+
 
 **********************************************************************/
 INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
