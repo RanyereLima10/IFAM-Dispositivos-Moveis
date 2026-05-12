@@ -138,20 +138,18 @@ export default function App() {
 
       {/* Foto */}
       <Image
-        source={{
-          uri: 'https://picsum.photos/200',
-        }}
+        source={('./assets/imagim9.jpg')}
         style={styles.foto}
       />
 
       {/* Título */}
       <Text style={styles.titulo}>
-        Meu Aplicativo
+        Aplicativo do Wendel
       </Text>
 
       {/* Subtítulo */}
       <Text style={styles.subtitulo}>
-        Exemplo de layout moderno com foto
+        Wendel, aluno do 3º ano do IFAM, cada esforço de hoje é um passo mais perto do seu futuro de sucesso.
       </Text>
 
       {/* Caixas */}
@@ -186,78 +184,83 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    backgroundColor: '#F5F7FA',
+    backgroundColor: '#F4F6F8',
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
   },
 
   foto: {
-    width: 140,
-    height: 140,
-    borderRadius: 70,
-    marginBottom: 20,
+    width: 160,
+    height: 160,
+    borderRadius: 80,
+    marginBottom: 25,
     borderWidth: 4,
-    borderColor: '',
+    borderColor: '#4A90E2',
   },
 
   titulo: {
-    fontSize: 32,
+    fontSize: 30,
     fontWeight: 'bold',
-    color: '#2D3436',
-    marginBottom: 10,
+    color: '#1E272E',
+    marginBottom: 12,
+    textAlign: 'center',
   },
 
   subtitulo: {
-    fontSize: 18,
-    color: '#636E72',
-    marginBottom: 30,
+    fontSize: 17,
+    color: '#57606F',
+    marginBottom: 35,
     textAlign: 'center',
+    lineHeight: 24,
+    paddingHorizontal: 10,
   },
 
   caixasContainer: {
     flexDirection: 'row',
+    justifyContent: 'center',
     marginBottom: 40,
   },
 
   caixa: {
-    width: 80,
-    height: 80,
-    marginHorizontal: 10,
+    width: 85,
+    height: 85,
+    marginHorizontal: 8,
     borderRadius: 20,
     justifyContent: 'center',
     alignItems: 'center',
+    elevation: 5,
   },
 
   caixa1: {
-    backgroundColor: '#6C63FF',
+    backgroundColor: '#4A90E2',
   },
 
   caixa2: {
-    backgroundColor: '#00B894',
+    backgroundColor: '#2ECC71',
   },
 
   caixa3: {
-    backgroundColor: '#FD79A8',
+    backgroundColor: '#9B59B6',
   },
 
   textoCaixa: {
-    fontSize: 24,
+    fontSize: 26,
     fontWeight: 'bold',
-    color: '#FFF',
+    color: '#FFFFFF',
   },
 
   botao: {
-    backgroundColor: '#2D3436',
+    backgroundColor: '#1E272E',
     paddingVertical: 15,
-    paddingHorizontal: 50,
+    paddingHorizontal: 55,
     borderRadius: 15,
   },
 
   textoBotao: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#FFF',
+    color: '#FFFFFF',
   },
 
 });
