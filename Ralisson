@@ -1,1 +1,128 @@
 
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Ralisso iago
+DATA:  12/ 05 /2026
+Bimestre: 2º Bimestre
+**********************************************************************/
+
+import React from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+
+
+      <Image
+        source={{
+          uri: 'https://upload.wikimedia.org/wikipedia/commons/5/5d/Vitor_Roque_2024.jpg',
+        }}
+        style={styles.image}
+      />
+
+      {/* Título */}
+      <Text style={styles.title}>APP DO MESQUITA</Text>
+
+      {/* Subtítulo */}
+      <Text style={styles.subtitle}>OLHA ESSAS CAIXAS!</Text>
+
+      {/* Três caixas */}
+      <View style={styles.boxContainer}>
+        <View style={styles.box}>
+          <Text style={styles.boxText}>SOBRE</Text>
+        </View>
+
+        <View style={styles.box}>
+          <Text style={styles.boxText}>NÚMERO</Text>
+        </View>
+
+        <View style={styles.box}>
+          <Text style={styles.boxText}>CONTATO</Text>
+        </View>
+      </View>
+
+      {/* Botão */}
+      <TouchableOpacity style={styles.button}>
+        <Text style={styles.buttonText}>APERTA AQUI!</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  // Fundo Palmeiras
+  container: {
+    flex: 1,
+    backgroundColor: '#006437',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+
+  image: {
+    width: 160,
+    height: 160,
+    borderRadius: 80,
+    marginBottom: 20,
+    borderWidth: 4,
+    borderColor: '#FFFFFF',
+  },
+
+  title: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+    marginBottom: 10,
+  },
+
+  subtitle: {
+    fontSize: 18,
+    color: '#DFFFE2',
+    marginBottom: 30,
+  },
+
+  boxContainer: {
+    flexDirection: 'row',
+    marginBottom: 30,
+  },
+
+  box: {
+    width: 90,
+    height: 90,
+    backgroundColor: '#FFFFFF',
+    marginHorizontal: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 12,
+    borderWidth: 2,
+    borderColor: '#004d29',
+  },
+
+  boxText: {
+    fontWeight: 'bold',
+    color: '#006437',
+  },
+
+  button: {
+    backgroundColor: '#FFFFFF',
+    paddingVertical: 12,
+    paddingHorizontal: 25,
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: '#004d29',
+  },
+
+  buttonText: {
+    color: '#006437',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+});
