@@ -186,6 +186,174 @@ borderRadius: 10
 
 });
 
+************************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Rakely da Silva de Souza
+DADOS: 12 / 05 / 2026
+BIMESTRE: 2º Bimestre
+
+DESCRIÇÃO DA ATIVIDADE:
+Projeto de tela no snack
+
+import React from 'react';
+import {
+View,
+Text,
+StyleSheet,
+TouchableOpacity,
+Image,
+Dimensions,
+ScrollView,
+} from 'react-native';
+
+const largura = Dimensions.get('window').width;
+
+export default function App() {
+return (
+<ScrollView contentContainerStyle={styles.container}>
+
+{/* Imagem no topo */}
+<Image
+source={{
+uri: 'https://cdn-icons-png.flaticon.com/512/4712/4712109.png',
+}}
+style={styles.imagem}
+/>
+
+{/* Título */}
+<Text style={styles.titulo}>Aprendendo Juntos</Text>
+
+
+{/* Cards */}
+<View style={styles.areaCards}>
+<View style={styles.card}>
+<Text style={styles.icone}>💻</Text>
+<Text style={styles.textoCard}>HTML</Text>
+</View>
+
+<View style={styles.card}>
+<Text style={styles.icone}>🎨</Text>
+<Text style={styles.textoCard}>CSS</Text>
+</View>
+
+<View style={styles.card}>
+<Text style={styles.icone}>⚛️</Text>
+<Text style={styles.textoCard}>React</Text>
+</View>
+
+<View style={styles.card}>
+<Text style={styles.icone}>📱</Text>
+<Text style={styles.textoCard}>Mobile</Text>
+</View>
+
+<View style={styles.card}>
+<Text style={styles.icone}>🧠</Text>
+<Text style={styles.textoCard}>Lógica</Text>
+</View>
+
+<View style={styles.card}>
+<Text style={styles.icone}>🌐</Text>
+<Text style={styles.textoCard}>Web</Text>
+</View>
+
+<View style={styles.card}>
+<Text style={styles.icone}>☁️</Text>
+<Text style={styles.textoCard}>API</Text>
+</View>
+
+<View style={styles.card}>
+<Text style={styles.icone}>✨</Text>
+<Text style={styles.textoCard}>UI Design</Text>
+</View>
+</View>
+
+{/* Botão */}
+<TouchableOpacity style={styles.botao}>
+<Text style={styles.textoBotao}>COMEÇAR AGORA</Text>
+</TouchableOpacity>
+
+</ScrollView>
+);
+}
+
+const styles = StyleSheet.create({
+container: {
+flexGrow: 1,
+backgroundColor: '#EAF6FF',
+alignItems: 'center',
+paddingVertical: 40,
+paddingHorizontal: 15,
+},
+
+imagem: {
+width: 150,
+height: 150,
+marginBottom: 15,
+},
+
+titulo: {
+fontSize: 28,
+fontWeight: 'bold',
+color: '#4B7EA8',
+marginBottom: 8,
+},
+
+subtitulo: {
+fontSize: 15,
+color: '#6E91B3',
+marginBottom: 30,
+textAlign: 'center',
+},
+
+areaCards: {
+flexDirection: 'row',
+flexWrap: 'wrap',
+justifyContent: 'center',
+},
+
+card: {
+width: largura * 0.38,
+backgroundColor: '#CFE9FF',
+padding: 18,
+margin: 10,
+borderRadius: 20,
+alignItems: 'center',
+shadowColor: '#000',
+shadowOpacity: 0.1,
+shadowRadius: 5,
+elevation: 4,
+},
+
+icone: {
+fontSize: 30,
+marginBottom: 10,
+},
+
+textoCard: {
+fontSize: 16,
+fontWeight: '600',
+color: '#3C6E91',
+},
+
+botao: {
+marginTop: 30,
+backgroundColor: '#7DB7E8',
+paddingVertical: 15,
+paddingHorizontal: 40,
+borderRadius: 30,
+},
+
+textoBotao: {
+color: '#fff',
+fontWeight: 'bold',
+fontSize: 16,
+},
+});
+
+
+
 
 
 
