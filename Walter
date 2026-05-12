@@ -1,1 +1,109 @@
+/**********************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Walter Isaías de Lima Silva
+DATA: 12 / 05 / 2026
+Bimestre: 2º Bimestre
+Assunto: Exercícios de Flexbox (Árvore e Alinhamentos)
+**********************************************************************/
+
+// 1. LAYOUT EXTREMOS (CIMA/BAIXO)
+// Descrição: Distribuição de elementos nos quatro cantos e centro usando space-between.
+
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+
+export function LayoutExtremos() {
+  return (
+    <View style={stylesExtremos.container}>
+      <View style={stylesExtremos.camadaExtrema}>
+        <Text style={[stylesExtremos.caixa, { backgroundColor: '#BAFFC9' }]}>B</Text>
+        <Text style={[stylesExtremos.caixa, { backgroundColor: '#FFFFBA' }]}>D</Text>
+      </View>
+      <View style={stylesExtremos.centroAbsoluto}>
+        <Text style={[stylesExtremos.caixa, { backgroundColor: '#BAE1FF' }]}>C</Text>
+      </View>
+      <View style={stylesExtremos.camadaExtrema}>
+        <Text style={[stylesExtremos.caixa, { backgroundColor: '#FFB3BA' }]}>A</Text>
+        <Text style={[stylesExtremos.caixa, { backgroundColor: '#E0BBE4' }]}>E</Text>
+      </View>
+    </View>
+  );
+}
+
+*****************************************************************************
+// 2. LAYOUT ÁRVORE
+// Descrição: Construção de pirâmide visual através de linhas horizontais centralizadas.
+
+export function LayoutArvore() {
+  return (
+    <View style={stylesArvore.container}>
+      <View style={stylesArvore.linha}><Text style={[stylesArvore.caixa, { backgroundColor: '#FFDFBA' }]}>A</Text></View>
+      <View style={stylesArvore.linha}>
+        <Text style={[stylesArvore.caixa, { backgroundColor: '#BAFFC9' }]}>B</Text>
+        <Text style={[stylesArvore.caixa, { backgroundColor: '#BAE1FF' }]}>C</Text>
+      </View>
+      <View style={stylesArvore.linha}>
+        <Text style={[stylesArvore.caixa, { backgroundColor: '#FFFFBA' }]}>D</Text>
+        <Text style={[stylesArvore.caixa, { backgroundColor: '#E0BBE4' }]}>E</Text>
+        <Text style={[stylesArvore.caixa, { backgroundColor: '#FFB3BA' }]}>F</Text>
+      </View>
+      <View style={stylesArvore.linha}>
+        <Text style={[stylesArvore.caixa, { backgroundColor: '#B2F7EF' }]}>G</Text>
+        <Text style={[stylesArvore.caixa, { backgroundColor: '#F7D1CD' }]}>H</Text>
+        <Text style={[stylesArvore.caixa, { backgroundColor: '#E2F0CB' }]}>I</Text>
+        <Text style={[stylesArvore.caixa, { backgroundColor: '#C5A3FF' }]}>J</Text>
+      </View>
+      <View style={stylesArvore.linha}><Text style={[stylesArvore.caixa, stylesArvore.tronco]}>|</Text></View>
+    </View>
+  );
+}
+
+
+*****************************************************************************
+// 3. ATIVIDADE PRÁTICA 1
+// Descrição: Layout padrão com cabeçalho, conteúdo horizontal e botão de ação.
+
+export default function App() {
+  return (
+    <View style={stylesAtividade.container}>
+      <Text style={stylesAtividade.titulo}>Minha Atividade</Text>
+      <Text style={stylesAtividade.subtitulo}>Desenvolvimento Mobile com React Native</Text>
+      <View style={stylesAtividade.linha}>
+        <View style={[stylesAtividade.caixa, { backgroundColor: '#FFB3BA' }]}><Text>1</Text></View>
+        <View style={[stylesAtividade.caixa, { backgroundColor: '#BAFFC9' }]}><Text>2</Text></View>
+        <View style={[stylesAtividade.caixa, { backgroundColor: '#BAE1FF' }]}><Text>3</Text></View>
+      </View>
+      <TouchableOpacity style={stylesAtividade.botao}>
+        <Text style={stylesAtividade.textoBotao}>Enviar Resposta</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
+
+// ESTILOS (Resumo das constantes de estilo utilizadas acima)
+const stylesExtremos = StyleSheet.create({
+  container: { flex: 1, justifyContent: 'space-between', padding: 10 },
+  camadaExtrema: { flexDirection: 'row', justifyContent: 'space-between', width: '100%' },
+  centroAbsoluto: { flexDirection: 'row', justifyContent: 'center', width: '100%' },
+  caixa: { padding: 20, fontSize: 20, fontWeight: 'bold', borderRadius: 8, borderWidth: 2, borderColor: '#4A90E2', textAlign: 'center', minWidth: 60 }
+});
+
+const stylesArvore = StyleSheet.create({
+  container: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+  linha: { flexDirection: 'row', marginVertical: -2 },
+  caixa: { padding: 15, margin: 3, fontSize: 18, fontWeight: 'bold', borderRadius: 8, borderWidth: 1.5, borderColor: '#4A90E2', textAlign: 'center', minWidth: 45 },
+  tronco: { backgroundColor: '#D4A373', borderColor: '#A98467', paddingHorizontal: 25, marginTop: 5 }
+});
+
+const stylesAtividade = StyleSheet.create({
+  container: { flex: 1, backgroundColor: '#F5F5F5', justifyContent: 'center', alignItems: 'center' },
+  titulo: { fontSize: 28, fontWeight: 'bold', position: 'absolute', top: 60 },
+  subtitulo: { fontSize: 16, color: '#666', marginBottom: 30 },
+  linha: { flexDirection: 'row', marginBottom: 40 },
+  caixa: { width: 60, height: 60, margin: 10, justifyContent: 'center', alignItems: 'center', borderRadius: 8, borderWidth: 1, borderColor: '#4A90E2' },
+  botao: { backgroundColor: '#4A90E2', paddingVertical: 12, paddingHorizontal: 30, borderRadius: 25 },
+  textoBotao: { color: 'white', fontWeight: '640' }
+});
 
