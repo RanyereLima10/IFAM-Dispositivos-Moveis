@@ -359,3 +359,251 @@ const styles = StyleSheet.create({
 });
 
 
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Cauã Fonseca s. Vieria
+DATA: 05 / 05 / 2026
+BIMESTRE: 2º Bimestre
+
+DESCRIÇÃO DA ATIVIDADE:
+Nesta atividade, o(a) aluno(a) deverá desenvolver uma aplicação mobile simples utilizando React Native, com o objetivo de compreender a estrutura básica de um aplicativo. O projeto deve conter uma tela inicial com uma mensagem de boas-vindas e pelo menos um botão interativo. Ao interagir com o botão, o aplicativo deve apresentar uma resposta na tela (ex: alerta, mudança de texto ou ação visual). Também devem ser aplicados conceitos de estilização utilizando StyleSheet, permitindo a personalização de cores, tamanhos e organização dos elementos. A atividade tem como objetivo reforçar o uso de componentes fundamentais como View, Text, Button e Alert, além de desenvolver a lógica de programação e organização do código.
+
+EXERCICIO PRATICO: 2
+/**********************************************************************/
+
+import React, { useState } from 'react';
+// Importa componentes do React Native
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+
+export default function App() {
+
+  // Estados para armazenar os dados digitados
+  const [nome, setNome] = useState("");
+  const [dia, setDia] = useState("");
+  const [mes, setMes] = useState("");
+  const [ano, setAno] = useState("");
+  const [mensagem, setMensagem] = useState("");
+
+  // Função para calcular a idade
+  const calcularIdade = () => {
+    const hoje = new Date(); // Data atual
+    const nascimento = new Date(ano, mes - 1, dia); // Data de nascimento
+
+    // Calcula a diferença de anos
+    let idade = hoje.getFullYear() - nascimento.getFullYear();
+
+    // Verifica mês/dia para ajustar a idade corretamente
+    const m = hoje.getMonth() - nascimento.getMonth();
+
+    if (m < 0 || (m === 0 && hoje.getDate() < nascimento.getDate())) {
+      idade--; // Ainda não fez aniversário este ano
+    }
+
+    return idade; // Retorna a idade calculada
+  };
+
+  // Função chamada ao clicar no botão
+  const verificar = () => {
+
+    // Verifica se todos os campos foram preenchidos
+    if (!nome || !dia || !mes || !ano) {
+      setMensagem("Preencha todos os campos!");
+      return;
+/**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Cauã Fonseca s. Vieria
+DATA: 05 / 05 / 2026
+BIMESTRE: 2º Bimestre
+
+DESCRIÇÃO DA ATIVIDADE:
+Nesta atividade, o(a) aluno(a) deverá desenvolver uma aplicação mobile simples utilizando React Native, com o objetivo de compreender a estrutura básica de um aplicativo. O projeto deve conter uma tela inicial com uma mensagem de boas-vindas e pelo menos um botão interativo. Ao interagir com o botão, o aplicativo deve apresentar uma resposta na tela (ex: alerta, mudança de texto ou ação visual). Também devem ser aplicados conceitos de estilização utilizando StyleSheet, permitindo a personalização de cores, tamanhos e organização dos elementos. A atividade tem como objetivo reforçar o uso de componentes fundamentais como View, Text, Button e Alert, além de desenvolver a lógica de programação e organização do código.
+
+EXERCICIO PRATICO: 4
+/**********************************************************************/
+   import React, { useState } from 'react';
+// Importa os componentes necessários do React Native
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+
+export default function App() {
+
+  // Estados para armazenar nome, curso e mensagem final
+  const [nome, setNome] = useState("");
+  const [curso, setCurso] = useState("");
+  const [mensagem, setMensagem] = useState("");
+
+  // Função chamada ao clicar no botão
+  const mostrarAluno = () => {
+
+    // Verifica se os campos foram preenchidos
+    if (!nome || !curso) {
+      setMensagem("Preencha todos os campos!");
+      return;
+    }
+
+    // Monta a mensagem
+    setMensagem(`Aluno ${nome} do curso ${curso}`);
+  };
+
+  return (
+    <View style={styles.container}>
+
+      {/* Título */}
+      <Text style={styles.titulo}>Cadastro de Aluno</Text>
+
+      {/* Campo Nome */}
+      <TextInput
+        style={styles.input}
+        placeholder="Digite o nome"
+        onChangeText={setNome}
+      />
+
+      {/* Campo Curso */}
+      <TextInput
+        style={styles.input}
+        placeholder="Digite o curso"
+        onChangeText={setCurso}
+      />
+
+      {/* Botão */}
+      <Button title="Mostrar" onPress={mostrarAluno} />
+
+      {/* Resultado */}
+      <Text style={styles.resultado}>{mensagem}</Text>
+
+    </View>
+  );
+}
+
+// Estilos
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center', // centraliza na vertical
+    alignItems: 'center', // centraliza na horizontal
+    padding: 20,
+  },
+  titulo: {
+    fontSize: 24,
+    marginBottom: 20,
+  },
+  input: {
+    borderWidth: 1,
+    width: '80%',
+    padding: 10,
+    marginBottom: 10,
+    borderRadius: 5,
+  },
+  resultado: {
+    marginTop: 20,
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+});
+/**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Cauã Fonseca s. Vieria
+DATA: 05 / 05 / 2026
+BIMESTRE: 2º Bimestre
+
+DESCRIÇÃO DA ATIVIDADE:
+Nesta atividade, o(a) aluno(a) deverá desenvolver uma aplicação mobile simples utilizando React Native, com o objetivo de compreender a estrutura básica de um aplicativo. O projeto deve conter uma tela inicial com uma mensagem de boas-vindas e pelo menos um botão interativo. Ao interagir com o botão, o aplicativo deve apresentar uma resposta na tela (ex: alerta, mudança de texto ou ação visual). Também devem ser aplicados conceitos de estilização utilizando StyleSheet, permitindo a personalização de cores, tamanhos e organização dos elementos. A atividade tem como objetivo reforçar o uso de componentes fundamentais como View, Text, Button e Alert, além de desenvolver a lógica de programação e organização do código.
+
+EXERCICIO PRATICO: 5
+/**********************************************************************/
+
+import React, { useState } from 'react';
+// Importa os componentes
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+
+export default function App() {
+
+  // Estados
+  const [nome, setNome] = useState("");
+  const [cidade, setCidade] = useState("");
+  const [mensagem, setMensagem] = useState("");
+  const [cor, setCor] = useState("black"); // controla a cor do texto
+
+  // Função do botão
+  const mostrarMensagem = () => {
+
+    // Validação
+    if (!nome || !cidade) {
+      setMensagem("Preencha todos os campos!");
+      setCor("red"); // erro em vermelho
+      return;
+    }
+
+    // Mensagem correta
+    setMensagem(`Olá ${nome}, você mora em ${cidade}`);
+    setCor("blue"); // mensagem em azul
+  };
+
+  return (
+    <View style={styles.container}>
+
+      {/* Título */}
+      <Text style={styles.titulo}>Desafio</Text>
+
+      {/* Campo Nome */}
+      <TextInput
+        style={styles.input}
+        placeholder="Digite seu nome"
+        onChangeText={setNome}
+      />
+
+      {/* Campo Cidade */}
+      <TextInput
+        style={styles.input}
+        placeholder="Digite sua cidade"
+        onChangeText={setCidade}
+      />
+
+      {/* Botão */}
+      <Button title="Mostrar" onPress={mostrarMensagem} />
+
+      {/* Resultado com cor dinâmica e centralizado */}
+      <Text style={[styles.resultado, { color: cor }]}>
+        {mensagem}
+      </Text>
+
+    </View>
+  );
+}
+
+// Estilos
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center', // centraliza vertical
+    alignItems: 'center', // centraliza horizontal
+    padding: 20,
+  },
+  titulo: {
+    fontSize: 24,
+    marginBottom: 20,
+  },
+  input: {
+    borderWidth: 1,
+    width: '80%',
+    padding: 10,
+    marginBottom: 10,
+    borderRadius: 5,
+  },
+  resultado: {
+    marginTop: 20,
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center', // texto centralizado
+  },
+});
+
+
+**********************************************************************/
+
