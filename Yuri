@@ -24,6 +24,159 @@ export default function App() {
   return (
     <View style={styles.container}>
 
+      {/* Imagem principal (responsiva) */}
+      <Image
+        source={{ uri: 'https://picsum.photos/200' }}
+        style={[
+          styles.imagem,
+          {
+            width: larguraTela * 0.35,
+            height: larguraTela * 0.35
+          }
+        ]}
+      />
+
+      {/* Título */}
+      <Text style={styles.titulo}>Meu Aplicativo</Text>
+
+      {/* Subtítulo */}
+      <Text style={styles.subtitulo}>
+        Aula de Layouts Responsivos
+      </Text>
+
+      {/* Linha horizontal (flexDirection) */}
+      <View style={styles.linha}>
+
+        <View style={[styles.caixa, { width: larguraTela * 0.28 }]}>
+          <Image
+            source={{ uri: 'https://picsum.photos/seed/pedra/100' }}
+            style={styles.imgCaixa}
+          />
+        </View>
+
+        <View style={[styles.caixa, { width: larguraTela * 0.28 }]}>
+          <Image
+            source={{ uri: 'https://picsum.photos/seed/papel/100' }}
+            style={styles.imgCaixa}
+          />
+        </View>
+
+        <View style={[styles.caixa, { width: larguraTela * 0.28 }]}>
+          <Image
+            source={{ uri: 'https://picsum.photos/seed/tesoura/100' }}
+            style={styles.imgCaixa}
+          />
+        </View>
+
+      </View>
+
+      {/* Botão responsivo */}
+      <TouchableOpacity
+        style={[
+          styles.botao,
+          { width: larguraTela * 0.6 }
+        ]}
+      >
+        <Text style={styles.textoBotao}>ENTRAR</Text>
+      </TouchableOpacity>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+
+  /* flex principal */
+  container: {
+    flex: 1,
+    backgroundColor: '#1f1f1f',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20
+  },
+
+  imagem: {
+    borderRadius: 100,
+    marginBottom: 20
+  },
+
+  titulo: {
+    fontSize: 28,
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 10
+  },
+
+  subtitulo: {
+    fontSize: 18,
+    color: '#cccccc',
+    textAlign: 'center',
+    marginBottom: 30
+  },
+
+  /* flexDirection */
+  linha: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+    marginBottom: 40
+  },
+
+  caixa: {
+    height: 90,
+    backgroundColor: '#4A90E2',
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+
+  imgCaixa: {
+    width: 55,
+    height: 55,
+    borderRadius: 8
+  },
+
+  botao: {
+    backgroundColor: '#E67E22',
+    paddingVertical: 12,
+    borderRadius: 10,
+    alignItems: 'center'
+  },
+
+  textoBotao: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 18
+  }
+
+});
+**********************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Yuri Lima Macedo
+DATA:  12/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição da Atividade: Nesta atividade, o aluno: yuri lima macedo deverá desenvolver uma aplicação mobile simples utilizando React Native, com o objetivo de compreender a estrutura básica de um aplicativo.O codigo es simples ultilizando um layout na aula do dia 12/05/2026 para o uso e saber de layout.usando imagens e figuras para uma representação, melhor de uma tela
+**********************************************************************/
+import React from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  Dimensions
+} from 'react-native';
+
+export default function App() {
+
+  const larguraTela = Dimensions.get('window').width;
+
+  return (
+    <View style={styles.container}>
+
       {/* Imagem principal responsiva */}
       <Image
         source={{ uri: 'https://picsum.photos/200' }}
