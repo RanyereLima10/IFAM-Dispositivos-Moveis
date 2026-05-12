@@ -310,3 +310,52 @@ const styles = StyleSheet.create({
     marginBottom: 5
   }
 });
+
+
+**********************************************************************/
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Cauã Fonseca da Silveira Vieria 
+DATA:  04/ 05 /2026
+Bimestre: 2º Bimestre
+Nesta atividade foi desenvolvido um aplicativo simples utilizando React Native, com o objetivo de compreender a estrutura básica de um app mobile.
+O aplicativo apresenta uma tela inicial com uma mensagem de boas-vindas e um botão interativo que, ao ser pressionado, exibe um alerta na tela.
+Também foram aplicados conceitos de estilização com StyleSheet, permitindo a personalização de cores e textos.
+A atividade contribuiu para o aprendizado dos principais componentes, como View, Text, Button e Alert, além de reforçar a lógica de programação.
+************+***************************************************************
+import React from 'react';
+import { StyleSheet, Text, View, Button, Alert } from 'react-native';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+      
+      <Text style={styles.welcomeText}>Bem-vindo!</Text>
+
+      
+      <Button 
+        title="Entrar" 
+        onPress={() => Alert.alert('Botão pressionado!')} 
+      />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#683FEA',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  welcomeText: {
+    fontSize: 24,
+    marginBottom: 20,
+    fontWeight: 'bold',
+  },
+
+
+});
+
+
