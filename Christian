@@ -1,1 +1,147 @@
+**********************************************************************/
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Christian Keven de Paiva Farias
+DATA:  05/05/2026
+Bimestre: 2º Bimestre
+Descrição da Atividade: Esse aplicativo é um formulário de cadastro de aluno feito em React Native.
+Ele permite que o usuário digite nome e e-mail e clique no botão para se cadastrar. O app realiza uma validação dos campos, verificando se estão vazios.
+Caso algum esteja, ele mostra mensagens de erro abaixo dos campos. Quando o usuário clica em “Cadastrar”, aparece uma mensagem de “Enviando dados...”, simulando um envio.
+Após alguns segundos: Se estiver tudo correto, aparece uma mensagem de sucesso com o nome do usuário. Se houver erro, nenhuma mensagem de sucesso é exibida. 
+Além disso, o formulário limpa os campos após um cadastro válido, deixando a interface pronta para um novo preenchimento.
+**********************************************************************/
+
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+
+export default function App() {
+
+  // Estados dos campos
+  const [nome, setNome] = useState('');
+  const [email, setEmail] = useState('');
+  const [cpf, setCpf] = useState('');
+
+  // Estados de erro
+  const [erroNome, setErroNome] = useState('');
+  const [erroEmail, setErroEmail] = useState('');
+  const [erroCpf, setErroCpf] = useState('');
+
+  // Validação simples
+  const validarEmail = (email) => /\S+@\S+\.\S+/.test(email);
+  const validarCPF = (cpf) => cpf.length === 11;
+
+  // Função de validação geral
+  const validar = () => {
+    let valido = true;
+
+    // Nome
+    if (nome.trim() === '') {
+      setErroNome('Preencha o nome');
+      valido = false;
+    } else setErroNome('');
+
+    // Email
+    if (email.trim() === '') {
+      setErroEmail('Preencha o email');
+      valido = false;
+    } else if (!validarEmail(email)) {
+      setErroEmail('Email inválido');
+      valido = false;
+    } else setErroEmail('');
+
+    // CPF
+    if (cpf.trim() === '') {
+      setErroCpf('Preencha o CPF');
+      valido = false;
+    } else if (!validarCPF(cpf)) {
+      setErroCpf('CPF deve ter 11 números');
+      valido = false;
+    } else setErroCpf('');
+
+    // Sucesso
+    if (valido) {
+      Alert.alert('Sucesso', 'Formulário enviado');
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+
+      <Text style={styles.titulo}>Formulário</Text>
+
+      {/* Nome */}
+      <TextInput
+        style={styles.input}
+        placeholder="Nome"
+        value={nome}
+        onChangeText={setNome}
+      />
+      {erroNome && <Text style={styles.erro}>{erroNome}</Text>}
+
+      {/* Email */}
+      <TextInput
+        style={styles.input}
+        placeholder="Email"
+        value={email}
+        onChangeText={setEmail}
+        keyboardType="email-address"
+      />
+      {erroEmail && <Text style={styles.erro}>{erroEmail}</Text>}
+
+      {/* CPF */}
+      <TextInput
+        style={styles.input}
+        placeholder="CPF"
+        value={cpf}
+        onChangeText={setCpf}
+        keyboardType="numeric"
+        maxLength={11}
+      />
+      {erroCpf && <Text style={styles.erro}>{erroCpf}</Text>}
+
+      {/* Botão */}
+      <TouchableOpacity style={styles.botao} onPress={validar}>
+        <Text style={styles.textoBotao}>Enviar</Text>
+      </TouchableOpacity>
+
+    </View>
+  );
+}
+
+// Estilos
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 20,
+    backgroundColor: '#fff',
+  },
+  titulo: {
+    fontSize: 24,
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 10,
+    marginBottom: 5,
+    borderRadius: 5,
+  },
+  erro: {
+    color: 'red',
+    marginBottom: 10,
+  },
+  botao: {
+    backgroundColor: 'purple',
+    padding: 15,
+    borderRadius: 5,
+    alignItems: 'center',
+  },
+  textoBotao: {
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+});
 
