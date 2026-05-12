@@ -3,7 +3,7 @@ INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
 DISCIPLINA: Dispositivos Móveis
 PROFESSOR: Ranyere Lima
 ALUNO(A): Christian Keven de Paiva Farias
-DATA:  05/05/2026
+DATA:  xx/ xx /2026
 Bimestre: 2º Bimestre
 Descrição da Atividade: Esse aplicativo é um formulário de cadastro de aluno feito em React Native.
 Ele permite que o usuário digite nome e e-mail e clique no botão para se cadastrar. O app realiza uma validação dos campos, verificando se estão vazios.
@@ -143,5 +143,354 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
   },
+});
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Christian Keven de Paiva Farias
+DATA:  12/ 05 /2026
+Bimestre: 2º Bimestre
+**********************************************************************/
+
+ import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+
+      {/* Estrela */}
+      <Text style={[styles.letra, styles.estrela]}>⭐</Text>
+
+      {/* Linha 1 */}
+      <View style={styles.row}>
+        <Text style={[styles.letra, styles.a]}>A</Text>
+      </View>
+
+      {/* Linha 2 */}
+      <View style={styles.row}>
+        <Text style={[styles.letra, styles.b]}>B</Text>
+        <Text style={[styles.letra, styles.c]}>C</Text>
+      </View>
+
+      {/* Linha 3 */}
+      <View style={styles.row}>
+        <Text style={[styles.letra, styles.d]}>D</Text>
+        <Text style={[styles.letra, styles.e]}>E</Text>
+        <Text style={[styles.letra, styles.f]}>F</Text>
+      </View>
+
+      {/* Tronco */}
+      <Text style={[styles.letra, styles.tronco]}>| |</Text>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+
+  container: {
+    flex: 1,
+    backgroundColor: '#0b1d0b',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+
+  letra: {
+    width: 60,
+    height: 60,
+    margin: 5,
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: 'white',
+    borderRadius: 15,
+    paddingTop: 10,
+  },
+
+  estrela: {
+    backgroundColor: 'gold',
+    color: 'black',
+  },
+
+  tronco: {
+    backgroundColor: '#8B4513',
+    width: 70,
+  },
+
+  a: {
+    backgroundColor: '#b3204d',
+  },
+
+  b: {
+    backgroundColor: '#b5485f',
+  },
+
+  c: {
+    backgroundColor: '#ff0048',
+  },
+
+  d: {
+    backgroundColor: '#ffe2ba',
+  },
+
+  e: {
+    backgroundColor: '#496940',
+  },
+
+  f: {
+    backgroundColor: '#27ae60',
+  },
+
+});
+
+
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A):Ed, Davi, Rian, Ralisson e Christian
+DATA:  05/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição da Atividade:  exemplo - Nesta atividade foi desenvolvido um aplicativo simples utilizando React Native, com o objetivo de compreender a estrutura básica de um app mobile.
+O aplicativo apresenta uma tela inicial com uma mensagem de boas-vindas e um botão interativo que, ao ser pressionado, exibe um alerta na tela.
+Também foram aplicados conceitos de estilização com StyleSheet, permitindo a personalização de cores e textos.
+A atividade contribuiu para o aprendizado dos principais componentes, como View, Text, Button e Alert, além de reforçar a lógica de programação.
+
+**********************************************************************/
+
+
+
+
+trabalho 1° bim
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  StyleSheet,
+  Alert
+} from 'react-native';
+
+export default function App() {
+
+  const [nome, setNome] = useState('');
+  const [mensagem, setMensagem] = useState('Bem-vindo ao app!');
+  const [frase, setFrase] = useState('Nunca desista dos seus objetivos!');
+
+  function mostrarMensagem() {
+    if (nome === '') {
+      setMensagem('Digite seu nome!');
+    } else {
+      setMensagem(`Olá, ${nome}! Seja bem-vindo 👋`);
+    }
+  }
+
+  function mudarFrase() {
+    setFrase('O sucesso é a soma de pequenos esforços!');
+  }
+
+  function mostrarAlerta() {
+    Alert.alert('Aviso', 'Você clicou no botão!');
+  }
+
+  return (
+    <View style={styles.container}>
+
+      <Text style={styles.titulo}>
+        Meu Primeiro App
+      </Text>
+
+      <Text style={styles.texto}>
+        Nome do aluno: {nome}
+      </Text>
+
+      <Text style={styles.texto}>
+        Curso: Informática
+      </Text>
+
+      <Text style={styles.frase}>
+        "{frase}"
+      </Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Digite seu nome"
+        onChangeText={setNome}
+      />
+
+      <View style={styles.botao}>
+        <Button
+          title="Mostrar mensagem"
+          onPress={mostrarMensagem}
+          color="#4CAF50"
+        />
+      </View>
+
+      <View style={styles.botao}>
+        <Button
+          title="Mudar frase"
+          onPress={mudarFrase}
+          color="#2196F3"
+        />
+      </View>
+
+      <View style={styles.botao}>
+        <Button
+          title="Mostrar alerta"
+          onPress={mostrarAlerta}
+          color="#FF5722"
+        />
+      </View>
+
+      <Text style={styles.resultado}>
+        {mensagem}
+      </Text>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 20,
+    backgroundColor: '#d9f0ff'
+  },
+  titulo: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    marginBottom: 15,
+    textAlign: 'center',
+    color: '#333'
+  },
+  texto: {
+    fontSize: 16,
+    marginBottom: 5,
+    textAlign: 'center'
+  },
+  frase: {
+    fontStyle: 'italic',
+    marginBottom: 15,
+    textAlign: 'center',
+    color: '#555'
+  },
+  input: {
+    borderWidth: 1,
+    padding: 10,
+    marginVertical: 10,
+    borderRadius: 8,
+    backgroundColor: '#fff'
+  },
+  botao: {
+    marginVertical: 5
+  },
+  resultado: {
+    marginTop: 20,
+    fontSize: 18,
+    color: 'blue',
+    textAlign: 'center'
+  }
+});
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A):Ed, Davi, Rian, Ralisson e Christian
+DATA:  05/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição da Atividade:  exemplo - Nesta atividade foi desenvolvido um aplicativo simples utilizando React Native, com o objetivo de compreender a estrutura básica de um app mobile.
+O aplicativo apresenta uma tela inicial com uma mensagem de boas-vindas e um botão interativo que, ao ser pressionado, exibe um alerta na tela.
+Também foram aplicados conceitos de estilização com StyleSheet, permitindo a personalização de cores e textos.
+A atividade contribuiu para o aprendizado dos principais componentes, como View, Text, Button e Alert, além de reforçar a lógica de programação.
+
+**********************************************************************/
+
+
+Aluno Ed: Atv Primeira Tela
+import React from 'react';
+import { View, Text, Button, StyleSheet } from 'react-native';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+      
+      {/* 1. Texto */}
+      <Text style={styles.texto}>Bem-vindo!</Text>
+
+      {/* 2. Botão */}
+      <Button 
+        title="Entrar" 
+        onPress={() => alert('Botão pressionado!')} 
+      />
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  texto: {
+    fontSize: 24,
+    marginBottom: 20,
+  },
+});
+
+
+Data:05/05/26
+Alunos: Ed, Davi, Rian e Ralisson, Christian
+trabalho 2°° bim atividade
+
+import React, { useState } from 'react';
+import { Text, View, Button, StyleSheet } from 'react-native';
+
+export default function App() {
+const [mensagem, setMensagem] = useState('Seja bem-vindo, aluno!');
+
+function mudarMensagem() {
+setMensagem('Você clicou no botão! ');
+}
+
+return (
+<View style={styles.container}>
+<Text style={styles.texto}>{mensagem}</Text>
+
+<Button
+title="Clique aqui "
+onPress={mudarMensagem}
+/>
+</View>
+);
+}
+
+const styles = StyleSheet.create({
+container: {
+flex: 1,
+justifyContent: 'center',
+alignItems: 'center',
+},
+texto: {
+fontSize: 20,
+marginBottom: 20,
+},
 });
 
