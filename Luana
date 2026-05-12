@@ -251,6 +251,134 @@ const styles = StyleSheet.create({
   },
 });
 
+**********************************************************************/
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Luana Vitoria C. Lima
+DATA:  05/05/2026
+Bimestre: 2º Bimestre
+Descrição da Atividade: Esse aplicativo é um formulário de cadastro de aluno feito em React Native.
+Ele permite que o usuário digite nome e e-mail e clique no botão para se cadastrar. O app realiza uma validação dos campos, verificando se estão vazios.
+Caso algum esteja, ele mostra mensagens de erro abaixo dos campos. Quando o usuário clica em “Cadastrar”, aparece uma mensagem de “Enviando dados...”, simulando um envio.
+Após alguns segundos: Se estiver tudo correto, aparece uma mensagem de sucesso com o nome do usuário. Se houver erro, nenhuma mensagem de sucesso é exibida. 
+Além disso, o formulário limpa os campos após um cadastro válido, deixando a interface pronta para um novo preenchimento.
+**********************************************************************/
+
+import React, { useState } from 'react';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+
+export default function App() {
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
+
+  const [erroNome, setErroNome] = useState("");
+  const [erroEmail, setErroEmail] = useState("");
+  const [mensagem, setMensagem] = useState("");
+  const [statusEnvio, setStatusEnvio] = useState("");
+
+  const validarCadastro = () => {
+    // limpa mensagens
+    setErroNome("");
+    setErroEmail("");
+    setMensagem("");
+    setStatusEnvio("");
+
+    // mostra envio de dados
+    setStatusEnvio("Enviando dados...");
+
+    let valido = true;
+
+    if (nome.trim() === "") {
+      setErroNome("Digite seu nome");
+      valido = false;
+    }
+
+    if (email.trim() === "") {
+      setErroEmail("Digite seu e-mail");
+      valido = false;
+    }
+
+    // simula processamento
+    setTimeout(() => {
+      if (valido) {
+        setMensagem(`Cadastro realizado!\nBem-vindo, ${nome}!`);
+        setNome("");
+        setEmail("");
+      } else {
+        setMensagem("");
+      }
+
+      setStatusEnvio(""); // remove "enviando"
+    }, 1500);
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titulo}>Cadastro de Aluno</Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Nome"
+        value={nome}
+        onChangeText={setNome}
+      />
+      {erroNome !== "" && <Text style={styles.erro}>{erroNome}</Text>}
+
+      <TextInput
+        style={styles.input}
+        placeholder="E-mail"
+        value={email}
+        onChangeText={setEmail}
+      />
+      {erroEmail !== "" && <Text style={styles.erro}>{erroEmail}</Text>}
+
+      <Button title="Cadastrar" onPress={validarCadastro} />
+
+      {/* mensagem de envio */}
+      {statusEnvio !== "" && (
+        <Text style={styles.envio}>{statusEnvio}</Text>
+      )}
+
+      {/* sucesso */}
+      {mensagem !== "" && (
+        <Text style={styles.sucesso}>{mensagem}</Text>
+      )}
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 20
+  },
+  titulo: {
+    fontSize: 22,
+    marginBottom: 15
+  },
+  input: {
+    borderWidth: 1,
+    padding: 10,
+    marginBottom: 5
+  },
+  erro: {
+    color: 'red',
+    marginBottom: 10
+  },
+  sucesso: {
+    color: 'green',
+    marginTop: 15,
+    fontSize: 16
+  },
+  envio: {
+    color: 'blue',
+    marginTop: 10,
+    fontSize: 16
+  }
+});
+
 
 
 
