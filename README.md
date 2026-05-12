@@ -116,8 +116,9 @@ const styles = {
 
 
 /**********************************************************************/
- ****⚠️ Atenção, Exemplo de Layout Responsivo no Snack *********
+ ****⚠️ Atenção, Exemplo de Layout Responsivo no Snack ***************
 /**********************************************************************/
+
 import React from 'react';
 import {
   View,
@@ -217,12 +218,8 @@ const styles = StyleSheet.create({
 });
 
 /**********************************************************************/
- ******** FIM Exemplo de Layout Responsivo no Snack************
+ ******** FIM Exemplo de Layout Responsivo no Snack********************
 /**********************************************************************/
-
-
-
-
 
 
 
