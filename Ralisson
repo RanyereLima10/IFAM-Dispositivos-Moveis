@@ -731,3 +731,126 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   }
 });
+
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Ralisson iago
+DATA:  05/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição da Atividade: atividade 2, imagem, estrela, quadrado, aredondado
+**********************************************************************/
+import React from 'react';
+import { View, Text, StyleSheet, Image, Dimensions, ScrollView, TouchableOpacity } from 'react-native';
+
+const larguraCard = Dimensions.get('window').width * 0.43; 
+
+export default function App() {
+  const cards = [
+    { nome: 'HTML', cor: '#9B59B6', icone: '</>' },
+    { nome: 'CSS', cor: '#E67E22', icone: '✏️' },
+    { nome: 'JavaScript', cor: '#2ECC71', icone: 'JS' },
+    { nome: 'React Native', cor: '#3498DB', icone: '⚛️' },
+    { nome: 'Mobile UI', cor: '#E74C3C', icone: '📱' },
+    { nome: 'API', cor: '#1ABC9C', icone: '☁️' },
+    { nome: 'Banco de Dados', cor: '#F1C40F', icone: '🗄️' },
+    { nome: 'Deploy', cor: '#34495E', icone: '🚀' },
+  ];
+
+  return (
+    <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollContent}>
+        
+        <Image 
+          source={{ uri: 'https://i.redd.it/w0fu52c6a8t61.jpg' }} 
+          style={styles.imagemTopo} 
+        />
+
+        <Text style={styles.titulo}>Aprendendo Juntos</Text>
+        <Text style={styles.subtitulo}>Cursos e conteúdos para impulsionar seus estudos!</Text>
+
+        <View style={styles.grade}>
+          {cards.map((item, index) => (
+            <View key={index} style={[styles.card, { backgroundColor: item.cor }]}>
+              <Text style={styles.icone}>{item.icone}</Text>
+              <Text style={styles.textoCard}>{item.nome}</Text>
+            </View>
+          ))}
+        </View>
+      </ScrollView>
+
+      <TouchableOpacity style={styles.botao}>
+        <Text style={styles.textoBotao}>🚀 COMEÇAR AGORA</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#F0F4F8',
+  },
+  scrollContent: {
+    alignItems: 'center',
+    paddingBottom: 100, 
+  },
+  imagemTopo: {
+    width: '100%',
+    height: 200,
+    resizeMode: 'cover',
+  },
+  titulo: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginTop: 20,
+    color: '#2C3E50',
+  },
+  subtitulo: {
+    fontSize: 14,
+    textAlign: 'center',
+    paddingHorizontal: 30,
+    color: '#7F8C8D',
+    marginBottom: 20,
+  },
+  grade: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+  },
+  card: {
+    width: larguraCard,
+    height: 100,
+    margin: 8,
+    borderRadius: 12,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 3, 
+  },
+  icone: {
+    fontSize: 24,
+    color: 'white',
+    marginBottom: 5,
+  },
+  textoCard: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 14,
+  },
+  botao: {
+    position: 'absolute',
+    bottom: 20,
+    backgroundColor: '#3F51B5',
+    width: '90%',
+    alignSelf: 'center',
+    padding: 15,
+    borderRadius: 30,
+    alignItems: 'center',
+  },
+  textoBotao: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+});
