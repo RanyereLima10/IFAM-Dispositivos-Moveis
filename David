@@ -171,13 +171,126 @@ const styles = StyleSheet.create({
 
 
 
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): DAVID YURI
+DATA:  28/ 04 /2026
+Bimestre: 2º Bimestre
+
+**********************************************************************/
+
+import React from 'react';
+import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+
+export default function App() {
+  
+  const cards = [
+    { id: 1, title: 'Card 1', icon: 'rocket' },
+    { id: 2, title: 'Card 2', icon: 'heart' },
+    { id: 3, title: 'Card 3', icon: 'star' },
+    { id: 4, title: 'Card 4', icon: 'camera' },
+    { id: 5, title: 'Card 5', icon: 'bell' },
+    { id: 6, title: 'Card 6', icon: 'check-circle' },
+  ];
+
+  return (
+    <ScrollView style={styles.container}>
+      
+      <Image 
+        source={{ uri: 'https://picsum.photos' }} 
+        style={styles.headerImage} 
+      />
+
+      <Text style={styles.title}>Meu Layout Responsivo</Text>
+
+      {/* Container dos Cards */}
+      <View style={styles.cardContainer}>
+        {cards.map((card) => (
+          <View key={card.id} style={styles.card}>
+            {/* 3. Adicionar ícones */}
+            <MaterialCommunityIcons name={card.icon} size={50} color="#4B0C82" />
+            <Text style={styles.cardText}>{card.title}</Text>
+          </View>
+        ))}
+      </View>
+
+      {/* 5. Botão abaixo dos cards */}
+      <TouchableOpacity style={styles.button}>
+        <Text style={styles.buttonText}>Confirmar Atividade</Text>
+      </TouchableOpacity>
+    </ScrollView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#7DC9BD', // Cor de fundo suave
+  },
+  headerImage: {
+    width: '100%',
+    height: 140,
+  },
+  title: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginVertical: 20,
+    color: '#333',
+  },
+  cardContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap', // Faz os cards "quebrarem" para a linha de baixo
+    justifyContent: 'space-around',
+    paddingHorizontal: 10,
+  },
+  card: {
+    // 1 e 2. Mais cards e novas cores
+    backgroundColor: '#6C63FF', 
+    width: '45%', // Garante 2 cards por linha
+    height: 120,
+    borderRadius: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 15,
+    // Sombra para o card
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+  },
+  cardText: {
+    color: '#fff',
+    marginTop: 10,
+    fontWeight: 'bold',
+  },
+  button: {
+    backgroundColor: '#2ECC71',
+    margin: 20,
+    padding: 15,
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+});
 
 
 
+**********************************************************************/
 
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): DAVID YURI
+DATA:  28/ 04 /2026
+Bimestre: 2º Bimestre
 
-
-
-
-
-
+**********************************************************************/
