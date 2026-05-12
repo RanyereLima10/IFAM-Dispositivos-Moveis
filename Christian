@@ -586,3 +586,122 @@ const styles = StyleSheet.create({
   },
 });
 
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Christian Keven de Paiva Farias
+DATA:  12/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição: O código cria uma tela centralizada com título, subtítulo, três imagens lado a lado e um botão “ENTRAR”, usando estilos para organizar o layout e o fundo da aplicação.
+**********************************************************************/
+
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+      
+      {/* Título */}
+      <Text style={styles.titulo}>
+        Meu Aplicativo
+      </Text>
+
+      {/* Subtítulo */}
+      <Text style={styles.subtitulo}>
+        Aula de Layouts
+      </Text>
+
+      {/* Três caixas com imagens */}
+      <View style={styles.caixasContainer}>
+
+        <View style={styles.caixa}>
+          <Image
+            source={{ uri: 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png' }}
+            style={styles.imagem}
+          />
+        </View>
+
+        <View style={styles.caixa}>
+          <Image
+            source={{ uri: 'https://cdn-icons-png.flaticon.com/512/4140/4140048.png' }}
+            style={styles.imagem}
+          />
+        </View>
+
+        <View style={styles.caixa}>
+          <Image
+            source={{ uri: 'https://cdn-icons-png.flaticon.com/512/1995/1995574.png' }}
+            style={styles.imagem}
+          />
+        </View>
+
+      </View>
+
+      {/* Botão */}
+      <TouchableOpacity style={styles.botao}>
+        <Text style={styles.textoBotao}>ENTRAR</Text>
+      </TouchableOpacity>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#EAF2FF'
+  },
+
+  titulo: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#1E3A8A'
+  },
+
+  subtitulo: {
+    fontSize: 18,
+    marginTop: 10,
+    marginBottom: 30,
+    color: '#444'
+  },
+
+  caixasContainer: {
+    flexDirection: 'row',
+    marginBottom: 30
+  },
+
+  caixa: {
+    width: 90,
+    height: 90,
+    backgroundColor: '#60A5FA',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginHorizontal: 10,
+    borderRadius: 10
+  },
+
+  imagem: {
+    width: 60,
+    height: 60,
+    resizeMode: 'contain'
+  },
+
+  botao: {
+    backgroundColor: '#2563EB',
+    paddingVertical: 12,
+    paddingHorizontal: 30,
+    borderRadius: 10
+  },
+
+  textoBotao: {
+    color: '#FFF',
+    fontSize: 18,
+    fontWeight: 'bold'
+  }
+});
+
