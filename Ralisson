@@ -483,3 +483,88 @@ const styles = StyleSheet.create({
   }
 
 });
+
+
+DATA:  12/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição da Atividade: icon, botao, 3 quadrados, fundo com cor
+**********************************************************************/
+inter
+
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+     
+      <Text style={styles.titulo}>Meu Aplicativo</Text>
+
+      {/* Requisito 2: Um subtítulo */}
+      <Text style={styles.subtitulo}>Aula de Layouts</Text>
+
+      
+      <View style={styles.linha}>
+        <Text style={styles.caixa}>A</Text>
+        <Text style={styles.caixa}>B</Text>
+        <Text style={styles.caixa}>C</Text>
+      </View>
+
+      
+      <TouchableOpacity style={styles.botao}>
+        <Text style={styles.textoBotao}>ENTRAR</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    
+    backgroundColor: '#2C3E50', 
+   
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20
+  },
+  titulo: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: 'white',
+    marginBottom: 10
+  },
+  subtitulo: {
+    fontSize: 18,
+    color: '#BDC3C7',
+    marginBottom: 40
+  },
+  linha: {
+    flexDirection: 'row',
+    marginBottom: 50
+  },
+  caixa: {
+    backgroundColor: '#3498DB',
+    color: 'white',
+    padding: 20,
+    margin: 10,
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    width: 65,
+    
+  },
+  botao: {
+    backgroundColor: '#4C1E6C',
+    paddingVertical: 15,
+    paddingHorizontal: 60,
+    borderRadius: 5 
+  },
+  textoBotao: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold'
+  }
+});
+
+
