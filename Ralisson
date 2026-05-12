@@ -345,3 +345,141 @@ const styles = StyleSheet.create({
   }
 });
 
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Ralisson iago
+
+DATA:  05/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição da Atividade: Formulários, Dados e Conexão com a Internet/ parte 2
+**********************************************************************/
+Boas Práticas em Formulários
+adicionar cor de fundo e imagem
+
+
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  Alert,
+  Image
+} from 'react-native';
+
+export default function App() {
+
+  const [nome, setNome] = useState('');
+  const [email, setEmail] = useState('');
+  const [cpf, setCpf] = useState('');
+
+  function validarFormulario() {
+    if (nome === '' || email === '' || cpf === '') {
+      Alert.alert(
+        'Campos obrigatórios',
+        'Por favor, preencha todas as informações.'
+      );
+    } else {
+      Alert.alert(
+        'Sucesso!',
+        'Cadastro realizado com sucesso.'
+      );
+    }
+  }
+
+  return (
+    <View style={styles.container}>
+
+      {/* Logo do IF Goiano */}
+      <Image
+        source={ require ('./assets/logoif.png')}
+        style={styles.logo}
+      />
+
+      <Text style={styles.titulo}>Inscreva-se</Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Nome"
+        value={nome}
+        onChangeText={setNome}
+      />
+
+      <TextInput
+        style={styles.input}
+        placeholder="E-mail"
+        value={email}
+        onChangeText={setEmail}
+        keyboardType="email-address"
+      />
+
+      <TextInput
+        style={styles.input}
+        placeholder="CPF"
+        value={cpf}
+        onChangeText={setCpf}
+        keyboardType="numeric"
+      />
+
+      <TouchableOpacity
+        style={styles.botao}
+        onPress={validarFormulario}
+      >
+        <Text style={styles.textoBotao}>
+          Inscrever-se
+        </Text>
+      </TouchableOpacity>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 20,
+    backgroundColor: '#0B7A3E'
+  },
+
+  logo: {
+    width: 170,
+    height: 90,
+    resizeMode: 'contain',
+    alignSelf: 'center',
+    marginBottom: 20
+  },
+
+  titulo: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 30,
+    color: '#fff'
+  },
+
+  input: {
+    backgroundColor: '#fff',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 15
+  },
+
+  botao: {
+    backgroundColor: '#d60000',
+    padding: 15,
+    borderRadius: 8
+  },
+
+  textoBotao: {
+    color: '#fff',
+    textAlign: 'center',
+    fontWeight: 'bold'
+  }
+
+});
