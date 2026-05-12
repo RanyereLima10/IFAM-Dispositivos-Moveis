@@ -1,1 +1,203 @@
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Isabelle Christine de Jesus Duarte
+DADOS: 05 / 05 / 2026
+BIMESTRE: 2º Bimestre
+
+DESCRIÇÃO DA ATIVIDADE:
+Formulários.
+
+// Importa o React e o hook useState (para criar estados)
+import React, { useState } from 'react';
+
+// Importa componentes básicos do React Native
+import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
+
+// Componente principal do app
+export default function App() {
+
+  // Criação dos estados para armazenar os valores digitados
+  const [nome, setNome] = useState(''); // Estado para o nome
+  const [email, setEmail] = useState(''); // Estado para o e-mail
+  const [cpf, setCpf] = useState(''); // Estado para o CPF
+  const [data, setData] = useState(''); // Estado para a data de nascimento
+
+  // Função chamada quando o botão é pressionado
+  const enviar = () => {
+
+    // Verifica se algum campo está vazio
+    if (!nome || !email || !cpf || !data) {
+
+      // Mostra um alerta de erro
+      Alert.alert("Erro", "Preencha todos os campos!");
+      return; // Interrompe a função
+    }
+
+    // Se todos os campos estiverem preenchidos
+    Alert.alert("Sucesso", "Inscrição realizada!");
+  };
+
+  // Interface do app
+  return (
+    <View style={styles.container}> {/* Container principal */}
+
+      {/* Título da tela */}
+      <Text style={styles.titulo}>Inscreva-se</Text>
+
+      {/* Campo de entrada para o nome */}
+      <TextInput
+        style={styles.input}
+        placeholder="Nome"
+        value={nome} // valor ligado ao estado
+        onChangeText={setNome} // atualiza o estado ao digitar
+      />
+
+      {/* Campo de entrada para o e-mail */}
+      <TextInput
+        style={styles.input}
+        placeholder="E-mail"
+        value={email}
+        onChangeText={setEmail}
+      />
+
+      {/* Campo de entrada para o CPF */}
+      <TextInput
+        style={styles.input}
+        placeholder="CPF"
+        value={cpf}
+        onChangeText={setCpf}
+      />
+
+      {/* Campo de entrada para data de nascimento */}
+      <TextInput
+        style={styles.input}
+        placeholder="Data de Nascimento"
+        value={data}
+        onChangeText={setData}
+      />
+
+      {/* Botão que chama a função enviar */}
+      <Button title="Inscrever-se" onPress={enviar} />
+    </View>
+  );
+}
+
+// Criação dos estilos
+const styles = StyleSheet.create({
+
+  // Estilo do container principal
+  container: {
+    flex: 1, // ocupa toda a tela
+    justifyContent: 'center', // centraliza verticalmente
+    padding: 20, // espaço interno
+  },
+
+  // Estilo do título
+  titulo: {
+    fontSize: 24, // tamanho da fonte
+    marginBottom: 20, // espaço abaixo
+    textAlign: 'center', // centraliza o texto
+  },
+
+  // Estilo dos inputs
+  input: {
+    borderWidth: 1, // borda
+    borderColor: '#ccc', // cor da borda
+    padding: 10, // espaço interno
+    marginBottom: 10, // espaço entre inputs
+    borderRadius: 5, // bordas arredondadas
+  },
+});
+
+**************************************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Isabelle Christine de Jesus Duarte
+DADOS: 12 / 05 / 2026
+BIMESTRE: 2º Bimestre
+
+DESCRIÇÃO DA ATIVIDADE:
+Criação de uma arvore para estudo de layout.
+
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+
+export default function App() {
+
+return (
+
+<View style={styles.container}>
+
+<View style={styles.linha}>
+<Text style={[styles.caixa,
+{backgroundColor: '#EDE07A'}
+]}>A</Text>
+</View>
+
+<View style={styles.linha}>
+<Text style={[styles.caixa,
+{backgroundColor: '#A9EDC5'}]}>B</Text>
+<Text style={[styles.caixa, 
+{backgroundColor: '#FFDBEA'}]}>C</Text>
+</View>
+
+<View style={styles.linha}>
+<Text style={[styles.caixa, 
+{backgroundColor: '#A9EDC5'}]}>D</Text>
+<Text style={[styles.caixa,
+{backgroundColor: '#EDCDA8'}]}>E</Text>
+<Text style={[styles.caixa, 
+{backgroundColor: '#A8AFED'}]}>F</Text>
+</View>
+
+<View style={styles.linha}>
+<Text style={[styles.caixa,
+{backgroundColor: '#E2C2FF'}]}>G</Text>
+<Text style={[styles.caixa, 
+{backgroundColor: '#FFDAC1'}]}>H</Text>
+<Text style={[styles.caixa, 
+{backgroundColor: '#BDE0FE'}]}>I</Text>
+<Text style={[styles.caixa,
+ {backgroundColor: '#F1C0E8'}]}>J</Text>
+</View>
+
+<View style={styles.linha}>
+<Text style={[styles.caixa,
+ {backgroundColor: '#E5A8ED'}]}>K</Text>
+<Text style={[styles.caixa,
+{backgroundColor: '#B8A8ED'}]}>L</Text>
+</View>
+
+</View>
+
+);
+
+}
+
+const styles = StyleSheet.create({
+
+container: {
+flex: 1,
+justifyContent: 'center',
+alignItems: 'center'
+},
+
+linha: {
+flexDirection: 'row'
+},
+
+caixa: {
+color: '#555',
+padding: 20,
+margin: 5,
+fontSize: 20,
+fontWeight: 'bold',
+borderRadius: 10
+}
+
+});
+
+
 
