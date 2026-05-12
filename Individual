@@ -4038,7 +4038,20 @@ const styles = StyleSheet.create({
   },
 });
 
-Aluno: import React from 'react';
+
+
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Christian Keven de Paiva Farias
+DATA:  09/ 05 /2026
+Bimestre: 2º Bimestre
+**********************************************************************/
+
+ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 export default function App() {
