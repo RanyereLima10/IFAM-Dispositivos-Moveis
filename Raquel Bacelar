@@ -2,7 +2,6 @@ INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
 DISCIPLINA: Dispositivos Móveis
 PROFESSOR: Ranyere Lima
 ALUNO(A): Raquel Bacelar Pena
-DATA:  05/ 05 /2026
 Bimestre: 2º Bimestreimport React, { useState } from 'react';
 
 import { View, Text, Button, StyleSheet, TextInput, Alert } from 'react-native';
