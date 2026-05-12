@@ -210,3 +210,182 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): DAVI MESQUITA
+DATA:  12/ 05 /2026
+Bimestre: 2º Bimestre
+**********************************************************************/
+
+import React from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  Dimensions,
+  ScrollView,
+} from 'react-native';
+
+// Ícones
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+const { width } = Dimensions.get('window');
+
+const cardWidth = width * 0.42;
+
+export default function App() {
+  return (
+    <ScrollView contentContainerStyle={styles.container}>
+
+      {/* IMAGEM NO TOPO */}
+      <Image
+        source={{
+          uri: 'https://lncimg.lance.com.br/cdn-cgi/image/width=950,quality=75,fit=pad,format=webp/uploads/2025/12/Vitor-Roque-centroavante-do-Palmeiras-aspect-ratio-512-320.png',
+        }}
+        style={styles.topImage}
+      />
+
+      {/* TÍTULO */}
+      <Text style={styles.title}>APP DO MESQUITA</Text>
+
+      {/* SUBTÍTULO */}
+      <Text style={styles.subtitle}>
+        Cards personalizados com React Native
+      </Text>
+
+      {/* CARDS */}
+      <View style={styles.cardsContainer}>
+
+        {/* CARD 1 */}
+        <View style={[styles.card, { backgroundColor: '#FF6B6B' }]}>
+          <Icon name="soccer-ball-o" size={35} color="#FFFFFF" />
+          <Text style={styles.cardTitle}>FUTEBOL</Text>
+          <Text style={styles.cardText}>Paixão nacional</Text>
+        </View>
+
+        {/* CARD 2 */}
+        <View style={[styles.card, { backgroundColor: '#4ECDC4' }]}>
+          <Icon name="phone" size={35} color="#FFFFFF" />
+          <Text style={styles.cardTitle}>CONTATO</Text>
+          <Text style={styles.cardText}>Fale conosco</Text>
+        </View>
+
+        {/* CARD 3 */}
+        <View style={[styles.card, { backgroundColor: '#FFD166' }]}>
+          <Icon name="music" size={35} color="#FFFFFF" />
+          <Text style={styles.cardTitle}>MÚSICA</Text>
+          <Text style={styles.cardText}>Ouça agora</Text>
+        </View>
+
+        {/* CARD 4 */}
+        <View style={[styles.card, { backgroundColor: '#6A4C93' }]}>
+          <Icon name="camera" size={35} color="#FFFFFF" />
+          <Text style={styles.cardTitle}>FOTOS</Text>
+          <Text style={styles.cardText}>Galeria completa</Text>
+        </View>
+
+      </View>
+
+      {/* BOTÃO ABAIXO DOS CARDS */}
+      <TouchableOpacity style={styles.button}>
+        <Icon name="star" size={20} color="#FFFFFF" />
+        <Text style={styles.buttonText}> VER MAIS</Text>
+      </TouchableOpacity>
+
+    </ScrollView>
+  );
+}
+
+const styles = StyleSheet.create({
+
+  // CONTAINER
+  container: {
+    flexGrow: 1,
+    backgroundColor: '#1B263B',
+    alignItems: 'center',
+    paddingVertical: 40,
+    paddingHorizontal: 15,
+  },
+
+  // IMAGEM TOPO
+  topImage: {
+    width: width * 0.55,
+    height: width * 0.55,
+    borderRadius: 20,
+    marginBottom: 20,
+    borderWidth: 4,
+    borderColor: '#FFFFFF',
+  },
+
+  // TÍTULO
+  title: {
+    fontSize: width * 0.08,
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+
+  // SUBTÍTULO
+  subtitle: {
+    fontSize: width * 0.045,
+    color: '#D6E4F0',
+    marginBottom: 30,
+    textAlign: 'center',
+  },
+
+  // CONTAINER DOS CARDS
+  cardsContainer: {
+    width: '100%',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
+
+  // CARD
+  card: {
+    width: cardWidth,
+    padding: 20,
+    borderRadius: 20,
+    alignItems: 'center',
+    marginBottom: 20,
+    elevation: 5,
+  },
+
+  // TÍTULO CARD
+  cardTitle: {
+    color: '#FFFFFF',
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginTop: 10,
+  },
+
+  // TEXTO CARD
+  cardText: {
+    color: '#F1F1F1',
+    marginTop: 5,
+    textAlign: 'center',
+  },
+
+  // BOTÃO
+  button: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#E63946',
+    paddingVertical: 15,
+    paddingHorizontal: 35,
+    borderRadius: 15,
+    marginTop: 20,
+  },
+
+  // TEXO BOTÃO
+  buttonText: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+});
