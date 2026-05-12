@@ -1488,6 +1488,94 @@ const styles = StyleSheet.create({
   },
 });
 
+************+***************************************************************************+***************************************************************************+***************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Joaquim Henrique Andrade de Almeida 
+DATA:  12/ 05 /2026
+Bimestre: 2º Bimestre
+Atividade Prática Exercício 1
+************+***************************************************************************+***************************************************************************+***************************************************************
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+
+      <Text style={styles.titulo}>Meu Aplicativo</Text>
+
+      <Text style={styles.subtitulo}>Aula de Layouts</Text>
+
+      <View style={styles.linha}>
+        <Text style={styles.caixa}>🗿</Text>
+        <Text style={styles.caixa}>📜</Text>
+        <Text style={styles.caixa}>✂️</Text>
+      </View>
+
+      <TouchableOpacity style={styles.botao}>
+        <Text style={styles.textoBotao}>ENTRAR</Text>
+      </TouchableOpacity>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+
+  container: {
+    flex: 1,
+    backgroundColor: '#1f1f1f',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20
+  },
+
+  titulo: {
+    fontSize: 24,
+    color: 'white',
+    fontWeight: 'bold',
+    marginBottom: 10
+  },
+
+  subtitulo: {
+    fontSize: 16,
+    color: '#cccccc',
+    marginBottom: 30
+  },
+
+  linha: {
+    flexDirection: 'row',
+    marginBottom: 40
+  },
+
+  caixa: {
+    width: 65,
+    height: 65,
+    backgroundColor: '#4A90E2',
+    margin: 5,
+    borderWidth: 2,
+    borderColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: 28
+  },
+
+  botao: {
+    borderWidth: 2,
+    borderColor: 'white',
+    paddingVertical: 10,
+    paddingHorizontal: 30
+  },
+
+  textoBotao: {
+    color: 'white',
+    fontWeight: 'bold'
+  }
+
+});
+
 
 INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
 DISCIPLINA: Dispositivos Móveis
