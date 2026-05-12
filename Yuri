@@ -474,7 +474,7 @@ INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
 DISCIPLINA: Dispositivos Móveis
 PROFESSOR: Ranyere Lima
 ALUNO(A): Yuri Lima Macedo
-DATA:  28/ 04 /2026
+DATA:  12/ 05 /2026
 Bimestre: 2º Bimestre
 Nesta atividade foi desenvolvido um aplicativo simples utilizando React Native, com o objetivo de compreender a estrutura básica de um app mobile.
 O aplicativo apresenta uma tela inicial com uma mensagem de boas-vindas e um botão interativo que, ao ser pressionado, exibe um alerta na tela.
@@ -557,4 +557,120 @@ const styles = StyleSheet.create({
   },
 });
 });
+import React from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image
+} from 'react-native';
 
+export default function App() {
+  return (
+    <View style={styles.container}>
+
+      {/* Imagem */}
+      <Image
+        source={{
+          uri: 'https://reactnative.dev/img/tiny_logo.png'
+        }}
+        style={styles.imagem}
+      />
+
+      {/* Título */}
+      <Text style={styles.titulo}>
+        Meu Aplicativo
+      </Text>
+
+      {/* Subtítulo */}
+      <Text style={styles.subtitulo}>
+        Aula de Layouts
+      </Text>
+
+      {/* Linha com ícones/emojis */}
+      <View style={styles.linha}>
+        <Text style={styles.caixa}>🗿</Text>
+        <Text style={styles.caixa}>📜</Text>
+        <Text style={styles.caixa}>✂️</Text>
+      </View>
+
+      {/* Botão */}
+      <TouchableOpacity style={styles.botao}>
+        <Text style={styles.textoBotao}>
+          ENTRAR
+        </Text>
+      </TouchableOpacity>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+
+  /* Fundo personalizado */
+  container: {
+    flex: 1,
+    backgroundColor: '#1f1f1f',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20
+  },
+
+  /* Imagem */
+  imagem: {
+    width: 100,
+    height: 100,
+    marginBottom: 20,
+    borderRadius: 50
+  },
+
+  titulo: {
+    fontSize: 28,
+    color: 'white',
+    fontWeight: 'bold',
+    marginBottom: 10
+  },
+
+  subtitulo: {
+    fontSize: 18,
+    color: '#cccccc',
+    marginBottom: 30
+  },
+
+  /* Linha horizontal */
+  linha: {
+    flexDirection: 'row',
+    marginBottom: 40
+  },
+
+  /* Caixas com bordas arredondadas */
+  caixa: {
+    width: 70,
+    height: 70,
+    backgroundColor: '#4A90E2',
+    margin: 5,
+    borderWidth: 2,
+    borderColor: 'white',
+    borderRadius: 10,
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    fontSize: 30,
+    color: 'white'
+  },
+
+  /* Botão */
+  botao: {
+    backgroundColor: '#E67E22',
+    paddingVertical: 12,
+    paddingHorizontal: 35,
+    borderRadius: 10
+  },
+
+  textoBotao: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 18
+  }
+
+});
