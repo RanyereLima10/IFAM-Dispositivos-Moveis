@@ -4567,3 +4567,117 @@ const styles = StyleSheet.create({
   }
 
 });
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Wendel Gomes Da Silva
+DATA:  12/ 05 /2026
+Bimestre: 2º Bimestre
+**********************************************************************/
+
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+
+export default function App() {
+
+  const linhas = [
+    ['A'],
+    ['B', 'C'],
+    ['D', 'E', 'F'],
+  ];
+
+  return (
+    <View style={styles.container}>
+
+      {/* Letra no topo */}
+      <Text style={[styles.letra, styles.topo]}>
+        W
+      </Text>
+
+      {/* Linhas */}
+      {linhas.map((linha, index) => (
+        <View key={index} style={styles.row}>
+          {linha.map((item) => (
+            <Text
+              key={item}
+              style={[styles.letra, styles[item.toLowerCase()]]}
+            >
+              {item}
+            </Text>
+          ))}
+        </View>
+      ))}
+
+      {/* Tronco */}
+      <Text style={[styles.letra, styles.tronco]}>
+        | |
+      </Text>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+
+  container: {
+    flex: 1,
+    backgroundColor: '#0b1d0b',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+
+  letra: {
+    width: 60,
+    height: 60,
+    margin: 5,
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: 'white',
+    borderRadius: 15,
+    paddingTop: 10,
+  },
+
+  topo: {
+    backgroundColor: '#f1c40f',
+    color: 'black',
+  },
+
+  tronco: {
+    backgroundColor: '#8B4513',
+    width: 70,
+  },
+
+  a: {
+    backgroundColor: '#b3204d',
+  },
+
+  b: {
+    backgroundColor: '#b5485f',
+  },
+
+  c: {
+    backgroundColor: '#ff0048',
+  },
+
+  d: {
+    backgroundColor: '#ffe2ba',
+  },
+
+  e: {
+    backgroundColor: '#496940',
+  },
+
+  f: {
+    backgroundColor: '#27ae60',
+  },
+
+});
