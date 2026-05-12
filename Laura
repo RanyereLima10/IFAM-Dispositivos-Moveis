@@ -380,5 +380,168 @@ const styles = StyleSheet.create({
   }
 });
 
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Laura Emanuelle M. Lima Santos
+DATA:  09/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição da Atividade: Nesta atividade prática, os alunos irão compreender como funcionam os aplicativos mobile, identificando as principais diferenças entre sistemas Desktop e Mobile. Durante o desenvolvimento da atividade, serão trabalhados conceitos fundamentais da programação para dispositivos móveis, como criação de interfaces, utilização de componentes visuais, eventos de clique, estados com useState e validação de formulários. 
+**********************************************************************/
+
+
+import React, { useState } from 'react';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+
+export default function App() {
+
+  const [nome, setNome] = useState("");
+  const [mensagem, setMensagem] = useState("");
+
+  const mostrarMensagem = () => {
+    setMensagem(`Olá, ${nome}`);
+  };
+
+  return (
+    <View style={styles.container}>
+
+      <Text style={styles.titulo}>Formulário</Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Digite seu nome"
+        onChangeText={setNome}
+      />
+
+      <Button
+        title="Mostrar"
+        onPress={mostrarMensagem}
+      />
+
+      <Text style={styles.resultado}>
+        {mensagem}
+      </Text>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+
+  titulo: {
+    fontSize: 24,
+    marginBottom: 20,
+  },
+
+  input: {
+    borderWidth: 1,
+    width: '80%',
+    padding: 10,
+    marginBottom: 10,
+    borderRadius: 5,
+  },
+
+  resultado: {
+    marginTop: 20,
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+});
+
+
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Laura Emanuelle M. Lima Santos
+DATA:  09/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição da Atividade: Os alunos desenvolverão telas simples utilizando React Native, criando campos de texto, botões e mensagens dinâmicas. Também serão aplicadas validações para melhorar a experiência do usuário, garantindo que os dados sejam preenchidos corretamente antes da execução das ações.
+**********************************************************************/
+
+import React, { useState } from 'react';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+
+export default function App() {
+
+  const [nome, setNome] = useState("");
+  const [mensagem, setMensagem] = useState("");
+  const [cor, setCor] = useState("black");
+
+  const validar = () => {
+
+    // Campo vazio
+    if (nome === "") {
+      setMensagem("Digite seu nome!");
+      setCor("red");
+      return;
+    }
+
+    // Campo preenchido
+    setMensagem(`Olá, ${nome}`);
+    setCor("green");
+  };
+
+  return (
+    <View style={styles.container}>
+
+      <Text style={styles.titulo}>Validação</Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Digite seu nome"
+        onChangeText={setNome}
+      />
+
+      <Button
+        title="Enviar"
+        onPress={validar}
+      />
+
+      <Text style={[styles.resultado, { color: cor }]}>
+        {mensagem}
+      </Text>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+
+  titulo: {
+    fontSize: 24,
+    marginBottom: 20,
+  },
+
+  input: {
+    borderWidth: 1,
+    width: '80%',
+    padding: 10,
+    marginBottom: 10,
+    borderRadius: 5,
+  },
+
+  resultado: {
+    marginTop: 20,
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+});
 
 
