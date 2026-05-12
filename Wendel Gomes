@@ -1,1 +1,263 @@
+**********************************************************************/
 
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Wendel Gomes Da Silva
+DATA:  12/ 05 /2026
+Bimestre: 2º Bimestre
+**********************************************************************/
+
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+
+export default function App() {
+
+  const linhas = [
+    ['A'],
+    ['B', 'C'],
+    ['D', 'E', 'F'],
+  ];
+
+  return (
+    <View style={styles.container}>
+
+      {/* Letra no topo */}
+      <Text style={[styles.letra, styles.topo]}>
+        W
+      </Text>
+
+      {/* Linhas */}
+      {linhas.map((linha, index) => (
+        <View key={index} style={styles.row}>
+          {linha.map((item) => (
+            <Text
+              key={item}
+              style={[styles.letra, styles[item.toLowerCase()]]}
+            >
+              {item}
+            </Text>
+          ))}
+        </View>
+      ))}
+
+      {/* Tronco */}
+      <Text style={[styles.letra, styles.tronco]}>
+        | |
+      </Text>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+
+  container: {
+    flex: 1,
+    backgroundColor: '#0b1d0b',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+
+  letra: {
+    width: 60,
+    height: 60,
+    margin: 5,
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: 'white',
+    borderRadius: 15,
+    paddingTop: 10,
+  },
+
+  topo: {
+    backgroundColor: '#f1c40f',
+    color: 'black',
+  },
+
+  tronco: {
+    backgroundColor: '#8B4513',
+    width: 70,
+  },
+
+  a: {
+    backgroundColor: '#b3204d',
+  },
+
+  b: {
+    backgroundColor: '#b5485f',
+  },
+
+  c: {
+    backgroundColor: '#ff0048',
+  },
+
+  d: {
+    backgroundColor: '#ffe2ba',
+  },
+
+  e: {
+    backgroundColor: '#496940',
+  },
+
+  f: {
+    backgroundColor: '#27ae60',
+  },
+
+});
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Wendel Gomes Da Silva
+DATA:  12/ 05 /2026
+Bimestre: 2º Bimestre
+**********************************************************************/
+
+import React from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+
+      {/* Foto */}
+      <Image
+        source={{
+          uri: 'https://picsum.photos/200',
+        }}
+        style={styles.foto}
+      />
+
+      {/* Título */}
+      <Text style={styles.titulo}>
+        Meu Aplicativo
+      </Text>
+
+      {/* Subtítulo */}
+      <Text style={styles.subtitulo}>
+        Exemplo de layout moderno com foto
+      </Text>
+
+      {/* Caixas */}
+      <View style={styles.caixasContainer}>
+
+        <View style={[styles.caixa, styles.caixa1]}>
+          <Text style={styles.textoCaixa}>1</Text>
+        </View>
+
+        <View style={[styles.caixa, styles.caixa2]}>
+          <Text style={styles.textoCaixa}>2</Text>
+        </View>
+
+        <View style={[styles.caixa, styles.caixa3]}>
+          <Text style={styles.textoCaixa}>3</Text>
+        </View>
+
+      </View>
+
+      {/* Botão */}
+      <TouchableOpacity style={styles.botao}>
+        <Text style={styles.textoBotao}>
+          Entrar
+        </Text>
+      </TouchableOpacity>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+
+  container: {
+    flex: 1,
+    backgroundColor: '#F5F7FA',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+
+  foto: {
+    width: 140,
+    height: 140,
+    borderRadius: 70,
+    marginBottom: 20,
+    borderWidth: 4,
+    borderColor: '',
+  },
+
+  titulo: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    color: '#2D3436',
+    marginBottom: 10,
+  },
+
+  subtitulo: {
+    fontSize: 18,
+    color: '#636E72',
+    marginBottom: 30,
+    textAlign: 'center',
+  },
+
+  caixasContainer: {
+    flexDirection: 'row',
+    marginBottom: 40,
+  },
+
+  caixa: {
+    width: 80,
+    height: 80,
+    marginHorizontal: 10,
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  caixa1: {
+    backgroundColor: '#6C63FF',
+  },
+
+  caixa2: {
+    backgroundColor: '#00B894',
+  },
+
+  caixa3: {
+    backgroundColor: '#FD79A8',
+  },
+
+  textoCaixa: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#FFF',
+  },
+
+  botao: {
+    backgroundColor: '#2D3436',
+    paddingVertical: 15,
+    paddingHorizontal: 50,
+    borderRadius: 15,
+  },
+
+  textoBotao: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#FFF',
+  },
+
+});
