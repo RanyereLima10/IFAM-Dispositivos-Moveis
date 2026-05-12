@@ -1,7 +1,3 @@
-
-// Grupo D : Felipe Vieira, Raquel Bacelar, Carlos.
-
-
 import React, { useState } from 'react';
 
 import { View, Text, Button, StyleSheet, TextInput, Alert } from 'react-native';
