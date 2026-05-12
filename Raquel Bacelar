@@ -296,5 +296,118 @@ const styles = StyleSheet.create({
   },
 });
 
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A):Raquel Bacelar
+DATA:  12/ 05  /  2026
+Bimestre: 2º Bimestreeee
+**********************************************************************/
+ import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+
+      {/* Estrela */}
+      <Text style={[styles.letra, styles.estrela]}>⭐</Text>
+
+      {/* Linha 1 */}
+      <View style={styles.row}>
+        <Text style={[styles.letra, styles.a]}>A</Text>
+      </View>
+
+      {/* Linha 2 */}
+      <View style={styles.row}>
+        <Text style={[styles.letra, styles.b]}>B</Text>
+        <Text style={[styles.letra, styles.c]}>C</Text>
+      </View>
+
+      {/* Linha 3 */}
+      <View style={styles.row}>
+        <Text style={[styles.letra, styles.d]}>D</Text>
+        <Text style={[styles.letra, styles.e]}>E</Text>
+        <Text style={[styles.letra, styles.f]}>F</Text>
+      </View>
+
+      {/* Tronco */}
+      <Text style={[styles.letra, styles.tronco]}>| |</Text>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+
+  container: {
+    flex: 1,
+    backgroundColor: '#0b1d0b',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+
+  letra: {
+    width: 60,
+    height: 60,
+    margin: 5,
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: 'white',
+    borderRadius: 15,
+    paddingTop: 10,
+  },
+
+  estrela: {
+    backgroundColor: 'gold',
+    color: 'black',
+  },
+
+  tronco: {
+    backgroundColor: '#8B4513',
+    width: 70,
+  },
+
+  a: {
+    backgroundColor: '#611427',
+  },
+
+  b: {
+    backgroundColor: '#F7BECC',
+  },
+
+  c: {
+    backgroundColor: '#C2CFC7',
+  },
+
+  d: {
+    backgroundColor: '#035AA6',
+  },
+
+  e: {
+    backgroundColor: '#3C93FA',
+  },
+
+  f: {
+    backgroundColor: '#035AA6',
+  },
+
+});
+
+
+
+
+
+
+
+
 });
 
