@@ -24,6 +24,175 @@ export default function App() {
   return (
     <View style={styles.container}>
 
+      {/* 4. Imagem no topo */}
+      <Image
+        source={{ uri: 'https://picsum.photos/300' }}
+        style={[
+          styles.imagemTopo,
+          {
+            width: larguraTela * 0.4,
+            height: larguraTela * 0.4
+          }
+        ]}
+      />
+
+      {/* Título */}
+      <Text style={styles.titulo}>Meu Aplicativo</Text>
+
+      {/* Subtítulo */}
+      <Text style={styles.subtitulo}>Layout Responsivo com Cards</Text>
+
+      {/* 1. 7 cards no total (3 + 4 adicionados) */}
+      <View style={styles.linha}>
+
+        <View style={[styles.card, { width: larguraTela * 0.22, backgroundColor: '#4A90E2' }]}>
+          <Text style={styles.icone}>🗿</Text>
+          <Text style={styles.textoCard}>Pedra</Text>
+        </View>
+
+        <View style={[styles.card, { width: larguraTela * 0.22, backgroundColor: '#27AE60' }]}>
+          <Text style={styles.icone}>📜</Text>
+          <Text style={styles.textoCard}>Papel</Text>
+        </View>
+
+        <View style={[styles.card, { width: larguraTela * 0.22, backgroundColor: '#E67E22' }]}>
+          <Text style={styles.icone}>✂️</Text>
+          <Text style={styles.textoCard}>Tesoura</Text>
+        </View>
+
+        {/* 4 cards extras */}
+        <View style={[styles.card, { width: larguraTela * 0.22, backgroundColor: '#9B59B6' }]}>
+          <Text style={styles.icone}>🔥</Text>
+          <Text style={styles.textoCard}>Fogo</Text>
+        </View>
+
+        <View style={[styles.card, { width: larguraTela * 0.22, backgroundColor: '#3498DB' }]}>
+          <Text style={styles.icone}>💧</Text>
+          <Text style={styles.textoCard}>Água</Text>
+        </View>
+
+        <View style={[styles.card, { width: larguraTela * 0.22, backgroundColor: '#E74C3C' }]}>
+          <Text style={styles.icone}>⚡</Text>
+          <Text style={styles.textoCard}>Raio</Text>
+        </View>
+
+        <View style={[styles.card, { width: larguraTela * 0.22, backgroundColor: '#F1C40F' }]}>
+          <Text style={styles.icone}>🌟</Text>
+          <Text style={styles.textoCard}>Estrela</Text>
+        </View>
+
+      </View>
+
+      {/* 5. Botão abaixo dos cards */}
+      <TouchableOpacity
+        style={[
+          styles.botao,
+          { width: larguraTela * 0.7 }
+        ]}
+      >
+        <Text style={styles.textoBotao}>ENTRAR</Text>
+      </TouchableOpacity>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+
+  container: {
+    flex: 1,
+    backgroundColor: '#121212',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 15
+  },
+
+  imagemTopo: {
+    borderRadius: 100,
+    marginBottom: 15
+  },
+
+  titulo: {
+    fontSize: 26,
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center'
+  },
+
+  subtitulo: {
+    fontSize: 16,
+    color: '#cccccc',
+    marginBottom: 20,
+    textAlign: 'center'
+  },
+
+  /* 3. cards com flexDirection */
+  linha: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    width: '100%',
+    marginBottom: 25
+  },
+
+  card: {
+    height: 100,
+    borderRadius: 12,
+    marginVertical: 6,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+
+  icone: {
+    fontSize: 28,
+    marginBottom: 5
+  },
+
+  textoCard: {
+    color: 'white',
+    fontWeight: 'bold'
+  },
+
+  botao: {
+    backgroundColor: '#2ECC71',
+    paddingVertical: 14,
+    borderRadius: 12,
+    alignItems: 'center'
+  },
+
+  textoBotao: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold'
+  }
+
+});
+**********************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Yuri Lima Macedo
+DATA:  12/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição da Atividade: Nesta atividade, o aluno: yuri lima macedo deverá desenvolver uma aplicação mobile simples utilizando React Native, com o objetivo de compreender a estrutura básica de um aplicativo.O codigo es simples ultilizando um layout na aula do dia 12/05/2026 para o uso e saber de layout.usando imagens e figuras para uma representação, melhor de uma tela
+**********************************************************************/
+import React from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  Dimensions
+} from 'react-native';
+
+export default function App() {
+
+  const larguraTela = Dimensions.get('window').width;
+
+  return (
+    <View style={styles.container}>
+
       {/* Imagem principal (responsiva) */}
       <Image
         source={{ uri: 'https://picsum.photos/200' }}
