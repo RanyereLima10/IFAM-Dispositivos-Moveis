@@ -189,3 +189,60 @@ const styles = StyleSheet.create({
     color: '#FFFFFF' // Define a cor do texto para branco
   },
 });
+
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Laura Emanuelle Menezes de Lima Santos 
+DATA:  28/ 04 /2026
+Bimestre: 2º Bimestre
+Descrição da Atividade: O código cria um aplicativo simples usando React Native. Ele mostra uma mensagem inicial na tela (“Bem-vindo!”) e um botão. Quando o usuário clica no botão, o aplicativo responde mudando a mensagem para “Seja bem-vindo ao app!”.
+Isso acontece porque o código usa um estado (useState) para guardar a mensagem e um evento (onPress) para detectar o clique do botão. Quando o botão é pressionado, a mensagem é atualizada automaticamente na tela.
+
+**********************************************************************/
+
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, Button } from 'react-native';
+
+export default function App() {
+  const [mensagem, setMensagem] = useState("Bem-vindo!");
+
+  const entrar = () => {
+    setMensagem("Seja bem-vindo ao app!");
+  };
+
+  return (
+    <View style={styles.container}>
+      
+      <Text style={styles.welcomeText}>
+        {mensagem}
+      </Text>
+
+      <Button 
+        title="Entrar" 
+        onPress={entrar} 
+      />
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#683FEA',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  welcomeText: {
+    fontSize: 24,
+    marginBottom: 20,
+    fontWeight: 'bold',
+    color: '#FFFFFF'
+  },
+});
+
+
