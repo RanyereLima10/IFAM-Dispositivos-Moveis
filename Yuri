@@ -172,3 +172,133 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
   },
 });
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A):Yuri lima Macedo
+DATA:  05/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição da Atividade: Nesta atividade foi desenvolvido um aplicativo simples com um formulario de castro e se o usuario digitou algo e se ele não digitou aparecera que deu erroe nao podera continar o cadastro.
+
+**********************************************************************/
+import { Text, View, Button, TextInput, StyleSheet } from 'react-native';
+import { useState } from 'react';
+
+// Componente principal do app
+export default function App() {
+
+  // Estado para mensagem principal exibida na tela
+  const [msg, setMsg] = useState("Seja bem-vindo, aluno!");
+
+  // Estado para mensagem de erro
+  const [erro, setErro] = useState("");
+
+  // Estados para armazenar os dados do formulário
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
+  const [cpf, setCpf] = useState("");
+  const [dataNasc, setDataNasc] = useState("");
+
+  // Função chamada ao clicar no botão
+  const handleSubmit = () => {
+
+    // Verifica se TODOS os campos estão vazios
+    if (!nome && !email && !cpf && !dataNasc) {
+
+      // Define mensagem de erro
+      setErro("Preencha o formulário antes de enviar!");
+
+      // Interrompe a execução da função
+      return;
+    }
+
+    // Limpa mensagem de erro caso esteja tudo ok
+    setErro("");
+
+    // Atualiza a mensagem com os dados digitados
+    setMsg(`Nome: ${nome}\nEmail: ${email}\nCPF: ${cpf}\nNascimento: ${dataNasc}`);
+  };
+
+  return (
+    // Container principal da tela
+    <View style={styles.container}>
+
+      {/* Exibe a mensagem principal */}
+      <Text style={styles.text}>{msg}</Text>
+
+      {/* Exibe erro apenas se existir mensagem */}
+      {erro ? <Text style={styles.erro}>{erro}</Text> : null}
+
+      {/* Campo de input para nome */}
+      <TextInput
+        style={styles.input}
+        placeholder="Digite seu nome"
+        value={nome}
+        onChangeText={setNome} // Atualiza o estado ao digitar
+      />
+
+      {/* Campo de input para email */}
+      <TextInput
+        style={styles.input}
+        placeholder="Digite seu email"
+        value={email}
+        onChangeText={setEmail}
+      />
+
+      {/* Campo de input para CPF */}
+      <TextInput
+        style={styles.input}
+        placeholder="Digite seu CPF"
+        value={cpf}
+        onChangeText={setCpf}
+        keyboardType="numeric" // Mostra teclado numérico
+      />
+
+      {/* Campo de input para data de nascimento */}
+      <TextInput
+        style={styles.input}
+        placeholder="Data de nascimento (DD/MM/AAAA)"
+        value={dataNasc}
+        onChangeText={setDataNasc}
+      />
+
+      {/* Botão que envia o formulário */}
+      <Button
+        title="Enviar formulário"
+        onPress={handleSubmit} // Chama a função ao clicar
+      />
+    </View>
+  );
+}
+
+// Estilos do app
+const styles = StyleSheet.create({
+
+  // Estilo do container principal
+  container: {
+    padding: 20,
+    marginTop: 40,
+  },
+
+  // Estilo do texto principal
+  text: {
+    marginBottom: 20,
+    fontSize: 16,
+  },
+
+  // Estilo da mensagem de erro
+  erro: {
+    color: 'red',
+    marginBottom: 10,
+    fontWeight: 'bold',
+  },
+
+  // Estilo dos campos de input
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 10,
+    marginBottom: 10,
+    borderRadius: 5,
+  },
+});
