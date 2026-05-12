@@ -858,3 +858,388 @@ const styles = StyleSheet.create({
 
 });
 
+************+***************************************************************************+***************************************************************************+***************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Joaquim Henrique Andrade de Almeida 
+DATA:  12/ 05 /2026
+Bimestre: 2º Bimestre
+Atividade Prática Exercício 2
+************+***************************************************************************+***************************************************************************+***************************************************************
+import React from 'react';
+import { Text, View, StyleSheet, Image } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { FontAwesome } from '@expo/vector-icons';
+
+export default function App() {
+  return (
+
+    <LinearGradient
+      colors={['#4e0066', '#1a0033']}
+      style={styles.container}
+    >
+
+      <View style={styles.caixa}>
+
+        <FontAwesome name="star" size={24} color="#ffd700" style={styles.icone} />
+        
+        <Text style={styles.texto}>Atividade Prática 2</Text>
+
+        <Image 
+          source={{ uri: 'https://i.pinimg.com/originals/f3/6b/f1/f36bf1ea2b2ecc2970014d5408875488.jpg' }} 
+          style={styles.imagem} 
+        />
+      </View>
+    </LinearGradient>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  caixa: {
+    backgroundColor: '#4A90E2', 
+    padding: 20,
+    margin: 5,
+    borderRadius: 10,           
+    width: '80%',
+    alignItems: 'center',       
+  },
+
+  icone: {
+    marginBottom: 10,
+  },
+
+  texto: {
+    color: '#ffffff',
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',        
+    marginBottom: 15,
+  },
+
+  imagem: {
+    width: 100,
+    height: 100,
+    borderRadius: 8,
+  },
+});
+
+************+***************************************************************************+***************************************************************************+***************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Joaquim Henrique Andrade de Almeida 
+DATA:  12/ 05 /2026
+Bimestre: 2º Bimestre
+Atividade Prática Exercício 3
+************+***************************************************************************+***************************************************************************+***************************************************************
+import React from 'react';
+import { View, Text, StyleSheet, Dimensions, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { Ionicons, FontAwesome5, MaterialIcons } from '@expo/vector-icons';
+
+const { width, height } = Dimensions.get('window');
+
+export default function App() {
+  return (
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+
+      <View style={styles.headerContainer}>
+        <Image
+          source={{ uri: 'https://thumbor.novaescola.org.br/FrCPJ4Sf5CcIezUbr8TFANGCh5c=/assets.novaescola.org.br/qgjfFXbuKKanAucAr6QrDpjN7Q8wbQ4awzc66PuKT3H9hfXW5CNZ2q4mvYG2/computador-pecas-informatica-circuito.jpg' }}
+          style={styles.headerImage}
+          resizeMode="cover"
+        />
+        <View style={styles.headerTextContainer}>
+          <Text style={styles.title}>Aprendendo Juntos</Text>
+          <Text style={styles.subtitle}>Cursos e conteúdos para impulsionar seus estudos!</Text>
+        </View>
+      </View>
+
+     
+      <View style={styles.cardsContainer}>
+       
+        <View style={styles.row}>
+          <View style={[styles.card, { backgroundColor: '#6C5CE7' }]}>
+            <Ionicons name="code-slash" size={32} color="#FFF" />
+            <Text style={styles.cardText}>HTML</Text>
+            <Text style={styles.cardDesc}>Estrutura de páginas web</Text>
+          </View>
+
+          <View style={[styles.card, { backgroundColor: '#FD79A8' }]}>
+            <FontAwesome5 name="paint-brush" size={32} color="#FFF" />
+            <Text style={styles.cardText}>CSS</Text>
+            <Text style={styles.cardDesc}>Estilização e layout</Text>
+          </View>
+        </View>
+
+    
+        <View style={styles.row}>
+          <View style={[styles.card, { backgroundColor: '#00B894' }]}>
+            <Text style={styles.jsIcon}>JS</Text>
+            <Text style={styles.cardText}>JavaScript</Text>
+            <Text style={styles.cardDesc}>Lógica e interatividade</Text>
+          </View>
+
+          <View style={[styles.card, { backgroundColor: '#0984E3' }]}>
+            <Ionicons name="logo-react" size={32} color="#FFF" />
+            <Text style={styles.cardText}>React Native</Text>
+            <Text style={styles.cardDesc}>Desenvolvimento mobile</Text>
+          </View>
+        </View>
+
+    
+        <View style={styles.row}>
+          <View style={[styles.card, { backgroundColor: '#E17055' }]}>
+            <MaterialIcons name="phone-android" size={32} color="#FFF" />
+            <Text style={styles.cardText}>Mobile UI</Text>
+            <Text style={styles.cardDesc}>Interfaces bonitas e responsivas</Text>
+          </View>
+
+          <View style={[styles.card, { backgroundColor: '#00CEC9' }]}>
+            <Ionicons name="cloud-outline" size={32} color="#FFF" />
+            <Text style={styles.cardText}>API</Text>
+            <Text style={styles.cardDesc}>Integração com serviços</Text>
+          </View>
+        </View>
+
+        <View style={styles.row}>
+          <View style={[styles.card, { backgroundColor: '#FDCB6E' }]}>
+            <FontAwesome5 name="database" size={32} color="#FFF" />
+            <Text style={styles.cardText}>Banco de Dados</Text>
+            <Text style={styles.cardDesc}>Armazenamento e consultas</Text>
+          </View>
+
+          <View style={[styles.card, { backgroundColor: '#A29BFE' }]}>
+            <Ionicons name="rocket-outline" size={32} color="#FFF" />
+            <Text style={styles.cardText}>Deploy</Text>
+            <Text style={styles.cardDesc}>Publicação do seu aplicativo</Text>
+          </View>
+        </View>
+
+        <View style={styles.row}>
+          <View style={[styles.card, { backgroundColor: '#D63031' }]}>
+            <FontAwesome5 name="server" size={32} color="#FFF" />
+            <Text style={styles.cardText}>Back-end</Text>
+            <Text style={styles.cardDesc}>Lógica do servidor</Text>
+          </View>
+
+          <View style={[styles.card, { backgroundColor: '#2D3436' }]}>
+            <Ionicons name="shield-checkmark-outline" size={32} color="#FFF" />
+            <Text style={styles.cardText}>Segurança</Text>
+            <Text style={styles.cardDesc}>Proteção de dados</Text>
+          </View>
+        </View>
+      </View>
+
+      
+      <TouchableOpacity style={styles.button}>
+        <Text style={styles.buttonText}>🚀 COMEÇAR AGORA</Text>
+      </TouchableOpacity>
+    </ScrollView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#F5F6FA',
+    paddingHorizontal: width * 0.04,
+    paddingTop: height * 0.02,
+  },
+
+  headerContainer: {
+    width: '100%',
+    height: height * 0.25, 
+    borderRadius: 16,
+    overflow: 'hidden',
+    marginBottom: 20,
+    position: 'relative',
+  },
+  headerImage: {
+    width: '100%',
+    height: '100%',
+  },
+  headerTextContainer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    padding: 15,
+    backgroundColor: 'rgba(0,0,0,0.4)',
+  },
+  title: {
+    fontSize: width < 360 ? 18 : 22, 
+    fontWeight: 'bold',
+    color: '#FFF',
+  },
+  subtitle: {
+    fontSize: width < 360 ? 12 : 14,
+    color: '#EEE',
+    marginTop: 4,
+  },
+
+  cardsContainer: {
+    width: '100%',
+  },
+  row: {
+    flexDirection: 'row', 
+    justifyContent: 'space-between', 
+    marginBottom: 12,
+  },
+  card: {
+    width: width * 0.46, 
+    aspectRatio: 1.3, 
+    borderRadius: 12,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 10,
+  },
+  jsIcon: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    color: '#FFF',
+  },
+  cardText: {
+    color: '#FFF',
+    fontWeight: 'bold',
+    fontSize: width < 360 ? 14 : 16,
+    marginTop: 8,
+  },
+  cardDesc: {
+    color: '#FFF',
+    fontSize: width < 360 ? 10 : 12,
+    textAlign: 'center',
+    marginTop: 4,
+    opacity: 0.9,
+  },
+
+  button: {
+    backgroundColor: '#4834D4',
+    paddingVertical: 14,
+    borderRadius: 10,
+    alignItems: 'center',
+    marginTop: 10,
+    marginBottom: 30,
+  },
+  buttonText: {
+    color: '#FFF',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+});
+
+************+***************************************************************************+***************************************************************************+***************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Joaquim Henrique Andrade de Almeida 
+DATA:  12/ 05 /2026
+Bimestre: 2º Bimestre
+Este código implementa um componente de Seletor de Data (DataPicker) em React para a web.
+Ele permite ao usuário selecionar individualmente o dia, o mês e o ano por meio de menus suspensos (<select>) e exibe a data formatada na tela em tempo real.
+************+***************************************************************************+***************************************************************************+***************************************************************
+
+import React, { useState } from "react";
+
+export default function DataPicker() {
+
+  const anoAtual = new Date().getFullYear();
+
+  const dias = Array.from({ length: 31 }, (_, i) => i + 1);
+  const meses = Array.from({ length: 12 }, (_, i) => i + 1);
+  const anos = Array.from(
+    { length: anoAtual - 1970 + 1 },
+    (_, i) => 1970 + i
+  );
+
+  const [dia, setDia] = useState(1);
+  const [mes, setMes] = useState(1);
+  const [ano, setAno] = useState(anoAtual);
+
+  return (
+    <div style={styles.container}>
+
+      <div style={styles.pickerContainer}>
+
+        {/* DIA */}
+        <select
+          value={dia}
+          onChange={(e) => setDia(Number(e.target.value))}
+          style={styles.select}
+        >
+          {dias.map((d) => (
+            <option key={d} value={d}>
+              {d}
+            </option>
+          ))}
+        </select>
+
+        {/* MÊS */}
+        <select
+          value={mes}
+          onChange={(e) => setMes(Number(e.target.value))}
+          style={styles.select}
+        >
+          {meses.map((m) => (
+            <option key={m} value={m}>
+              {m}
+            </option>
+          ))}
+        </select>
+
+        {/* ANO */}
+        <select
+          value={ano}
+          onChange={(e) => setAno(Number(e.target.value))}
+          style={styles.select}
+        >
+          {anos.map((a) => (
+            <option key={a} value={a}>
+              {a}
+            </option>
+          ))}
+        </select>
+
+      </div>
+
+      <p style={styles.resultado}>
+        Data selecionada: {dia}/{mes}/{ano}
+      </p>
+
+    </div>
+  );
+}
+
+const styles = {
+  container: {
+    textAlign: "center",
+    marginTop: "50px",
+    fontFamily: "Arial",
+  },
+
+  pickerContainer: {
+    display: "flex",
+    justifyContent: "center",
+    gap: "10px",
+    marginTop: "20px",
+  },
+
+  select: {
+    padding: "10px",
+    fontSize: "16px",
+    borderRadius: "8px",
+  },
+
+  resultado: {
+    marginTop: "20px",
+    fontSize: "18px",
+  },
+};
+
+
