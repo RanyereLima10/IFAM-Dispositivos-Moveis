@@ -4484,3 +4484,86 @@ const styles = StyleSheet.create({
   },
 
 });
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): DAVI MESQUITA
+DATA:  12/ 05 /2026
+Bimestre: 2º Bimestre
+**********************************************************************/
+
+
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+
+export default function App() {
+
+  return (
+
+    <View style={styles.container}>
+
+      {/* Estrela */}
+      <View style={styles.linha}>
+        <Text style={[styles.caixa, { backgroundColor: '#F1C40F' }]}>C</Text>
+      </View>
+
+      {/* Topo da árvore */}
+      <View style={styles.linha}>
+        <Text style={[styles.caixa, { backgroundColor: '#27AE60' }]}>B</Text>
+        <Text style={[styles.caixa, { backgroundColor: '#8E44AD' }]}>D</Text>
+      </View>
+
+      {/* Meio */}
+      <View style={styles.linha}>
+        <Text style={[styles.caixa, { backgroundColor: '#E74C3C' }]}>A</Text>
+        <Text style={[styles.caixa, { backgroundColor: '#27AE60' }]}>B</Text>
+        <Text style={[styles.caixa, { backgroundColor: '#F1C40F' }]}>C</Text>
+      </View>
+
+      {/* Base */}
+      <View style={styles.linha}>
+        <Text style={[styles.caixa, { backgroundColor: '#8E44AD' }]}>D</Text>
+        <Text style={[styles.caixa, { backgroundColor: '#E67E22' }]}>E</Text>
+        <Text style={[styles.caixa, { backgroundColor: '#27AE60' }]}>B</Text>
+        <Text style={[styles.caixa, { backgroundColor: '#E74C3C' }]}>A</Text>
+      </View>
+
+      {/* Tronco */}
+      <View style={styles.linha}>
+        <Text style={[styles.caixa, { backgroundColor: '#8B4513' }]}>E</Text>
+      </View>
+
+    </View>
+
+  );
+
+}
+
+const styles = StyleSheet.create({
+
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#ECF0F1'
+  },
+
+  linha: {
+    flexDirection: 'row'
+  },
+
+  caixa: {
+    color: 'white',
+    padding: 20,
+    margin: 5,
+    fontSize: 20,
+    fontWeight: 'bold',
+    borderRadius: 10,
+    textAlign: 'center',
+    minWidth: 60
+  }
+
+});
