@@ -111,3 +111,123 @@ const styles = {
 /**********************************************************************/
  ******** FIM EXEMPLO: Componente React – Data com rolagem ************
 /**********************************************************************/
+
+
+
+
+/**********************************************************************/
+ ****⚠️ Atenção, Exemplo de Layout Responsivo no Snack *********
+/**********************************************************************/
+import React from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  ScrollView
+} from 'react-native';
+
+const larguraTela = Dimensions.get('window').width;
+
+export default function App() {
+
+  return (
+
+    <ScrollView contentContainerStyle={styles.container}>
+
+      <Text style={styles.titulo}>
+        Layout Responsivo
+      </Text>
+
+      <View style={styles.cardContainer}>
+
+        <View style={styles.card}>
+          <Text style={styles.textoCard}>HTML</Text>
+        </View>
+
+        <View style={styles.card}>
+          <Text style={styles.textoCard}>CSS</Text>
+        </View>
+
+        <View style={styles.card}>
+          <Text style={styles.textoCard}>JavaScript</Text>
+        </View>
+
+        <View style={styles.card}>
+          <Text style={styles.textoCard}>React Native</Text>
+        </View>
+
+      </View>
+
+    </ScrollView>
+
+  );
+
+}
+
+const styles = StyleSheet.create({
+
+  container: {
+    flexGrow: 1,
+    backgroundColor: '#EAF2FF',
+    alignItems: 'center',
+    padding: 20
+  },
+
+  titulo: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    marginBottom: 20
+  },
+
+  cardContainer: {
+
+    flexDirection: 'row',
+
+    flexWrap: 'wrap',
+
+    justifyContent: 'center'
+
+  },
+
+  card: {
+
+    width: larguraTela * 0.4,
+
+    height: 120,
+
+    backgroundColor: '#4A90E2',
+
+    margin: 10,
+
+    borderRadius: 15,
+
+    justifyContent: 'center',
+
+    alignItems: 'center'
+
+  },
+
+  textoCard: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold'
+  }
+
+});
+
+/**********************************************************************/
+ ******** FIM Exemplo de Layout Responsivo no Snack************
+/**********************************************************************/
+
+
+
+
+
+
+
+
+
+
+
+
