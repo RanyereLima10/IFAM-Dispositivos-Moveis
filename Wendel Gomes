@@ -264,3 +264,165 @@ const styles = StyleSheet.create({
   },
 
 });
+
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Wendel Gomes Da Silva
+DATA:  12/ 05 /2026
+Bimestre: 2º Bimestre
+**********************************************************************/
+
+import React from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+
+      {/* Imagem no topo */}
+      <Image
+        source={{ uri: 'https://i.redd.it/8mntsmtdl8sb1.jpg' }}
+        style={styles.imagemTopo}
+      />
+
+      {/* Título */}
+      <Text style={styles.titulo}>
+        Wendell Gomes
+      </Text>
+
+      {/* Subtítulo */}
+      <Text style={styles.subtitulo}>
+        "Wendel, aluno do 3º ano de informatica, cada esforço de hoje é um passo mais perto do seu futuro de sucesso."
+      </Text>
+
+      {/* Cards */}
+      <View style={styles.grid}>
+
+        <View style={[styles.card, { backgroundColor: '#1abc9c' }]}>
+          <Text style={styles.icone}>📱</Text>
+          <Text style={styles.textoCard}>Celular</Text>
+        </View>
+
+        <View style={[styles.card, { backgroundColor: '#3498db' }]}>
+          <Text style={styles.icone}>💻</Text>
+          <Text style={styles.textoCard}>Notebook</Text>
+        </View>
+
+        <View style={[styles.card, { backgroundColor: '#9b59b6' }]}>
+          <Text style={styles.icone}>🎧</Text>
+          <Text style={styles.textoCard}>Áudio</Text>
+        </View>
+
+        <View style={[styles.card, { backgroundColor: '#e67e22' }]}>
+          <Text style={styles.icone}>📷</Text>
+          <Text style={styles.textoCard}>Câmera</Text>
+        </View>
+
+        <View style={[styles.card, { backgroundColor: '#2ecc71' }]}>
+          <Text style={styles.icone}>🎮</Text>
+          <Text style={styles.textoCard}>Games</Text>
+        </View>
+
+        <View style={[styles.card, { backgroundColor: '#34495e' }]}>
+          <Text style={styles.icone}>📚</Text>
+          <Text style={styles.textoCard}>Estudo</Text>
+        </View>
+
+        <View style={[styles.card, { backgroundColor: '#f1c40f' }]}>
+          <Text style={styles.icone}>⭐</Text>
+          <Text style={styles.textoCard}>Favorito</Text>
+        </View>
+
+      </View>
+
+      {/* Botão */}
+      <TouchableOpacity style={styles.botao}>
+        <Text style={styles.textoBotao}>
+          Ver mais
+        </Text>
+      </TouchableOpacity>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+
+  container: {
+    flex: 1,
+    backgroundColor: '#f4f6f7',
+    alignItems: 'center',
+    padding: 15,
+  },
+
+  imagemTopo: {
+    width: '100%',
+    height: 180,
+    borderRadius: 15,
+    marginBottom: 15,
+  },
+
+  titulo: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    color: '#2c3e50',
+  },
+
+  subtitulo: {
+    fontSize: 16,
+    color: '#7f8c8d',
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+
+  grid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+  },
+
+  card: {
+    width: 90,
+    height: 90,
+    margin: 8,
+    borderRadius: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  icone: {
+    fontSize: 26,
+  },
+
+  textoCard: {
+    fontSize: 12,
+    color: '#fff',
+    fontWeight: 'bold',
+    marginTop: 5,
+  },
+
+  botao: {
+    marginTop: 20,
+    backgroundColor: 'black',
+    paddingVertical: 12,
+    paddingHorizontal: 40,
+    borderRadius: 10,
+  },
+
+  textoBotao: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+
+});
