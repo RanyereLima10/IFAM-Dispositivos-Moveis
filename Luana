@@ -111,3 +111,147 @@ const styles = StyleSheet.create({
 **********************************************************************/
 
 
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Luana Vitoria cordovil lima 
+DATA:  12/ 05 /2026
+Bimestre: 2º Bimestre
+Descriçao: Esse código cria uma tela em React Native com:
+Um título no topo (“Meu Aplicativo”)
+Um subtítulo (“Aula de Layouts”)
+Três caixas alinhadas horizontalmente com as letras A, B e C
+Um botão “ENTRAR”
+Fundo colorido escuro
+Todo o layout centralizado na tela usando View, Text, TouchableOpacity e StyleSheet.
+
+**********************************************************************/
+
+
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+      
+      <View style={styles.card}>
+        
+        {/* Título */}
+        <Text style={styles.titulo}>Meu Aplicativo</Text>
+
+
+        {/* Subtítulo */}
+        <Text style={styles.subtitulo}>Aula de Layouts</Text>
+
+
+        {/* Caixas alinhadas */}
+        <View style={styles.linha}>
+          <View style={styles.caixa}>
+            <Text style={styles.textoCaixa}>A</Text>
+          </View>
+
+
+          <View style={styles.caixa}>
+            <Text style={styles.textoCaixa}>B</Text>
+          </View>
+
+
+          <View style={styles.caixa}>
+            <Text style={styles.textoCaixa}>C</Text>
+          </View>
+        </View>
+
+
+        {/* Botão */}
+        <TouchableOpacity style={styles.botao}>
+          <Text style={styles.textoBotao}>ENTRAR</Text>
+        </TouchableOpacity>
+
+
+      </View>
+    </View>
+  );
+}
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#1e1e1e', // fundo colorido
+    justifyContent: 'center', // centraliza vertical
+    alignItems: 'center', // centraliza horizontal
+  },
+
+
+  card: {
+    width: 300,
+    padding: 25,
+    borderWidth: 2,
+    borderColor: '#ffffff',
+    borderStyle: 'dashed',
+    alignItems: 'center',
+    borderRadius: 10,
+  },
+
+
+  titulo: {
+    fontSize: 24,
+    color: '#ffffff',
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+
+
+  subtitulo: {
+    fontSize: 18,
+    color: '#dddddd',
+    marginBottom: 30,
+  },
+
+
+  linha: {
+    flexDirection: 'row',
+    marginBottom: 40,
+  },
+
+
+  caixa: {
+    width: 50,
+    height: 50,
+    borderWidth: 2,
+    borderColor: '#ffffff',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginHorizontal: 8,
+  },
+
+
+  textoCaixa: {
+    color: '#ffffff',
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+
+
+  botao: {
+    borderWidth: 2,
+    borderColor: '#ffffff',
+    paddingVertical: 10,
+    paddingHorizontal: 30,
+    borderRadius: 5,
+  },
+
+
+  textoBotao: {
+    color: '#ffffff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+});
+
+
+
+
+
