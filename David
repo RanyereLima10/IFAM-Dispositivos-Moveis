@@ -65,3 +65,119 @@ const styles = StyleSheet.create({
   }
 });
 
+
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): DAVID YURI
+DATA:  28/ 04 /2026
+Bimestre: 2º Bimestre
+
+**********************************************************************/
+
+
+
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+
+      {/* Título */}
+      <Text style={styles.titulo}>
+        Meu Aplicativo
+      </Text>
+
+      {/* Subtítulo */}
+      <Text style={styles.subtitulo}>
+        Exercício de React Native
+      </Text>
+
+      {/* Três caixas */}
+      <View style={styles.linha}>
+        <Text style={styles.caixa}>A</Text>
+        <Text style={styles.caixa}>B</Text>
+        <Text style={styles.caixa}>C</Text>
+      </View>
+
+      {/* Botão */}
+      <TouchableOpacity style={styles.botao}>
+        <Text style={styles.textoBotao}>Clique Aqui</Text>
+      </TouchableOpacity>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+
+  /* Fundo colorido + layout centralizado */
+  container: {
+    flex: 1,
+    backgroundColor: '#D6EAF8',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+
+  /* Título */
+  titulo: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    marginBottom: 10
+  },
+
+  /* Subtítulo */
+  subtitulo: {
+    fontSize: 18,
+    color: '#555',
+    marginBottom: 20
+  },
+
+  /* Linha das caixas */
+  linha: {
+    flexDirection: 'row',
+    marginBottom: 20
+  },
+
+  /* Caixas */
+  caixa: {
+    backgroundColor: '#4A90E2',
+    color: 'white',
+    padding: 20,
+    margin: 5,
+    fontSize: 20,
+    borderRadius: 8
+  },
+
+  /* Botão */
+  botao: {
+    backgroundColor: '#2ECC71',
+    paddingVertical: 12,
+    paddingHorizontal: 25,
+    borderRadius: 8
+  },
+
+  textoBotao: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold'
+  }
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
