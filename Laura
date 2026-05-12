@@ -545,3 +545,117 @@ const styles = StyleSheet.create({
 });
 
 
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Laura Emanuelle M. Lima Santos
+DATA:  09/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição da Atividade: Este código React Native utiliza componentes básicos e Flexbox para desenhar uma árvore de natal minimalista na tela. A estrutura é montada em camadas, começando com uma letra no topo e expandindo para três na base da folhagem. Cada caractere é estilizado como um bloco colorido com bordas arredondadas e texto centralizado. As cores alternam entre tons de verde para as folhas e marrom para o tronco inferior. O layout principal utiliza alinhamento centralizado para garantir que a árvore fique no meio do dispositivo. É um exemplo prático de como empilhar elementos View e aplicar estilos condicionais em listas. Por fim, o uso de flexDirection: 'row' organiza as letras horizontalmente em cada nível da árvore.
+
+**********************************************************************/
+
+ import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+
+
+      <View style={styles.row}>
+        <Text style={[styles.letra, styles.a]}>A</Text>
+      </View>
+
+
+     
+      <View style={styles.row}>
+        <Text style={[styles.letra, styles.b]}>B</Text>
+        <Text style={[styles.letra, styles.c]}>C</Text>
+      </View>
+
+
+      <View style={styles.row}>
+        <Text style={[styles.letra, styles.d]}>D</Text>
+        <Text style={[styles.letra, styles.e]}>E</Text>
+        <Text style={[styles.letra, styles.f]}>F</Text>
+      </View>
+     
+      <Text style={[styles.letra, styles.tronco]}>| |</Text>
+
+
+    </View>
+  );
+}
+
+
+const styles = StyleSheet.create({
+
+
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+
+
+  letra: {
+    width: 60,
+    height: 60,
+    margin: 5,
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: 'white',
+    borderRadius: 15,
+    paddingTop: 10,
+  },
+
+
+  tronco: {
+    backgroundColor: '#8B4513',
+    width: 70,
+  },
+
+
+  a: {
+    backgroundColor: '#496940',
+  },
+
+
+  b: {
+    backgroundColor: '#27ae60',
+  },
+
+
+  c: {
+    backgroundColor: '#496940',
+  },
+
+
+  d: {
+    backgroundColor: '#27ae60',
+  },
+
+
+  e: {
+    backgroundColor: '#496940',
+  },
+
+
+  f: {
+    backgroundColor: '#27ae60',
+  },
+
+
+});
