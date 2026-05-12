@@ -1,1 +1,54 @@
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+      <View style={styles.linha}>
+        {/* alignSelf: 'flex-start' (cima), 'center' (meio), 'flex-end' (baixo) */} 
+        <Text style={[styles.caixa, styles.centro, { backgroundColor: '#691130' }]}>A</Text>
+        <Text style={[styles.caixa, styles.centro, { backgroundColor: '#85216A' }]}>B</Text>
+        <Text style={[styles.caixa, styles.centro, { backgroundColor: '#4A2087' }]}>C</Text>
+        <Text style={[styles.caixa, styles.centro, { backgroundColor: '#D9CA3B' }]}>D</Text>
+        <Text style={[styles.caixa, styles.centro, { backgroundColor: '#4A2087' }]}>E</Text>
+        <Text style={[styles.caixa, styles.centro, { backgroundColor: '#85216A' }]}>F</Text>
+        <Text style={[styles.caixa, styles.centro, { backgroundColor: '#691130' }]}>G</Text>
+        
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f0f0f0'
+  },
+  linha: {
+    flexDirection: 'row',
+    height: 200, 
+    alignItems: 'center' 
+  },
+  caixa: {
+    color: 'white',
+    padding: 20,
+    margin: 5,
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    borderRadius: 50, 
+    overflow: 'hidden'
+  },
+  cima: {
+    alignSelf: 'flex-start'
+  },
+  centro: {
+    alignSelf: 'center'
+  },
+  baixo: {
+    alignSelf: 'flex-end'
+  }
+});
 
