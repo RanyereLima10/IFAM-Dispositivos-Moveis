@@ -7,4 +7,105 @@ DATA:  12/ 05 /2026
 Bimestre: 2º Bimestre
 Atividade Prática Exercício 1
 ************+***************************************
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
+export default function App() {
+  return (
+    <View style={styles.container}>
+
+      <Text style={styles.titulo}>Painel Gamer</Text>
+
+      <Text style={styles.subtitulo}>
+        Escolha uma opção abaixo
+      </Text>
+
+      <View style={styles.linha}>
+        <View style={styles.card}>
+          <Text style={styles.icone}>🎮</Text>
+          <Text style={styles.textoCard}>Jogar</Text>
+        </View>
+
+        <View style={styles.card}>
+          <Text style={styles.icone}>🏆</Text>
+          <Text style={styles.textoCard}>Ranking</Text>
+        </View>
+
+        <View style={styles.card}>
+          <Text style={styles.icone}>⚙️</Text>
+          <Text style={styles.textoCard}>Config</Text>
+        </View>
+      </View>
+
+      <TouchableOpacity style={styles.botao}>
+        <Text style={styles.textoBotao}>INICIAR</Text>
+      </TouchableOpacity>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+
+  container: {
+    flex: 1,
+    backgroundColor: '#121212',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20
+  },
+
+  titulo: {
+    fontSize: 28,
+    color: '#00ffcc',
+    fontWeight: 'bold',
+    marginBottom: 8
+  },
+
+  subtitulo: {
+    fontSize: 16,
+    color: '#dddddd',
+    marginBottom: 35
+  },
+
+  linha: {
+    flexDirection: 'row',
+    marginBottom: 45
+  },
+
+  card: {
+    width: 90,
+    height: 100,
+    backgroundColor: '#292929',
+    marginHorizontal: 8,
+    borderRadius: 12,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 2,
+    borderColor: '#00ffcc'
+  },
+
+  icone: {
+    fontSize: 32,
+    marginBottom: 8
+  },
+
+  textoCard: {
+    color: 'white',
+    fontWeight: 'bold'
+  },
+
+  botao: {
+    backgroundColor: '#00ffcc',
+    paddingVertical: 12,
+    paddingHorizontal: 40,
+    borderRadius: 10
+  },
+
+  textoBotao: {
+    color: '#121212',
+    fontWeight: 'bold',
+    fontSize: 16
+  }
+
+});
