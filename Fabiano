@@ -1,1 +1,383 @@
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Fabiano Batista Mesquita
+DATA:  05/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição: Desafio modifique o ap
+
+**********************************************************************/
+
+import React from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Alert, StatusBar } from 'react-native';
+
+export default function App() {
+
+  function handlePress() {
+    Alert.alert("Você iniciou o app! Bons estudos 📚");
+  }
+
+  return (
+    <View style={styles.container}>
+     
+      <StatusBar barStyle="light-content" backgroundColor="#0F172A" />
+
+      {/* Título */}
+      <Text style={styles.title}>Seja bem-vindo, aluno! </Text>
+
+      {/* Subtítulo */}
+      <Text style={styles.subtitle}>
+        Pronto para começar sua jornada?
+      </Text>
+
+      {/* Botão */}
+      <TouchableOpacity style={styles.button} onPress={handlePress}>
+        <Text style={styles.buttonText}>Iniciar</Text>
+      </TouchableOpacity>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#0F172A',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 20,
+  },
+
+  title: {
+    fontSize: 34,
+    fontWeight: 'bold',
+    color: '#F8FAFC',
+    marginBottom: 8,
+  },
+
+  subtitle: {
+    fontSize: 16,
+    color: '#94A3B8',
+    marginBottom: 50,
+  },
+
+  button: {
+    backgroundColor: '#22C55E',
+    paddingVertical: 16,
+    paddingHorizontal: 70,
+    borderRadius: 12,
+    elevation: 6,
+  },
+
+  buttonText: {
+    color: '#0F172A',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+});
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Fabiano Batista Mesquita
+DATA:  05/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição: O aplicativo exibe uma mensagem e um botão na tela. Quando o usuário pressiona o botão, o texto é alterado e uma mensagem de alerta aparece.
+
+**********************************************************************/
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, Alert } from 'react-native';
+
+export default function App() {
+
+  // Estado para mudar o texto ao clicar
+  const [mensagem, setMensagem] = useState("Bem-vindo!");
+
+  // Função do botão
+  function entrar() {
+    setMensagem("Você clicou em Entrar!");
+    Alert.alert("Ação", "Botão pressionado com sucesso!");
+  }
+
+  return (
+    <View style={styles.container}>
+
+      {/* TEXTO */}
+      <Text style={styles.texto}>
+        {mensagem}
+      </Text>
+
+      {/* BOTÃO */}
+      <TouchableOpacity style={styles.botao} onPress={entrar}>
+        <Text style={styles.textoBotao}>Entrar</Text>
+      </TouchableOpacity>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+  },
+
+  texto: {
+    fontSize: 24,
+    marginBottom: 20,
+  },
+
+  botao: {
+    backgroundColor: '#007BFF',
+    padding: 15,
+    borderRadius: 10,
+  },
+
+  textoBotao: {
+    color: '#fff',
+    fontSize: 18,
+  }
+});
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Fabiano Batista Mesquita
+DATA:  05/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição: O aplicativo permite que o usuário digite seu nome em um campo de texto. Após clicar no botão, o sistema mostra uma saudação personalizada e verifica se o campo foi preenchido corretamente.
+
+**********************************************************************/
+
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert } from 'react-native';
+
+export default function App() {
+
+  // Estados
+  const [nome, setNome] = useState("");
+  const [mensagem, setMensagem] = useState("Seja bem-vindo, aluno!");
+
+  // Função do botão
+  function entrar() {
+    if (nome === "") {
+      Alert.alert("Erro", "Digite seu nome!");
+      return;
+    }
+
+    setMensagem(`Bem-vindo, ${nome}! 🚀`);
+  }
+
+  return (
+    <View style={styles.container}>
+
+      {/* TEXTO */}
+      <Text style={styles.texto}>
+        {mensagem}
+      </Text>
+
+      {/* INPUT */}
+      <TextInput
+        style={styles.input}
+        placeholder="Digite seu nome"
+        value={nome}
+        onChangeText={setNome}
+      />
+
+      {/* BOTÃO */}
+      <TouchableOpacity style={styles.botao} onPress={entrar}>
+        <Text style={styles.textoBotao}>Acessar</Text>
+      </TouchableOpacity>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f5f5f5',
+    padding: 20,
+  },
+
+  texto: {
+    fontSize: 22,
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+
+  input: {
+    width: '100%',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 12,
+    borderRadius: 10,
+    marginBottom: 15,
+    backgroundColor: '#fff',
+  },
+
+  botao: {
+    backgroundColor: '#28a745',
+    padding: 15,
+    borderRadius: 10,
+    width: '100%',
+    alignItems: 'center',
+  },
+
+  textoBotao: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+  }
+});
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Fabiano Batista Mesquita
+DATA:  05/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição: O aplicativo cria um formulário com campos de nome e email. O sistema valida os dados digitados, verifica se os campos estão preenchidos corretamente e exibe uma mensagem de sucesso após o cadastro.
+******************************************************************
+
+mport React, { useState } from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+  Alert
+} from 'react-native';
+
+export default function App() {
+
+  // Estados
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
+  const [mensagem, setMensagem] = useState("");
+
+  // Função ao clicar no botão
+  function cadastrar() {
+
+    if (nome === "" || email === "") {
+      Alert.alert("Erro", "Preencha todos os campos!");
+      return;
+    }
+
+    // Validação simples de email
+    if (!email.includes("@")) {
+      Alert.alert("Erro", "Email inválido!");
+      return;
+    }
+
+    setMensagem(`Cadastro realizado!\nNome: ${nome}\nEmail: ${email}`);
+
+    // Limpar campos
+    setNome("");
+    setEmail("");
+  }
+
+  return (
+    <View style={styles.container}>
+
+      <Text style={styles.titulo}>Formulário de Cadastro</Text>
+
+      {/* INPUT NOME */}
+      <TextInput
+        style={styles.input}
+        placeholder="Digite seu nome"
+        value={nome}
+        onChangeText={setNome}
+      />
+
+      {/* INPUT EMAIL */}
+      <TextInput
+        style={styles.input}
+        placeholder="Digite seu email"
+        value={email}
+        onChangeText={setEmail}
+        keyboardType="email-address"
+      />
+
+      {/* BOTÃO */}
+      <TouchableOpacity style={styles.botao} onPress={cadastrar}>
+        <Text style={styles.textoBotao}>Cadastrar</Text>
+      </TouchableOpacity>
+
+      {/* RESULTADO */}
+      {mensagem !== "" && (
+        <Text style={styles.resultado}>{mensagem}</Text>
+      )}
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    justifyContent: 'center',
+    backgroundColor: '#f5f5f5',
+  },
+
+  titulo: {
+    fontSize: 24,
+    textAlign: 'center',
+    marginBottom: 20,
+    fontWeight: 'bold',
+  },
+
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 12,
+    borderRadius: 10,
+    marginBottom: 15,
+    backgroundColor: '#fff',
+  },
+
+  botao: {
+    backgroundColor: '#6f42c1',
+    padding: 15,
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+
+  textoBotao: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+
+  resultado: {
+    marginTop: 20,
+    fontSize: 16,
+    textAlign: 'center',
+    color: 'green',
+  }
+});
+
+
+
+
+
+
+
+
+
+
 
