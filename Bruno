@@ -50,6 +50,54 @@ INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
 DISCIPLINA: Dispositivos Móveis
 PROFESSOR: Ranyere Lima
 ALUNO(A): Bruno Guilherme Alves de Souza
+DATA:  28/ 04 /2026
+Bimestre: 2º Bimestre
+Atividade Desafio Modifique o App
+************+***************************************
+
+import React from 'react';
+import { View, Text, Button, StyleSheet } from 'react-native';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+
+      <Text style={styles.texto}>
+        Seja bem-vindo, aluno!
+      </Text>
+
+      <Button
+        title="Clique Aqui"
+        onPress={() => alert('Você entrou no aplicativo!')}
+      />
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#ddeeff'
+  },
+
+  texto: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    color: '#003366'
+  }
+
+});
+
+************+***************************************************************************+***************************************************************************+***************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Bruno Guilherme Alves de Souza
 DATA:  12/ 05 /2026
 Bimestre: 2º Bimestre
 Atividade Prática Exercício 1
