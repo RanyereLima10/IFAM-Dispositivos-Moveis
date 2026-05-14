@@ -86,7 +86,8 @@ PROFESSOR: Ranyere Lima
 ALUNO(A): Fabiano Batista Mesquita
 DATA:  05/ 05 /2026
 Bimestre: 2º Bimestre
-Descrição: O aplicativo exibe uma mensagem e um botão na tela. Quando o usuário pressiona o botão, o texto é alterado e uma mensagem de alerta aparece.
+Descrição: O aplicativo exibe uma mensagem e um botão na tela. 
+Quando o usuário pressiona o botão, o texto é alterado e uma mensagem de alerta aparece.
 
 **********************************************************************/
 import React, { useState } from 'react';
@@ -153,7 +154,8 @@ PROFESSOR: Ranyere Lima
 ALUNO(A): Fabiano Batista Mesquita
 DATA:  05/ 05 /2026
 Bimestre: 2º Bimestre
-Descrição: O aplicativo permite que o usuário digite seu nome em um campo de texto. Após clicar no botão, o sistema mostra uma saudação personalizada e verifica se o campo foi preenchido corretamente.
+Descrição: O aplicativo permite que o usuário digite seu nome em um campo de texto. 
+Após clicar no botão, o sistema mostra uma saudação personalizada e verifica se o campo foi preenchido corretamente.
 
 **********************************************************************/
 
@@ -249,7 +251,9 @@ PROFESSOR: Ranyere Lima
 ALUNO(A): Fabiano Batista Mesquita
 DATA:  05/ 05 /2026
 Bimestre: 2º Bimestre
-Descrição: O aplicativo cria um formulário com campos de nome e email. O sistema valida os dados digitados, verifica se os campos estão preenchidos corretamente e exibe uma mensagem de sucesso após o cadastro.
+Descrição: O aplicativo cria um formulário com campos de nome e email.
+O sistema valida os dados digitados, verifica se os campos estão preenchidos corretamente e exibe uma mensagem de sucesso após o cadastro.
+
 *********************************************************************/
 
 mport React, { useState } from 'react';
@@ -381,7 +385,9 @@ ALUNO(A): Fabiano Batista Mesquita
 DATA:  12/ 05 /2026
 Bimestre: 2º Bimestre
 Descrição: arvore de natal
+
 **********************************************************************/
+
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
@@ -468,8 +474,108 @@ const styles = StyleSheet.create({
   },
 });
 
+**********************************************************************/
 
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Fabiano Batista Mesquita
+DATA:  12/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição: Nesta atividade foi criada uma tela simples no React Native contendo um título, subtítulo, 
+três caixas alinhadas horizontalmente e um botão. Foram utilizados componentes básicos como View, Text e TouchableOpacity,
+além de estilizações com StyleSheet para centralizar e organizar os elementos da interface.
 
+**********************************************************************/
+import React from 'react';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+
+      {/* Título */}
+      <Text style={styles.titulo}>Meu Aplicativo</Text>
+
+      {/* Subtítulo */}
+      <Text style={styles.subtitulo}>Aula de Layouts</Text>
+
+      {/* Caixas alinhadas */}
+      <View style={styles.linha}>
+        <View style={styles.caixa}>
+          <Text style={styles.textoCaixa}>A</Text>
+        </View>
+
+        <View style={styles.caixa}>
+          <Text style={styles.textoCaixa}>B</Text>
+        </View>
+
+        <View style={styles.caixa}>
+          <Text style={styles.textoCaixa}>C</Text>
+        </View>
+      </View>
+
+      {/* Botão */}
+      <TouchableOpacity style={styles.botao}>
+        <Text style={styles.textoBotao}>ENTRAR</Text>
+      </TouchableOpacity>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#111',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  titulo: {
+    fontSize: 28,
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+
+  subtitulo: {
+    fontSize: 18,
+    color: '#ccc',
+    marginBottom: 30,
+  },
+
+  linha: {
+    flexDirection: 'row',
+    marginBottom: 30,
+  },
+
+  caixa: {
+    width: 60,
+    height: 60,
+    backgroundColor: '#333',
+    borderWidth: 2,
+    borderColor: '#fff',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginHorizontal: 10,
+  },
+
+  textoCaixa: {
+    color: '#fff',
+    fontSize: 20,
+  },
+
+  botao: {
+    backgroundColor: '#fff',
+    paddingVertical: 12,
+    paddingHorizontal: 30,
+    borderRadius: 10,
+  },
+
+  textoBotao: {
+    fontWeight: 'bold',
+  },
+});
 
 
 
