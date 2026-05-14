@@ -577,9 +577,79 @@ const styles = StyleSheet.create({
   },
 });
 
+**********************************************************************/
 
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Fabiano Batista Mesquita
+DATA:  12/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição: Esta atividade teve como objetivo personalizar a interface do aplicativo utilizando imagem, 
+ícones, cores personalizadas e bordas arredondadas. 
+Foram aplicados recursos visuais do React Native para deixar o aplicativo mais moderno,
+organizado e visualmente agradável.
 
+**********************************************************************/
 
+import React from 'react';
+import { View, Text, Image, StyleSheet } from 'react-native';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+
+      {/* Imagem */}
+      <Image
+        source={{
+          uri: 'https://reactnative.dev/img/tiny_logo.png',
+        }}
+        style={styles.imagem}
+      />
+
+      {/* Ícones usando emojis */}
+      <Text style={styles.icone}>⭐ 🎨 🚀</Text>
+
+      {/* Caixa personalizada */}
+      <View style={styles.caixa}>
+        <Text style={styles.texto}>Caixa com bordas arredondadas</Text>
+      </View>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#1e1e1e',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  imagem: {
+    width: 100,
+    height: 100,
+    marginBottom: 20,
+  },
+
+  icone: {
+    fontSize: 35,
+    marginBottom: 20,
+  },
+
+  caixa: {
+    backgroundColor: '#4CAF50',
+    padding: 20,
+    borderRadius: 20,
+  },
+
+  texto: {
+    color: '#fff',
+    fontSize: 16,
+    textAlign: 'center',
+  },
+});
 
 
 
