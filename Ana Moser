@@ -7,7 +7,7 @@ DATA:  28/ 04 /2026
 Bimestre: 2º Bimestre
 Descrição: Modifique o app.
 Grupo A
-**********************************************************************
+**********************************************************************/
 
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Alert, StatusBar } from 'react-native';
