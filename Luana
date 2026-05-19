@@ -40,6 +40,7 @@ export default function App() {
       </View>
 
 
+
       {/* Linha 3 */}
       <View style={styles.linha}>
         <Text style={[styles.caixa, { backgroundColor: '#FF5733' }]}>
@@ -586,7 +587,175 @@ const styles = StyleSheet.create({
   },
 });
 
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Luana Vitoria cordovil lima 
+DATA:  19/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição: Esse código em React Native mostra diferentes estilos de fontes usando fontFamily e fontWeight.
+Ele cria uma tela com várias caixas, cada uma exibindo um tipo de fonte diferente, como fonte fina, normal, média, negrito, grossa, serif e monospace.
+O ScrollView permite rolar a tela, o View organiza as caixas e o Text mostra os textos estilizados. 
+Já o StyleSheet define cores, tamanhos, espaçamentos e estilos das fontes.
+**********************************************************************/
 
+import React from 'react';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
+
+export default function App() {
+  return (
+    <ScrollView style={styles.container}>
+
+      <Text style={styles.titulo}>
+        Tipos de Fontes
+      </Text>
+
+      {/* Fonte fina */}
+      <View style={styles.caixa}>
+        <Text style={styles.nomeFonte}>
+          Fonte Fina
+        </Text>
+
+        <Text style={styles.fina}>
+          Esta é uma fonte fina.
+        </Text>
+      </View>
+
+      {/* Fonte normal */}
+      <View style={styles.caixa}>
+        <Text style={styles.nomeFonte}>
+          Fonte Normal
+        </Text>
+
+        <Text style={styles.normal}>
+          Esta é uma fonte normal.
+        </Text>
+      </View>
+
+      {/* Fonte média */}
+      <View style={styles.caixa}>
+        <Text style={styles.nomeFonte}>
+          Fonte Média
+        </Text>
+
+        <Text style={styles.media}>
+          Esta é uma fonte média.
+        </Text>
+      </View>
+
+      {/* Fonte negrito */}
+      <View style={styles.caixa}>
+        <Text style={styles.nomeFonte}>
+          Fonte Negrito
+        </Text>
+
+        <Text style={styles.negrito}>
+          Esta é uma fonte em negrito.
+        </Text>
+      </View>
+
+      {/* Fonte grossa */}
+      <View style={styles.caixa}>
+        <Text style={styles.nomeFonte}>
+          Fonte Grossa
+        </Text>
+
+        <Text style={styles.grossa}>
+          Esta é uma fonte muito grossa.
+        </Text>
+      </View>
+
+      {/* Fonte serif */}
+      <View style={styles.caixa}>
+        <Text style={styles.nomeFonte}>
+          Fonte Serif
+        </Text>
+
+        <Text style={styles.serif}>
+          Fonte clássica com detalhes.
+        </Text>
+      </View>
+
+      {/* Fonte monospace */}
+      <View style={styles.caixa}>
+        <Text style={styles.nomeFonte}>
+          Fonte Monospace
+        </Text>
+
+        <Text style={styles.mono}>
+          Fonte estilo máquina de escrever.
+        </Text>
+      </View>
+
+    </ScrollView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#DDEEFF',
+    padding: 20,
+  },
+
+  titulo: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 20,
+    color: '#003366',
+  },
+
+  caixa: {
+    backgroundColor: 'white',
+    padding: 15,
+    borderRadius: 15,
+    marginBottom: 15,
+    elevation: 4,
+  },
+
+  nomeFonte: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 8,
+    color: '#0055AA',
+  },
+
+  fina: {
+    fontSize: 22,
+    fontWeight: '200',
+  },
+
+  normal: {
+    fontSize: 22,
+    fontWeight: '400',
+  },
+
+  media: {
+    fontSize: 22,
+    fontWeight: '500',
+  },
+
+  negrito: {
+    fontSize: 22,
+    fontWeight: '700',
+  },
+
+  grossa: {
+    fontSize: 22,
+    fontWeight: '900',
+  },
+
+  serif: {
+    fontSize: 22,
+    fontFamily: 'serif',
+  },
+
+  mono: {
+    fontSize: 22,
+    fontFamily: 'monospace',
+  },
+});
 
 
 
