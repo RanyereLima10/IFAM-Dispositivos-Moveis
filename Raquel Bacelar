@@ -502,3 +502,145 @@ button1: {
 
   
 });
+
+///////////////////////////////////////////////////
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Raquel Bacelar Pena
+DATA:  19/ 05 /2026
+//////////////////////////////////////////////////
+import React from 'react';
+import { Text, View } from 'react-native';
+
+export default function App() {
+
+  return (
+
+    // Caixa principal
+    <View style={{ marginTop: 100, alignItems: 'center' }}>
+
+      {/* Texto com estilos de fonte */}
+      <Text
+        style={{
+
+          fontSize: 25, // Tamanho da fonte
+
+          color: '#001B43', // Cor da letra
+
+          fontWeight: 'bold', // Negrito
+
+          fontFamily: 'sans-serif', // Tipo da fonte
+
+          marginBottom: 75,
+          
+        
+
+          /*fontStyle: 'italic' // Itálico*/
+
+        }}
+      >
+        Fonte Sans-serif
+      </Text>
+      <Text
+        style={{
+
+          fontSize: 25, // Tamanho da fonte
+
+          color: '#03258C', // Cor da letra
+
+          fontWeight: 'bold', // Negrito
+
+          fontFamily: 'Display', // Tipo da fonte
+          
+          marginBottom: 75,
+
+          /*fontStyle: 'italic' // Itálico*/
+
+        }}
+      >
+        Fonte Display
+      </Text>
+      <Text
+        style={{
+
+          fontSize: 25, // Tamanho da fonte
+
+          color: '#022873', // Cor da letra
+
+          fontWeight: 'bold', // Negrito
+
+          fontFamily: 'arial', // Tipo da fonte
+          
+          marginBottom: 75,
+
+          /*fontStyle: 'italic' // Itálico*/
+
+        }}
+      >
+        Fonte Arial
+      </Text>
+      <Text
+        style={{
+
+          fontSize: 25, // Tamanho da fonte
+
+          color: '#056CF2', // Cor da letra
+
+          fontWeight: 'bold', // Negrito
+
+          fontFamily: 'fantasy', // Tipo da fonte
+          
+          marginBottom: 75,
+
+          /*fontStyle: 'italic' // Itálico*/
+
+        }}
+      >
+        Fonte fantasy
+      </Text>
+      <Text
+        style={{
+
+          fontSize: 25, // Tamanho da fonte
+
+          color: '#0597F2', // Cor da letra
+
+          fontWeight: 'bold', // Negrito
+
+          fontFamily: 'monospace', // Tipo da fonte
+          
+          marginBottom: 75,
+
+          /*fontStyle: 'italic' // Itálico*/
+
+        }}
+      >
+        Fonte monospace
+      </Text>
+      <Text
+        style={{
+
+          fontSize: 25, // Tamanho da fonte
+
+          color: '#0166B0', // Cor da letra
+
+          fontWeight: 'bold', // Negrito
+
+          fontFamily: 'cursive', // Tipo da fonte
+          
+          marginBottom: 75,
+
+          /*fontStyle: 'italic' // Itálico*/
+
+        }}
+      >
+        Fonte cursive
+      </Text>
+      
+      
+    </View>
+
+  );
+}
+
