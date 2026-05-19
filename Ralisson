@@ -1,3 +1,152 @@
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Ralisso iago
+DATA:  19/ 05 /2026
+Bimestre: 2º Bimestre
+**********************************************************************/
+
+import React from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Alert,
+  StatusBar
+} from 'react-native';
+
+export default function App() {
+
+  function handlePress() {
+    Alert.alert("Você iniciou o app! Bons estudos 📚");
+  }
+
+  function handleSecondPress() {
+    Alert.alert("Você acessou a área de exercícios 📝");
+  }
+
+  return (
+    <View style={styles.container}>
+
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor="#0F172A"
+      />
+
+      {/* Primeiro título */}
+      <Text style={styles.title}>
+        Seja bem-vindo, aluno!
+      </Text>
+
+      {/* Primeiro subtítulo */}
+      <Text style={styles.subtitle}>
+        Pronto para começar sua jornada?
+      </Text>
+
+      {/* Primeiro botão */}
+      <TouchableOpacity
+        style={styles.button}
+        onPress={handlePress}
+      >
+        <Text style={styles.buttonText}>
+          Iniciar
+        </Text>
+      </TouchableOpacity>
+
+      {/* Segundo título */}
+      <Text style={styles.secondTitle}>
+        Área de Exercícios 📘
+      </Text>
+
+      {/* Segundo subtítulo */}
+      <Text style={styles.secondSubtitle}>
+        Treine seus conhecimentos diariamente.
+      </Text>
+
+      {/* Segundo botão */}
+      <TouchableOpacity
+        style={styles.secondButton}
+        onPress={handleSecondPress}
+      >
+        <Text style={styles.secondButtonText}>
+          Ver Exercícios
+        </Text>
+      </TouchableOpacity>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+
+  container: {
+    flex: 1,
+    backgroundColor: '#0F172A',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 20,
+  },
+
+  title: {
+    fontSize: 34,
+    fontWeight: 'bold',
+    color: '#F8FAFC',
+    marginBottom: 8,
+  },
+
+  subtitle: {
+    fontSize: 16,
+    color: '#94A3B8',
+    marginBottom: 30,
+  },
+
+  /* PRIMEIRO BOTÃO */
+  button: {
+    backgroundColor: '#F97316',
+    paddingVertical: 16,
+    paddingHorizontal: 70,
+    borderRadius: 12,
+    elevation: 6,
+    marginBottom: 50,
+  },
+
+  buttonText: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+
+  secondTitle: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#F8FAFC',
+    marginBottom: 8,
+  },
+
+  secondSubtitle: {
+    fontSize: 16,
+    color: '#CBD5E1',
+    marginBottom: 30,
+    textAlign: 'center',
+  },
+
+  /* SEGUNDO BOTÃO */
+  secondButton: {
+    backgroundColor: '#EC4899',
+    paddingVertical: 16,
+    paddingHorizontal: 50,
+    borderRadius: 12,
+    elevation: 6,
+  },
+
+  secondButtonText: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+
+});
 
 INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
 DISCIPLINA: Dispositivos Móveis
