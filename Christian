@@ -796,3 +796,80 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Christian Keven de Paiva Farias
+DATA:  15/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição: Código em React Native que cria uma tela com diferentes fontes 
+**********************************************************************/
+
+import React from 'react';
+import { Text, View } from 'react-native';
+
+export default function App() {
+  return (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: 20,
+      }}
+    >
+
+      {/* MUITO FINO */}
+      <Text
+        style={{
+          fontSize: 30,
+          fontFamily: 'sans-serif',
+          fontWeight: '100', // bem fino
+          color: 'gray',
+        }}
+      >
+        [Fino] Texto bem leve e delicado
+      </Text>
+
+      {/* FINO (alternativo) */}
+      <Text
+        style={{
+          fontSize: 30,
+          fontFamily: 'sans-serif-light',
+          color: 'black',
+        }}
+      >
+        [Light] Texto fino elegante
+      </Text>
+
+      {/* GROSSO */}
+      <Text
+        style={{
+          fontSize: 30,
+          fontFamily: 'sans-serif',
+          fontWeight: 'bold',
+          color: 'blue',
+        }}
+      >
+        [Bold] Texto grosso padrão
+      </Text>
+
+      {/* MUITO GROSSO */}
+      <Text
+        style={{
+          fontSize: 32,
+          fontFamily: 'sans-serif',
+          fontWeight: '900', // bem grosso
+          color: 'red',
+        }}
+      >
+        [Black 900] Texto MUITO grosso
+      </Text>
+
+    </View>
+  );
+}
+
