@@ -402,12 +402,103 @@ const styles = StyleSheet.create({
 
 });
 
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Ana Moser M. de Oliveira
+DATA:  19/ 05 /2026
+
+import React from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Alert, StatusBar } from 'react-native';
+
+export default function App() {
+
+  function handlePress() {
+    Alert.alert("Você iniciou o app! Bons estudos 📚");
+  }
+
+  return (
+    <View style={styles.container}>
+      
+      <StatusBar barStyle="light-content" backgroundColor="#0F172A" />
+
+      {/* Título */}
+      <Text style={styles.title}>Seja bem-vindo, Aluno! </Text>
+
+      {/* Subtítulo */}
+      <Text style={styles.subtitle}>
+       vamos adquirir conhecimento ?
+      </Text>
+      {/* Subtítulo */}
+      <Text style={styles.subtitle1}>
+      Quer rever os conteudos?
+
+      </Text>
+
+      {/* Botão */}
+      <TouchableOpacity style={styles.button} onPress={handlePress}>
+        <Text style={styles.buttonText}>Iniciar</Text>
+      </TouchableOpacity>
+      
+      <TouchableOpacity style={styles.button1} onPress={handlePress}>
+        <Text style={styles.buttonText}>Reiniciar</Text>
+      </TouchableOpacity>
+      
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#00508F',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 20,
+  },
+
+  title: {
+    fontSize: 34,
+    fontWeight: 'bold',
+    color: '#F8FAFC',
+    marginBottom: 8,
+  },
+
+  subtitle: {
+    fontSize: 16,
+    color: '#DAE7FF',
+    marginBottom: 10,
+  },
+
+  subtitle1: {
+    fontSize: 16,
+    color:'#DAE7FF',
+    marginBottom:50
+  },
+
+  button: {
+    margin: 10,
+    backgroundColor: '#DAE7FF',
+    paddingVertical: 16,
+    paddingHorizontal: 70,
+    borderRadius: 12,
+    elevation: 6,
+  },
 
 
+button1: {
+    backgroundColor: '#DAE7FF',
+    paddingVertical: 16,
+    paddingHorizontal: 70,
+    borderRadius: 12,
+    elevation: 6,
+  },
+  buttonText: {
+    color: '#0F172A',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
 
 
-
-
-
+  
 });
-
