@@ -1281,3 +1281,186 @@ const styles = {
 };
 
 
+************+***************************************************************************+***************************************************************************+***************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Joaquim Henrique Andrade de Almeida 
+DATA:  19/ 05 /2026
+Bimestre: 2º Bimestre
+ESSE CODIGO FALA SOBRE A CRIAÇÃO DE BOTOES E ETC
+************+***************************************************************************+***************************************************************************+***************************************************************
+
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, Modal, Alert } from 'react-native';
+
+export default function App() {
+  const [modalVisible, setModalVisible] = useState(false);
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <View style={styles.card}>
+        
+        {/* Bloco de Boas-Vindas */}
+        <View style={styles.textSection}>
+          <Text style={styles.title}>Seja bem-vindo</Text>
+          <Text style={styles.subtitle}>Escola IFAM</Text>
+        </View>
+
+        <View style={styles.textSection}>
+          <Text style={styles.title}>Olá</Text>
+          <Text style={styles.subtitle}>Escola de Informática</Text>
+        </View>
+
+        <View style={styles.btnGroup}>
+          <TouchableOpacity 
+            style={[styles.button, styles.btnPrimary]}
+            onPress={() => setModalVisible(true)}
+          >
+            <Text style={styles.btnText}>Entrar</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity 
+            style={[styles.button, styles.btnSecondary]}
+            onPress={() => Alert.alert('Sair', 'Você fechou o aplicativo.')}
+          >
+            <Text style={styles.btnText}>Sair</Text>
+          </TouchableOpacity>
+        </View>
+
+      </View>
+
+   
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalTitle}>Acesso Permitido!</Text>
+            <Text style={styles.modalText}>Você entrou no sistema da Escola de Informática do IFAM.</Text>
+            
+            <TouchableOpacity
+              style={styles.modalButton}
+              onPress={() => setModalVisible(false)}
+            >
+              <Text style={styles.modalButtonText}>Fechar</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#f0f4f1', 
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  card: {
+    backgroundColor: '#ffffff',
+    borderRadius: 16,
+    padding: 28,
+    width: '100%',
+    maxWidth: 340,
+
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.08,
+    shadowRadius: 12,
+  },
+  textSection: {
+    marginBottom: 20,
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    color: '#1b4332', 
+    textAlign: 'center',
+    marginBottom: 4,
+  },
+  subtitle: {
+    fontSize: 15,
+    color: '#6c757d',
+    textAlign: 'center',
+    textTransform: 'uppercase', 
+    letterSpacing: 1,
+  },
+  btnGroup: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 15,
+  },
+  button: {
+    flex: 1,
+    paddingVertical: 14,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginHorizontal: 6, 
+  },
+  btnPrimary: {
+    backgroundColor: '#2d6a4f', 
+  },
+  btnSecondary: {
+    backgroundColor: '#adb5bd', 
+  },
+  btnText: {
+    color: '#ffffff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  // Estilos do Popup (Modal)
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', 
+    alignItems: 'center',
+  },
+  modalView: {
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 25,
+    width: '80%',
+    maxWidth: 300,
+    alignItems: 'center',
+    elevation: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.25,
+    shadowRadius: 10,
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#2d6a4f',
+    marginBottom: 10,
+  },
+  modalText: {
+    fontSize: 15,
+    color: '#495057',
+    textAlign: 'center',
+    marginBottom: 20,
+    lineHeight: 22,
+  },
+  modalButton: {
+    backgroundColor: '#2d6a4f',
+    borderRadius: 8,
+    paddingVertical: 10,
+    paddingHorizontal: 24,
+    elevation: 2,
+  },
+  modalButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+});
