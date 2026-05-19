@@ -378,7 +378,12 @@ PROFESSOR: Ranyere Lima
 ALUNO(A):Jasmin Silva De Lima
 DATA:  12/ 05 /2026
 Bimestre: 2º Bimestre
-Descrição da Atividade: 
+Descrição da Atividade: Esse código cria uma interface simples em React Native.
+A tela possui um título, um subtítulo, três caixas alinhadas horizontalmente com as letras A, B e C, além de
+um botão “Clique Aqui”. Os componentes `View` e `Text` são usados para organizar e mostrar os elementos na tela, enquanto o `TouchableOpacity`
+cria o botão clicável. Os estilos definidos no `StyleSheet` controlam as cores, tamanhos, espaçamentos e o alinhamento dos componentes, deixando
+a interface centralizada e organizada.
+
 
 **********************************************************************/
 
@@ -470,6 +475,17 @@ const styles = StyleSheet.create({
   }
 
 });
+
+**********************************************************************/
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A):Jasmin Silva De Lima
+DATA:  12/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição da Atividade:
+**********************************************************************/
+
 
 
 
