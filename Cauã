@@ -844,3 +844,97 @@ const styles = StyleSheet.create({
 });
 
 **********************************************************************/
+
+
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Cauã Fonseca s. Vieria
+DATA: 19/ 05 / 2026
+BIMESTRE: 2º Bimestre
+************************************************************************
+
+
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+
+      <Text style={styles.texto1}>
+        Negrito
+      </Text>
+
+       <Text style={styles.subtexto1}>
+        Palavra em Negrito
+      </Text>
+
+      <Text style={styles.texto2}>
+        Texto Azul 
+      </Text>
+
+        <Text style={styles.subtexto2}>
+        Palavra em italic
+      </Text>
+
+      <Text style={styles.texto3}>
+        Texto Verde
+      </Text>
+
+            <Text style={styles.subtexto3}>
+        Palavra em monospace
+      </Text>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f2f2f2',
+  },
+
+  texto1: {
+    fontSize: 30,
+    color: 'red',
+    fontWeight: 'bold',
+    marginBottom: 20
+  },
+
+subtexto1: {
+  margin: 10,
+  fontFamily: 'negrito'
+},
+
+subtexto2: {
+  margin: 10,
+  fontFamily: 'italic'
+},
+
+subtexto3: {
+  margin:10,
+  fontFamily: 'monospace'
+},
+  texto2: {
+    fontSize: 24,
+    margin: 10 ,
+    color: 'blue',
+    marginBottom: 20,
+  },
+
+  texto3: {
+    fontSize: 20,
+    margin: 10,
+    color: 'green',
+    fontFamily: 'italic',
+    fontWeight: '900',
+  },
+
+});
+
