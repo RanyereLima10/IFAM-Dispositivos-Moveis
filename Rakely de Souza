@@ -352,6 +352,99 @@ fontSize: 16,
 },
 });
 
+*********************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Rakely da Silva de Souza
+DADOS: 19 / 05 / 2026
+BIMESTRE: 2º Bimestre
+
+DESCRIÇÃO DA ATIVIDADE:
+Revisão
+
+import React from 'react';
+import { Text, View } from 'react-native';
+
+export default function App() {
+
+  return (
+
+    // Caixa principal
+    <View style={{ marginTop: 100, alignItems: 'center' }}>
+
+      {/* Texto com estilos de fonte */}
+      <Text
+        style={{
+
+          fontSize: 30, // Tamanho da fonte
+
+          color: 'black', // Cor da letra
+
+          fontWeight: 'bold', // Negrito
+
+          fontFamily: 'serif', // Fonte normal do sistema
+          
+          fontWeight: '200'
+          
+
+          /*fontStyle: 'italic' // Itálico*/
+
+        }}
+      >
+        Baby,
+      </Text>
+
+
+      {/* Texto com estilos de fonte */}
+      <Text
+        style={{
+
+          fontSize: 30, // Tamanho da fonte
+
+          color: 'blue', // Cor da letra
+
+          fontWeight: 'bold', // Negrito
+
+          fontFamily: 'monospace', // Fonte normal do sistema
+          
+          fontWeight: '200'
+          
+
+          /*fontStyle: 'italic' // Itálico*/
+
+        }}
+      >
+        Now that i found you
+      </Text>
+
+       {/* Texto com estilos de fonte */}
+      <Text
+        style={{
+
+          fontSize: 30, // Tamanho da fonte
+
+          color: 'red', // Cor da letra
+
+          fontWeight: 'bold', // Negrito
+
+          fontFamily: 'sans-serif', // Fonte normal do sistema
+          
+          fontWeight: '100'
+          
+
+          /*fontStyle: 'italic' // Itálico*/
+
+        }}
+      >
+        i can't let you gooooooo
+      </Text>
+    </View>
+
+    
+
+  );
+}
 
 
 
