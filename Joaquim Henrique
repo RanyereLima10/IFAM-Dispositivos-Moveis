@@ -1464,3 +1464,89 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
+
+
+************+***************************************************************************+***************************************************************************+***************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Joaquim Henrique Andrade de Almeida 
+DATA:  12/ 05 /2026
+Bimestre: 2º Bimestre
+varias fontes com estilos diferentes etc
+************+***************************************************************************+***************************************************************************+***************************************************************
+import React from 'react';
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+
+export default function App() {
+  return (
+    <SafeAreaView style={styles.container}>
+      <View style={styles.card}>
+
+        < Text style={[styles.textoBas, styles.maiusculo]}>Bem-Vindo as fontes:</Text>
+        
+        <Text style={[styles.textoBase, styles.sansSerif]}>sans-serif</Text>
+
+        <Text style={[styles.textoBase, styles.serif]}>serif</Text>
+
+        <Text style={[styles.textoBase, styles.monospace]}>monospace</Text>
+
+        <Text style={[styles.textoBase, styles.italico]}>italic</Text>
+
+        <Text style={[styles.textoBase, styles.maiusculo]}>uppercase</Text>
+
+        <Text style={[styles.textoBase, styles.espacado]}>bold</Text>
+
+        <Text style={[styles.textoBase, styles.alternativa]}>arial</Text>
+
+      </View>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#f4f4f9',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  card: {
+    backgroundColor: '#ffffff',
+    padding: 30,
+    borderRadius: 12,
+    width: '100%',
+    maxWidth: 320,
+    alignItems: 'center',
+    gap: 15, 
+  },
+  textoBase: {
+    fontSize: 22,
+    color: '#333333',
+  },
+
+  sansSerif: {
+    fontFamily: 'sans-serif',
+  },
+  serif: {
+    fontFamily: 'serif',
+  },
+  monospace: {
+    fontFamily: 'monospace',
+  },
+  italico: {
+    fontStyle: 'italic', 
+  },
+  maiusculo: {
+    textTransform: 'uppercase',
+    fontWeight: 'bold',
+  },
+  espacado: {
+    letterSpacing: 4, 
+  },
+  alternativa: {
+    fontFamily: 'arial', 
+    fontWeight: '300',
+  },
+});
