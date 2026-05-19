@@ -1,1 +1,159 @@
+#########################################################################################
+19/05/2026
+
+import React from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Alert,
+  StatusBar,
+  Image
+} from 'react-native';
+
+export default function App() {
+
+  // URL da imagem (troque pela que você quiser)
+  const imageUrl =
+    'https://i.pinimg.com/564x/ac/2e/93/ac2e930977fd949a8998356a14e220c5.jpg';
+
+  function handlePressOne() {
+    Alert.alert('Você carburou a unção com Cristo🙌🍁');
+  }
+
+  function handlePressTwo() {
+    Alert.alert('Você bebeu do azeite benzido🍷🥃');
+  }
+
+  return (
+    <View style={styles.container}>
+
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor="#0F172A"
+      />
+
+      {/* Imagem */}
+      <Image
+        source={{ uri: imageUrl }}
+        style={styles.image}
+      />
+
+      {/* Primeiro título */}
+      <Text style={styles.title}>
+        Deseja refletir na palavra do Senhor?
+      </Text>
+
+      {/* Primeiro subtítulo */}
+      <Text style={styles.subtitle}>
+        Clique abaixo para meditar a palavra
+      </Text>
+
+      {/* Primeiro botão */}
+      <TouchableOpacity
+        style={styles.buttonGreen}
+        onPress={handlePressOne}
+      >
+        <Text style={styles.buttonText}>
+          Ouvir Palavra
+        </Text>
+      </TouchableOpacity>
+
+      {/* Segundo título */}
+      <Text style={styles.titleSecond}>
+        Deseja iniciar a santa ceia?
+      </Text>
+
+      {/* Segundo subtítulo */}
+      <Text style={styles.subtitle}>
+        Clique abaixo para beber do vinho
+      </Text>
+
+      {/* Segundo botão */}
+      <TouchableOpacity
+        style={styles.buttonBlue}
+        onPress={handlePressTwo}
+      >
+        <Text style={styles.buttonTextWhite}>
+          Iniciar Estudos
+        </Text>
+      </TouchableOpacity>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+
+  container: {
+    flex: 1,
+    backgroundColor: 'black ',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 20,
+  },
+
+  image: {
+    width: 250,
+    height: 150,
+    borderRadius: 12,
+    marginBottom: 30,
+  },
+
+  title: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#F8FAFC',
+    textAlign: 'center',
+    marginBottom: 8,
+  },
+
+  titleSecond: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#F8FAFC',
+    textAlign: 'center',
+    marginTop: 40,
+    marginBottom: 8,
+  },
+
+  subtitle: {
+    fontSize: 16,
+    color: '#94A3B8',
+    textAlign: 'center',
+    marginBottom: 20,
+  },
+
+  buttonGreen: {
+    backgroundColor: '#22C55E',
+    paddingVertical: 16,
+    paddingHorizontal: 50,
+    borderRadius: 12,
+    elevation: 6,
+    marginBottom: 20,
+  },
+
+  buttonBlue: {
+    backgroundColor: '#3B82F6',
+    paddingVertical: 16,
+    paddingHorizontal: 50,
+    borderRadius: 12,
+    elevation: 6,
+  },
+
+  buttonText: {
+    color: '#0F172A',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+
+  buttonTextWhite: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+
+});
+#############################################################################################
 
