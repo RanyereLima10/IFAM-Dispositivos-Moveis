@@ -351,6 +351,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 34,
     fontWeight: 'bold',
+    fontFamily: 'erif boll italic',
     color: '#1D1F96',
     marginBottom: 8,
   },
@@ -375,6 +376,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
+
 
 
 
