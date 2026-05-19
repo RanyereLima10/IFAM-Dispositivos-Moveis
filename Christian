@@ -705,3 +705,94 @@ const styles = StyleSheet.create({
   }
 });
 
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Christian Keven de Paiva Farias
+DATA:  15/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição: Código em React Native que cria uma tela de boas-vindas com textos e dois botões estilizados, utilizando componentes básicos e estilos visuais.
+**********************************************************************/
+
+import React from 'react';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+      
+      {/* Texto principal */}
+      <Text style={styles.title}>
+        Sejam bem-vindos!
+      </Text>
+
+      {/* Subtextos */}
+      <Text style={styles.subtitle}>
+        Prontos para começar sua jornada.
+      </Text>
+
+      <Text style={styles.subtitle}>
+        Explore novas possibilidades e divirta-se.
+      </Text>
+
+      {/* Botões */}
+      <TouchableOpacity style={styles.buttonPrimary}>
+        <Text style={styles.buttonText}>Começar</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.buttonSecondary}>
+        <Text style={styles.buttonText}>Saiba Mais</Text>
+      </TouchableOpacity>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#4facfe',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+
+  title: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: '#fff',
+    marginBottom: 15,
+    textAlign: 'center',
+  },
+
+  subtitle: {
+    fontSize: 18,
+    color: '#f0f0f0',
+    textAlign: 'center',
+    marginBottom: 10,
+  },
+
+  buttonPrimary: {
+    backgroundColor: '#28a745',
+    paddingVertical: 12,
+    paddingHorizontal: 40,
+    borderRadius: 10,
+    marginTop: 20,
+  },
+
+  buttonSecondary: {
+    backgroundColor: '#007bff',
+    paddingVertical: 12,
+    paddingHorizontal: 40,
+    borderRadius: 10,
+    marginTop: 15,
+  },
+
+  buttonText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+});
