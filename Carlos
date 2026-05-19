@@ -156,4 +156,62 @@ const styles = StyleSheet.create({
 
 });
 #############################################################################################
+import React from 'react';
+import { Text, View } from 'react-native';
+
+export default function App() {
+
+  return (
+
+    // Caixa principal
+    <View style={{ marginTop: 100, alignItems: 'center' }}>
+
+      {/* Texto com estilos de fonte */}
+      <Text
+        style={{
+          fontSize: 40, // Tamanho da fonte
+          color: 'black', // Cor da letra
+          fontWeight: 'bold', // Negrito
+          fontFamily: 'sans-serif', // Tipo da fonte
+          fontWeight: '100'
+          /*fontStyle: 'italic' // Itálico*/
+        }}
+      > Exemplos de Cauã
+      </Text>
+
+      <Text 
+        style={{
+          fontSize: 60,
+          color:'green',
+          fontWeight:'bold',
+          fontFamily:'serif',
+          fontWeight:'700'
+        }} 
+        > cauã Negrito
+      </Text>
+       <Text 
+        style={{
+          fontSize: 50,
+          color:'black',
+          fontWeight:'bold',
+          fontFamily:'monospace',
+          fontWeight:'100'
+        }} 
+        > cauã Negresco
+      </Text>
+       <Text 
+        style={{
+          fontSize: 45,
+          color:'red',
+          fontWeight:'bold',
+          fontFamily:'normal',
+          fontWeight:'900'
+        }} 
+        > cauã Negreiro
+      </Text>
+
+    </View>
+
+  );
+}
 
