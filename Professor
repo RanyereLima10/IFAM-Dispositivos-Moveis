@@ -1,3 +1,30 @@
+///////////////////////////////////////////////////////
+ Revisão
+//////////////////// Exemplos de fontFamily///////////
+fontFamily: 'sans-serif' // Fonte padrão sem detalhes
+fontFamily: 'serif' // Fonte com detalhes nas letras
+fontFamily: 'monospace' // Fonte estilo máquina de escrever
+fontFamily: 'normal' // Fonte normal do sistema
+
+
+////////////Controla a espessura da letra.///////////
+fontWeight: '100' // Muito fina
+fontWeight: '200'
+fontWeight: '300'
+fontWeight: '400' // Normal
+fontWeight: '500'
+fontWeight: '600'
+fontWeight: '700' // Negrito
+fontWeight: '800'
+fontWeight: '900' // Muito grossa
+fontWeight: 'bold' // Negrito
+fontWeight: 'normal' // Normal
+
+////////////////////////////////////////////////////////
+
+
+
+
 
 // EXEMPLO : FORMULARIO SIMPLES
 // useState é utilizado para armazenar valores que podem mudar
