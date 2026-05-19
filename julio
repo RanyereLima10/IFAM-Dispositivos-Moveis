@@ -358,3 +358,123 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
 });
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Julio Cesar de Souza Albuquerque
+DATA:  19/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição:
+Tipos de Fontes
+*******************************************************
+*/  
+**********************************************************************/
+
+import React from 'react';
+import { Text, View } from 'react-native';
+
+export default function App() {
+
+  return (
+
+    // Caixa principal
+    <View style={{ marginTop: 100, alignItems: 'center' }}>
+
+      {/* Texto com estilos de fonte */}
+      <Text
+        style={{
+          margin: 20,
+          fontSize: 20,
+        }}
+      >
+        Estilos de fonte:
+      </Text>
+
+      <Text
+        style={{
+          fontSize: 15,
+          fontWeight: '900', // Muito grosso
+        }}
+      >
+        Muito grosso
+      </Text>
+      <Text
+        style={{
+          fontSize: 15,
+          fontWeight: 'bold', // Negrito
+        }}
+      >
+        Negrito
+      </Text>
+      <Text
+        style={{
+          fontSize: 15,
+          fontWeight: '400', // Normal
+        }}
+      >
+        Normal
+      </Text>
+      <Text
+        style={{
+          fontSize: 15,
+          fontWeight: '100', // Muito fino
+        }}
+      >
+        Muito Fino
+      </Text>
+
+      <Text
+        style={{
+          margin: 20,
+          fontSize: 20,
+        }}
+      >
+        Tipos de Fontes:
+      </Text>
+
+      <Text
+        style={{
+          margin: 5,
+          fontSize: 15,
+          fontFamily: 'sans-serif'
+        }}
+      >
+        Texto em Sans Seriff
+      </Text>
+
+      <Text
+        style={{
+          margin: 5,
+          fontSize: 15,
+          fontFamily: 'sans-serif'
+        }}
+      >
+        Texto em Sans Serif
+      </Text>
+
+      <Text
+        style={{
+          margin: 5,
+          fontSize: 15,
+          fontFamily: 'serif'
+        }}
+      >
+        Texto em Serif
+      </Text>
+
+      <Text
+        style={{
+          margin: 5,
+          fontSize: 15,
+          fontFamily: 'Normal'
+        }}
+      >
+        Texto Normal
+      </Text>
+
+    </View>
+  );
+}
