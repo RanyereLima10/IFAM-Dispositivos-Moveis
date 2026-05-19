@@ -293,4 +293,98 @@ ALUNO(A): DAVID YURI
 DATA:  28/ 04 /2026
 Bimestre: 2º Bimestre
 
+Descrição:Tela Inicial
+**********************************************************************/
+
+import React from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Alert, StatusBar } from 'react-native';
+
+export default function App() {
+
+  function handlePress() {
+    Alert.alert("Você iniciou o app! Bons estudos 📚");
+  }
+
+  return (
+    <View style={styles.container}>
+      
+      <StatusBar barStyle="light-content" backgroundColor="#0F172A" />
+
+      {/* Título */}
+      <Text style={styles.title}>Seja Bem-Vindo, Aluno! </Text>
+      <Text style={styles.title}>Pronto Pra Estudar?  </Text>
+
+      {/* Subtítulo */}
+      <Text style={styles.subtitle}>
+        Pronto para começar sua jornada?
+      </Text>
+      <Text style={styles.subtitle}>
+        Pronto E So Aperta No Botão 
+      </Text>
+
+      {/* Botão */}
+      <TouchableOpacity style={styles.button} onPress={handlePress}>
+        <Text style={styles.buttonText}>Iniciar</Text>
+      </TouchableOpacity>
+
+      <Text style={styles.title}>
+      </Text>
+
+      <TouchableOpacity style={styles.button} onPress={handlePress}>
+        <Text style={styles.buttonText}>Reinicia</Text>
+      </TouchableOpacity>
+
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#DBC6F1',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 20,
+  },
+
+  title: {
+    fontSize: 34,
+    fontWeight: 'bold',
+    color: '#1D1F96',
+    marginBottom: 8,
+  },
+
+  subtitle: {
+    fontSize: 16,
+    color: '#497AD4',
+    marginBottom: 50,
+  },
+
+  button: {
+    backgroundColor: '#743FDE',
+    paddingVertical: 16,
+    paddingHorizontal: 70,
+    borderRadius: 12,
+    elevation: 6,
+  },
+
+  buttonText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+});
+
+
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): DAVID YURI
+DATA:  28/ 04 /2026
+Bimestre: 2º Bimestre
+
 **********************************************************************/
