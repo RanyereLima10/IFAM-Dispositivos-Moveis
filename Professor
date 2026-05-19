@@ -1,3 +1,41 @@
+import React from 'react';
+import { Text, View } from 'react-native';
+
+export default function App() {
+
+  return (
+
+    // Caixa principal
+    <View style={{ marginTop: 100, alignItems: 'center' }}>
+
+      {/* Texto com estilos de fonte */}
+      <Text
+        style={{
+
+          fontSize: 30, // Tamanho da fonte
+
+          color: 'blue', // Cor da letra
+
+          fontWeight: 'bold', // Negrito
+
+          fontFamily: 'monospace', // Tipo da fonte
+          
+          fontWeight: '100'
+
+          /*fontStyle: 'italic' // Itálico*/
+
+        }}
+      >
+        Exemplo de Fonte
+      </Text>
+
+    </View>
+
+  );
+}
+
+
+
 ///////////////////////////////////////////////////////
  Revisão
 //////////////////// Exemplos de fontFamily///////////
