@@ -1,3 +1,86 @@
+************+***************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Yuri Lima Macedo
+DATA:  12/ 05 /2026
+Bimestre: 2º Bimestre
+Nesta atividade foi desenvolvido um aplicativo simples utilizando React Native, com o objetivo de compreender a estrutura básica de um app mobile.
+O aplicativo apresenta uma tela inicial com uma mensagem de boas-vindas e um botão interativo que, ao ser pressionado.
+Também foram aplicados conceitos de estilização com StyleSheet, permitindo a personalização de cores e textos.
+A atividade contribuiu para o aprendizado dos principais componentes, como View, Text, Button, além de reforçar a lógica de programação.
+************+***************************************************************
+import React from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+} from 'react-native';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+      
+      {/* Texto principal */}
+      <Text style={styles.titulo}>
+        Bem-vindo!
+      </Text>
+
+      {/* Subtexto */}
+      <Text style={styles.subtitulo}>
+        Pronto para começar uma janela nova.
+      </Text>
+
+            {/* Subtexto */}
+      <Text style={styles.subtitulo}>
+      Para uma nova experiencia. 
+      </Text>
+
+      {/* Botões */}
+      <View style={styles.areaBotoes}>
+        
+        <TouchableOpacity style={styles.botaoPrimario}>
+          <Text style={styles.textoBotao}>
+            Entrar
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.botaoSecundario}>
+          <Text style={styles.textoBotao}>
+            Cadastrar
+          </Text>
+        </TouchableOpacity>
+
+      </View>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#F5F7FA',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+
+  titulo: {
+    fontSize: 36,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 10,
+  },
+
+  subtitulo: {
+    fontSize: 18,
+    textAlign: 'center',
+    color: '#666',
+    marginBottom: 40,
+    lineHeight: 26,
+  },
 **********************************************************************
 INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
 DISCIPLINA: Dispositivos Móveis
