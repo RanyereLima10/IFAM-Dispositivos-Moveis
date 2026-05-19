@@ -800,7 +800,7 @@ export default function App() {
           </View>
         ))}
       </View>
- m
+ 
       {/* 5. Botão abaixo dos cards */}
       <TouchableOpacity style={styles.button}>
         <Text style={styles.buttonText}>Confirmar Atividade</Text>
