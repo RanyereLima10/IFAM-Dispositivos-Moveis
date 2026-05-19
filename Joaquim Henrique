@@ -939,13 +939,18 @@ DATA:  12/ 05 /2026
 Bimestre: 2º Bimestre
 Atividade Prática Exercício 3
 ************+***************************************************************************+***************************************************************************+***************************************************************
-import React from 'react';
-import { View, Text, StyleSheet, Dimensions, Image, TouchableOpacity, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, Dimensions, Image, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { Ionicons, FontAwesome5, MaterialIcons } from '@expo/vector-icons';
 
 const { width, height } = Dimensions.get('window');
 
 export default function App() {
+  // Função que exibe a mensagem de acordo com o item clicado
+  const mostrarMensagem = (titulo, mensagem) => {
+    Alert.alert(titulo, mensagem);
+  };
+
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
 
@@ -965,80 +970,113 @@ export default function App() {
       <View style={styles.cardsContainer}>
        
         <View style={styles.row}>
-          <View style={[styles.card, { backgroundColor: '#6C5CE7' }]}>
+          <TouchableOpacity 
+            style={[styles.card, { backgroundColor: '#6C5CE7' }]}
+            onPress={() => mostrarMensagem('HTML', 'É a linguagem de marcação usada para estruturar todo o conteúdo de páginas da web. É a base de qualquer site!')}
+          >
             <Ionicons name="code-slash" size={32} color="#FFF" />
             <Text style={styles.cardText}>HTML</Text>
             <Text style={styles.cardDesc}>Estrutura de páginas web</Text>
-          </View>
+          </TouchableOpacity>
 
-          <View style={[styles.card, { backgroundColor: '#FD79A8' }]}>
+          <TouchableOpacity 
+            style={[styles.card, { backgroundColor: '#FD79A8' }]}
+            onPress={() => mostrarMensagem('CSS', 'Responsável por deixar tudo bonito, organizado e com a cara do projeto: cores, fontes, tamanhos e layouts são definidos aqui.')}
+          >
             <FontAwesome5 name="paint-brush" size={32} color="#FFF" />
             <Text style={styles.cardText}>CSS</Text>
             <Text style={styles.cardDesc}>Estilização e layout</Text>
-          </View>
+          </TouchableOpacity>
         </View>
 
     
         <View style={styles.row}>
-          <View style={[styles.card, { backgroundColor: '#00B894' }]}>
+          <TouchableOpacity 
+            style={[styles.card, { backgroundColor: '#00B894' }]}
+            onPress={() => mostrarMensagem('JavaScript', 'Torna as páginas dinâmicas e interativas! Com ele você cria funcionalidades, regras de negócio e muito mais.')}
+          >
             <Text style={styles.jsIcon}>JS</Text>
             <Text style={styles.cardText}>JavaScript</Text>
             <Text style={styles.cardDesc}>Lógica e interatividade</Text>
-          </View>
+          </TouchableOpacity>
 
-          <View style={[styles.card, { backgroundColor: '#0984E3' }]}>
+          <TouchableOpacity 
+            style={[styles.card, { backgroundColor: '#0984E3' }]}
+            onPress={() => mostrarMensagem('React Native', 'Framework que usa JavaScript e React para criar aplicativos móveis nativos para Android e iOS com um só código.')}
+          >
             <Ionicons name="logo-react" size={32} color="#FFF" />
             <Text style={styles.cardText}>React Native</Text>
             <Text style={styles.cardDesc}>Desenvolvimento mobile</Text>
-          </View>
+          </TouchableOpacity>
         </View>
 
     
         <View style={styles.row}>
-          <View style={[styles.card, { backgroundColor: '#E17055' }]}>
+          <TouchableOpacity 
+            style={[styles.card, { backgroundColor: '#E17055' }]}
+            onPress={() => mostrarMensagem('Mobile UI', 'Conjunto de técnicas para criar telas bonitas, fáceis de usar e que se adaptam a qualquer tamanho de celular.')}
+          >
             <MaterialIcons name="phone-android" size={32} color="#FFF" />
             <Text style={styles.cardText}>Mobile UI</Text>
             <Text style={styles.cardDesc}>Interfaces bonitas e responsivas</Text>
-          </View>
+          </TouchableOpacity>
 
-          <View style={[styles.card, { backgroundColor: '#00CEC9' }]}>
+          <TouchableOpacity 
+            style={[styles.card, { backgroundColor: '#00CEC9' }]}
+            onPress={() => mostrarMensagem('API', 'É um ponto de contato que permite seu aplicativo conversar com outros sistemas, buscar dados ou enviar informações.')}
+          >
             <Ionicons name="cloud-outline" size={32} color="#FFF" />
             <Text style={styles.cardText}>API</Text>
             <Text style={styles.cardDesc}>Integração com serviços</Text>
-          </View>
+          </TouchableOpacity>
         </View>
 
         <View style={styles.row}>
-          <View style={[styles.card, { backgroundColor: '#FDCB6E' }]}>
+          <TouchableOpacity 
+            style={[styles.card, { backgroundColor: '#FDCB6E' }]}
+            onPress={() => mostrarMensagem('Banco de Dados', 'É onde todas as informações do sistema são guardadas, organizadas e consultadas quando necessário.')}
+          >
             <FontAwesome5 name="database" size={32} color="#FFF" />
             <Text style={styles.cardText}>Banco de Dados</Text>
             <Text style={styles.cardDesc}>Armazenamento e consultas</Text>
-          </View>
+          </TouchableOpacity>
 
-          <View style={[styles.card, { backgroundColor: '#A29BFE' }]}>
+          <TouchableOpacity 
+            style={[styles.card, { backgroundColor: '#A29BFE' }]}
+            onPress={() => mostrarMensagem('Deploy', 'É o processo de publicar seu aplicativo ou site para que outras pessoas possam acessá-lo na internet.')}
+          >
             <Ionicons name="rocket-outline" size={32} color="#FFF" />
             <Text style={styles.cardText}>Deploy</Text>
             <Text style={styles.cardDesc}>Publicação do seu aplicativo</Text>
-          </View>
+          </TouchableOpacity>
         </View>
 
         <View style={styles.row}>
-          <View style={[styles.card, { backgroundColor: '#D63031' }]}>
+          <TouchableOpacity 
+            style={[styles.card, { backgroundColor: '#D63031' }]}
+            onPress={() => mostrarMensagem('Back-end', 'É a parte que roda no servidor, processa regras, gerencia dados e faz o sistema funcionar por trás das telas.')}
+          >
             <FontAwesome5 name="server" size={32} color="#FFF" />
             <Text style={styles.cardText}>Back-end</Text>
             <Text style={styles.cardDesc}>Lógica do servidor</Text>
-          </View>
+          </TouchableOpacity>
 
-          <View style={[styles.card, { backgroundColor: '#2D3436' }]}>
+          <TouchableOpacity 
+            style={[styles.card, { backgroundColor: '#2D3436' }]}
+            onPress={() => mostrarMensagem('Segurança', 'Conjunto de práticas para proteger dados, usuários e todo o sistema contra acessos indevidos ou ataques.')}
+          >
             <Ionicons name="shield-checkmark-outline" size={32} color="#FFF" />
             <Text style={styles.cardText}>Segurança</Text>
             <Text style={styles.cardDesc}>Proteção de dados</Text>
-          </View>
+          </TouchableOpacity>
         </View>
       </View>
 
       
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity 
+        style={styles.button}
+        onPress={() => mostrarMensagem('Vamos começar!', 'Que legal! Aqui você vai aprender tudo o que precisa para criar seus próprios projetos. Bora estudar? 🚀')}
+      >
         <Text style={styles.buttonText}>🚀 COMEÇAR AGORA</Text>
       </TouchableOpacity>
     </ScrollView>
