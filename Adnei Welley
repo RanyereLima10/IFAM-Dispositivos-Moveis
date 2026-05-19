@@ -1,1 +1,120 @@
+**********************************************************************/
 
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Adnei Wesley R. Guedes
+DATA:  19/ 05 /2026
+Bimestre: 2º Bimestre
+Assunto: Revisao
+**********************************************************************/
+
+import React from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Alert,
+  StatusBar,
+} from 'react-native';
+
+export default function App() {
+
+  function handleStart() {
+    Alert.alert("Você iniciou o app! Bons estudos 📚");
+  }
+
+  function handleInfo() {
+    Alert.alert("Esse sistema foi criado em React Native 🚀");
+  }
+
+  return (
+    <View style={styles.container}>
+
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor="#0F172A"
+      />
+
+      {/* Texto 1 */}
+      <Text style={styles.title}>
+        Olá, bem-vindo ao sistema!
+      </Text>
+
+      {/* Texto 2 */}
+      <Text style={styles.subtitle}>
+        Pronto para começar sua jornada?
+      </Text>
+
+      {/* Botão 1 */}
+      <TouchableOpacity
+        style={styles.button}
+        onPress={handleStart}
+      >
+        <Text style={styles.buttonText}>
+          Iniciar
+        </Text>
+      </TouchableOpacity>
+
+      {/* Botão 2 */}
+      <TouchableOpacity
+        style={styles.buttonSecondary}
+        onPress={handleInfo}
+      >
+        <Text style={styles.buttonText}>
+          Informações
+        </Text>
+      </TouchableOpacity>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#116D8C',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 20,
+  },
+
+  title: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+    marginBottom: 10,
+    textAlign: 'center',
+  },
+
+  subtitle: {
+    fontSize: 18,
+    color: '#E2E8F0',
+    marginBottom: 40,
+    textAlign: 'center',
+  },
+
+  button: {
+    backgroundColor: '#00BA59',
+    paddingVertical: 15,
+    paddingHorizontal: 70,
+    borderRadius: 12,
+    marginBottom: 15,
+    elevation: 5,
+  },
+
+  buttonSecondary: {
+    backgroundColor: '#8C0500',
+    paddingVertical: 15,
+    paddingHorizontal: 50,
+    borderRadius: 12,
+    elevation: 5,
+  },
+
+  buttonText: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+});
