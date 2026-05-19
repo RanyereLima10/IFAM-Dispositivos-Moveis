@@ -3,7 +3,7 @@ INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
 DISCIPLINA: Dispositivos Móveis
 PROFESSOR: Ranyere Lima
 ALUNO(A): Christian Keven de Paiva Farias
-DATA:  xx/ xx /2026
+DATA:  12/ 04 /2026
 Bimestre: 2º Bimestre
 Descrição da Atividade: Esse aplicativo é um formulário de cadastro de aluno feito em React Native.
 Ele permite que o usuário digite nome e e-mail e clique no botão para se cadastrar. O app realiza uma validação dos campos, verificando se estão vazios.
