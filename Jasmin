@@ -1234,6 +1234,121 @@ const styles = StyleSheet.create({
 
 
 
+************+***************************************************************************+***************************************************************************+***************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Jasmin Silva De Lima
+DATA:  12/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição: O código usa fontes difrentes , mas em baixo de cada uma fonte tem como funciona seu estilo e etc. 
+Como no código pode ser usando pra título, sub-título e várias outas coisas.
+
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+
+      <Text style={styles.titulo}>Exemplo de fontes</Text>
+
+      {/* ===================== 1 ===================== */}
+      <Text style={styles.bold}>Bem-vindo Aluno</Text>
+      <Text style={styles.desc}>
+         Fonte em negrito (bold). Não muda a fonte, só deixa o texto mais forte e destacado.
+      </Text>
+
+      {/* ===================== 2 ===================== */}
+      <Text style={styles.regular}>Descubra novos lugares</Text>
+      <Text style={styles.desc}>
+         Fonte normal (regular). É o estilo padrão de leitura em aplicativos.
+      </Text>
+
+      {/* ===================== 3 ===================== */}
+      <Text style={styles.light}>Sua próxima viagem começa aqui</Text>
+      <Text style={styles.desc}>
+         Fonte leve (light). Dá um visual mais suave e delicado ao texto.
+      </Text>
+
+      {/* ===================== 4 ===================== */}
+      <Text style={styles.italic}>Experiências únicas</Text>
+      <Text style={styles.desc}>
+        Texto em itálico. Usado para dar destaque estilizado ou diferenciado.
+      </Text>
+
+      {/* ===================== 5 ===================== */}
+      <Text style={styles.big}>Atendimento 24h</Text>
+      <Text style={styles.desc}>
+         Fonte maior. Serve para chamar atenção sem mudar a fonte real.
+      </Text>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+
+  container: {
+    flex: 1,
+    backgroundColor: '#1E293B',
+    justifyContent: 'center',
+    padding: 20,
+  },
+
+  titulo: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#F59E0B',
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+
+  //  1 - negrito
+  bold: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#38BDF8',
+  },
+
+  //  2 - normal
+  regular: {
+    fontSize: 18,
+    fontWeight: 'normal',
+    color: '#A78BFA',
+  },
+
+  //  3 - leve
+  light: {
+    fontSize: 18,
+    fontWeight: '300',
+    color: '#34D399',
+  },
+
+  //  4 - itálico
+  italic: {
+    fontSize: 18,
+    fontStyle: 'italic',
+    color: '#F472B6',
+  },
+
+  //  5 - destaque
+  big: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#FBBF24',
+  },
+
+  // descrição
+  desc: {
+    fontSize: 13,
+    color: '#CBD5E1',
+    marginBottom: 15,
+    lineHeight: 18,
+  },
+});
+
+
 
 
 
