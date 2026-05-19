@@ -405,7 +405,7 @@ const styles = StyleSheet.create({
 INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
 DISCIPLINA: Dispositivos Móveis
 PROFESSOR: Ranyere Lima
-ALUNO(A): Ana Moser M. de Oliveira
+ALUNO(A): Raquel Bacelar Pena
 DATA:  19/ 05 /2026
 
 import React from 'react';
