@@ -868,3 +868,113 @@ const styles = StyleSheet.create({
 
 
 
+
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Ana Moser M. de Oliveira
+DATA:  12/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição: Nesta atividade vamos modificar o nosso primeiro codigo, adicionando dois titulos, dois subtitulos e dois botoes
+**********************************************************************/
+import React from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Alert, StatusBar } from 'react-native';
+
+
+export default function App() {
+
+
+  function handlePress() {
+    Alert.alert("Você iniciou o app! Bons estudos 📚");
+  }
+
+
+  return (
+    <View style={styles.container}>
+     
+      <StatusBar barStyle="light-content" backgroundColor="#0F172A" />
+
+
+      {/* Título */}
+      <Text style={styles.title}>Seja Bem-Vindo, Aluno! </Text>
+      <Text style={styles.title}>Vamos Estudar?  </Text>
+
+
+      {/* Subtítulo */}
+      <Text style={styles.subtitle}>
+        Pronto para começar sua jornada?
+      </Text>
+      <Text style={styles.subtitle}>
+        Vamos rever o conteudo?
+      </Text>
+
+
+      {/* Botão */}
+      <TouchableOpacity style={styles.button} onPress={handlePress}>
+        <Text style={styles.buttonText}>Iniciar</Text>
+      </TouchableOpacity>
+
+
+      <Text style={styles.title}>
+      </Text>
+
+
+      <TouchableOpacity style={styles.button} onPress={handlePress}>
+        <Text style={styles.buttonText}>Reiniciar</Text>
+      </TouchableOpacity>
+
+
+
+
+    </View>
+  );
+}
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#030063',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 20,
+  },
+
+
+  title: {
+    fontSize: 34,
+    fontWeight: 'bold',
+    color: '#F8FAFC',
+    marginBottom: 8,
+  },
+
+
+  subtitle: {
+    fontSize: 16,
+    color: '#FFFCFC',
+    marginBottom: 50,
+  },
+
+
+  button: {
+    backgroundColor: '#5C5CBF',
+    paddingVertical: 16,
+    paddingHorizontal: 70,
+    borderRadius: 12,
+    elevation: 6,
+  },
+
+
+  buttonText: {
+    color: '#FFFCFC',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+});
+
+
+
+
