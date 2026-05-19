@@ -223,3 +223,138 @@ const styles = StyleSheet.create({
 
 });
 
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Julio Cesar de Souza Albuquerque
+DATA:  19/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição: Exercicio de mobile feito com o intuito de fortalecer o aprendizado, simulando uma tela onde foi adicionado mais um botão e mais um subtexto
+*******************************************************
+*/  
+**********************************************************************/
+
+import React from 'react';
+import {
+  View,
+  Text,
+  Button,
+  Alert,
+  StyleSheet,
+  SafeAreaView,
+  StatusBar,
+} from 'react-native';
+
+export default function App() {
+  const mostrarMensagem = () => {
+    Alert.alert(
+      'Bem-vindo ',
+      'Sua nova jornada começou com sucesso!'
+    );
+  };
+
+  const mostrarInfo = () => {
+    Alert.alert(
+      'Informação ',
+      'Continue estudando React Native todos os dias!'
+    );
+  };
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="dark-content" />
+
+      <View style={styles.card}>
+        <Text style={styles.titulo}>
+          Seja bem-vindo, Julio 
+        </Text>
+
+        <Text style={styles.subtitulo}>
+          Pronto para começar uma nova jornada?
+        </Text>
+
+        <Text style={styles.subtextoExtra}>
+          Aprender programação é um passo importante para o seu futuro 
+        </Text>
+
+        <View style={styles.botao}>
+          <Button
+            title="Iniciar"
+            onPress={mostrarMensagem}
+            color="#4F46E5"
+          />
+        </View>
+
+        <View style={styles.botaoSecundario}>
+          <Button
+            title="Saiba Mais"
+            onPress={mostrarInfo}
+            color="#10B981"
+          />
+        </View>
+      </View>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#F3F4F6',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+
+  card: {
+    width: '100%',
+    backgroundColor: '#FFFFFF',
+    padding: 25,
+    borderRadius: 16,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+    elevation: 5,
+  },
+
+  titulo: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#111827',
+    marginBottom: 12,
+    textAlign: 'center',
+  },
+
+  subtitulo: {
+    fontSize: 16,
+    color: '#6B7280',
+    textAlign: 'center',
+    marginBottom: 10,
+    lineHeight: 24,
+  },
+
+  subtextoExtra: {
+    fontSize: 15,
+    color: '#4B5563',
+    textAlign: 'center',
+    marginBottom: 25,
+    lineHeight: 22,
+  },
+
+  botao: {
+    borderRadius: 10,
+    overflow: 'hidden',
+    marginBottom: 15,
+  },
+
+  botaoSecundario: {
+    borderRadius: 10,
+    overflow: 'hidden',
+  },
+});
