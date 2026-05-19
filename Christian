@@ -163,7 +163,7 @@ export default function App() {
     <View style={styles.container}>
 
       {/* Estrela */}
-      <Text style={[styles.letra, styles.estrela]}>⭐</Text>
+      <Text style={[styles.letra, styles.estrela]}></Text>
 
       {/* Linha 1 */}
       <View style={styles.row}>
