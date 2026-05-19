@@ -665,7 +665,7 @@ INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
 DISCIPLINA: Dispositivos Móveis
 PROFESSOR: Ranyere Lima
 ALUNO(A): Laura Emanuelle Menezes
-DATA:  12/ 05 /2026
+DATA:  19/ 05 /2026
 Bimestre: 2º Bimestre
 Este código implementa um componente de Seletor de Data (DataPicker) em React para a web.
 Ele permite ao usuário selecionar individualmente o dia, o mês e o ano por meio de menus suspensos (<select>) e exibe a data formatada na tela em tempo real.
