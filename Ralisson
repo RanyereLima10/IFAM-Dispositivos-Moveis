@@ -6,6 +6,209 @@ DATA:  19/ 05 /2026
 Bimestre: 2º Bimestre
 **********************************************************************/
 
+
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+
+   
+      <Text style={styles.title}>
+        Exemplos de fontFamily
+      </Text>
+
+      <Text style={[styles.text, { fontFamily: 'sans-serif' }]}>
+        Fonte sans-serif
+      </Text>
+
+      <Text style={[styles.text, { fontFamily: 'serif' }]}>
+        Fonte serif
+      </Text>
+
+      <Text style={[styles.text, { fontFamily: 'monospace' }]}>
+        Fonte monospace
+      </Text>
+
+      <Text style={[styles.text, { fontFamily: 'normal' }]}>
+        Fonte normal
+      </Text>
+
+      <Text style={styles.title}>
+        Exemplos de fontWeight
+      </Text>
+
+      <Text style={[styles.text, { fontWeight: '100' }]}>
+        Peso 100 - Muito fina
+      </Text>
+
+      <Text style={[styles.text, { fontWeight: '300' }]}>
+        Peso 300 - Fina
+      </Text>
+
+      <Text style={[styles.text, { fontWeight: '400' }]}>
+        Peso 400 - Normal
+      </Text>
+
+      <Text style={[styles.text, { fontWeight: '700' }]}>
+        Peso 700 - Negrito
+      </Text>
+
+      <Text style={[styles.text, { fontWeight: '900' }]}>
+        Peso 900 - Muito grossa
+      </Text>
+
+      <Text style={[styles.text, { fontWeight: 'bold' }]}>
+        Bold
+      </Text>
+
+      <Text style={styles.title}>
+        Exemplos de fontStyle
+      </Text>
+
+      <Text style={[styles.text, { fontStyle: 'normal' }]}>
+        Texto normal
+      </Text>
+
+      <Text style={[styles.text, { fontStyle: 'italic' }]}>
+        Texto em itálico
+      </Text>
+
+
+      <Text style={styles.title}>
+        Exemplos de textTransform
+      </Text>
+
+      <Text style={[styles.text, { textTransform: 'uppercase' }]}>
+        texto maiúsculo
+      </Text>
+
+      <Text style={[styles.text, { textTransform: 'lowercase' }]}>
+        TEXTO MINÚSCULO
+      </Text>
+
+      <Text style={[styles.text, { textTransform: 'capitalize' }]}>
+        texto com cada palavra maiúscula
+      </Text>
+
+     
+      <Text style={styles.title}>
+        Exemplos de textDecoration
+      </Text>
+
+      <Text style={[styles.text, { textDecorationLine: 'underline' }]}>
+        Texto sublinhado
+      </Text>
+
+      <Text style={[styles.text, { textDecorationLine: 'line-through' }]}>
+        Texto riscado
+      </Text>
+
+      <Text
+        style={[
+          styles.text,
+          { textDecorationLine: 'underline line-through' },
+        ]}>
+        Sublinhado e riscado
+      </Text>
+
+      <Text style={styles.title}>
+        Exemplos de letterSpacing
+      </Text>
+
+      <Text style={[styles.text, { letterSpacing: 1 }]}>
+        Espaçamento 1
+      </Text>
+
+      <Text style={[styles.text, { letterSpacing: 5 }]}>
+        Espaçamento 5
+      </Text>
+
+      <Text style={styles.title}>
+        Exemplos de sombra
+      </Text>
+
+      <Text
+        style={[
+          styles.text,
+          {
+            textShadowColor: 'gray',
+            textShadowOffset: { width: 2, height: 2 },
+            textShadowRadius: 3,
+          },
+        ]}>
+        Texto com sombra
+      </Text>
+
+      <Text style={styles.title}>
+        Exemplos de cores
+      </Text>
+
+      <Text style={[styles.text, { color: 'red' }]}>
+        Texto vermelho
+      </Text>
+
+      <Text style={[styles.text, { color: 'blue' }]}>
+        Texto azul
+      </Text>
+
+      <Text style={[styles.text, { color: 'green' }]}>
+        Texto verde
+      </Text>
+
+     
+      <Text style={styles.title}>
+        Exemplos de tamanho
+      </Text>
+
+      <Text style={[styles.text, { fontSize: 14 }]}>
+        Tamanho 14
+      </Text>
+
+      <Text style={[styles.text, { fontSize: 24 }]}>
+        Tamanho 24
+      </Text>
+
+      <Text style={[styles.text, { fontSize: 34 }]}>
+        Tamanho 34
+      </Text>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#f2f2f2',
+    paddingTop: 50,
+    alignItems: 'center',
+  },
+
+  title: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    marginTop: 20,
+    marginBottom: 10,
+    color: '#222',
+  },
+
+  text: {
+    fontSize: 22,
+    marginVertical: 5,
+    color: '#000',
+  },
+});
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Ralisso iago
+DATA:  19/ 05 /2026
+Bimestre: 2º Bimestre
+**********************************************************************/
+
 import React from 'react';
 import {
   View,
