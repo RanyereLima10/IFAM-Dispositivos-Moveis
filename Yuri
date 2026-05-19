@@ -6,6 +6,106 @@ ALUNO(A): Yuri Lima Macedo
 DATA:  19/ 05 /2026
 Bimestre: 2º Bimestre
 Nesta atividade foi desenvolvido um aplicativo simples utilizando React Native, com o objetivo de compreender a estrutura básica de um app mobile.
+O aplicativo apresenta uma tela inicial com umas mensagens simples de fontes diferentes e bem dinamicas para estudo e prática.
+************+***************************************************************
+
+import React from 'react';
+import { Text, View } from 'react-native';
+
+export default function App() {
+
+  return (
+
+    // Caixa principal
+    <View style={{ marginTop: 100, alignItems: 'center' }}>
+
+      {/* Mensagem 1 */}
+      <Text
+        style={{
+          fontSize: 30,
+          color: 'blue',
+          fontWeight: 'bold',
+          fontFamily: 'monospace',
+          marginBottom: 20,
+        }}
+      >
+        Mensagem em Monospace
+      </Text>
+
+      {/* Explicação */}
+      <Text style={{ marginBottom: 30 }}>
+        Estilo: monospace | FontWeight: bold
+      </Text>
+
+
+      {/* Mensagem 2 */}
+      <Text
+        style={{
+          fontSize: 28,
+          color: 'red',
+          fontWeight: '100',
+          fontFamily: 'sans-serif',
+          marginBottom: 20,
+        }}
+      >
+        Mensagem fina e moderna
+      </Text>
+
+      {/* Explicação */}
+      <Text style={{ marginBottom: 30 }}>
+        Estilo: sans-serif | FontWeight: 100
+      </Text>
+
+
+      {/* Mensagem 3 */}
+      <Text
+        style={{
+          fontSize: 30,
+          color: 'green',
+          fontWeight: '700',
+          fontFamily: 'serif',
+          fontStyle: 'italic',
+          marginBottom: 20,
+        }}
+      >
+        Mensagem elegante
+      </Text>
+
+      {/* Explicação */}
+      <Text style={{ marginBottom: 30 }}>
+        Estilo: serif | FontWeight: 700 | Italic
+      </Text>
+
+
+      {/* Mensagem 4 */}
+      <Text
+        style={{
+          fontSize: 32,
+          color: 'purple',
+          fontWeight: '900',
+          fontFamily: 'sans-serif',
+        }}
+      >
+        ALERTA IMPORTANTE
+      </Text>
+
+      {/* Explicação */}
+      <Text>
+        Estilo: sans-serif | FontWeight: 900
+      </Text>
+
+    </View>
+
+  );
+}
+************+***************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Yuri Lima Macedo
+DATA:  19/ 05 /2026
+Bimestre: 2º Bimestre
+Nesta atividade foi desenvolvido um aplicativo simples utilizando React Native, com o objetivo de compreender a estrutura básica de um app mobile.
 O aplicativo apresenta uma tela inicial com uma mensagem de boas-vindas e um botão interativo que, ao ser pressionado.
 Também foram aplicados conceitos de estilização com StyleSheet, permitindo a personalização de cores e textos.
 A atividade contribuiu para o aprendizado dos principais componentes, como View, Text, Button, além de reforçar a lógica de programação.
