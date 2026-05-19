@@ -947,7 +947,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 34,
     fontWeight: 'bold',
-    fontFamily: '𝐒𝐞𝐫𝐢𝐟 𝐁𝐨𝐥𝐝',
     color: '#F8FAFC',
     marginBottom: 8,
   },
@@ -955,7 +954,6 @@ const styles = StyleSheet.create({
 
   subtitle: {
     fontSize: 16,
-    fontFamily: '𝐒𝐞𝐫𝐢𝐟 𝐁𝐨𝐥𝐝',
     color: '#FFFCFC',
     marginBottom: 50,
   },
@@ -973,7 +971,6 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#FFFCFC',
     fontSize: 18,
-    fontFamily: '𝐒𝐞𝐫𝐢𝐟 𝐁𝐨𝐥𝐝',
     fontWeight: 'bold',
   },
 });
