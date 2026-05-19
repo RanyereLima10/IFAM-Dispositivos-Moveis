@@ -465,6 +465,126 @@ const styles = StyleSheet.create({
   },
 });
 
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Luana Vitoria cordovil lima 
+DATA:  19/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição: Esse código cria uma tela de boas-vindas no React Native com título, texto,
+emojis e dois botões interativos. Quando o usuário clica nos botões,
+aparecem alertas com mensagens motivadoras.
+Também utiliza estilos para deixar a tela organizada e colorida.
+**********************************************************************/
+
+import React from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
+
+export default function App() {
+
+  const mostrarAlerta1 = () => {
+    Alert.alert(
+      '🚀 Bora Aluno!',
+      'Hora de praticar e aprender coisas incríveis!'
+    );
+  };
+
+  const mostrarAlerta2 = () => {
+    Alert.alert(
+      '🎉 Sucesso!',
+      'Você está indo muito bem nos estudos!'
+    );
+  };
+
+  return (
+    <View style={styles.container}>
+
+      <Text style={styles.emoji}>📚✨</Text>
+
+      <Text style={styles.titulo}>
+        Bem-Vindo, Aluno!
+      </Text>
+
+      <Text style={styles.texto}>
+        Clique em um botão para começar sua jornada!
+      </Text>
+
+      <TouchableOpacity
+        style={styles.botaoVerde}
+        onPress={mostrarAlerta1}
+      >
+        <Text style={styles.textoBotao}>Começar</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.botaoAzul}
+        onPress={mostrarAlerta2}
+      >
+        <Text style={styles.textoBotao}>Explorar</Text>
+      </TouchableOpacity>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#111827',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+
+  emoji: {
+    fontSize: 60,
+    marginBottom: 10,
+  },
+
+  titulo: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+    marginBottom: 15,
+    textAlign: 'center',
+  },
+
+  texto: {
+    fontSize: 18,
+    color: '#D1D5DB',
+    textAlign: 'center',
+    marginBottom: 25,
+  },
+
+  botaoVerde: {
+    backgroundColor: 'green',
+    width: '80%',
+    padding: 15,
+    borderRadius: 12,
+    alignItems: 'center',
+    marginBottom: 15,
+  },
+
+  botaoAzul: {
+    backgroundColor: '#2563EB',
+    width: '80%',
+    padding: 15,
+    borderRadius: 12,
+    alignItems: 'center',
+  },
+
+  textoBotao: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+});
 
 
 
