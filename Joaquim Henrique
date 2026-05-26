@@ -1729,6 +1729,9 @@ import {
   ScrollView,
 } from 'react-native';
 
+// IMPORTAÇÃO DO PICKER
+import { Picker } from '@react-native-picker/picker';
+
 export default function App() {
 
   // ============================================================================
@@ -1755,28 +1758,34 @@ export default function App() {
 
     // Verifica se o nome possui pelo menos 3 caracteres
     if (!nome || nome.trim().length < 3) {
+
       Alert.alert(
         'Erro',
         'O nome deve ter no mínimo 3 caracteres.'
       );
+
       return false;
     }
 
     // Verifica se o preço é válido
     if (!preco || isNaN(preco) || parseFloat(preco) <= 0) {
+
       Alert.alert(
         'Erro',
         'Digite um preço válido maior que 0.'
       );
+
       return false;
     }
 
     // Verifica categoria
     if (!categoria) {
+
       Alert.alert(
         'Erro',
         'Selecione uma categoria.'
       );
+
       return false;
     }
 
@@ -1902,11 +1911,13 @@ export default function App() {
   // ============================================================================
 
   const categorias = [
-    'Eletrônicos',
-    'Roupas',
-    'Alimentos',
-    'Outros',
-  ];
+  'Eletrônicos',
+  'Roupas',
+  'Alimentos',
+  'Móveis',
+  'Beleza',
+  'Outros',
+];
 
   // ============================================================================
   // RENDERIZAÇÃO
@@ -1919,10 +1930,7 @@ export default function App() {
       showsVerticalScrollIndicator={false}
     >
 
-      {/* ========================================================================= */}
       {/* HEADER */}
-      {/* ========================================================================= */}
-
       <View style={styles.header}>
 
         <Text style={styles.titulo}>
@@ -1934,10 +1942,7 @@ export default function App() {
         </Text>
       </View>
 
-      {/* ========================================================================= */}
       {/* FORMULÁRIO */}
-      {/* ========================================================================= */}
-
       <View style={styles.formulario}>
 
         {/* Nome */}
@@ -1967,36 +1972,31 @@ export default function App() {
           keyboardType="decimal-pad"
         />
 
-        {/* Categoria */}
+        {/* CATEGORIA COM PICKER */}
         <Text style={styles.label}>
           Categoria *
         </Text>
 
-        <View style={styles.categoriaContainer}>
+        <View style={styles.pickerContainer}>
 
-          {categorias.map((item) => (
+          <Picker
+            selectedValue={categoria}
+            onValueChange={(itemValue) =>
+              setCategoria(itemValue)
+            }
+            style={styles.picker}
+          >
 
-            <TouchableOpacity
-              key={item}
-              style={[
-                styles.categoriaBotao,
-                categoria === item &&
-                styles.categoriaSelecionada,
-              ]}
-              onPress={() => setCategoria(item)}
-            >
+            {categorias.map((item) => (
 
-              <Text
-                style={[
-                  styles.categoriaTexto,
-                  categoria === item &&
-                  styles.categoriaTextoSelecionado,
-                ]}
-              >
-                {item}
-              </Text>
-            </TouchableOpacity>
-          ))}
+              <Picker.Item
+                key={item}
+                label={item}
+                value={item}
+              />
+            ))}
+
+          </Picker>
         </View>
 
         {/* Descrição */}
@@ -2014,22 +2014,20 @@ export default function App() {
           numberOfLines={4}
         />
 
-        {/* ========================================================================= */}
-        {/* BOTÕES */}
-        {/* ========================================================================= */}
-
-        {/* Botão cadastrar */}
+        {/* BOTÃO CADASTRAR */}
         <TouchableOpacity
           style={styles.botaoCadastrar}
           onPress={cadastrarProduto}
         >
 
           <Text style={styles.textoBotao}>
-            {editandoId ? 'ATUALIZAR PRODUTO' : 'CADASTRAR PRODUTO'}
+            {editandoId
+              ? 'ATUALIZAR PRODUTO'
+              : 'CADASTRAR PRODUTO'}
           </Text>
         </TouchableOpacity>
 
-        {/* Botão limpar */}
+        {/* BOTÃO LIMPAR */}
         <TouchableOpacity
           style={styles.botaoLimpar}
           onPress={limparCampos}
@@ -2041,10 +2039,7 @@ export default function App() {
         </TouchableOpacity>
       </View>
 
-      {/* ========================================================================= */}
       {/* LISTA DE PRODUTOS */}
-      {/* ========================================================================= */}
-
       <View style={styles.listaContainer}>
 
         <Text style={styles.listaTitulo}>
@@ -2098,7 +2093,10 @@ export default function App() {
 
                   {/* Editar */}
                   <TouchableOpacity
-                    style={[styles.botaoAcao, styles.botaoEditar]}
+                    style={[
+                      styles.botaoAcao,
+                      styles.botaoEditar
+                    ]}
                     onPress={() => editarProduto(item)}
                   >
 
@@ -2109,7 +2107,10 @@ export default function App() {
 
                   {/* Excluir */}
                   <TouchableOpacity
-                    style={[styles.botaoAcao, styles.botaoExcluir]}
+                    style={[
+                      styles.botaoAcao,
+                      styles.botaoExcluir
+                    ]}
                     onPress={() => deletarProduto(item.id)}
                   >
 
@@ -2193,46 +2194,26 @@ const styles = StyleSheet.create({
     color: '#333',
   },
 
+  // PICKER CONTAINER
+  pickerContainer: {
+    borderWidth: 1,
+    borderColor: '#D1D5DB',
+    borderRadius: 10,
+    backgroundColor: '#F9FAFB',
+    marginBottom: 12,
+    overflow: 'hidden',
+  },
+
+  // PICKER
+  picker: {
+    height: 55,
+    color: '#333',
+  },
+
   // TextArea
   textArea: {
     height: 100,
     textAlignVertical: 'top',
-  },
-
-  // Container categorias
-  categoriaContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    marginBottom: 10,
-  },
-
-  // Botão categoria
-  categoriaBotao: {
-    borderWidth: 1,
-    borderColor: '#D1D5DB',
-    paddingVertical: 10,
-    paddingHorizontal: 14,
-    borderRadius: 8,
-    marginRight: 8,
-    marginBottom: 8,
-    backgroundColor: '#FFF',
-  },
-
-  // Categoria selecionada
-  categoriaSelecionada: {
-    backgroundColor: '#1E40AF',
-    borderColor: '#1E40AF',
-  },
-
-  // Texto categoria
-  categoriaTexto: {
-    color: '#555',
-    fontWeight: '600',
-  },
-
-  // Texto categoria selecionada
-  categoriaTextoSelecionado: {
-    color: '#FFF',
   },
 
   // Botão cadastrar
