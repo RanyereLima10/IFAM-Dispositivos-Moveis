@@ -1,3 +1,15 @@
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Felipe Vieira Cunha
+DATA:  19/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição: Estilos de fontes.
+
+**********************************************************************/
+
 import React from 'react';
 import { Text, View } from 'react-native';
 
@@ -50,10 +62,17 @@ export default function App() {
 
   );
 }
+**********************************************************************/
 
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Felipe Vieira Cunha
+DATA:  26/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição: descrever o que cada de linha de código faz.
 
-
-
+**********************************************************************/
 import {
   Image,          // Componente para exibir imagens
   ScrollView,     // Container com rolagem de tela
