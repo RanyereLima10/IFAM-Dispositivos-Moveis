@@ -943,151 +943,280 @@ Bimestre: 2º Bimestre
 Assunto:Layout em Aplicações Móveis
 Atividade Prática Exercício 3
 ************+***************************************************************************+***************************************************************************+***************************************************************
+// Importa o React e o hook useState
 import React, { useState } from 'react';
+
+// Importa componentes do React Native
 import { View, Text, StyleSheet, Dimensions, Image, TouchableOpacity, ScrollView, Alert } from 'react-native';
+
+// Importa bibliotecas de ícones
 import { Ionicons, FontAwesome5, MaterialIcons } from '@expo/vector-icons';
 
+// Obtém largura e altura da tela do dispositivo
 const { width, height } = Dimensions.get('window');
 
+// Componente principal do aplicativo
 export default function App() {
+
   // Função que exibe a mensagem de acordo com o item clicado
   const mostrarMensagem = (titulo, mensagem) => {
+
+    // Exibe um alerta com título e mensagem
     Alert.alert(titulo, mensagem);
   };
 
+  // Estrutura visual do aplicativo
   return (
+
+    // ScrollView permite rolagem vertical da tela
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
 
+      {/* Container do cabeçalho */}
       <View style={styles.headerContainer}>
+
+        {/* Imagem principal do topo */}
         <Image
           source={{ uri: 'https://thumbor.novaescola.org.br/FrCPJ4Sf5CcIezUbr8TFANGCh5c=/assets.novaescola.org.br/qgjfFXbuKKanAucAr6QrDpjN7Q8wbQ4awzc66PuKT3H9hfXW5CNZ2q4mvYG2/computador-pecas-informatica-circuito.jpg' }}
           style={styles.headerImage}
           resizeMode="cover"
         />
+
+        {/* Área de texto sobre a imagem */}
         <View style={styles.headerTextContainer}>
+
+          {/* Título principal */}
           <Text style={styles.title}>Aprendendo Juntos</Text>
+
+          {/* Subtítulo */}
           <Text style={styles.subtitle}>Cursos e conteúdos para impulsionar seus estudos!</Text>
         </View>
       </View>
 
-     
+      {/* Container dos cards */}
       <View style={styles.cardsContainer}>
-       
+
+        {/* Primeira linha de cards */}
         <View style={styles.row}>
+
+          {/* Card HTML */}
           <TouchableOpacity 
             style={[styles.card, { backgroundColor: '#6C5CE7' }]}
+
+            // Ao clicar, mostra mensagem sobre HTML
             onPress={() => mostrarMensagem('HTML', 'É a linguagem de marcação usada para estruturar todo o conteúdo de páginas da web. É a base de qualquer site!')}
           >
+
+            {/* Ícone */}
             <Ionicons name="code-slash" size={32} color="#FFF" />
+
+            {/* Nome do card */}
             <Text style={styles.cardText}>HTML</Text>
+
+            {/* Descrição */}
             <Text style={styles.cardDesc}>Estrutura de páginas web</Text>
           </TouchableOpacity>
 
+          {/* Card CSS */}
           <TouchableOpacity 
             style={[styles.card, { backgroundColor: '#FD79A8' }]}
+
+            // Ao clicar, mostra mensagem sobre CSS
             onPress={() => mostrarMensagem('CSS', 'Responsável por deixar tudo bonito, organizado e com a cara do projeto: cores, fontes, tamanhos e layouts são definidos aqui.')}
           >
+
+            {/* Ícone */}
             <FontAwesome5 name="paint-brush" size={32} color="#FFF" />
+
+            {/* Nome */}
             <Text style={styles.cardText}>CSS</Text>
+
+            {/* Descrição */}
             <Text style={styles.cardDesc}>Estilização e layout</Text>
           </TouchableOpacity>
         </View>
 
-    
+        {/* Segunda linha */}
         <View style={styles.row}>
+
+          {/* Card JavaScript */}
           <TouchableOpacity 
             style={[styles.card, { backgroundColor: '#00B894' }]}
+
+            // Mensagem sobre JavaScript
             onPress={() => mostrarMensagem('JavaScript', 'Torna as páginas dinâmicas e interativas! Com ele você cria funcionalidades, regras de negócio e muito mais.')}
           >
+
+            {/* Texto JS simulando logo */}
             <Text style={styles.jsIcon}>JS</Text>
+
+            {/* Nome */}
             <Text style={styles.cardText}>JavaScript</Text>
+
+            {/* Descrição */}
             <Text style={styles.cardDesc}>Lógica e interatividade</Text>
           </TouchableOpacity>
 
+          {/* Card React Native */}
           <TouchableOpacity 
             style={[styles.card, { backgroundColor: '#0984E3' }]}
+
+            // Mensagem sobre React Native
             onPress={() => mostrarMensagem('React Native', 'Framework que usa JavaScript e React para criar aplicativos móveis nativos para Android e iOS com um só código.')}
           >
+
+            {/* Ícone React */}
             <Ionicons name="logo-react" size={32} color="#FFF" />
+
+            {/* Nome */}
             <Text style={styles.cardText}>React Native</Text>
+
+            {/* Descrição */}
             <Text style={styles.cardDesc}>Desenvolvimento mobile</Text>
           </TouchableOpacity>
         </View>
 
-    
+        {/* Terceira linha */}
         <View style={styles.row}>
+
+          {/* Card Mobile UI */}
           <TouchableOpacity 
             style={[styles.card, { backgroundColor: '#E17055' }]}
+
+            // Mensagem sobre Mobile UI
             onPress={() => mostrarMensagem('Mobile UI', 'Conjunto de técnicas para criar telas bonitas, fáceis de usar e que se adaptam a qualquer tamanho de celular.')}
           >
+
+            {/* Ícone */}
             <MaterialIcons name="phone-android" size={32} color="#FFF" />
+
+            {/* Nome */}
             <Text style={styles.cardText}>Mobile UI</Text>
+
+            {/* Descrição */}
             <Text style={styles.cardDesc}>Interfaces bonitas e responsivas</Text>
           </TouchableOpacity>
 
+          {/* Card API */}
           <TouchableOpacity 
             style={[styles.card, { backgroundColor: '#00CEC9' }]}
+
+            // Mensagem sobre API
             onPress={() => mostrarMensagem('API', 'É um ponto de contato que permite seu aplicativo conversar com outros sistemas, buscar dados ou enviar informações.')}
           >
+
+            {/* Ícone */}
             <Ionicons name="cloud-outline" size={32} color="#FFF" />
+
+            {/* Nome */}
             <Text style={styles.cardText}>API</Text>
+
+            {/* Descrição */}
             <Text style={styles.cardDesc}>Integração com serviços</Text>
           </TouchableOpacity>
         </View>
 
+        {/* Quarta linha */}
         <View style={styles.row}>
+
+          {/* Card Banco de Dados */}
           <TouchableOpacity 
             style={[styles.card, { backgroundColor: '#FDCB6E' }]}
+
+            // Mensagem sobre banco de dados
             onPress={() => mostrarMensagem('Banco de Dados', 'É onde todas as informações do sistema são guardadas, organizadas e consultadas quando necessário.')}
           >
+
+            {/* Ícone */}
             <FontAwesome5 name="database" size={32} color="#FFF" />
+
+            {/* Nome */}
             <Text style={styles.cardText}>Banco de Dados</Text>
+
+            {/* Descrição */}
             <Text style={styles.cardDesc}>Armazenamento e consultas</Text>
           </TouchableOpacity>
 
+          {/* Card Deploy */}
           <TouchableOpacity 
             style={[styles.card, { backgroundColor: '#A29BFE' }]}
+
+            // Mensagem sobre deploy
             onPress={() => mostrarMensagem('Deploy', 'É o processo de publicar seu aplicativo ou site para que outras pessoas possam acessá-lo na internet.')}
           >
+
+            {/* Ícone */}
             <Ionicons name="rocket-outline" size={32} color="#FFF" />
+
+            {/* Nome */}
             <Text style={styles.cardText}>Deploy</Text>
+
+            {/* Descrição */}
             <Text style={styles.cardDesc}>Publicação do seu aplicativo</Text>
           </TouchableOpacity>
         </View>
 
+        {/* Quinta linha */}
         <View style={styles.row}>
+
+          {/* Card Back-end */}
           <TouchableOpacity 
             style={[styles.card, { backgroundColor: '#D63031' }]}
+
+            // Mensagem sobre back-end
             onPress={() => mostrarMensagem('Back-end', 'É a parte que roda no servidor, processa regras, gerencia dados e faz o sistema funcionar por trás das telas.')}
           >
+
+            {/* Ícone */}
             <FontAwesome5 name="server" size={32} color="#FFF" />
+
+            {/* Nome */}
             <Text style={styles.cardText}>Back-end</Text>
+
+            {/* Descrição */}
             <Text style={styles.cardDesc}>Lógica do servidor</Text>
           </TouchableOpacity>
 
+          {/* Card Segurança */}
           <TouchableOpacity 
             style={[styles.card, { backgroundColor: '#2D3436' }]}
+
+            // Mensagem sobre segurança
             onPress={() => mostrarMensagem('Segurança', 'Conjunto de práticas para proteger dados, usuários e todo o sistema contra acessos indevidos ou ataques.')}
           >
+
+            {/* Ícone */}
             <Ionicons name="shield-checkmark-outline" size={32} color="#FFF" />
+
+            {/* Nome */}
             <Text style={styles.cardText}>Segurança</Text>
+
+            {/* Descrição */}
             <Text style={styles.cardDesc}>Proteção de dados</Text>
           </TouchableOpacity>
         </View>
       </View>
 
-      
+      {/* Botão final */}
       <TouchableOpacity 
+
+        // Estilo do botão
         style={styles.button}
+
+        // Mensagem do botão
         onPress={() => mostrarMensagem('Vamos começar!', 'Que legal! Aqui você vai aprender tudo o que precisa para criar seus próprios projetos. Bora estudar? 🚀')}
       >
+
+        {/* Texto do botão */}
         <Text style={styles.buttonText}>🚀 COMEÇAR AGORA</Text>
       </TouchableOpacity>
     </ScrollView>
   );
 }
 
+// Criação dos estilos
 const styles = StyleSheet.create({
+
+  // Estilo principal da tela
   container: {
     flex: 1,
     backgroundColor: '#F5F6FA',
@@ -1095,18 +1224,23 @@ const styles = StyleSheet.create({
     paddingTop: height * 0.02,
   },
 
+  // Cabeçalho
   headerContainer: {
     width: '100%',
-    height: height * 0.25, 
+    height: height * 0.25,
     borderRadius: 16,
     overflow: 'hidden',
     marginBottom: 20,
     position: 'relative',
   },
+
+  // Imagem do cabeçalho
   headerImage: {
     width: '100%',
     height: '100%',
   },
+
+  // Área dos textos do cabeçalho
   headerTextContainer: {
     position: 'absolute',
     bottom: 0,
@@ -1115,44 +1249,59 @@ const styles = StyleSheet.create({
     padding: 15,
     backgroundColor: 'rgba(0,0,0,0.4)',
   },
+
+  // Título
   title: {
-    fontSize: width < 360 ? 18 : 22, 
+    fontSize: width < 360 ? 18 : 22,
     fontWeight: 'bold',
     color: '#FFF',
   },
+
+  // Subtítulo
   subtitle: {
     fontSize: width < 360 ? 12 : 14,
     color: '#EEE',
     marginTop: 4,
   },
 
+  // Container dos cards
   cardsContainer: {
     width: '100%',
   },
+
+  // Linha dos cards
   row: {
-    flexDirection: 'row', 
-    justifyContent: 'space-between', 
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     marginBottom: 12,
   },
+
+  // Estilo do card
   card: {
-    width: width * 0.46, 
-    aspectRatio: 1.3, 
+    width: width * 0.46,
+    aspectRatio: 1.3,
     borderRadius: 12,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 10,
   },
+
+  // Texto JS
   jsIcon: {
     fontSize: 32,
     fontWeight: 'bold',
     color: '#FFF',
   },
+
+  // Texto principal dos cards
   cardText: {
     color: '#FFF',
     fontWeight: 'bold',
     fontSize: width < 360 ? 14 : 16,
     marginTop: 8,
   },
+
+  // Descrição dos cards
   cardDesc: {
     color: '#FFF',
     fontSize: width < 360 ? 10 : 12,
@@ -1161,6 +1310,7 @@ const styles = StyleSheet.create({
     opacity: 0.9,
   },
 
+  // Botão principal
   button: {
     backgroundColor: '#4834D4',
     paddingVertical: 14,
@@ -1169,13 +1319,14 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 30,
   },
+
+  // Texto do botão
   buttonText: {
     color: '#FFF',
     fontWeight: 'bold',
     fontSize: 16,
   },
 });
-
 ************+***************************************************************************+***************************************************************************+***************************************************************
 INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
 DISCIPLINA: Dispositivos Móveis
