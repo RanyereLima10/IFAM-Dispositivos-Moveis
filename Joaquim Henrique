@@ -654,6 +654,7 @@ PROFESSOR: Ranyere Lima
 ALUNO(A): Joaquim Henrique Andrade de Almeida 
 DATA:  12/ 05 /2026
 Bimestre: 2º Bimestre
+Assunto:Layout em Aplicações Móveis
 Atividade Prática Exercício 1
 ************+***************************************************************************+***************************************************************************+***************************************************************
 import React from 'react';
@@ -740,7 +741,8 @@ PROFESSOR: Ranyere Lima
 ALUNO(A): Joaquim Henrique Andrade de Almeida 
 DATA:  12/ 05 /2026
 Bimestre: 2º Bimestre
-Atividade Prática Exercício 1
+Assunto:Layout em Aplicações Móveis
+Atividade Prática Exercício 2
 ************+***************************************************************************+***************************************************************************+***************************************************************
 
 import React from 'react';
@@ -865,7 +867,8 @@ PROFESSOR: Ranyere Lima
 ALUNO(A): Joaquim Henrique Andrade de Almeida 
 DATA:  12/ 05 /2026
 Bimestre: 2º Bimestre
-Atividade Prática Exercício 2
+Assunto:Layout em Aplicações Móveis
+Atividade Prática Exercício 2 (sem ser do slide)
 ************+***************************************************************************+***************************************************************************+***************************************************************
 import React from 'react';
 import { Text, View, StyleSheet, Image } from 'react-native';
@@ -937,6 +940,7 @@ PROFESSOR: Ranyere Lima
 ALUNO(A): Joaquim Henrique Andrade de Almeida 
 DATA:  12/ 05 /2026
 Bimestre: 2º Bimestre
+Assunto:Layout em Aplicações Móveis
 Atividade Prática Exercício 3
 ************+***************************************************************************+***************************************************************************+***************************************************************
 import React, { useState } from 'react';
