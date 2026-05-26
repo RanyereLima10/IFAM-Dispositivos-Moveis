@@ -488,3 +488,140 @@ const styles = StyleSheet.create({
   },
 
 });
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Amanda Medeiros Lins
+DATA:  26/ 05 /2026
+Bimestre: 2º Bimestre
+Assunto: Criar um formulario de login com validação de dados
+**********************************************************************/
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  Alert
+} from 'react-native';
+
+export default function App() {
+
+  // Estados para guardar email e senha
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+
+  // Função de validação
+  function validarLogin() {
+
+    // Verifica se o email possui "@"
+    if (email.indexOf('@') === -1) {
+      Alert.alert('Erro', 'Digite um email válido!');
+      return;
+    }
+
+    // Verifica se a senha possui no mínimo 6 caracteres
+    if (senha.length < 6) {
+      Alert.alert('Erro', 'A senha deve ter no mínimo 6 caracteres!');
+      return;
+    }
+
+    // Se tudo estiver correto
+    Alert.alert('Sucesso', 'Login realizado com sucesso!');
+  }
+
+  return (
+    <View style={styles.container}>
+
+      <View style={styles.card}>
+
+        <Text style={styles.titulo}>
+          Formulário de Login
+        </Text>
+
+        {/* Campo de email */}
+        <TextInput
+          style={styles.input}
+          placeholder="Digite seu email"
+          value={email}
+          onChangeText={setEmail}
+        />
+
+        {/* Campo de senha */}
+        <TextInput
+          style={styles.input}
+          placeholder="Digite sua senha"
+          secureTextEntry={true}
+          value={senha}
+          onChangeText={setSenha}
+        />
+
+        {/* Botão */}
+        <TouchableOpacity
+          style={styles.botao}
+          onPress={validarLogin}
+        >
+          <Text style={styles.textoBotao}>
+            ENTRAR
+          </Text>
+        </TouchableOpacity>
+
+      </View>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+
+  container: {
+    flex: 1,
+    backgroundColor: '#f2f2f2',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+
+  card: {
+    width: '85%',
+    backgroundColor: '#fff',
+    padding: 25,
+    borderRadius: 10,
+    elevation: 5
+  },
+
+  titulo: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    marginBottom: 25,
+    textAlign: 'center'
+  },
+
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 15,
+    fontSize: 16
+  },
+
+  botao: {
+    backgroundColor: '#4A90E2',
+    padding: 15,
+    borderRadius: 8,
+    alignItems: 'center'
+  },
+
+  textoBotao: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold'
+  }
+
+});
+
+
