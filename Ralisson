@@ -1,3 +1,528 @@
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Alert,
+  FlatList,
+  StyleSheet,
+  ScrollView,
+} from 'react-native';
+
+export default function App() {
+
+  // Estados do formulário
+  const [nome, setNome] = useState('');
+  const [preco, setPreco] = useState('');
+  const [categoria, setCategoria] = useState('Eletrônicos');
+  const [descricao, setDescricao] = useState('');
+
+  // Lista de produtos
+  const [produtos, setProdutos] = useState([]);
+
+  // Função cadastrar produto
+  const cadastrarProduto = () => {
+
+    // Validação
+    if (!nome || !preco || !descricao) {
+      Alert.alert('Erro', 'Preencha todos os campos!');
+      return;
+    }
+
+    // Novo produto
+    const novoProduto = {
+      id: Date.now().toString(),
+      nome,
+      preco,
+      categoria,
+      descricao,
+    };
+
+    // Adiciona produto
+    setProdutos([...produtos, novoProduto]);
+
+    // Mensagem
+    Alert.alert('Sucesso', 'Produto cadastrado!');
+
+    // Limpa campos
+    limparCampos();
+  };
+
+  // Deletar produto
+  const deletarProduto = (id) => {
+    const novaLista = produtos.filter(
+      (item) => item.id !== id
+    );
+
+    setProdutos(novaLista);
+  };
+
+  // Limpar formulário
+  const limparCampos = () => {
+    setNome('');
+    setPreco('');
+    setCategoria('Eletrônicos');
+    setDescricao('');
+  };
+
+  return (
+    <View style={styles.container}>
+
+      {/* HEADER */}
+      <View style={styles.header}>
+
+        {/* Logo */}
+        <Text style={styles.logoTexto}>
+          Mega Frios
+        </Text>
+
+       {/* Título */}
+<Text style={styles.headerTexto}>
+
+  Tudo o que você precisa, com qualidade e o melhor preço.
+</Text>
+
+      </View>
+
+      <ScrollView>
+
+        {/* FORMULÁRIO */}
+        <View style={styles.formularioContainer}>
+
+          {/* Nome */}
+          <Text style={styles.label}>
+            Nome do Produto *
+          </Text>
+
+          <TextInput
+            style={styles.input}
+            placeholder="Digite o nome do produto"
+            value={nome}
+            onChangeText={setNome}
+          />
+
+          {/* Preço */}
+          <Text style={styles.label}>
+            Preço *
+          </Text>
+
+          <TextInput
+            style={styles.input}
+            placeholder="Digite o preço"
+            keyboardType="numeric"
+            value={preco}
+            onChangeText={setPreco}
+          />
+
+          {/* Categoria */}
+          <Text style={styles.label}>
+            Categoria *
+          </Text>
+
+          <View style={styles.categoriaContainer}>
+
+            {/* Eletrônicos */}
+            <TouchableOpacity
+              style={[
+                styles.categoriaBotao,
+                categoria === 'Eletrônicos' &&
+                  styles.categoriaSelecionada,
+              ]}
+              onPress={() =>
+                setCategoria('Eletrônicos')
+              }
+            >
+              <Text
+                style={[
+                  styles.categoriaBotaoTexto,
+                  categoria === 'Eletrônicos' &&
+                    styles.categoriaSelecionadaTexto,
+                ]}
+              >
+                Eletrônicos
+              </Text>
+            </TouchableOpacity>
+
+            {/* Roupas */}
+            <TouchableOpacity
+              style={[
+                styles.categoriaBotao,
+                categoria === 'Roupas' &&
+                  styles.categoriaSelecionada,
+              ]}
+              onPress={() =>
+                setCategoria('Roupas')
+              }
+            >
+              <Text
+                style={[
+                  styles.categoriaBotaoTexto,
+                  categoria === 'Roupas' &&
+                    styles.categoriaSelecionadaTexto,
+                ]}
+              >
+                Roupas
+              </Text>
+            </TouchableOpacity>
+
+            {/* Alimentos */}
+            <TouchableOpacity
+              style={[
+                styles.categoriaBotao,
+                categoria === 'Alimentos' &&
+                  styles.categoriaSelecionada,
+              ]}
+              onPress={() =>
+                setCategoria('Alimentos')
+              }
+            >
+              <Text
+                style={[
+                  styles.categoriaBotaoTexto,
+                  categoria === 'Alimentos' &&
+                    styles.categoriaSelecionadaTexto,
+                ]}
+              >
+                Alimentos
+              </Text>
+            </TouchableOpacity>
+
+          </View>
+
+          {/* Descrição */}
+          <Text style={styles.label}>
+            Descrição
+          </Text>
+
+          <TextInput
+            style={[
+              styles.input,
+              styles.descricaoInput,
+            ]}
+            placeholder="Digite a descrição"
+            multiline
+            value={descricao}
+            onChangeText={setDescricao}
+          />
+
+          {/* BOTÕES */}
+          <View style={styles.botaoContainer}>
+
+            {/* CADASTRAR */}
+            <TouchableOpacity
+              style={[
+                styles.botao,
+                styles.botaoCadastrar,
+              ]}
+              onPress={cadastrarProduto}
+            >
+              <Text style={styles.textoBotao}>
+                CADASTRAR
+              </Text>
+            </TouchableOpacity>
+
+            {/* LIMPAR */}
+            <TouchableOpacity
+              style={[
+                styles.botao,
+                styles.botaoLimpar,
+              ]}
+              onPress={limparCampos}
+            >
+              <Text style={styles.textoBotao}>
+                LIMPAR
+              </Text>
+            </TouchableOpacity>
+
+            {/* VOLTAR */}
+            <TouchableOpacity
+              style={[
+                styles.botao,
+                styles.botaoVoltar,
+              ]}
+            >
+              <Text style={styles.textoBotao}>
+                VOLTAR
+              </Text>
+            </TouchableOpacity>
+
+          </View>
+        </View>
+
+        {/* LISTA */}
+        <View style={styles.listaContainer}>
+
+          <Text style={styles.listaTitulo}>
+            Produtos Cadastrados
+          </Text>
+
+          {produtos.length === 0 ? (
+
+            <View style={styles.emptyState}>
+              <Text style={styles.emptyStateText}>
+                Nenhum produto cadastrado
+              </Text>
+            </View>
+
+          ) : (
+
+            <FlatList
+              data={produtos}
+              keyExtractor={(item) => item.id}
+              scrollEnabled={false}
+              renderItem={({ item }) => (
+
+                <View style={styles.produtoCard}>
+
+                  <Text style={styles.produtoNome}>
+                    {item.nome}
+                  </Text>
+
+                  <Text style={styles.produtoPreco}>
+                    R$ {item.preco}
+                  </Text>
+
+                  <Text style={styles.produtoCategoria}>
+                    {item.categoria}
+                  </Text>
+
+                  <Text style={styles.produtoDescricao}>
+                    {item.descricao}
+                  </Text>
+
+                  {/* BOTÃO DELETAR */}
+                  <TouchableOpacity
+                    style={[
+                      styles.botao,
+                      styles.botaoDeletar,
+                    ]}
+                    onPress={() =>
+                      deletarProduto(item.id)
+                    }
+                  >
+                    <Text style={styles.textoBotao}>
+                      DELETAR
+                    </Text>
+                  </TouchableOpacity>
+
+                </View>
+              )}
+            />
+
+          )}
+        </View>
+
+      </ScrollView>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+
+  // Container principal
+  container: {
+    flex: 1,
+    backgroundColor: '#FFFFFF',
+  },
+
+  // Header
+  header: {
+    backgroundColor: '#1E40AF',
+    padding: 20,
+    paddingTop: 50,
+    alignItems: 'center',
+  },
+
+  // Logo
+  logoTexto: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+
+  // Texto do header
+  headerTexto: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+  },
+
+  // Formulário
+  formularioContainer: {
+    padding: 20,
+  },
+
+  // Labels
+  label: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#1E40AF',
+    marginBottom: 8,
+  },
+
+  // Inputs
+  input: {
+    borderWidth: 1,
+    borderColor: '#DDD',
+    padding: 12,
+    marginBottom: 15,
+    borderRadius: 8,
+    fontSize: 16,
+  },
+
+  // Input descrição
+  descricaoInput: {
+    height: 100,
+    textAlignVertical: 'top',
+  },
+
+  // Container categorias
+  categoriaContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 15,
+    gap: 8,
+  },
+
+  // Botão categoria
+  categoriaBotao: {
+    flex: 1,
+    paddingVertical: 10,
+    borderWidth: 1,
+    borderColor: '#DDD',
+    borderRadius: 6,
+    alignItems: 'center',
+  },
+
+  // Categoria selecionada
+  categoriaSelecionada: {
+    backgroundColor: '#1E40AF',
+    borderColor: '#1E40AF',
+  },
+
+  // Texto categoria
+  categoriaBotaoTexto: {
+    fontSize: 12,
+    color: '#666',
+    fontWeight: '600',
+  },
+
+  // Texto categoria selecionada
+  categoriaSelecionadaTexto: {
+    color: '#FFFFFF',
+  },
+
+  // Container botões
+  botaoContainer: {
+    marginTop: 20,
+    gap: 10,
+  },
+
+  // Botão padrão
+  botao: {
+    paddingVertical: 12,
+    borderRadius: 6,
+    alignItems: 'center',
+  },
+
+  // Botão cadastrar
+  botaoCadastrar: {
+    backgroundColor: '#1E40AF',
+  },
+
+  // Botão limpar
+  botaoLimpar: {
+    backgroundColor: '#FF6B6B',
+  },
+
+  // Botão voltar
+  botaoVoltar: {
+    backgroundColor: '#999',
+  },
+
+  // Botão deletar
+  botaoDeletar: {
+    backgroundColor: '#FF6B6B',
+    marginTop: 10,
+  },
+
+  // Texto botão
+  textoBotao: {
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+    fontSize: 14,
+  },
+
+  // Lista
+  listaContainer: {
+    padding: 20,
+  },
+
+  // Título lista
+  listaTitulo: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#1E40AF',
+    marginBottom: 15,
+  },
+
+  // Estado vazio
+  emptyState: {
+    alignItems: 'center',
+    marginTop: 20,
+  },
+
+  // Texto vazio
+  emptyStateText: {
+    color: '#999',
+    fontSize: 16,
+  },
+
+  // Card produto
+  produtoCard: {
+    backgroundColor: '#F9FAFB',
+    borderLeftWidth: 5,
+    borderLeftColor: '#1E40AF',
+    padding: 15,
+    marginBottom: 12,
+    borderRadius: 8,
+  },
+
+  // Nome produto
+  produtoNome: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#1E40AF',
+    marginBottom: 8,
+  },
+
+  // Preço produto
+  produtoPreco: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#059669',
+    marginBottom: 4,
+  },
+
+  // Categoria produto
+  produtoCategoria: {
+    fontSize: 14,
+    color: '#666',
+    marginBottom: 4,
+  },
+
+  // Descrição produto
+  produtoDescricao: {
+    fontSize: 14,
+    color: '#999',
+    marginBottom: 12,
+  },
+
+});
+
 INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
 DISCIPLINA: Dispositivos Móveis
 PROFESSOR: Ranyere Lima
