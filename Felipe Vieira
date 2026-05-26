@@ -51,3 +51,144 @@ export default function App() {
   );
 }
 
+
+
+
+import {
+  Image,          // Componente para exibir imagens
+  ScrollView,     // Container com rolagem de tela
+  StyleSheet,     // Utilitário para criar estilos CSS
+  Text,           // Componente para textos
+  TouchableOpacity, // Botão com efeito de clique transparente
+  View            // Bloco container base (como uma div)
+} from 'react-native';
+
+export default function App() {
+  // Lista de objetos com os dados de cada card
+  const cards = [
+    { id: 1, title: 'HTML', icon: '🌐', color: '#07335F' },
+    { id: 2, title: 'CSS', icon: '🎨', color: '#6C5CE7' },
+    { id: 3, title: 'JavaScript', icon: '💻', color: '#E8BD3A' },
+    { id: 4, title: 'React', icon: '⚛️', color: '#8CBEEF' },
+    { id: 5, title: 'Node.js', icon: '🟢', color: '#428072' },
+    { id: 6, title: 'Banco de Dados', icon: '🗄️', color: '#FD79A8' },
+  ];
+
+  return (
+    // ScrollView permite rolar a tela se o conteúdo for maior que ela
+    <ScrollView contentContainerStyle={styles.container}>
+      
+      {/* Imagem do topo carregada através de um link da web */}
+      <Image
+        source={{
+          uri: 'https://cdn-icons-png.flaticon.com/512/1055/1055687.png',
+        }}
+        style={styles.image}
+      />
+
+      {/* Textos principais da interface */}
+      <Text style={styles.title}>Aprendendo React Native</Text>
+      <Text style={styles.subtitle}>
+        Layout responsivo com cards
+      </Text>
+
+      {/* Bloco principal que agrupa todos os cards */}
+      <View style={styles.cardsContainer}>
+        {/* Percorre o array e cria um componente visual para cada card */}
+        {cards.map((card) => (
+          <View
+            key={card.id} // Identificador único exigido pelo React
+            style={[styles.card, { backgroundColor: card.color }]} // Junta o estilo fixo com a cor dinâmica
+          >
+            <Text style={styles.icon}>{card.icon}</Text>
+            <Text style={styles.cardText}>{card.title}</Text>
+          </View>
+        ))}
+      </View>
+
+      {/* Botão clicável */}
+      <TouchableOpacity style={styles.button}>
+        <Text style={styles.buttonText}>COMEÇAR AGORA</Text>
+      </TouchableOpacity>
+
+    </ScrollView>
+  );
+}
+
+// Definição das regras de estilização da tela
+const styles = StyleSheet.create({
+  container: {
+    flexGrow: 1,           // Ocupa todo o espaço disponível na rolagem
+    backgroundColor: '#F1F2F6', // Cor de fundo cinza claro
+    alignItems: 'center',  // Centraliza os elementos na horizontal
+    padding: 20,           // Espaçamento interno nas bordas da tela
+  },
+
+  image: {
+    width: 180,           // Largura da imagem
+    height: 180,          // Altura da imagem
+    marginTop: 40,        // Afasta o topo da barra de status do celular
+    marginBottom: 15,     // Espaço abaixo da imagem
+  },
+
+  title: {
+    fontSize: 28,         // Tamanho da fonte do título
+    fontWeight: 'bold',   // Deixa a fonte em negrito
+    color: '#2D3436',     // Cor do texto (grafite escuro)
+  },
+
+  subtitle: {
+    fontSize: 16,         // Tamanho da fonte do subtítulo
+    color: '#636E72',     // Cor do texto (cinza médio)
+    marginBottom: 25,     // Espaço abaixo do subtítulo
+  },
+
+  cardsContainer: {
+    width: '100%',         // Ocupa toda a largura da tela
+    flexDirection: 'row',  // Alinha os itens em linha (um ao lado do outro)
+    flexWrap: 'wrap',      // Quebra linha automaticamente se não couber
+    justifyContent: 'space-between', // Joga um card para cada canto
+  },
+
+  card: {
+    width: '47%',          // Ocupa quase metade da largura (permite 2 por linha)
+    height: 120,           // Altura fixa de cada bloco
+    borderRadius: 20,      // Arredonda os cantos do card
+    justifyContent: 'center', // Centraliza o conteúdo verticalmente
+    alignItems: 'center',  // Centraliza o conteúdo horizontalmente
+    marginBottom: 15,      // Espaço abaixo de cada card
+    elevation: 5,          // Cria sombra simulada no Android
+    shadowColor: '#000',   // Cor da sombra no iOS
+    shadowOffset: { width: 0, height: 2 }, // Direção da sombra no iOS
+    shadowOpacity: 0.25,   // Opacidade da sombra no iOS
+    shadowRadius: 3.84,    // Desfoque da sombra no iOS
+  },
+
+  icon: {
+    fontSize: 35,          // Tamanho do emoji
+    marginBottom: 10,      // Espaço entre o emoji e o texto
+  },
+
+  cardText: {
+    color: '#FFF',         // Texto do card em branco
+    fontSize: 16,          // Tamanho da fonte do card
+    fontWeight: 'bold',    // Texto em negrito
+    textAlign: 'center',   // Centraliza o texto se houver quebra de linha
+  },
+
+  button: {
+    marginTop: 20,         // Espaço acima do botão
+    backgroundColor: '#0984E3', // Cor de fundo azul
+    paddingVertical: 15,   // Espaçamento interno vertical (altura)
+    paddingHorizontal: 40, // Espaçamento interno horizontal (largura)
+    borderRadius: 30,      // Deixa o botão totalmente arredondado
+    marginBottom: 30,      // Espaço abaixo para não colar no fim da tela
+  },
+
+  buttonText: {
+    color: '#FFF',         // Texto do botão em branco
+    fontSize: 16,          // Tamanho da fonte do botão
+    fontWeight: 'bold',    // Texto em negrito
+  },
+});
+
