@@ -652,17 +652,23 @@ PROFESSOR: Ranyere Lima
 ALUNO(A): Raquel Bacelar Pena
 DATA:  26/ 05 /2026
 
+// Importa o React para poder criar componentes
 import React from 'react';
+
+// Importa componentes do React Native
 import { 
-  View, 
-  Text, 
-  StyleSheet, 
-  Image, 
-  TouchableOpacity,
-  ScrollView 
+  View, // Cria áreas/blocos na tela
+  Text, // Exibe textos
+  StyleSheet, // Cria estilos CSS-like
+  Image, // Exibe imagens
+  TouchableOpacity, // Cria botão clicável
+  ScrollView // Permite rolar a tela
 } from 'react-native';
 
+// Componente principal do aplicativo
 export default function App() {
+
+  // Array com os dados dos cards
   const cards = [
     { id: 1, title: 'HTML', icon: '🌐', color: '#07335F' },
     { id: 2, title: 'CSS', icon: '🎨', color: '#6C5CE7' },
@@ -674,113 +680,158 @@ export default function App() {
     { id: 6, title: 'Deploy', icon: '🗄️', color: '#2E3E4D' },
   ];
 
+  // Retorna tudo que será mostrado na tela
   return (
+
+    // ScrollView permite rolar a página
     <ScrollView contentContainerStyle={styles.container}>
       
       {/* Imagem no topo */}
       <Image
+
+        // Define a imagem usando uma URL da internet
         source={{
           uri: 'https://cdn-icons-png.flaticon.com/512/1055/1055687.png',
         }}
+
+        // Aplica o estilo da imagem
         style={styles.image}
       />
 
-      {/* Título */}
-      <Text style={styles.title}>Aprendendo React Native</Text>
+      {/* Título principal */}
+      <Text style={styles.title}>
+        Aprendendo React Native
+      </Text>
+
+      {/* Subtítulo */}
       <Text style={styles.subtitle}>
         Layout responsivo com cards
       </Text>
 
-      {/* Cards */}
+      {/* Área que contém todos os cards */}
       <View style={styles.cardsContainer}>
+
+        {/* Percorre o array cards e cria um card para cada item */}
         {cards.map((card) => (
+
+          // View representa cada card
           <View
-            key={card.id}
+            key={card.id} // Chave única para cada card
+
+            // Junta o estilo padrão do card com a cor específica
             style={[styles.card, { backgroundColor: card.color }]}
           >
-            <Text style={styles.icon}>{card.icon}</Text>
-            <Text style={styles.cardText}>{card.title}</Text>
+
+            {/* Mostra o emoji do card */}
+            <Text style={styles.icon}>
+              {card.icon}
+            </Text>
+
+            {/* Mostra o nome da tecnologia */}
+            <Text style={styles.cardText}>
+              {card.title}
+            </Text>
+
           </View>
         ))}
       </View>
 
       {/* Botão */}
       <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>COMEÇAR AGORA</Text>
+
+        {/* Texto do botão */}
+        <Text style={styles.buttonText}>
+          COMEÇAR AGORA
+        </Text>
+
       </TouchableOpacity>
 
     </ScrollView>
   );
 }
 
+// Criação dos estilos
 const styles = StyleSheet.create({
+
+  // Estilo do container principal
   container: {
-    flexGrow: 1,
-    backgroundColor: '#F2F2F2',
-    alignItems: 'center',
-    padding: 20,
+    flexGrow: 1, // Faz o conteúdo ocupar a tela
+    backgroundColor: '#F1F2F6', // Cor de fundo
+    alignItems: 'center', // Centraliza horizontalmente
+    padding: 20, // Espaçamento interno
   },
 
+  // Estilo da imagem
   image: {
-    width: 180,
-    height: 180,
-    marginTop: 20,
-    marginBottom: 15,
+    width: 180, // Largura
+    height: 180, // Altura
+    marginTop: 20, // Espaço acima
+    marginBottom: 15, // Espaço abaixo
   },
 
+  // Estilo do título
   title: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: '#2D3436',
+    fontSize: 28, // Tamanho da letra
+    fontWeight: 'bold', // Texto em negrito
+    color: '#2D3436', // Cor do texto
   },
 
+  // Estilo do subtítulo
   subtitle: {
-    fontSize: 16,
-    color: '#636E72',
-    marginBottom: 25,
+    fontSize: 16, // Tamanho da letra
+    color: '#636E72', // Cor do texto
+    marginBottom: 25, // Espaço abaixo
   },
 
+  // Container que guarda os cards
   cardsContainer: {
-    width: '100%',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
+    width: '100%', // Ocupa toda a largura
+    flexDirection: 'row', // Organiza em linha
+    flexWrap: 'wrap', // Quebra linha automaticamente
+    justifyContent: 'space-between', // Espaço entre cards
   },
 
+  // Estilo de cada card
   card: {
-    width: '47%',
-    height: 120,
-    borderRadius: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 15,
-    elevation: 5,
+    width: '47%', // Largura do card
+    height: 120, // Altura do card
+    borderRadius: 20, // Bordas arredondadas
+    justifyContent: 'center', // Centraliza verticalmente
+    alignItems: 'center', // Centraliza horizontalmente
+    marginBottom: 15, // Espaço abaixo
+    elevation: 5, // Sombra no Android
   },
 
+  // Estilo dos emojis
   icon: {
-    fontSize: 35,
-    marginBottom: 10,
+    fontSize: 35, // Tamanho do emoji
+    marginBottom: 10, // Espaço abaixo
   },
 
+  // Texto do card
   cardText: {
-    color: '#FFF',
-    fontSize: 16,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    color: '#FFF', // Cor branca
+    fontSize: 16, // Tamanho da letra
+    fontWeight: 'bold', // Negrito
+    textAlign: 'center', // Centraliza texto
   },
 
+  // Estilo do botão
   button: {
-    marginTop: 20,
-    backgroundColor: '#0984E3',
-    paddingVertical: 15,
-    paddingHorizontal: 40,
-    borderRadius: 30,
-    marginBottom: 30,
+    marginTop: 20, // Espaço acima
+    backgroundColor: '#0984E3', // Cor do botão
+    paddingVertical: 15, // Espaço interno vertical
+    paddingHorizontal: 40, // Espaço interno horizontal
+    borderRadius: 30, // Bordas arredondadas
+    marginBottom: 30, // Espaço abaixo
   },
 
+  // Texto do botão
   buttonText: {
-    color: '#FFF',
-    fontSize: 16,
-    fontWeight: 'bold',
+    color: '#FFF', // Cor branca
+    fontSize: 16, // Tamanho da letra
+    fontWeight: 'bold', // Negrito
   },
 });
+
+
