@@ -1655,3 +1655,20 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
+
+*/ 1. Utilidade da View
+A View serve como o bloco de construção básico da interface, equivalente à <div> do HTML, usada para agrupar, estruturar e estilizar outros componentes. 
+
+2. Organização em Linha
+A propriedade flexDirection: 'row' organiza os elementos em linha (horizontalmente). 
+
+3. Função do justifyContent
+O justifyContent alinha os elementos filhos ao longo do eixo principal do container (vertical por padrão, ou horizontal se for linha). 
+
+4. Utilidade do StyleSheet
+O StyleSheet serve para criar objetos de estilo isolados, melhorando o desempenho do aplicativo e organizando o código de forma limpa. 
+
+5. Vantagem do Snack para Iniciantes
+A maior vantagem do Expo Snack é permitir programar e testar o código direto no navegador ou celular em tempo real, sem precisar instalar nada no computador.
+*/
+
