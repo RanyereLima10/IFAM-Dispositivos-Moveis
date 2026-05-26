@@ -507,11 +507,6 @@ Também foram aplicados conceitos de estilização com StyleSheet, permitindo a 
 A atividade contribuiu para o aprendizado dos principais componentes, como View, Text, Button e Alert, além de reforçar a lógica de programação.
 
 **********************************************************************/
-Prática: Sua Primeira Tela
-Agora é a sua vez! Crie uma tela simples usando Snack (React Native) ou App
-Inventor.
-
-
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Alert, StatusBar } from 'react-native';
 
