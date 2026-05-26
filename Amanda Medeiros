@@ -264,3 +264,227 @@ fontWeight: 'bold',
 fontSize: 16,
 },
 });
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Amanda Medeiros Lins
+DATA:  26/ 05 /2026
+Bimestre: 2º Bimestre
+Assunto: layout de tela
+**********************************************************************/
+// Importa o React para criar componentes
+import React from 'react';
+
+// Importa componentes do React Native
+import {
+View, // Cria áreas/blocos na tela
+Text, // Exibe textos
+StyleSheet, // Cria estilos CSS no React Native
+TouchableOpacity, // Cria botão clicável
+Image, // Exibe imagens
+Dimensions, // Pega dimensões da tela
+ScrollView, // Permite rolagem da tela
+} from 'react-native';
+
+// Pega a largura da tela do celular
+const largura = Dimensions.get('window').width;
+
+// Cria o componente principal do app
+export default function App() {
+
+  // O que será exibido na tela
+  return (
+
+    // ScrollView permite rolar a tela verticalmente
+    <ScrollView contentContainerStyle={styles.container}>
+
+      {/* Imagem no topo */}
+      <Image
+
+        // Fonte da imagem
+        source={{
+          uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLRIn4R3J-QpG-h-iKDdkV_cVdW_UU8pthSg&s',
+        }}
+
+        // Aplica o estilo da imagem
+        style={styles.imagem}
+      />
+
+      {/* Título principal */}
+      <Text style={styles.titulo}>
+        Programação
+      </Text>
+
+      {/* Subtítulo */}
+      <Text style={styles.subtitulo}>
+        Programação de um jeito facil
+      </Text>
+
+      {/* Área que contém todos os cards */}
+      <View style={styles.areaCards}>
+
+        {/* Primeiro card */}
+        <View style={styles.card}>
+          <Text style={styles.icone}>💻</Text>
+          <Text style={styles.textoCard}>HTML</Text>
+        </View>
+
+        {/* Segundo card */}
+        <View style={styles.card}>
+          <Text style={styles.icone}>🎨</Text>
+          <Text style={styles.textoCard}>CSS</Text>
+        </View>
+
+        {/* Terceiro card */}
+        <View style={styles.card}>
+          <Text style={styles.icone}>⚛️</Text>
+          <Text style={styles.textoCard}>React</Text>
+        </View>
+
+        {/* Quarto card */}
+        <View style={styles.card}>
+          <Text style={styles.icone}>📱</Text>
+          <Text style={styles.textoCard}>Mobile</Text>
+        </View>
+
+        {/* Quinto card */}
+        <View style={styles.card}>
+          <Text style={styles.icone}>🧠</Text>
+          <Text style={styles.textoCard}>Lógica</Text>
+        </View>
+
+        {/* Sexto card */}
+        <View style={styles.card}>
+          <Text style={styles.icone}>🌐</Text>
+          <Text style={styles.textoCard}>Web</Text>
+        </View>
+
+        {/* Sétimo card */}
+        <View style={styles.card}>
+          <Text style={styles.icone}>☁️</Text>
+          <Text style={styles.textoCard}>API</Text>
+        </View>
+
+        {/* Oitavo card */}
+        <View style={styles.card}>
+          <Text style={styles.icone}>✨</Text>
+          <Text style={styles.textoCard}>UI Design</Text>
+        </View>
+
+        {/* Nono card */}
+        <View style={styles.card}>
+          <Text style={styles.icone}>☕</Text>
+          <Text style={styles.textoCard}>Java Script</Text>
+        </View>
+
+        {/* Décimo card */}
+        <View style={styles.card}>
+          <Text style={styles.icone}>🐱</Text>
+          <Text style={styles.textoCard}>Github</Text>
+        </View>
+
+      </View>
+
+      {/* Botão */}
+      <TouchableOpacity style={styles.botao}>
+
+        {/* Texto do botão */}
+        <Text style={styles.textoBotao}>
+          COMEÇAR AGORA
+        </Text>
+
+      </TouchableOpacity>
+
+    </ScrollView>
+  );
+}
+
+// Criação dos estilos do app
+const styles = StyleSheet.create({
+
+  // Estilo principal da tela
+  container: {
+    flexGrow: 1, // Faz ocupar toda altura disponível
+    backgroundColor: '#C8B2F5', // Cor de fundo
+    alignItems: 'center', // Centraliza horizontalmente
+    paddingVertical: 1, // Espaçamento vertical
+    paddingHorizontal: 15, // Espaçamento lateral
+  },
+
+  // Estilo da imagem
+  imagem: {
+    width: '150%', // Largura da imagem
+    height: 200, // Altura da imagem
+    marginBottom: 15, // Espaço abaixo da imagem
+    borderRadius: 20, // Bordas arredondadas
+    resizeMode: 'cover', // Ajusta a imagem
+  },
+
+  // Estilo do título
+  titulo: {
+    fontSize: 28, // Tamanho da fonte
+    fontWeight: 'bold', // Texto em negrito
+    color: 'black', // Cor do texto
+    marginBottom: 8, // Espaço abaixo
+  },
+
+  // Estilo do subtítulo
+  subtitulo: {
+    fontSize: 15, // Tamanho da fonte
+    color: 'black', // Cor do texto
+    marginBottom: 30, // Espaço abaixo
+    textAlign: 'center', // Centraliza texto
+  },
+
+  // Área dos cards
+  areaCards: {
+    flexDirection: 'row', // Coloca os itens em linha
+    flexWrap: 'wrap', // Quebra linha automaticamente
+    justifyContent: 'center', // Centraliza os cards
+  },
+
+  // Estilo de cada card
+  card: {
+    width: largura * 0.38, // Largura proporcional da tela
+    backgroundColor: '#BB9BE8', // Cor do card
+    padding: 18, // Espaçamento interno
+    margin: 10, // Espaçamento externo
+    borderRadius: 20, // Bordas arredondadas
+    alignItems: 'center', // Centraliza conteúdo
+    shadowColor: 'black', // Cor da sombra
+    shadowOpacity: 0.1, // Transparência da sombra
+    shadowRadius: 5, // Tamanho da sombra
+    elevation: 4, // Sombra no Android
+  },
+
+  // Estilo dos ícones
+  icone: {
+    fontSize: 30, // Tamanho do emoji
+    marginBottom: 10, // Espaço abaixo
+  },
+
+  // Texto do card
+  textoCard: {
+    fontSize: 16, // Tamanho da fonte
+    fontWeight: '600', // Peso da fonte
+    color: 'black', // Cor do texto
+  },
+
+  // Estilo do botão
+  botao: {
+    marginTop: 30, // Espaço acima
+    backgroundColor: '#D4B0FF', // Cor do botão
+    paddingVertical: 15, // Espaço vertical interno
+    paddingHorizontal: 40, // Espaço horizontal interno
+    borderRadius: 30, // Bordas arredondadas
+  },
+
+  // Texto do botão
+  textoBotao: {
+    color: '#AD64B2', // Cor do texto
+    fontWeight: 'bold', // Negrito
+    fontSize: 16, // Tamanho da fonte
+  },
+
+});
