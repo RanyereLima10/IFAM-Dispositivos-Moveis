@@ -938,3 +938,233 @@ subtexto3: {
 
 });
 
+
+/**********************************************************************
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Cauã Fonseca Da S. Vieria
+DATA: 26/05/2026
+BIMESTRE: 2º Bimestre
+DESCRIÇÃO: Atividade Prática 3 - Layout Responsivo
+
+**********************************************************************/
+
+
+import React from 'react';
+
+// Importando componentes do React Native
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
+
+// Importando bibliotecas de ícones
+import {
+  FontAwesome5,
+  MaterialIcons,
+  Ionicons,
+} from '@expo/vector-icons';
+
+// Componente principal
+export default function App() {
+
+  // Lista de cards
+  const cards = [
+
+    // Card HTML
+    {
+      titulo: 'HTML',
+      icone: <FontAwesome5 name="html5" size={28} color="#fff" />,
+    },
+
+    // Card CSS
+    {
+      titulo: 'CSS',
+      icone: <FontAwesome5 name="css3-alt" size={28} color="#fff" />,
+    },
+
+    // Card JavaScript
+    {
+      titulo: 'Javascript',
+      icone: <Ionicons name="logo-javascript" size={28} color="#fff" />,
+    },
+
+    // Card React Native
+    {
+      titulo: 'REACT NATIVE',
+      icone: <Ionicons name="phone-portrait" size={28} color="#fff" />,
+    },
+
+    // Card Mobile UI
+    {
+      titulo: 'MOBILE UI',
+      icone: <Ionicons name="color-palette" size={28} color="#fff" />,
+    },
+
+    // Card API
+    {
+      titulo: 'API',
+      icone: <MaterialIcons name="api" size={28} color="#fff" />,
+    },
+
+    // Card Banco de Dados
+    {
+      titulo: 'BANCO DE DADOS',
+      icone: <Ionicons name="server" size={28} color="#fff" />,
+    },
+
+    // Card Deploy
+    {
+      titulo: 'DEPLOY',
+      icone: <MaterialIcons name="cloud-upload" size={28} color="#fff" />,
+    },
+
+    // Card Back-end
+    {
+      titulo: 'BACK-END',
+      icone: <MaterialIcons name="storage" size={28} color="#fff" />,
+    },
+  ];
+
+  return (
+
+    // ScrollView permite rolagem da tela
+    <ScrollView contentContainerStyle={styles.container}>
+
+      {/* Imagem no topo */}
+      <Image
+        source={{
+          uri: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085',
+        }}
+        style={styles.banner}
+      />
+
+      {/* Título principal */}
+      <Text style={styles.titulo}>
+        Aplicativo Mobile
+      </Text>
+
+      {/* Subtítulo */}
+      <Text style={styles.subtitulo}>
+        Aula de Layouts
+      </Text>
+
+      {/* Área dos cards */}
+      <View style={styles.cardsContainer}>
+
+        {/* Percorre todos os cards */}
+        {cards.map((card, index) => (
+
+          // Card individual
+          <View key={index} style={styles.card}>
+
+            {/* Ícone */}
+            {card.icone}
+
+            {/* Texto do card */}
+            <Text style={styles.cardTexto}>
+              {card.titulo}
+            </Text>
+
+          </View>
+        ))}
+      </View>
+
+      {/* Botão */}
+      <TouchableOpacity style={styles.botao}>
+
+        {/* Texto do botão */}
+        <Text style={styles.botaoTexto}>
+          Saiba Mais
+        </Text>
+
+      </TouchableOpacity>
+
+    </ScrollView>
+  );
+}
+
+// Estilos da aplicação
+const styles = StyleSheet.create({
+
+  // Container principal
+  container: {
+    padding: 20,
+    alignItems: 'center',
+    backgroundColor: '#0F172A',
+  },
+
+  // Estilo da imagem
+  banner: {
+    width: '100%',
+    height: 200,
+    borderRadius: 20,
+    marginBottom: 20,
+  },
+
+  // Título principal
+  titulo: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+  },
+
+  // Subtítulo
+  subtitulo: {
+    fontSize: 18,
+    marginTop: 8,
+    marginBottom: 25,
+    color: '#CBD5E1',
+  },
+
+  // Container dos cards
+  cardsContainer: {
+    width: '100%',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
+
+  // Card individual
+  card: {
+    width: '47%',
+    backgroundColor: '#2563EB',
+    padding: 20,
+    borderRadius: 16,
+    alignItems: 'center',
+    marginBottom: 15,
+  },
+
+  // Texto do card
+  cardTexto: {
+    color: '#fff',
+    marginTop: 10,
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+
+  // Botão
+  botao: {
+    marginTop: 20,
+    backgroundColor: '#38BDF8',
+    paddingVertical: 15,
+    paddingHorizontal: 40,
+    borderRadius: 12,
+    marginBottom: 30,
+  },
+
+  // Texto do botão
+  botaoTexto: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+});
+
