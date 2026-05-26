@@ -1,1 +1,196 @@
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Rafael Gloria Dos Santos
+DADOS:26/05/ 2026
+BIMESTRE: 2º Bimestre
 
+DESCRIÇÃO DA ATIVIDADE:
+Nesta atividade, o(a) aluno(a) deverá desenvolver uma aplicação mobile simples utilizando React Native, com o objetivo de compreender a estrutura básica de um aplicativo. O projeto deve conter uma tela inicial com uma mensagem de boas-vindas e pelo menos um botão 
+interativo. Ao interagir com o botão, o aplicativo deve apresentar uma resposta na tela (ex: alerta, mudança de texto ou ação visual). Também devem ser aplicados conceitos de estilização utilizando StyleSheet, permitindo a personalização de núcleos, tamanhos e 
+organização dos elementos. A atividade tem como objetivo fortalecer o uso de componentes fundamentais como View, Text, Button e Alert, além de desenvolver uma lógica de programação e organização do código.
+
+
+
+
+
+import React from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
+
+import { Ionicons } from '@expo/vector-icons';
+
+export default function App() {
+  const cards = [
+    {
+      titulo: 'Tecnologia',
+      texto: 'Novidades do mundo tech.',
+      icone: 'laptop-outline',
+      cor: '#4F46E5',
+    },
+    {
+      titulo: 'Esportes',
+      texto: 'Resultados e notícias.',
+      icone: 'football-outline',
+      cor: '#059669',
+    },
+    {
+      titulo: 'Música',
+      texto: 'Lançamentos musicais.',
+      icone: 'musical-notes-outline',
+      cor: '#DB2777',
+    },
+    {
+      titulo: 'Viagens',
+      texto: 'Destinos incríveis.',
+      icone: 'airplane-outline',
+      cor: '#EA580C',
+    },
+    {
+      titulo: 'Cinema',
+      texto: 'Filmes em destaque.',
+      icone: 'film-outline',
+      cor: '#0891B2',
+    },
+    {
+      titulo: 'Games',
+      texto: 'Jogos mais populares.',
+      icone: 'game-controller-outline',
+      cor: '#7C3AED',
+    },
+  ];
+
+  return (
+    <ScrollView style={styles.container}>
+      
+      <Image
+        source={{
+          uri: 'https://cdn.pixabay.com/photo/2020/12/16/15/19/mobile-phone-5836879_640.png',
+        }}
+        style={styles.imagemTopo}
+      />
+
+      <Text style={styles.titulo}>
+        Menu Principal
+      </Text>
+
+      <View style={styles.cardsContainer}>
+        {cards.map((card, index) => (
+          <View
+            key={index}
+            style={[
+              styles.card,
+              { backgroundColor: card.cor },
+            ]}
+          >
+            <Ionicons
+              name={card.icone}
+              size={42}
+              color="#"
+            />
+
+            <Text style={styles.cardTitulo}>
+              {card.titulo}
+            </Text>
+
+            <Text style={styles.cardTexto}>
+              {card.texto}
+            </Text>
+          </View>
+        ))}
+      </View>
+
+      {/* Botão */}
+      <TouchableOpacity style={styles.botao}>
+        <Text style={styles.botaoTexto}>
+          Ver Mais
+        </Text>
+      </TouchableOpacity>
+
+    </ScrollView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#F5C200',
+  },
+
+  imagemTopo: {
+    width: '100%',
+    height: 220,
+    borderBottomLeftRadius: 25,
+    borderBottomRightRadius: 25,
+  },
+
+  titulo: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginVertical: 20,
+    color: '#0F172A',
+  },
+
+  /* Organização em colunas */
+  cardsContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    paddingHorizontal: 15,
+  },
+
+  /* Cards arredondados */
+  card: {
+    width: '47%',
+    padding: 22,
+    marginBottom: 18,
+    borderRadius: 22,
+    alignItems: 'center',
+
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+
+    elevation: 6,
+  },
+
+  cardTitulo: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#000000',
+    marginTop: 12,
+  },
+
+  cardTexto: {
+    fontSize: 14,
+    color: '#000000',
+    textAlign: 'center',
+    marginTop: 8,
+  },
+
+  botao: {
+    backgroundColor: '#0074D9',
+    marginHorizontal: 20,
+    marginVertical: 25,
+    paddingVertical: 16,
+    borderRadius: 30,
+    alignItems: 'center',
+  },
+
+  botaoTexto: {
+    color: '#000000',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+});
