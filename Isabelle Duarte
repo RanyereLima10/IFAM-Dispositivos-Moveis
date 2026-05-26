@@ -196,7 +196,151 @@ fontSize: 20,
 fontWeight: 'bold',
 borderRadius: 10
 }
+});
 
+*******************************************************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Isabelle Christine de Jesus Duarte
+DADOS: 26 / 05 / 2026
+BIMESTRE: 2º Bimestre
+
+DESCRIÇÃO DA ATIVIDADE:
+Atividade de estudo de layout: Imagem, título e cards de layout organizados e código comentado. 
+O tema do meu é "Livraria" e a paleta é em tons de verde moderno.
+
+
+
+
+import React from 'react';
+// Importação dos componentes base do React Native
+import {
+  View,           // Container genérico (como uma div)
+  Text,           // Para exibir textos
+  StyleSheet,     // Para criar a folha de estilos
+  Dimensions,     // Para pegar as dimensões da tela do dispositivo
+  Image,          // Para renderizar imagens
+  TouchableOpacity, // Um botão que reduz a opacidade ao ser clicado
+  ScrollView,     // Permite rolagem de tela caso o conteúdo exceda o tamanho
+} from 'react-native';
+
+// Captura a largura total da tela do celular
+const larguraTela = Dimensions.get('window').width;
+
+export default function App() {
+  return (
+    // ScrollView envolve tudo para garantir que usuários de telas pequenas consigam rolar
+    <ScrollView style={styles.container}>
+
+      {/* Imagem de cabeçalho vinda de uma URL externa */}
+      <Image
+        source={{
+          uri: 'https://cdn-icons-png.flaticon.com/512/3145/3145765.png'
+        }}
+        style={styles.topo}
+      />
+
+      <Text style={styles.titulo}>Livraria Online</Text>
+
+      {/* Container que agrupa os cards de categorias */}
+      <View style={styles.cardsContainer}>
+
+        {/* Cada View abaixo é um 'card'. Usei array de estilos para manter a base e mudar apenas a cor */}
+        <View style={[styles.card, { backgroundColor: '#59594C' }]}>
+          <Text style={styles.textoCard}>Romance</Text>
+        </View>
+
+        <View style={[styles.card, { backgroundColor: '#59594C' }]}>
+          <Text style={styles.textoCard}>Fantasia</Text>
+        </View>
+
+        <View style={[styles.card, { backgroundColor: '#95A685' }]}>
+          <Text style={styles.textoCard}>Suspense</Text>
+        </View>
+
+        <View style={[styles.card, { backgroundColor: '#95A685' }]}>
+          <Text style={styles.textoCard}>Drama</Text>
+        </View>
+
+        <View style={[styles.card, { backgroundColor: '#B5BF9F' }]}>
+          <Text style={styles.textoCard}>Terror</Text>
+        </View>
+
+        <View style={[styles.card, { backgroundColor: '#B5BF9F' }]}>
+          <Text style={styles.textoCard}>HQs</Text>
+        </View>
+
+        <View style={[styles.card, { backgroundColor: '#B8B68F' }]}>
+          <Text style={styles.textoCard}>Aventura</Text>
+        </View>
+
+        <View style={[styles.card, { backgroundColor: '#B8B68F' }]}>
+          <Text style={styles.textoCard}>Poesia</Text>
+        </View>
+
+      </View>
+
+      {/* Botão interativo */}
+      <TouchableOpacity style={styles.botao}>
+        <Text style={styles.textoBotao}>COMPRAR LIVROS</Text>
+      </TouchableOpacity>
+
+    </ScrollView>
+  );
+}
+
+// Estilização dos componentes
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#FFF8F0',
+    paddingTop: 40,
+  },
+  topo: {
+    width: '100%',
+    height: 180,
+    resizeMode: 'contain', // Garante que a imagem não seja cortada
+  },
+  titulo: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginVertical: 20,
+    color: '#333',
+  },
+  cardsContainer: {
+    flexDirection: 'row',     // Alinha os cards em linha
+    flexWrap: 'wrap',        // Quebra a linha quando não houver mais espaço
+    justifyContent: 'space-around', // Distribui o espaço entre os cards
+    paddingHorizontal: 10,
+  },
+  card: {
+    width: larguraTela / 2.4, // Define a largura baseada no tamanho da tela
+    height: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 15,
+    borderRadius: 10,
+    elevation: 3,             // Sombra para Android
+  },
+  textoCard: {
+    color: '#FFF',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  botao: {
+    backgroundColor: '#4A5D23',
+    margin: 20,
+    padding: 15,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  textoBotao: {
+    color: '#FFF',
+    fontWeight: 'bold',
+    fontSize: 18,
+  },
 });
 
 
