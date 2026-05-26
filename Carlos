@@ -810,4 +810,344 @@ const styles = StyleSheet.create({
   },
 });
 ********************************************************************
+********************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Carlos Augusto de Freitas Saraiva
+DATA:  26 / 05 /2026
+Bimestre: 2º Bimestre
+Descrição:
+********************************************************************
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  FlatList,
+  StyleSheet,
+  Alert,
+  ScrollView,
+} from "react-native";
+
+export default function App() {
+  // Estado da lista de produtos
+  const [produtos, setProdutos] = useState([]);
+
+  // Estados dos campos do formulário
+  const [nome, setNome] = useState("");
+  const [preco, setPreco] = useState("");
+  const [categoria, setCategoria] = useState("");
+  const [descricao, setDescricao] = useState("");
+
+  // Controla edição
+  const [editandoId, setEditandoId] = useState(null);
+
+  // Função para limpar formulário
+  const limparCampos = () => {
+    setNome("");
+    setPreco("");
+    setCategoria("");
+    setDescricao("");
+    setEditandoId(null);
+  };
+
+  // Validação dos dados
+  const validarCampos = () => {
+    if (!nome || !preco || !categoria || !descricao) {
+      Alert.alert("Erro", "Todos os campos são obrigatórios.");
+      return false;
+    }
+
+    if (isNaN(preco) || Number(preco) <= 0) {
+      Alert.alert("Erro", "Digite um preço válido.");
+      return false;
+    }
+
+    return true;
+  };
+
+  // Adicionar ou editar produto
+  const salvarProduto = () => {
+    if (!validarCampos()) return;
+
+    const novoProduto = {
+      id: editandoId ? editandoId : Date.now().toString(),
+      nome,
+      preco,
+      categoria,
+      descricao,
+    };
+
+    // Se estiver editando
+    if (editandoId) {
+      const listaAtualizada = produtos.map((produto) =>
+        produto.id === editandoId ? novoProduto : produto
+      );
+
+      setProdutos(listaAtualizada);
+
+      Alert.alert("Sucesso", "Produto atualizado!");
+    } else {
+      // Novo cadastro
+      setProdutos([...produtos, novoProduto]);
+
+      Alert.alert("Sucesso", "Produto cadastrado!");
+    }
+
+    limparCampos();
+  };
+
+  // Editar produto
+  const editarProduto = (produto) => {
+    setNome(produto.nome);
+    setPreco(produto.preco);
+    setCategoria(produto.categoria);
+    setDescricao(produto.descricao);
+    setEditandoId(produto.id);
+  };
+
+  // Deletar produto
+  const deletarProduto = (id) => {
+    Alert.alert(
+      "Confirmar",
+      "Deseja realmente excluir este produto?",
+      [
+        {
+          text: "Cancelar",
+          style: "cancel",
+        },
+        {
+          text: "Excluir",
+          onPress: () => {
+            const novaLista = produtos.filter(
+              (produto) => produto.id !== id
+            );
+
+            setProdutos(novaLista);
+          },
+        },
+      ]
+    );
+  };
+
+  // Renderização de cada item da lista
+  const renderItem = ({ item }) => (
+    <View style={styles.card}>
+      <Text style={styles.titulo}>{item.nome}</Text>
+
+      <Text>Preço: R$ {item.preco}</Text>
+      <Text>Categoria: {item.categoria}</Text>
+      <Text>Descrição: {item.descricao}</Text>
+
+      <View style={styles.botoesContainer}>
+        <TouchableOpacity
+          style={[styles.botao, styles.botaoEditar]}
+          onPress={() => editarProduto(item)}
+        >
+          <Text style={styles.textoBotao}>Editar</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[styles.botao, styles.botaoExcluir]}
+          onPress={() => deletarProduto(item.id)}
+        >
+          <Text style={styles.textoBotao}>Excluir</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+
+  return (
+    <ScrollView style={styles.container}>
+      <Text style={styles.header}>
+        Cadastro de Produtos
+      </Text>
+
+      {/* Campo Nome */}
+      <TextInput
+        style={styles.input}
+        placeholder="Nome do produto"
+        value={nome}
+        onChangeText={setNome}
+      />
+
+      {/* Campo Preço */}
+      <TextInput
+        style={styles.input}
+        placeholder="Preço"
+        value={preco}
+        onChangeText={setPreco}
+        keyboardType="numeric"
+      />
+
+      {/* Campo Categoria */}
+      <TextInput
+        style={styles.input}
+        placeholder="Categoria"
+        value={categoria}
+        onChangeText={setCategoria}
+      />
+
+      {/* Campo Descrição */}
+      <TextInput
+        style={[styles.input, styles.textArea]}
+        placeholder="Descrição"
+        value={descricao}
+        onChangeText={setDescricao}
+        multiline
+      />
+
+      {/* Botão Salvar */}
+      <TouchableOpacity
+        style={styles.botaoSalvar}
+        onPress={salvarProduto}
+      >
+        <Text style={styles.textoBotao}>
+          {editandoId ? "Atualizar Produto" : "Cadastrar Produto"}
+        </Text>
+      </TouchableOpacity>
+
+      {/* Lista de Produtos */}
+      <Text style={styles.subtitulo}>
+        Produtos Cadastrados
+      </Text>
+
+      <FlatList
+        data={produtos}
+        keyExtractor={(item) => item.id}
+        renderItem={renderItem}
+        scrollEnabled={false}
+      />
+    </ScrollView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    marginTop: 40,
+    backgroundColor: "#D6EBFF",
+  },
+
+  header: {
+    fontSize: 28,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 20,
+  },
+
+  input: {
+    backgroundColor: "#ABC0D1",
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 12,
+  },
+
+  textArea: {
+    height: 80,
+  },
+
+  botaoSalvar: {
+    backgroundColor: "#007bff",
+    padding: 15,
+    borderRadius: 8,
+    alignItems: "center",
+    marginBottom: 20,
+  },
+
+  subtitulo: {
+    fontSize: 22,
+    fontWeight: "bold",
+    marginBottom: 10,
+  },
+
+  card: {
+    backgroundColor: "#fff",
+    padding: 15,
+    borderRadius: 10,
+    marginBottom: 15,
+  },
+
+  titulo: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 5,
+  },
+
+  botoesContainer: {
+    flexDirection: "row",
+    marginTop: 10,
+    justifyContent: "space-between",
+  },
+
+  botao: {
+    flex: 1,
+    padding: 10,
+    borderRadius: 6,
+    alignItems: "center",
+    marginHorizontal: 5,
+  },
+
+  botaoEditar: {
+    backgroundColor: "#28a745",
+  },
+
+  botaoExcluir: {
+    backgroundColor: "#dc3545",
+  },
+
+  textoBotao: {
+    color: "#fff",
+    fontWeight: "bold",
+  },
+});
+***********************************************************
+********************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Carlos Augusto de Freitas Saraiva
+DATA:  26 / 05 /2026
+Bimestre: 2º Bimestre
+****************
+
+Para que serve a View no React Native?
+A View é o componente básico de layout no React Native. Ela funciona como um “container” para organizar outros elementos (textos, botões, imagens etc.). É equivalente a uma div no HTML. Você usa View para estruturar a interface da tela.
+Qual propriedade organiza elementos em linha?
+A propriedade é o flexDirection: 'row'.
+Ela faz com que os elementos fiquem dispostos horizontalmente (em linha).
+column (padrão) → em coluna (vertical)
+row → em linha (horizontal)
+O que faz o justifyContent?
+O justifyContent controla o alinhamento dos elementos no eixo principal (definido pelo flexDirection).
+
+Exemplos:
+
+flex-start → começa no início
+center → centraliza
+flex-end → vai para o final
+space-between → espaço entre os itens
+space-around → espaço ao redor dos itens
+Para que serve o StyleSheet?
+O StyleSheet serve para criar e organizar estilos no React Native de forma otimizada e mais estruturada.
+
+Vantagens:
+
+Melhor desempenho do que estilos inline
+Código mais organizado
+Reutilização de estilos
+Facilita manutenção
+Qual a vantagem do Snack para iniciantes?
+O Snack (Expo Snack) é um ambiente online para React Native que permite:
+Rodar código sem instalar nada no computador
+Testar apps rapidamente no navegador
+Ver resultados em tempo real
+Usar no celular com QR Code (Expo Go)
+Facilita o aprendizado para iniciantes
+
 
