@@ -757,5 +757,179 @@ const styles = StyleSheet.create({
   },
 });
 
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Luana Vitoria cordovil lima 
+DATA:  26/ 05 /2026
+Bimestre: 2º Bimestre
+**********************************************************************/
+// Importa o React para criar componentes
+import React from 'react';
 
+// Importa componentes do React Native
+import { 
+  StyleSheet, // Cria estilos
+  Text, // Exibe textos
+  View, // Cria áreas/blocos na tela
+  ScrollView, // Permite rolagem da tela
+  Image, // Exibe imagens
+  TouchableOpacity, // Cria botão clicável
+  Alert, // Mostra alertas na tela
+  Dimensions // Pega tamanho da tela
+} from 'react-native';
+
+// Importa ícones do Material Design
+// O Snack normalmente instala automaticamente
+import { MaterialIcons } from '@expo/vector-icons'; 
+
+// Função principal do aplicativo
+export default function App() {
+  
+  // Função executada ao clicar no botão
+  const executarBotao = () => {
+
+    // Mostra um alerta na tela
+    Alert.alert("Ação", "Botão inferior clicado com sucesso!");
+  };
+
+  // Array contendo informações dos cards
+  const cards = [
+
+    // Cada objeto representa um card
+    // id = identificação
+    // titulo = texto exibido
+    // icone = nome do ícone
+    // cor = cor do fundo
+
+    { id: 1, titulo: 'Perfil', icone: 'person', cor: '#FF7675' },
+
+    { id: 2, titulo: 'Configurações', icone: 'settings', cor: '#74B9FF' },
+
+    { id: 3, titulo: 'Mensagens', icone: 'chat', cor: '#55E6C1' },
+
+    { id: 4, titulo: 'Calendário', icone: 'date-range', cor: '#A29BFE' },
+
+    { id: 5, titulo: 'Notificações', icone: 'notifications', cor: '#FFEAA7' },
+
+    { id: 6, titulo: 'Favoritos', icone: 'star', cor: '#FAB1A0' },
+
+    { id: 7, titulo: 'Estatísticas', icone: 'bar-chart', cor: '#55EA7A' },
+
+    { id: 8, titulo: 'Ajuda', icone: 'help', cor: '#FD79A8' },
+  ];
+
+  // Retorno visual da tela
+  return (
+
+    // ScrollView permite rolar a tela
+    <ScrollView contentContainerStyle={styles.container}>
+      
+      {/* Imagem do topo */}
+      <Image 
+        
+        // Imagem vinda da internet
+        source={{ uri: 'https://picsum.photos' }} 
+        
+        // Estilo da imagem
+        style={styles.imagemTopo} 
+      />
+
+      {/* Título principal */}
+      <Text style={styles.tituloPagina}>
+        Painel de Controle
+      </Text>
+
+      {/* Área dos cards */}
+      <View style={styles.grid}>
+
+        {/* Percorre todos os cards do array */}
+        {cards.map((card) => (
+
+          // Card individual
+          <View 
+            key={card.id} 
+            style={[
+              styles.card, 
+              { backgroundColor: card.cor }
+            ]}
+          >
+
+            {/* Ícone do card */}
+            <MaterialIcons 
+              name={card.icone} 
+              size={32} 
+              color="#FFF" 
+            />
+
+            {/* Texto do card */}
+            <Text style={styles.tituloCard}>
+              {card.titulo}
+            </Text>
+
+          </View>
+        ))}
+      </View>
+
+      {/* Botão inferior */}
+      <TouchableOpacity 
+        
+        // Estilo do botão
+        style={styles.botaoInferior} 
+        
+        // Executa função ao clicar
+        onPress={executarBotao}
+      >
+
+        {/* Texto do botão */}
+        <Text style={styles.textoBotao}>
+          Confirmar Alterações
+        </Text>
+
+      </TouchableOpacity>
+
+    </ScrollView>
+  );
+}
+
+// Pega a largura da tela do celular
+const larguraTela = Dimensions.get('window').width;
+
+// Criação dos estilos
+const styles = StyleSheet.create({
+
+  // Estilo do container principal
+  container: {
+
+    // Espaço inferior
+    paddingBottom: 40,
+
+    // Cor de fundo
+    backgroundColor: '#F5F6FA',
+  },
+
+  // Estilo da imagem do topo
+  imagemTopo: {
+
+    // Largura total
+    width: '100%',
+
+    // Altura da imagem
+    height: 180,
+
+    // Ajusta a imagem sem distorcer
+    resizeMode: 'cover',
+  },
+
+  // Estilo do título principal
+  tituloPagina: {
+
+    // Tamanho da fonte
+    fontSize: 22,
+
+    // Fonte em negrito
+    fontWeight: 'bold',
+
+    // Cor do texto
+    color: '#2
 
