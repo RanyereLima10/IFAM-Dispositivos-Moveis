@@ -476,3 +476,371 @@ export default function App() {
       </Text>
 
     </View>
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Julio Cesar de Souza Albuquerque
+DATA:  26/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição: Atividade 1 Layout
+*******************************************************
+*/  
+**********************************************************************/
+
+// App.js
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+      
+      {/* Título */}
+      <Text style={styles.title}>Atividade Prática 1</Text>
+
+      {/* Subtítulo */}
+      <Text style={styles.subtitle}>
+        Exercício de Layout em React Native
+      </Text>
+
+      {/* Três caixas */}
+      <View style={styles.boxContainer}>
+        <View style={styles.box} />
+        <View style={styles.box} />
+        <View style={styles.box} />
+      </View>
+
+      {/* Botão */}
+      <TouchableOpacity style={styles.button}>
+        <Text style={styles.buttonText}>Clique Aqui</Text>
+      </TouchableOpacity>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#D6EAF8', // Fundo colorido
+    alignItems: 'center', // Centraliza horizontalmente
+    justifyContent: 'center', // Centraliza verticalmente
+  },
+
+  title: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    color: '#1B4F72',
+  },
+
+  subtitle: {
+    fontSize: 18,
+    marginBottom: 30,
+    color: '#2874A6',
+  },
+
+  boxContainer: {
+    flexDirection: 'row',
+    marginBottom: 30,
+  },
+
+  box: {
+    width: 70,
+    height: 70,
+    backgroundColor: '#5DADE2',
+    marginHorizontal: 10,
+    borderRadius: 10,
+  },
+
+  button: {
+    backgroundColor: '#1B4F72',
+    paddingVertical: 12,
+    paddingHorizontal: 30,
+    borderRadius: 10,
+  },
+
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+});
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Julio Cesar de Souza Albuquerque
+DATA:  26/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição: Atividade 2 Layout
+*******************************************************
+*/  
+**********************************************************************/
+
+// App.js
+
+import React from 'react';
+import { View, Text, Image, StyleSheet } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+
+      {/* Título */}
+      <Text style={styles.title}>Atividade Prática 2</Text>
+
+      {/* Imagem */}
+      <Image
+        source={{
+          uri: 'https://reactnative.dev/img/tiny_logo.png'
+        }}
+        style={styles.image}
+      />
+
+      {/* Ícones */}
+      <View style={styles.iconContainer}>
+
+        <Icon
+          name="heart"
+          size={40}
+          color="#E74C3C"
+        />
+
+        <Icon
+          name="star"
+          size={40}
+          color="#F1C40F"
+        />
+
+        <Icon
+          name="smile-o"
+          size={40}
+          color="#2ECC71"
+        />
+
+      </View>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+
+  // Tela principal
+  container: {
+    flex: 1,
+    backgroundColor: '#D6EAF8',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  // Título
+  title: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#1B4F72',
+    marginBottom: 20,
+  },
+
+  // Imagem
+  image: {
+    width: 100,
+    height: 100,
+    borderRadius: 10,
+    marginBottom: 30,
+  },
+
+  // Área dos ícones
+  iconContainer: {
+    flexDirection: 'row',
+    gap: 20,
+  },
+
+});
+
+/**********************************************************************
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Julio Cesar de Souza Albuquerque
+DATA: 26/05/2026
+BIMESTRE: 2º Bimestre
+DESCRIÇÃO: Atividade Prática 3 - Layout Responsivo
+
+**********************************************************************/
+
+// Importa o React
+import React from 'react';
+
+// Importa componentes do React Native
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
+
+// Importa ícones
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+// Pega largura da tela
+const { width } = Dimensions.get('window');
+
+// Função principal
+export default function App() {
+  return (
+
+    // Container principal
+    <View style={styles.container}>
+
+      {/* Imagem no topo */}
+      <Image
+        source={{
+          uri: 'https://reactnative.dev/img/tiny_logo.png',
+        }}
+        style={styles.image}
+      />
+
+      {/* Título */}
+      <Text style={styles.title}>
+        Layout Responsivo
+      </Text>
+
+      {/* Área dos cards */}
+      <View style={styles.cardContainer}>
+
+        {/* Card 1 */}
+        <View style={styles.card}>
+          <Icon name="home" size={35} color="#fff" />
+          <Text style={styles.cardText}>Home</Text>
+        </View>
+
+        {/* Card 2 */}
+        <View style={styles.card}>
+          <Icon name="user" size={35} color="#fff" />
+          <Text style={styles.cardText}>Perfil</Text>
+        </View>
+
+        {/* Card 3 */}
+        <View style={styles.card}>
+          <Icon name="camera" size={35} color="#fff" />
+          <Text style={styles.cardText}>Câmera</Text>
+        </View>
+
+        {/* Card 4 */}
+        <View style={styles.card}>
+          <Icon name="music" size={35} color="#fff" />
+          <Text style={styles.cardText}>Música</Text>
+        </View>
+
+        {/* Card 5 */}
+        <View style={styles.card}>
+          <Icon name="heart" size={35} color="#fff" />
+          <Text style={styles.cardText}>Favoritos</Text>
+        </View>
+
+        {/* Card 6 */}
+        <View style={styles.card}>
+          <Icon name="book" size={35} color="#fff" />
+          <Text style={styles.cardText}>Livros</Text>
+        </View>
+
+        {/* Card 7 */}
+        <View style={styles.card}>
+          <Icon name="gamepad" size={35} color="#fff" />
+          <Text style={styles.cardText}>Jogos</Text>
+        </View>
+
+      </View>
+
+      {/* Botão */}
+      <TouchableOpacity style={styles.button}>
+        <Text style={styles.buttonText}>
+          Clique Aqui
+        </Text>
+      </TouchableOpacity>
+
+    </View>
+  );
+}
+
+// Estilos
+const styles = StyleSheet.create({
+
+  // Tela principal
+  container: {
+    flex: 1,
+    backgroundColor: '#F4ECF7',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 20,
+  },
+
+  // Imagem
+  image: {
+    width: 120,
+    height: 120,
+    borderRadius: 20,
+    marginBottom: 20,
+  },
+
+  // Título
+  title: {
+    fontSize: width * 0.07,
+    fontWeight: 'bold',
+    color: '#6C3483',
+    marginBottom: 30,
+  },
+
+  // Área dos cards
+  cardContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    gap: 15,
+    marginBottom: 30,
+  },
+
+  // Card
+  card: {
+    width: width * 0.25,
+    height: width * 0.25,
+    backgroundColor: '#8E44AD',
+    borderRadius: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  // Texto dos cards
+  cardText: {
+    color: '#fff',
+    marginTop: 10,
+    fontWeight: 'bold',
+  },
+
+  // Botão
+  button: {
+    backgroundColor: '#5B2C6F',
+    paddingVertical: 12,
+    paddingHorizontal: 30,
+    borderRadius: 10,
+  },
+
+  // Texto do botão
+  buttonText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+
+});
