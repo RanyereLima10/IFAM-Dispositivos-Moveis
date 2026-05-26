@@ -190,162 +190,346 @@ DATA:  12/ 05 /2026
 Bimestre: 2º Bimestre
 Descrição da Atividade: Nesta atividade, o aluno: yuri lima macedo deverá desenvolver uma aplicação mobile simples utilizando React Native, com o objetivo de compreender a estrutura básica de um aplicativo.O codigo es simples ultilizando um layout na aula do dia 12/05/2026 para o uso e saber de layout.usando imagens e figuras para uma representação, melhor de uma tela
 **********************************************************************/
+// Importa o React para criar componentes
 import React from 'react';
+
+// Importa componentes do React Native
 import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-  Dimensions
+  View, // Container visual
+  Text, // Exibe textos
+  StyleSheet, // Cria estilos
+  TouchableOpacity, // Botão clicável
+  Image, // Exibe imagens
+  Dimensions // Pega dimensões da tela
 } from 'react-native';
 
+// Exporta o componente principal App
 export default function App() {
 
+  // Pega a largura atual da tela do celular
   const larguraTela = Dimensions.get('window').width;
 
+  // Retorna o layout da aplicação
   return (
+
+    // Container principal da tela
     <View style={styles.container}>
 
-      {/* 4. Imagem no topo */}
+      {/* Imagem no topo */}
       <Image
+
+        // Imagem carregada pela internet
         source={{ uri: 'https://picsum.photos/300' }}
+
+        // Aplica estilos fixos + estilos dinâmicos
         style={[
           styles.imagemTopo,
           {
+
+            // Largura da imagem = 40% da tela
             width: larguraTela * 0.4,
+
+            // Altura da imagem = 40% da tela
             height: larguraTela * 0.4
           }
         ]}
       />
 
-      {/* Título */}
-      <Text style={styles.titulo}>Meu Aplicativo</Text>
+      {/* Título principal */}
+      <Text style={styles.titulo}>
+        Meu Aplicativo
+      </Text>
 
       {/* Subtítulo */}
-      <Text style={styles.subtitulo}>Layout Responsivo com Cards</Text>
+      <Text style={styles.subtitulo}>
+        Layout Responsivo com Cards
+      </Text>
 
-      {/* 1. 7 cards no total (3 + 4 adicionados) */}
+      {/* Container que segura todos os cards */}
       <View style={styles.linha}>
 
-        <View style={[styles.card, { width: larguraTela * 0.22, backgroundColor: '#4A90E2' }]}>
+        {/* Card Pedra */}
+        <View
+          style={[
+            styles.card,
+            {
+
+              // Largura do card = 22% da tela
+              width: larguraTela * 0.22,
+
+              // Cor de fundo do card
+              backgroundColor: '#4A90E2'
+            }
+          ]}
+        >
+
+          {/* Emoji do card */}
           <Text style={styles.icone}>🗿</Text>
+
+          {/* Texto do card */}
           <Text style={styles.textoCard}>Pedra</Text>
+
         </View>
 
-        <View style={[styles.card, { width: larguraTela * 0.22, backgroundColor: '#27AE60' }]}>
+        {/* Card Papel */}
+        <View
+          style={[
+            styles.card,
+            {
+              width: larguraTela * 0.22,
+              backgroundColor: '#27AE60'
+            }
+          ]}
+        >
           <Text style={styles.icone}>📜</Text>
           <Text style={styles.textoCard}>Papel</Text>
         </View>
 
-        <View style={[styles.card, { width: larguraTela * 0.22, backgroundColor: '#E67E22' }]}>
+        {/* Card Tesoura */}
+        <View
+          style={[
+            styles.card,
+            {
+              width: larguraTela * 0.22,
+              backgroundColor: '#E67E22'
+            }
+          ]}
+        >
           <Text style={styles.icone}>✂️</Text>
           <Text style={styles.textoCard}>Tesoura</Text>
         </View>
 
-        {/* 4 cards extras */}
-        <View style={[styles.card, { width: larguraTela * 0.22, backgroundColor: '#9B59B6' }]}>
+        {/* Card Fogo */}
+        <View
+          style={[
+            styles.card,
+            {
+              width: larguraTela * 0.22,
+              backgroundColor: '#9B59B6'
+            }
+          ]}
+        >
           <Text style={styles.icone}>🔥</Text>
           <Text style={styles.textoCard}>Fogo</Text>
         </View>
 
-        <View style={[styles.card, { width: larguraTela * 0.22, backgroundColor: '#3498DB' }]}>
+        {/* Card Água */}
+        <View
+          style={[
+            styles.card,
+            {
+              width: larguraTela * 0.22,
+              backgroundColor: '#3498DB'
+            }
+          ]}
+        >
           <Text style={styles.icone}>💧</Text>
           <Text style={styles.textoCard}>Água</Text>
         </View>
 
-        <View style={[styles.card, { width: larguraTela * 0.22, backgroundColor: '#E74C3C' }]}>
+        {/* Card Raio */}
+        <View
+          style={[
+            styles.card,
+            {
+              width: larguraTela * 0.22,
+              backgroundColor: '#E74C3C'
+            }
+          ]}
+        >
           <Text style={styles.icone}>⚡</Text>
           <Text style={styles.textoCard}>Raio</Text>
         </View>
 
-        <View style={[styles.card, { width: larguraTela * 0.22, backgroundColor: '#F1C40F' }]}>
+        {/* Card Estrela */}
+        <View
+          style={[
+            styles.card,
+            {
+              width: larguraTela * 0.22,
+              backgroundColor: '#F1C40F'
+            }
+          ]}
+        >
           <Text style={styles.icone}>🌟</Text>
           <Text style={styles.textoCard}>Estrela</Text>
         </View>
 
       </View>
 
-      {/* 5. Botão abaixo dos cards */}
+      {/* Botão */}
       <TouchableOpacity
+
+        // Estilo do botão
         style={[
           styles.botao,
-          { width: larguraTela * 0.7 }
+          {
+
+            // Botão ocupa 70% da largura da tela
+            width: larguraTela * 0.7
+          }
         ]}
       >
-        <Text style={styles.textoBotao}>ENTRAR</Text>
+
+        {/* Texto do botão */}
+        <Text style={styles.textoBotao}>
+          ENTRAR
+        </Text>
+
       </TouchableOpacity>
 
     </View>
   );
 }
 
+// Criação dos estilos
 const styles = StyleSheet.create({
 
+  // Estilo do container principal
   container: {
+
+    // Faz ocupar toda a tela
     flex: 1,
+
+    // Cor de fundo escura
     backgroundColor: '#121212',
+
+    // Centraliza verticalmente
     justifyContent: 'center',
+
+    // Centraliza horizontalmente
     alignItems: 'center',
+
+    // Espaçamento interno
     padding: 15
   },
 
+  // Estilo da imagem
   imagemTopo: {
+
+    // Deixa imagem redonda
     borderRadius: 100,
+
+    // Espaço abaixo da imagem
     marginBottom: 15
   },
 
+  // Estilo do título
   titulo: {
+
+    // Tamanho da fonte
     fontSize: 26,
+
+    // Cor branca
     color: 'white',
+
+    // Texto em negrito
     fontWeight: 'bold',
+
+    // Centraliza texto
     textAlign: 'center'
   },
 
+  // Estilo do subtítulo
   subtitulo: {
+
+    // Tamanho da fonte
     fontSize: 16,
+
+    // Cor cinza clara
     color: '#cccccc',
+
+    // Espaço abaixo
     marginBottom: 20,
+
+    // Centraliza texto
     textAlign: 'center'
   },
 
-  /* 3. cards com flexDirection */
+  // Container dos cards
   linha: {
+
+    // Organiza os elementos em linha
     flexDirection: 'row',
+
+    // Permite quebrar linha
     flexWrap: 'wrap',
+
+    // Espaço entre os cards
     justifyContent: 'space-between',
+
+    // Ocupa toda largura
     width: '100%',
+
+    // Espaço abaixo
     marginBottom: 25
   },
 
+  // Estilo padrão dos cards
   card: {
+
+    // Altura fixa
     height: 100,
+
+    // Bordas arredondadas
     borderRadius: 12,
+
+    // Margem vertical
     marginVertical: 6,
+
+    // Centraliza verticalmente
     justifyContent: 'center',
+
+    // Centraliza horizontalmente
     alignItems: 'center'
   },
 
+  // Estilo do emoji
   icone: {
+
+    // Tamanho do emoji
     fontSize: 28,
+
+    // Espaço abaixo
     marginBottom: 5
   },
 
+  // Texto dos cards
   textoCard: {
+
+    // Cor branca
     color: 'white',
+
+    // Texto em negrito
     fontWeight: 'bold'
   },
 
+  // Estilo do botão
   botao: {
+
+    // Cor verde
     backgroundColor: '#2ECC71',
+
+    // Espaçamento vertical interno
     paddingVertical: 14,
+
+    // Bordas arredondadas
     borderRadius: 12,
+
+    // Centraliza conteúdo
     alignItems: 'center'
   },
 
+  // Texto do botão
   textoBotao: {
+
+    // Cor branca
     color: 'white',
+
+    // Tamanho da fonte
     fontSize: 18,
+
+    // Negrito
     fontWeight: 'bold'
   }
 
