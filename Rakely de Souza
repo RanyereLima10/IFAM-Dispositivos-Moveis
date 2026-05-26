@@ -206,67 +206,141 @@ TouchableOpacity,
 Image,
 Dimensions,
 ScrollView,
+Alert,
 } from 'react-native';
 
 const largura = Dimensions.get('window').width;
 
 export default function App() {
+
+function mostrarMensagem(tema) {
+
+let mensagem = '';
+
+switch (tema) {
+case 'HTML':
+mensagem = 'HTML é usado para criar a estrutura de sites.';
+break;
+
+case 'CSS':
+mensagem = 'CSS serve para estilizar páginas e deixar tudo bonito.';
+break;
+
+case 'React':
+mensagem = 'React ajuda a criar interfaces modernas e rápidas.';
+break;
+
+case 'Mobile':
+mensagem = 'Mobile é o desenvolvimento de aplicativos para celular.';
+break;
+
+case 'Lógica':
+mensagem = 'Lógica de programação ajuda a resolver problemas.';
+break;
+
+case 'Web':
+mensagem = 'Web envolve criação de sites e sistemas online.';
+break;
+
+case 'API':
+mensagem = 'API conecta sistemas diferentes e troca informações.';
+break;
+
+case 'UI Design':
+mensagem = 'UI Design cuida da aparência e experiência visual.';
+break;
+}
+
+Alert.alert(tema, mensagem);
+}
+
 return (
-<ScrollView contentContainerStyle={styles.container}>
+<View style={styles.container}>
+<ScrollView contentContainerStyle={styles.scrollContent}>
 
 {/* Imagem no topo */}
 <Image
 source={{
-uri: 'https://cdn-icons-png.flaticon.com/512/4712/4712109.png',
+uri: 'https://static.vecteezy.com/system/resources/previews/049/873/333/non_2x/blue-lilies-love-photo.jpeg',
 }}
-style={styles.imagem}
+style={styles.imagemTopo}
 />
 
 {/* Título */}
 <Text style={styles.titulo}>Aprendendo Juntos</Text>
 
+{/* Subtítulo */}
+<Text style={styles.subtitulo}>
+💙
+</Text>
 
 {/* Cards */}
 <View style={styles.areaCards}>
-<View style={styles.card}>
+
+<TouchableOpacity
+style={styles.card}
+onPress={() => mostrarMensagem('HTML')}
+>
 <Text style={styles.icone}>💻</Text>
 <Text style={styles.textoCard}>HTML</Text>
-</View>
+</TouchableOpacity>
 
-<View style={styles.card}>
+<TouchableOpacity
+style={styles.card}
+onPress={() => mostrarMensagem('CSS')}
+>
 <Text style={styles.icone}>🎨</Text>
 <Text style={styles.textoCard}>CSS</Text>
-</View>
+</TouchableOpacity>
 
-<View style={styles.card}>
+<TouchableOpacity
+style={styles.card}
+onPress={() => mostrarMensagem('React')}
+>
 <Text style={styles.icone}>⚛️</Text>
 <Text style={styles.textoCard}>React</Text>
-</View>
+</TouchableOpacity>
 
-<View style={styles.card}>
+<TouchableOpacity
+style={styles.card}
+onPress={() => mostrarMensagem('Mobile')}
+>
 <Text style={styles.icone}>📱</Text>
 <Text style={styles.textoCard}>Mobile</Text>
-</View>
+</TouchableOpacity>
 
-<View style={styles.card}>
+<TouchableOpacity
+style={styles.card}
+onPress={() => mostrarMensagem('Lógica')}
+>
 <Text style={styles.icone}>🧠</Text>
 <Text style={styles.textoCard}>Lógica</Text>
-</View>
+</TouchableOpacity>
 
-<View style={styles.card}>
+<TouchableOpacity
+style={styles.card}
+onPress={() => mostrarMensagem('Web')}
+>
 <Text style={styles.icone}>🌐</Text>
 <Text style={styles.textoCard}>Web</Text>
-</View>
+</TouchableOpacity>
 
-<View style={styles.card}>
+<TouchableOpacity
+style={styles.card}
+onPress={() => mostrarMensagem('API')}
+>
 <Text style={styles.icone}>☁️</Text>
 <Text style={styles.textoCard}>API</Text>
-</View>
+</TouchableOpacity>
 
-<View style={styles.card}>
+<TouchableOpacity
+style={styles.card}
+onPress={() => mostrarMensagem('UI Design')}
+>
 <Text style={styles.icone}>✨</Text>
 <Text style={styles.textoCard}>UI Design</Text>
-</View>
+</TouchableOpacity>
+
 </View>
 
 {/* Botão */}
@@ -275,22 +349,28 @@ style={styles.imagem}
 </TouchableOpacity>
 
 </ScrollView>
+</View>
 );
 }
 
 const styles = StyleSheet.create({
+
 container: {
-flexGrow: 1,
+flex: 1,
 backgroundColor: '#EAF6FF',
+},
+
+scrollContent: {
 alignItems: 'center',
-paddingVertical: 40,
+paddingVertical: 1,
 paddingHorizontal: 15,
 },
 
-imagem: {
-width: 150,
-height: 150,
-marginBottom: 15,
+imagemTopo: {
+width: '120%',
+height: 200,
+marginBottom: 30,
+resizeMode:'cover',
 },
 
 titulo: {
@@ -343,6 +423,7 @@ backgroundColor: '#7DB7E8',
 paddingVertical: 15,
 paddingHorizontal: 40,
 borderRadius: 30,
+marginBottom: 40,
 },
 
 textoBotao: {
@@ -350,6 +431,7 @@ color: '#fff',
 fontWeight: 'bold',
 fontSize: 16,
 },
+
 });
 
 *********************************************************************
