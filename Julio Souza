@@ -1311,3 +1311,438 @@ const styles = StyleSheet.create({
     backgroundColor: '#DC3545'
   }
 });
+
+/**********************************************************************
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Julio Cesar de Souza Albuquerque
+DATA: 26/05/2026
+BIMESTRE: 2º Bimestre
+DESCRIÇÃO: CRUD de Produtos + Desafio
+
+**********************************************************************/
+
+import React, { useState } from 'react';
+
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  FlatList,
+  StyleSheet,
+  Alert,
+  ScrollView
+} from 'react-native';
+
+// IMPORTAÇÃO DO PICKER
+import { Picker } from '@react-native-picker/picker';
+
+export default function App() {
+
+  // Lista de produtos
+  const [produtos, setProdutos] = useState([]);
+
+  // Campos do formulário
+  const [nome, setNome] = useState('');
+  const [preco, setPreco] = useState('');
+  const [descricao, setDescricao] = useState('');
+  const [quantidade, setQuantidade] = useState('');
+
+  // PICKER (curso/categoria)
+  const [curso, setCurso] = useState('Informática');
+
+  // Controle de edição
+  const [editandoId, setEditandoId] = useState(null);
+
+  // Limpar campos
+  const limparCampos = () => {
+
+    setNome('');
+    setPreco('');
+    setDescricao('');
+    setQuantidade('');
+    setCurso('Informática');
+    setEditandoId(null);
+  };
+
+  // Validação
+  const validarCampos = () => {
+
+    if (
+      !nome ||
+      !preco ||
+      !descricao ||
+      !quantidade
+    ) {
+
+      Alert.alert('Erro', 'Todos os campos são obrigatórios!');
+      return false;
+    }
+
+    if (isNaN(preco) || Number(preco) <= 0) {
+
+      Alert.alert('Erro', 'Digite um preço válido!');
+      return false;
+    }
+
+    if (isNaN(quantidade) || Number(quantidade) < 0) {
+
+      Alert.alert('Erro', 'Digite uma quantidade válida!');
+      return false;
+    }
+
+    return true;
+  };
+
+  // Salvar produto
+  const salvarProduto = () => {
+
+    if (!validarCampos()) return;
+
+    const novoProduto = {
+
+      id: editandoId
+        ? editandoId
+        : Date.now().toString(),
+
+      nome,
+      preco,
+      descricao,
+      quantidade,
+
+      // VALOR DO PICKER
+      curso
+    };
+
+    // Editar produto
+    if (editandoId) {
+
+      const listaAtualizada = produtos.map((produto) =>
+        produto.id === editandoId
+          ? novoProduto
+          : produto
+      );
+
+      setProdutos(listaAtualizada);
+
+      Alert.alert('Sucesso', 'Produto atualizado!');
+    }
+
+    // Novo produto
+    else {
+
+      setProdutos([...produtos, novoProduto]);
+
+      Alert.alert('Sucesso', 'Produto cadastrado!');
+    }
+
+    limparCampos();
+  };
+
+  // Deletar produto
+  const deletarProduto = (id) => {
+
+    const novaLista = produtos.filter(
+      (produto) => produto.id !== id
+    );
+
+    setProdutos(novaLista);
+  };
+
+  // Editar produto
+  const editarProduto = (produto) => {
+
+    setNome(produto.nome);
+    setPreco(produto.preco);
+    setDescricao(produto.descricao);
+    setQuantidade(produto.quantidade);
+
+    // CARREGA O PICKER
+    setCurso(produto.curso);
+
+    setEditandoId(produto.id);
+  };
+
+  return (
+
+    <ScrollView style={styles.container}>
+
+      {/* Título */}
+      <Text style={styles.titulo}>
+        Cadastro de Produtos
+      </Text>
+
+      {/* Nome */}
+      <TextInput
+        style={styles.input}
+        placeholder="Nome do produto"
+        value={nome}
+        onChangeText={setNome}
+      />
+
+      {/* Preço */}
+      <TextInput
+        style={styles.input}
+        placeholder="Preço"
+        keyboardType="numeric"
+        value={preco}
+        onChangeText={setPreco}
+      />
+
+      {/* Quantidade */}
+      <TextInput
+        style={styles.input}
+        placeholder="Quantidade"
+        keyboardType="numeric"
+        value={quantidade}
+        onChangeText={setQuantidade}
+      />
+
+      {/* PICKER */}
+      <Text style={styles.label}>
+        Escolha um curso:
+      </Text>
+
+      <View style={styles.pickerContainer}>
+
+        <Picker
+          selectedValue={curso}
+          style={styles.picker}
+          onValueChange={(itemValue) =>
+            setCurso(itemValue)
+          }
+        >
+
+          <Picker.Item
+            label="Informática"
+            value="Informática"
+          />
+
+          <Picker.Item
+            label="Administração"
+            value="Administração"
+          />
+
+          <Picker.Item
+            label="Enfermagem"
+            value="Enfermagem"
+          />
+
+          <Picker.Item
+            label="Edificações"
+            value="Edificações"
+          />
+
+        </Picker>
+      </View>
+
+      {/* Descrição */}
+      <TextInput
+        style={[styles.input, styles.textArea]}
+        placeholder="Descrição"
+        multiline
+        numberOfLines={4}
+        value={descricao}
+        onChangeText={setDescricao}
+      />
+
+      {/* Botão salvar */}
+      <TouchableOpacity
+        style={styles.botao}
+        onPress={salvarProduto}
+      >
+
+        <Text style={styles.textoBotao}>
+
+          {editandoId
+            ? 'Atualizar Produto'
+            : 'Cadastrar Produto'}
+
+        </Text>
+
+      </TouchableOpacity>
+
+      {/* Subtítulo */}
+      <Text style={styles.subtitulo}>
+        Produtos Cadastrados
+      </Text>
+
+      {/* Lista */}
+      <FlatList
+
+        data={produtos}
+
+        keyExtractor={(item) => item.id}
+
+        scrollEnabled={false}
+
+        renderItem={({ item }) => (
+
+          <View style={styles.card}>
+
+            {/* Nome */}
+            <Text style={styles.nomeProduto}>
+              {item.nome}
+            </Text>
+
+            {/* Preço */}
+            <Text>
+              Preço: R$ {item.preco}
+            </Text>
+
+            {/* Quantidade */}
+            <Text>
+              Quantidade: {item.quantidade}
+            </Text>
+
+            {/* Curso */}
+            <Text>
+              Curso: {item.curso}
+            </Text>
+
+            {/* Descrição */}
+            <Text>
+              Descrição: {item.descricao}
+            </Text>
+
+            {/* Botões */}
+            <View style={styles.botoesContainer}>
+
+              {/* Editar */}
+              <TouchableOpacity
+                style={[styles.botaoAcao, styles.editar]}
+                onPress={() => editarProduto(item)}
+              >
+
+                <Text style={styles.textoBotao}>
+                  Editar
+                </Text>
+
+              </TouchableOpacity>
+
+              {/* Deletar */}
+              <TouchableOpacity
+                style={[styles.botaoAcao, styles.deletar]}
+                onPress={() => deletarProduto(item.id)}
+              >
+
+                <Text style={styles.textoBotao}>
+                  Deletar
+                </Text>
+
+              </TouchableOpacity>
+
+            </View>
+
+          </View>
+        )}
+      />
+
+    </ScrollView>
+  );
+}
+
+const styles = StyleSheet.create({
+
+  container: {
+    flex: 1,
+    padding: 20,
+    marginTop: 40,
+    backgroundColor: '#F2F2F2'
+  },
+
+  titulo: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 20
+  },
+
+  subtitulo: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginTop: 30,
+    marginBottom: 10
+  },
+
+  label: {
+    fontSize: 18,
+    marginBottom: 5,
+    fontWeight: 'bold'
+  },
+
+  input: {
+    backgroundColor: '#FFF',
+    borderWidth: 1,
+    borderColor: '#CCC',
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 15
+  },
+
+  pickerContainer: {
+    backgroundColor: '#FFF',
+    borderWidth: 1,
+    borderColor: '#CCC',
+    borderRadius: 8,
+    marginBottom: 15
+  },
+
+  picker: {
+    height: 50
+  },
+
+  textArea: {
+    height: 100
+  },
+
+  botao: {
+    backgroundColor: '#007BFF',
+    padding: 15,
+    borderRadius: 8,
+    alignItems: 'center'
+  },
+
+  textoBotao: {
+    color: '#FFF',
+    fontWeight: 'bold'
+  },
+
+  card: {
+    backgroundColor: '#FFF',
+    padding: 15,
+    borderRadius: 8,
+    marginBottom: 15
+  },
+
+  nomeProduto: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 5
+  },
+
+  botoesContainer: {
+    flexDirection: 'row',
+    marginTop: 10
+  },
+
+  botaoAcao: {
+    flex: 1,
+    padding: 10,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginHorizontal: 5
+  },
+
+  editar: {
+    backgroundColor: '#28A745'
+  },
+
+  deletar: {
+    backgroundColor: '#DC3545'
+  }
+
+});
