@@ -1349,11 +1349,309 @@ const styles = StyleSheet.create({
 });
 
 
+************+***************************************************************************+***************************************************************************+***************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Jasmin Silva De Lima
+DATA:  12/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição:O código foi desenvolvido em React Native com Expo para criar uma tela responsiva de cursos.
+A aplicação possui uma imagem no topo, título, subtítulo, cards coloridos com ícones e um botão na parte inferior.
+Os cards são gerados dinamicamente através de um array utilizando o método `map()`, facilitando a organização do conteúdo. 
+O layout utiliza Flexbox para deixar os elementos responsivos em diferentes tamanhos de tela.
+Também foram adicionadas novas cores, mais 4 cards, ícones personalizados e um botão interativo para melhorar o visual e a experiência do usuário.
 
+************+***************************************************************************+***************************************************************************+********************************************
 
+import React from 'react';
+// Importa o React para criar componentes
 
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
 
+/*
+View = cria áreas/blocos na tela
+Text = mostra textos
+StyleSheet = cria estilos CSS do React Native
+ScrollView = permite rolar a tela
+TouchableOpacity = cria botão clicável
+Image = exibe imagens
+*/
 
+import { MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
+// Importa bibliotecas de ícones do Expo
 
+export default function App() {
+// Cria o componente principal do aplicativo
 
+  const cards = [
+    /*
+    Array com os dados dos cards.
+    Cada card possui:
+    titulo = nome
+    cor = cor do card
+    icone = ícone do card
+    */
 
+    { titulo: 'HTML', cor: '#6C63FF', icone: 'code' },
+
+    { titulo: 'CSS', cor: '#FF9800', icone: 'brush' },
+
+    { titulo: 'JavaScript', cor: '#4CAF50', icone: 'javascript' },
+
+    { titulo: 'React Native', cor: '#2196F3', icone: 'mobile-alt' },
+
+    { titulo: 'Banco de Dados', cor: '#9C27B0', icone: 'storage' },
+
+    { titulo: 'API', cor: '#009688', icone: 'cloud' },
+
+    { titulo: 'Deploy', cor: '#E91E63', icone: 'rocket' },
+
+    { titulo: 'UX Design', cor: '#795548', icone: 'palette' },
+  ];
+
+  return (
+    // Tudo que será mostrado na tela fica dentro do return
+
+    <ScrollView contentContainerStyle={styles.container}>
+      {/* 
+      ScrollView permite rolar a tela para cima e para baixo
+      contentContainerStyle aplica estilo no conteúdo interno
+      */}
+
+      {/* IMAGEM DO TOPO */}
+      <Image
+        source={{
+          uri: 'https://cdn-icons-png.flaticon.com/512/2721/2721297.png',
+        }}
+        /*
+        source = imagem que será carregada
+        uri = endereço da imagem na internet
+        */
+
+        style={styles.imagem}
+        // Aplica o estilo da imagem
+      />
+
+      {/* TÍTULO PRINCIPAL */}
+      <Text style={styles.titulo}>
+        Aprendendo Juntos
+      </Text>
+
+      {/* SUBTÍTULO */}
+      <Text style={styles.subtitulo}>
+        Cursos e conteúdos para impulsionar seus estudos
+      </Text>
+
+      {/* ÁREA DOS CARDS */}
+      <View style={styles.cardsContainer}>
+
+        {cards.map((card, index) => (
+          /*
+          map percorre todos os cards do array
+          e cria um card para cada item
+          */
+
+          <View
+            key={index}
+            // chave única para cada item
+
+            style={[
+              styles.card,
+              { backgroundColor: card.cor }
+            ]}
+            /*
+            styles.card = estilo padrão
+            backgroundColor = cor dinâmica do card
+            */
+          >
+
+            {/* ÍCONE */}
+            <FontAwesome5
+              name={card.icone}
+              // nome do ícone
+
+              size={30}
+              // tamanho do ícone
+
+              color="#fff"
+              // cor branca
+            />
+
+            {/* TEXTO DO CARD */}
+            <Text style={styles.cardTexto}>
+              {card.titulo}
+            </Text>
+
+          </View>
+        ))}
+      </View>
+
+      {/* BOTÃO */}
+      <TouchableOpacity style={styles.botao}>
+        {/*
+        TouchableOpacity cria botão clicável
+        */}
+
+        <MaterialIcons
+          name="rocket-launch"
+          size={22}
+          color="#fff"
+        />
+
+        <Text style={styles.botaoTexto}>
+          {' '}COMEÇAR AGORA
+        </Text>
+
+      </TouchableOpacity>
+
+    </ScrollView>
+  );
+}
+
+/* =========================
+   ESTILOS
+========================= */
+
+const styles = StyleSheet.create({
+
+  container: {
+    /*
+    Estilo principal da tela
+    */
+
+    padding: 20,
+    // espaço interno
+
+    alignItems: 'center',
+    // centraliza horizontalmente
+
+    backgroundColor: '#F2F4F8',
+    // cor de fundo
+  },
+
+  imagem: {
+
+    width: 180,
+    // largura da imagem
+
+    height: 180,
+    // altura da imagem
+
+    marginTop: 20,
+    // espaço acima
+
+    marginBottom: 10,
+    // espaço abaixo
+  },
+
+  titulo: {
+
+    fontSize: 28,
+    // tamanho da letra
+
+    fontWeight: 'bold',
+    // negrito
+
+    color: '#333',
+    // cor do texto
+  },
+
+  subtitulo: {
+
+    fontSize: 14,
+
+    color: '#666',
+
+    marginBottom: 20,
+
+    textAlign: 'center',
+    // centraliza o texto
+  },
+
+  cardsContainer: {
+
+    flexDirection: 'row',
+    /*
+    coloca os cards lado a lado
+    */
+
+    flexWrap: 'wrap',
+    /*
+    quebra linha quando faltar espaço
+    */
+
+    justifyContent: 'space-between',
+    /*
+    cria espaço entre os cards
+    */
+  },
+
+  card: {
+
+    width: '47%',
+    // largura dos cards
+
+    borderRadius: 15,
+    // bordas arredondadas
+
+    padding: 20,
+
+    marginBottom: 15,
+
+    alignItems: 'center',
+
+    elevation: 4,
+    // sombra Android
+  },
+
+  cardTexto: {
+
+    color: '#fff',
+
+    fontWeight: 'bold',
+
+    marginTop: 10,
+
+    textAlign: 'center',
+  },
+
+  botao: {
+
+    flexDirection: 'row',
+    // ícone e texto lado a lado
+
+    backgroundColor: '#3F51B5',
+
+    paddingVertical: 15,
+    // espaço vertical
+
+    paddingHorizontal: 30,
+    // espaço horizontal
+
+    borderRadius: 30,
+    // botão arredondado
+
+    marginTop: 20,
+
+    alignItems: 'center',
+
+    elevation: 5,
+  },
+
+  botaoTexto: {
+
+    color: '#fff',
+
+    fontSize: 16,
+
+    fontWeight: 'bold',
+  },
+});
