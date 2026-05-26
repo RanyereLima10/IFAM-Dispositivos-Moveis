@@ -2091,3 +2091,255 @@ const styles = StyleSheet.create({
     fontFamily: 'fantasy',
   },
 });
+
+
+************+***************************************************************************+***************************************************************************+***************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Bruno Guilherme Alves de Souza
+DATA:  26/ 05 /2026
+Bimestre: 2º Bimestre
+Atividade
+************+***************************************
+// Importa o React
+import React from 'react';
+
+// Importa componentes principais do React Native
+import {
+  View, // Container para agrupar elementos
+  Text, // Exibe textos
+  StyleSheet, // Cria estilos
+  ScrollView, // Permite rolagem da tela
+  Image, // Exibe imagens
+  TouchableOpacity, // Botão clicável com efeito de toque
+} from 'react-native';
+
+// Importa bibliotecas de ícones
+import {
+  Ionicons,
+  MaterialIcons,
+  FontAwesome5
+} from '@expo/vector-icons';
+
+// Componente principal do aplicativo
+export default function App() {
+
+  // Array contendo os dados dos cards
+  const cards = [
+    {
+      title: 'HTML', // Título do card
+      subtitle: 'Estrutura de páginas', // Subtítulo
+      color: '#6C63FF', // Cor de fundo
+      icon: 'logo-html5', // Ícone
+    },
+    {
+      title: 'CSS',
+      subtitle: 'Estilização',
+      color: '#FF914D',
+      icon: 'logo-css3',
+    },
+    {
+      title: 'JavaScript',
+      subtitle: 'Lógica e interações',
+      color: '#4CAF50',
+      icon: 'logo-javascript',
+    },
+    {
+      title: 'React Native',
+      subtitle: 'Apps mobile',
+      color: '#2196F3',
+      icon: 'logo-react',
+    },
+    {
+      title: 'UI Design',
+      subtitle: 'Interfaces modernas',
+      color: '#E91E63',
+      icon: 'phone-portrait',
+    },
+    {
+      title: 'API',
+      subtitle: 'Integração de dados',
+      color: '#00BCD4',
+      icon: 'cloud-outline',
+    },
+    {
+      title: 'Banco de Dados',
+      subtitle: 'Armazenamento',
+      color: '#FFC107',
+      icon: 'server-outline',
+    },
+    {
+      title: 'Deploy',
+      subtitle: 'Publicação do app',
+      color: '#9C27B0',
+      icon: 'rocket-outline',
+    },
+  ];
+
+  // Retorno da interface
+  return (
+
+    // ScrollView permite rolar a tela verticalmente
+    <ScrollView contentContainerStyle={styles.container}>
+
+      {/* Imagem exibida no topo da tela */}
+      <Image
+        source={{
+          uri: 'https://cdn-icons-png.flaticon.com/512/1055/1055687.png',
+        }}
+        style={styles.topImage}
+      />
+
+      {/* Título principal */}
+      <Text style={styles.title}>Aprendendo Juntos</Text>
+
+      {/* Subtítulo */}
+      <Text style={styles.subtitle}>
+        Cursos e conteúdos para impulsionar seus estudos
+      </Text>
+
+      {/* Container dos cards */}
+      <View style={styles.cardsContainer}>
+
+        {/* Percorre o array de cards e cria um card para cada item */}
+        {cards.map((card, index) => (
+
+          <View
+            key={index}
+            style={[
+              styles.card,
+              { backgroundColor: card.color } // Cor dinâmica
+            ]}
+          >
+
+            {/* Ícone do card */}
+            <Ionicons
+              name={card.icon}
+              size={32}
+              color="#fff"
+            />
+
+            {/* Título do card */}
+            <Text style={styles.cardTitle}>
+              {card.title}
+            </Text>
+
+            {/* Subtítulo do card */}
+            <Text style={styles.cardSubtitle}>
+              {card.subtitle}
+            </Text>
+
+          </View>
+        ))}
+      </View>
+
+      {/* Botão principal */}
+      <TouchableOpacity style={styles.button}>
+
+        {/* Ícone do botão */}
+        <FontAwesome5
+          name="rocket"
+          size={18}
+          color="#fff"
+        />
+
+        {/* Texto do botão */}
+        <Text style={styles.buttonText}>
+          {' '}COMEÇAR AGORA
+        </Text>
+
+      </TouchableOpacity>
+
+    </ScrollView>
+  );
+}
+
+// Criação dos estilos
+const styles = StyleSheet.create({
+
+  // Container principal
+  container: {
+    flexGrow: 1,
+    backgroundColor: '#F4F6FC',
+    alignItems: 'center',
+    padding: 20,
+    paddingTop: 50,
+  },
+
+  // Estilo da imagem superior
+  topImage: {
+    width: 140,
+    height: 140,
+    marginBottom: 20,
+  },
+
+  // Estilo do título principal
+  title: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#333',
+  },
+
+  // Estilo do subtítulo
+  subtitle: {
+    fontSize: 14,
+    color: '#666',
+    textAlign: 'center',
+    marginBottom: 25,
+    marginTop: 5,
+    paddingHorizontal: 20,
+  },
+
+  // Container dos cards
+  cardsContainer: {
+    flexDirection: 'row', // Organiza em linha
+    flexWrap: 'wrap', // Permite quebrar linha
+    justifyContent: 'space-between',
+  },
+
+  // Estilo individual do card
+  card: {
+    width: '47%',
+    borderRadius: 16,
+    padding: 18,
+    marginBottom: 15,
+    alignItems: 'center',
+    elevation: 4, // Sombra Android
+  },
+
+  // Texto do título do card
+  cardTitle: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginTop: 10,
+  },
+
+  // Texto do subtítulo do card
+  cardSubtitle: {
+    color: '#fff',
+    fontSize: 12,
+    textAlign: 'center',
+    marginTop: 5,
+  },
+
+  // Estilo do botão
+  button: {
+    flexDirection: 'row',
+    backgroundColor: '#3D5AFE',
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    borderRadius: 30,
+    alignItems: 'center',
+    marginTop: 10,
+    marginBottom: 30,
+  },
+
+  // Texto do botão
+  buttonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+});
