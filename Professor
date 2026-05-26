@@ -1,3 +1,84 @@
+
+////////////////////////////////// Picker /////////////////////////////////////////////
+
+import React, { useState } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+
+import { Picker } from '@react-native-picker/picker';
+
+export default function App() {
+
+  const [curso, setCurso] = useState('Informática');
+
+  return (
+
+    <View style={styles.container}>
+
+      <Text style={styles.titulo}>
+        Escolha um curso:
+      </Text>
+
+      <Picker
+        selectedValue={curso}
+        style={styles.picker}
+        onValueChange={(itemValue) => setCurso(itemValue)}
+      >
+
+        <Picker.Item label="Informática" value="Informática" />
+        <Picker.Item label="Administração" value="Administração" />
+        <Picker.Item label="Enfermagem" value="Enfermagem" />
+        <Picker.Item label="Edificações" value="Edificações" />
+
+      </Picker>
+
+      <Text style={styles.resultado}>
+        Curso escolhido: {curso}
+      </Text>
+
+    </View>
+
+  );
+}
+
+const styles = StyleSheet.create({
+
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 20,
+  },
+
+  titulo: {
+    fontSize: 22,
+    marginBottom: 10,
+    textAlign: 'center',
+  },
+
+  picker: {
+    backgroundColor: '#ddd',
+  },
+
+  resultado: {
+    marginTop: 20,
+    fontSize: 20,
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
+
+});
+
+
+
+
+
+
+
+////////////////////////////////// Picker /////////////////////////////////////////////
+
+
+
+
+
 import React from 'react';
 import { Text, View } from 'react-native';
 
