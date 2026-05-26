@@ -972,3 +972,215 @@ const styles = StyleSheet.create({
     lineHeight: 18,
   },
 });
+
+
+******************************************************************************************************************************************************************************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Laura Emanuelle Menezes
+DATA:  26/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição: Este código em React Native cria a tela de um aplicativo de estudos chamado "Aprendendo Juntos". Ele exibe uma imagem no topo, um título, um subtítulo e uma lista de 8 cursos de tecnologia (como HTML, CSS e React Native).
+Esses cursos são renderizados dinamicamente a partir de uma lista de dados e organizados em uma grade colorida de duas colunas com ícones personalizados. Toda a interface fica dentro de uma área de rolagem vertical, permitindo navegar por todo o conteúdo em qualquer tamanho de tela, e termina com um botão interativo "COMEÇAR AGORA" na parte inferior.
+A estilização utiliza um fundo cinza claro, textos centralizados, cartões com bordas arredondadas e sombras para dar um aspecto moderno e limpo.
+*****************************************************************************************************************************************************************************************************************************
+
+// Importa o React para permitir criar componentes
+import React from 'react';
+
+// Importa componentes visuais do React Native
+import {
+  View, // Container para organizar elementos
+  Text, // Exibe textos na tela
+  StyleSheet, // Cria estilos organizados
+  ScrollView, // Permite rolagem da tela
+  TouchableOpacity, // Botão com efeito de toque
+  Image, // Exibe imagens
+} from 'react-native';
+
+// Importa ícones das bibliotecas Expo
+import { MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
+
+// Cria o componente principal do aplicativo
+export default function App() {
+
+  // Array contendo os dados dos cards
+  const cards = [
+
+    // Card HTML
+    { titulo: 'HTML', cor: '#A7B17A', icone: 'code' },
+
+    // Card CSS
+    { titulo: 'CSS', cor: '#FF9800', icone: 'brush' },
+
+    // Card JavaScript
+    { titulo: 'JavaScript', cor: '#9F97CB', icone: 'javascript' },
+
+    // Card React Native
+    { titulo: 'React Native', cor: '#2196F3', icone: 'mobile-alt' },
+
+    // Card Banco de Dados
+    { titulo: 'Banco de Dados', cor: '#9C27B0', icone: 'storage' },
+
+    // Card API
+    { titulo: 'API', cor: '#009688', icone: 'cloud' },
+
+    // Card Deploy
+    { titulo: 'Deploy', cor: '#BC75A5', icone: 'rocket' },
+
+    // Card UX Design
+    { titulo: 'UX Design', cor: '#795548', icone: 'palette' },
+  ];
+
+  // Retorna os elementos que aparecerão na tela
+  return (
+
+    // ScrollView permite rolar a tela caso o conteúdo ultrapasse o tamanho
+    <ScrollView contentContainerStyle={styles.container}>
+     
+      {/* IMAGEM DO TOPO */}
+      <Image
+
+        // Define a imagem usando uma URL da internet
+        source={{
+          uri: 'https://w7.pngwing.com/pngs/568/379/png-transparent-technology-computer-icons-technology-electronics-text-logo.png',
+        }}
+
+        // Aplica os estilos da imagem
+        style={styles.imagem}
+      />
+
+      {/* Texto principal */}
+      <Text style={styles.titulo}>Aprendendo Juntos</Text>
+
+      {/* Texto secundário */}
+      <Text style={styles.subtitulo}>
+        Cursos e conteúdos para impulsionar seus estudos
+      </Text>
+
+      {/* Container que guarda todos os cards */}
+      <View style={styles.cardsContainer}>
+
+        {/* Percorre o array cards e cria um card para cada item */}
+        {cards.map((card, index) => (
+
+          // View representando um card
+          <View
+            key={index} // Chave única para cada card
+
+            // Junta o estilo padrão do card com a cor específica
+            style={[styles.card, { backgroundColor: card.cor }]}
+          >
+
+            {/* Ícone do card */}
+            <FontAwesome5
+              name={card.icone} // Nome do ícone
+              size={30} // Tamanho do ícone
+              color="#fff" // Cor branca
+            />
+
+            {/* Texto do card */}
+            <Text style={styles.cardTexto}>
+              {card.titulo}
+            </Text>
+          </View>
+        ))}
+      </View>
+
+      {/* BOTÃO */}
+      <TouchableOpacity style={styles.botao}>
+
+        {/* Ícone dentro do botão */}
+        <MaterialIcons
+          name="rocket-launch"
+          size={22}
+          color="#fff"
+        />
+
+        {/* Texto do botão */}
+        <Text style={styles.botaoTexto}>
+          {' '}COMEÇAR AGORA
+        </Text>
+      </TouchableOpacity>
+    </ScrollView>
+  );
+}
+
+// Cria os estilos do aplicativo
+const styles = StyleSheet.create({
+
+  // Estilo do container principal
+  container: {
+    padding: 20, // Espaçamento interno
+    alignItems: 'center', // Centraliza os itens horizontalmente
+    backgroundColor: '#F2F4F8', // Cor de fundo
+  },
+
+  // Estilo da imagem
+  imagem: {
+    width: 180, // Largura da imagem
+    height: 180, // Altura da imagem
+    marginTop: 20, // Espaço acima da imagem
+    marginBottom: 10, // Espaço abaixo da imagem
+  },
+
+  // Estilo do título principal
+  titulo: {
+    fontSize: 28, // Tamanho da fonte
+    fontWeight: 'bold', // Texto em negrito
+    color: '#333', // Cor do texto
+  },
+
+  // Estilo do subtítulo
+  subtitulo: {
+    fontSize: 14, // Tamanho da fonte
+    color: '#666', // Cor cinza
+    marginBottom: 20, // Espaço abaixo
+    textAlign: 'center', // Centraliza o texto
+  },
+
+  // Container dos cards
+  cardsContainer: {
+    flexDirection: 'row', // Organiza os cards em linha
+    flexWrap: 'wrap', // Permite quebrar linha
+    justifyContent: 'space-between', // Espaçamento entre os cards
+  },
+
+  // Estilo de cada card
+  card: {
+    width: '47%', // Largura do card
+    borderRadius: 15, // Bordas arredondadas
+    padding: 30, // Espaçamento interno
+    marginBottom: 15, // Espaço abaixo
+    alignItems: 'center', // Centraliza conteúdo
+    elevation: 4, // Sombra no Android
+  },
+
+  // Texto dentro do card
+  cardTexto: {
+    color: '#fff', // Cor branca
+    fontWeight: 'bold', // Texto em negrito
+    marginTop: 7, // Espaço acima do texto
+    textAlign: 'center', // Centraliza o texto
+  },
+
+  // Estilo do botão
+  botao: {
+    flexDirection: 'row', // Ícone e texto lado a lado
+    backgroundColor: '#3F51B5', // Cor do botão
+    paddingVertical: 15, // Espaçamento vertical
+    paddingHorizontal: 30, // Espaçamento horizontal
+    borderRadius: 30, // Bordas arredondadas
+    marginTop: 20, // Espaço acima
+    alignItems: 'center', // Centraliza conteúdo
+    elevation: 5, // Sombra
+  },
+
+  // Texto do botão
+  botaoTexto: {
+    color: '#fff', // Cor branca
+    fontSize: 16, // Tamanho da fonte
+    fontWeight: 'bold', // Texto em negrito
+  },
+});
