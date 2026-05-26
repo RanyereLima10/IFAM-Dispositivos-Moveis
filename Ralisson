@@ -1100,14 +1100,14 @@ const larguraCard = Dimensions.get('window').width * 0.43;
 
 export default function App() {
   const cards = [
-    { nome: 'HTML', cor: '#9B59B6', icone: '</>' },
-    { nome: 'CSS', cor: '#E67E22', icone: '✏️' },
-    { nome: 'JavaScript', cor: '#2ECC71', icone: 'JS' },
-    { nome: 'React Native', cor: '#3498DB', icone: '⚛️' },
-    { nome: 'Mobile UI', cor: '#E74C3C', icone: '📱' },
-    { nome: 'API', cor: '#1ABC9C', icone: '☁️' },
-    { nome: 'Banco de Dados', cor: '#F1C40F', icone: '🗄️' },
-    { nome: 'Deploy', cor: '#34495E', icone: '🚀' },
+    { nome: 'HTML', cor: '#B73C25', icone: '</>' },
+    { nome: 'CSS', cor: '#B73C25', icone: '✏️' },
+    { nome: 'JavaScript', cor: '#B73C25', icone: 'JS' },
+    { nome: 'React Native', cor: '#B73C25', icone: '⚛️' },
+    { nome: 'Mobile UI', cor: '#B73C25', icone: '📱' },
+    { nome: 'API', cor: '#B73C25', icone: '☁️' },
+    { nome: 'Banco de Dados', cor: '#B73C25', icone: '🗄️' },
+    { nome: 'Deploy', cor: '#B73C25', icone: '🚀' },
   ];
 
   return (
@@ -1115,7 +1115,7 @@ export default function App() {
       <ScrollView contentContainerStyle={styles.scrollContent}>
         
         <Image 
-          source={{ uri: 'https://i.redd.it/w0fu52c6a8t61.jpg' }} 
+          source={{ uri: 'https://s2.glbimg.com/Y3X4qWUVv35RgqHOvGqZ67BtBwg=/600x0/filters:quality(70)/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2022/B/r/RUAqubR0eByCv3ttFVOw/2017-06-12-kratos.jpg' }} 
           style={styles.imagemTopo} 
         />
 
@@ -1142,7 +1142,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F0F4F8',
+    backgroundColor: '#C0C2BE',
   },
   scrollContent: {
     alignItems: 'center',
@@ -1182,18 +1182,18 @@ const styles = StyleSheet.create({
   },
   icone: {
     fontSize: 24,
-    color: 'white',
+    color: '#E7FFEF',
     marginBottom: 5,
   },
   textoCard: {
-    color: 'white',
+    color: '#E7FFEF',
     fontWeight: 'bold',
     fontSize: 14,
   },
   botao: {
     position: 'absolute',
     bottom: 20,
-    backgroundColor: '#3F51B5',
+    backgroundColor: '#B73C25',
     width: '90%',
     alignSelf: 'center',
     padding: 15,
@@ -1201,7 +1201,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   textoBotao: {
-    color: 'white',
+    color: '#E7FFEF',
     fontWeight: 'bold',
     fontSize: 16,
   },
