@@ -730,3 +730,327 @@ const styles = StyleSheet.create({
   },
 
 });
+
+import React, { useState } from 'react';
+
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  FlatList,
+  StyleSheet,
+  Alert,
+  TouchableOpacity
+} from 'react-native';
+
+export default function App() {
+
+  // =========================
+  // LOGIN
+  // =========================
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+  const [logado, setLogado] = useState(false);
+
+  // =========================
+  // PRODUTOS
+  // =========================
+  const [nomeProduto, setNomeProduto] = useState('');
+  const [precoProduto, setPrecoProduto] = useState('');
+  const [categoria, setCategoria] = useState('');
+  const [descricao, setDescricao] = useState('');
+  const [listaProdutos, setListaProdutos] = useState([]);
+
+  const [editandoId, setEditandoId] = useState(null);
+
+  // =========================
+  // LOGIN COM VALIDAÇÃO
+  // =========================
+  function entrar() {
+
+    if (!email || !senha) {
+      Alert.alert('Erro', 'Preencha email e senha');
+      return;
+    }
+
+    if (!email.includes('@')) {
+      Alert.alert('Erro', 'Email inválido');
+      return;
+    }
+
+    if (senha.length < 6) {
+      Alert.alert('Erro', 'A senha deve ter no mínimo 6 caracteres');
+      return;
+    }
+
+    Alert.alert('Sucesso', 'Login realizado com sucesso');
+    setLogado(true);
+  }
+
+  // =========================
+  // SALVAR PRODUTO
+  // =========================
+  function salvarProduto() {
+
+    if (!nomeProduto || !precoProduto || !categoria || !descricao) {
+      Alert.alert('Erro', 'Preencha todos os campos');
+      return;
+    }
+
+    if (isNaN(precoProduto)) {
+      Alert.alert('Erro', 'Preço inválido');
+      return;
+    }
+
+    if (editandoId !== null) {
+
+      const novaLista = listaProdutos.map((item) => {
+        if (item.id === editandoId) {
+          return {
+            ...item,
+            nome: nomeProduto,
+            preco: precoProduto,
+            categoria,
+            descricao
+          };
+        }
+        return item;
+      });
+
+      setListaProdutos(novaLista);
+      Alert.alert('Sucesso', 'Produto atualizado');
+      setEditandoId(null);
+
+    } else {
+
+      const novoProduto = {
+        id: Date.now(),
+        nome: nomeProduto,
+        preco: precoProduto,
+        categoria,
+        descricao
+      };
+
+      setListaProdutos([...listaProdutos, novoProduto]);
+      Alert.alert('Sucesso', 'Produto cadastrado');
+    }
+
+    limparCampos();
+  }
+
+  // =========================
+  // LIMPAR CAMPOS
+  // =========================
+  function limparCampos() {
+    setNomeProduto('');
+    setPrecoProduto('');
+    setCategoria('');
+    setDescricao('');
+  }
+
+  // =========================
+  // VOLTAR PARA LOGIN (NOVO)
+  // =========================
+  function voltarLogin() {
+    setLogado(false);
+
+    setEmail('');
+    setSenha('');
+
+    setListaProdutos([]);
+    setNomeProduto('');
+    setPrecoProduto('');
+    setCategoria('');
+    setDescricao('');
+    setEditandoId(null);
+  }
+
+  function excluirProduto(id) {
+    setListaProdutos(listaProdutos.filter(item => item.id !== id));
+    Alert.alert('Produto removido');
+  }
+
+  function editarProduto(item) {
+    setNomeProduto(item.nome);
+    setPrecoProduto(item.preco);
+    setCategoria(item.categoria);
+    setDescricao(item.descricao);
+    setEditandoId(item.id);
+  }
+
+  // =========================
+  // TELA LOGIN
+  // =========================
+  if (!logado) {
+    return (
+      <View style={styles.container}>
+
+        <Text style={styles.titulo}>Login</Text>
+
+        <TextInput
+          style={styles.input}
+          placeholder="Digite seu email"
+          value={email}
+          onChangeText={setEmail}
+        />
+
+        <TextInput
+          style={styles.input}
+          placeholder="Digite sua senha"
+          secureTextEntry
+          value={senha}
+          onChangeText={setSenha}
+        />
+
+        <Button title="Entrar" onPress={entrar} />
+
+      </View>
+    );
+  }
+
+  // =========================
+  // TELA PRODUTOS
+  // =========================
+  return (
+    <View style={styles.container}>
+
+      <Text style={styles.titulo}>Cadastro de Produtos</Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Nome"
+        value={nomeProduto}
+        onChangeText={setNomeProduto}
+      />
+
+      <TextInput
+        style={styles.input}
+        placeholder="Preço"
+        value={precoProduto}
+        keyboardType="numeric"
+        onChangeText={setPrecoProduto}
+      />
+
+      <TextInput
+        style={styles.input}
+        placeholder="Categoria"
+        value={categoria}
+        onChangeText={setCategoria}
+      />
+
+      <TextInput
+        style={styles.input}
+        placeholder="Descrição"
+        value={descricao}
+        onChangeText={setDescricao}
+      />
+
+      <Button
+        title={editandoId ? "Atualizar Produto" : "Cadastrar Produto"}
+        onPress={salvarProduto}
+      />
+
+      {/* NOVOS BOTÕES */}
+      <View style={{ marginTop: 10 }}>
+        <Button title="Limpar tudo" onPress={limparCampos} />
+      </View>
+
+      <View style={{ marginTop: 10 }}>
+        <Button title="Voltar para login" color="gray" onPress={voltarLogin} />
+      </View>
+
+      <FlatList
+        data={listaProdutos}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => (
+          <View style={styles.card}>
+
+            <Text>Nome: {item.nome}</Text>
+            <Text>Preço: R$ {item.preco}</Text>
+            <Text>Categoria: {item.categoria}</Text>
+            <Text>Descrição: {item.descricao}</Text>
+
+            <View style={styles.botoes}>
+
+              <TouchableOpacity
+                style={styles.editar}
+                onPress={() => editarProduto(item)}
+              >
+                <Text style={styles.textoBotao}>Editar</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.excluir}
+                onPress={() => excluirProduto(item.id)}
+              >
+                <Text style={styles.textoBotao}>Excluir</Text>
+              </TouchableOpacity>
+
+            </View>
+
+          </View>
+        )}
+      />
+
+    </View>
+  );
+}
+
+// =========================
+// ESTILOS
+// =========================
+const styles = StyleSheet.create({
+
+  container: {
+    flex: 1,
+    padding: 20,
+    marginTop: 40
+  },
+
+  titulo: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 20
+  },
+
+  input: {
+    borderWidth: 1,
+    borderColor: '#999',
+    padding: 10,
+    marginBottom: 10,
+    borderRadius: 5
+  },
+
+  card: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 10,
+    marginTop: 10,
+    borderRadius: 5
+  },
+
+  botoes: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 10
+  },
+
+  editar: {
+    backgroundColor: 'orange',
+    padding: 8,
+    borderRadius: 5
+  },
+
+  excluir: {
+    backgroundColor: 'red',
+    padding: 8,
+    borderRadius: 5
+  },
+
+  textoBotao: {
+    color: '#fff',
+    fontWeight: 'bold'
+  }
+});
