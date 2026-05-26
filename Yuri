@@ -1,3 +1,707 @@
+
+************+***************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Yuri Lima Macedo
+DATA:  26/ 05 /2026
+Bimestre: 2º Bimestre
+Nesta atividade foi desenvolvido um aplicativo simples utilizando React Native, com o objetivo de compreender a estrutura básica de um app mobile.
+O aplicativo apresenta uma tela inicial com uma tela de cadastro de produtos, preços, tipos e em siguida cadastramos e se quisermos depois temos o alterar cadastrar e excluir. Ele e bem dinamicas para estudo e prática.
+************+***************************************************************
+// Importa o React e o hook useState
+import React, { useState } from 'react';
+// Importa componentes do React Native
+import {
+
+  // Container visual
+  View,
+
+  // Exibe textos
+  Text,
+
+  // Campo de digitação
+  TextInput,
+
+  // Botão clicável
+  TouchableOpacity,
+
+  // Lista otimizada
+  FlatList,
+
+  // Criação de estilos
+  StyleSheet,
+
+  // Exibe alertas
+  Alert,
+
+  // Permite rolagem na tela
+  ScrollView
+
+} from 'react-native';
+
+// Exporta o componente principal App
+export default function App() {
+
+  // Estado para armazenar o nome do produto
+  const [nome, setNome] = useState('');
+
+  // Estado para armazenar o preço
+  const [preco, setPreco] = useState('');
+
+  // Estado para armazenar a categoria
+  const [categoria, setCategoria] = useState('');
+
+  // Estado para armazenar a descrição
+  const [descricao, setDescricao] = useState('');
+
+  // Estado que guarda todos os produtos cadastrados
+  const [produtos, setProdutos] = useState([]);
+
+  // Estado usado para saber qual produto está sendo editado
+  const [editandoId, setEditandoId] = useState(null);
+
+  // Função responsável por salvar ou editar produtos
+  function salvarProduto() {
+
+    // Verifica se algum campo está vazio
+    if (
+
+      // Remove espaços vazios do nome
+      nome.trim() === '' ||
+
+      // Remove espaços vazios do preço
+      preco.trim() === '' ||
+
+      // Remove espaços vazios da categoria
+      categoria.trim() === '' ||
+
+      // Remove espaços vazios da descrição
+      descricao.trim() === ''
+
+    ) {
+
+      // Mostra alerta de erro
+      Alert.alert(
+        '⚠️ Atenção',
+        'Preencha todos os campos!'
+      );
+
+      // Interrompe a função
+      return;
+    }
+
+    // Verifica se o preço é inválido
+    if (
+
+      // Verifica se não é número
+      isNaN(preco) ||
+
+      // Verifica se é menor ou igual a zero
+      Number(preco) <= 0
+
+    ) {
+
+      // Exibe alerta
+      Alert.alert(
+        '⚠️ Atenção',
+        'Digite um preço válido!'
+      );
+
+      // Interrompe execução
+      return;
+    }
+
+    // Verifica se está editando produto
+    if (editandoId !== null) {
+
+      // Cria nova lista atualizando o produto
+      const novaLista = produtos.map((item) => {
+
+        // Procura produto pelo id
+        if (item.id === editandoId) {
+
+          // Retorna produto atualizado
+          return {
+
+            // Mantém o mesmo id
+            id: editandoId,
+
+            // Atualiza nome
+            nome,
+
+            // Atualiza preço
+            preco,
+
+            // Atualiza categoria
+            categoria,
+
+            // Atualiza descrição
+            descricao
+          };
+        }
+
+        // Retorna produto sem alteração
+        return item;
+      });
+
+      // Atualiza lista de produtos
+      setProdutos(novaLista);
+
+      // Remove modo edição
+      setEditandoId(null);
+
+      // Exibe mensagem de sucesso
+      Alert.alert(
+        '✅ Sucesso',
+        'Produto atualizado!'
+      );
+    }
+
+    // Caso seja novo cadastro
+    else {
+
+      // Cria novo objeto produto
+      const novoProduto = {
+
+        // Gera id único usando data atual
+        id: Date.now().toString(),
+
+        // Nome do produto
+        nome,
+
+        // Preço do produto
+        preco,
+
+        // Categoria do produto
+        categoria,
+
+        // Descrição do produto
+        descricao
+      };
+
+      // Adiciona produto na lista
+      setProdutos([
+        ...produtos,
+        novoProduto
+      ]);
+
+      // Exibe mensagem
+      Alert.alert(
+        '🎉 Sucesso',
+        'Produto cadastrado!'
+      );
+    }
+
+    // Limpa os campos
+    limparCampos();
+  }
+
+  // Função para limpar os inputs
+  function limparCampos() {
+
+    // Limpa nome
+    setNome('');
+
+    // Limpa preço
+    setPreco('');
+
+    // Limpa categoria
+    setCategoria('');
+
+    // Limpa descrição
+    setDescricao('');
+  }
+
+  // Função para editar produto
+  function editarProduto(produto) {
+
+    // Coloca nome no input
+    setNome(produto.nome);
+
+    // Coloca preço no input
+    setPreco(produto.preco);
+
+    // Coloca categoria no input
+    setCategoria(produto.categoria);
+
+    // Coloca descrição no input
+    setDescricao(produto.descricao);
+
+    // Define id do produto em edição
+    setEditandoId(produto.id);
+  }
+
+  // Função para deletar produto
+  function deletarProduto(id) {
+
+    // Cria nova lista removendo o produto
+    const novaLista = produtos.filter(
+
+      // Mantém produtos diferentes do id removido
+      (item) => item.id !== id
+    );
+
+    // Atualiza lista
+    setProdutos(novaLista);
+
+    // Mostra alerta
+    Alert.alert(
+      '🗑️ Produto removido!'
+    );
+  }
+
+  // Retorno da interface
+  return (
+
+    // Tela com rolagem
+    <ScrollView style={styles.container}>
+
+      {/* Cabeçalho */}
+      <View style={styles.header}>
+
+        {/* Título principal */}
+        <Text style={styles.titulo}>
+          🛍️ Cadastro de Produtos
+        </Text>
+
+        {/* Subtítulo */}
+        <Text style={styles.subtitulo}>
+          Organize seus produtos facilmente
+        </Text>
+
+      </View>
+
+      {/* Campo nome */}
+      <TextInput
+
+        // Texto placeholder
+        placeholder="📦 Nome do produto"
+
+        // Estilo do input
+        style={styles.input}
+
+        // Valor digitado
+        value={nome}
+
+        // Atualiza estado
+        onChangeText={setNome}
+      />
+
+      {/* Campo preço */}
+      <TextInput
+
+        // Placeholder
+        placeholder="💰 Preço"
+
+        // Estilo
+        style={styles.input}
+
+        // Teclado numérico
+        keyboardType="numeric"
+
+        // Valor do estado
+        value={preco}
+
+        // Atualiza preço
+        onChangeText={setPreco}
+      />
+
+      {/* Campo categoria */}
+      <TextInput
+
+        // Placeholder
+        placeholder="🏷️ Categoria"
+
+        // Estilo
+        style={styles.input}
+
+        // Valor do estado
+        value={categoria}
+
+        // Atualiza categoria
+        onChangeText={setCategoria}
+      />
+
+      {/* Campo descrição */}
+      <TextInput
+
+        // Placeholder
+        placeholder="📝 Descrição"
+
+        // Junta estilos
+        style={[
+          styles.input,
+          styles.textArea
+        ]}
+
+        // Permite múltiplas linhas
+        multiline
+
+        // Valor
+        value={descricao}
+
+        // Atualiza descrição
+        onChangeText={setDescricao}
+      />
+
+      {/* Botão cadastrar */}
+      <TouchableOpacity
+
+        // Estilo botão
+        style={styles.botao}
+
+        // Evento de clique
+        onPress={salvarProduto}
+      >
+
+        {/* Texto botão */}
+        <Text style={styles.textoBotao}>
+
+          {/* Verifica se está editando */}
+          {editandoId
+            ? '✏️ ATUALIZAR'
+            : '🚀 CADASTRAR'}
+        </Text>
+
+      </TouchableOpacity>
+
+      {/* Título lista */}
+      <Text style={styles.listaTitulo}>
+        📋 Produtos Cadastrados
+      </Text>
+
+      {/* Lista de produtos */}
+      <FlatList
+
+        // Dados da lista
+        data={produtos}
+
+        // Chave única
+        keyExtractor={(item) => item.id}
+
+        // Desativa scroll interno
+        scrollEnabled={false}
+
+        // Renderiza cada item
+        renderItem={({ item, index }) => (
+
+          // Card do produto
+          <View
+
+            // Junta estilos
+            style={[
+              styles.card,
+              {
+
+                // Alterna cores automaticamente
+                backgroundColor:
+                  index % 2 === 0
+                    ? '#6C63FF'
+                    : '#FF6584'
+              }
+            ]}
+          >
+
+            {/* Nome do produto */}
+            <Text style={styles.nomeProduto}>
+              {item.nome}
+            </Text>
+
+            {/* Preço */}
+            <Text style={styles.info}>
+              💰 R$ {item.preco}
+            </Text>
+
+            {/* Categoria */}
+            <Text style={styles.info}>
+              🏷️ {item.categoria}
+            </Text>
+
+            {/* Descrição */}
+            <Text style={styles.info}>
+              📝 {item.descricao}
+            </Text>
+
+            {/* Área dos botões */}
+            <View style={styles.areaBotoes}>
+
+              {/* Botão editar */}
+              <TouchableOpacity
+
+                // Estilos botão
+                style={[
+                  styles.botaoAcao,
+                  {
+                    backgroundColor: '#00C897'
+                  }
+                ]}
+
+                // Evento editar
+                onPress={() => editarProduto(item)}
+              >
+
+                {/* Texto botão */}
+                <Text style={styles.textoBotaoAcao}>
+                  ✏️ Editar
+                </Text>
+
+              </TouchableOpacity>
+
+              {/* Botão excluir */}
+              <TouchableOpacity
+
+                // Estilos botão
+                style={[
+                  styles.botaoAcao,
+                  {
+                    backgroundColor: '#FF3B3B'
+                  }
+                ]}
+
+                // Evento excluir
+                onPress={() => deletarProduto(item.id)}
+              >
+
+                {/* Texto botão */}
+                <Text style={styles.textoBotaoAcao}>
+                  🗑️ Excluir
+                </Text>
+
+              </TouchableOpacity>
+
+            </View>
+
+          </View>
+
+        )}
+      />
+
+    </ScrollView>
+  );
+}
+
+// Criação dos estilos
+const styles = StyleSheet.create({
+
+  // Estilo container principal
+  container: {
+
+    // Ocupa toda tela
+    flex: 1,
+
+    // Cor de fundo
+    backgroundColor: '#F2F5FF',
+
+    // Espaçamento interno
+    padding: 20,
+
+    // Margem superior
+    marginTop: 40
+  },
+
+  // Cabeçalho
+  header: {
+
+    // Centraliza itens
+    alignItems: 'center',
+
+    // Espaço inferior
+    marginBottom: 25
+  },
+
+  // Título principal
+  titulo: {
+
+    // Tamanho da fonte
+    fontSize: 30,
+
+    // Texto em negrito
+    fontWeight: 'bold',
+
+    // Cor do texto
+    color: '#3D3D3D'
+  },
+
+  // Subtítulo
+  subtitulo: {
+
+    // Tamanho da fonte
+    fontSize: 16,
+
+    // Cor cinza
+    color: '#777',
+
+    // Espaço acima
+    marginTop: 5
+  },
+
+  // Input padrão
+  input: {
+
+    // Fundo branco
+    backgroundColor: 'white',
+
+    // Bordas arredondadas
+    borderRadius: 15,
+
+    // Espaçamento interno
+    padding: 14,
+
+    // Espaço abaixo
+    marginBottom: 15,
+
+    // Tamanho da fonte
+    fontSize: 16,
+
+    // Sombra Android
+    elevation: 3
+  },
+
+  // Área descrição
+  textArea: {
+
+    // Altura maior
+    height: 90
+  },
+
+  // Botão principal
+  botao: {
+
+    // Cor botão
+    backgroundColor: '#6C63FF',
+
+    // Espaçamento interno
+    padding: 16,
+
+    // Bordas arredondadas
+    borderRadius: 15,
+
+    // Centraliza conteúdo
+    alignItems: 'center',
+
+    // Espaço abaixo
+    marginBottom: 25,
+
+    // Sombra
+    elevation: 5
+  },
+
+  // Texto botão
+  textoBotao: {
+
+    // Cor branca
+    color: 'white',
+
+    // Tamanho fonte
+    fontSize: 18,
+
+    // Negrito
+    fontWeight: 'bold'
+  },
+
+  // Título lista
+  listaTitulo: {
+
+    // Fonte maior
+    fontSize: 24,
+
+    // Negrito
+    fontWeight: 'bold',
+
+    // Espaço abaixo
+    marginBottom: 15,
+
+    // Cor
+    color: '#333'
+  },
+
+  // Card produto
+  card: {
+
+    // Espaçamento interno
+    padding: 18,
+
+    // Bordas arredondadas
+    borderRadius: 20,
+
+    // Espaço abaixo
+    marginBottom: 18,
+
+    // Sombra Android
+    elevation: 6
+  },
+
+  // Nome produto
+  nomeProduto: {
+
+    // Fonte maior
+    fontSize: 24,
+
+    // Negrito
+    fontWeight: 'bold',
+
+    // Cor branca
+    color: 'white',
+
+    // Espaço abaixo
+    marginBottom: 10
+  },
+
+  // Informações do produto
+  info: {
+
+    // Cor branca
+    color: 'white',
+
+    // Tamanho fonte
+    fontSize: 16,
+
+    // Espaço abaixo
+    marginBottom: 5
+  },
+
+  // Área botões
+  areaBotoes: {
+
+    // Botões em linha
+    flexDirection: 'row',
+
+    // Espaço entre botões
+    justifyContent: 'space-between',
+
+    // Espaço acima
+    marginTop: 18
+  },
+
+  // Botão editar/excluir
+  botaoAcao: {
+
+    // Espaçamento interno
+    padding: 12,
+
+    // Bordas arredondadas
+    borderRadius: 12,
+
+    // Largura botão
+    width: '48%',
+
+    // Centraliza texto
+    alignItems: 'center'
+  },
+
+  // Texto dos botões
+  textoBotaoAcao: {
+
+    // Cor branca
+    color: 'white',
+
+    // Negrito
+    fontWeight: 'bold'
+  }
+
+});
+
 ************+***************************************************************
 INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
 DISCIPLINA: Dispositivos Móveis
