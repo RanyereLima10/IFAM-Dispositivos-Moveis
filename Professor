@@ -1277,4 +1277,423 @@ const styles = StyleSheet.create({
   },
 });
 
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Amanda Medeiros Lins
+DATA:  26/ 05 /2026
+Bimestre: 2º Bimestre
+Assunto: cadastro de produtos
+**********************************************************************/
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Alert,
+  FlatList,
+  StyleSheet,
+  ScrollView,
+} from 'react-native';
+
+export default function App() {
+  // Estados do formulário
+  const [nome, setNome] = useState('');
+  const [preco, setPreco] = useState('');
+  const [categoria, setCategoria] = useState('Eletrônicos');
+  const [descricao, setDescricao] = useState('');
+
+  // Lista de produtos
+  const [produtos, setProdutos] = useState([]);
+
+  // Função cadastrar produto
+  const cadastrarProduto = () => {
+    // Validação
+    if (!nome || !preco || !descricao) {
+      Alert.alert('Erro', 'Preencha todos os campos!');
+      return;
+    }
+
+    // Cria novo produto
+    const novoProduto = {
+      id: Date.now().toString(),
+      nome,
+      preco,
+      categoria,
+      descricao,
+    };
+
+    // Adiciona na lista
+    setProdutos([...produtos, novoProduto]);
+
+    // Mensagem sucesso
+    Alert.alert('Sucesso', 'Produto cadastrado!');
+
+    // Limpa campos
+    limparCampos();
+  };
+
+  // Função deletar produto
+  const deletarProduto = (id) => {
+    const novaLista = produtos.filter((item) => item.id !== id);
+    setProdutos(novaLista);
+  };
+
+  // Limpar formulário
+  const limparCampos = () => {
+    setNome('');
+    setPreco('');
+    setCategoria('Eletrônicos');
+    setDescricao('');
+  };
+
+  return (
+    <View style={styles.container}>
+      
+      {/* HEADER */}
+      <View style={styles.header}>
+        <Text style={styles.headerTitle}>Novo Produto</Text>
+      </View>
+
+      <ScrollView>
+        {/* FORMULÁRIO */}
+        <View style={styles.formularioContainer}>
+          
+          {/* Nome */}
+          <Text style={styles.label}>Nome do Produto *</Text>
+
+          <TextInput
+            style={styles.input}
+            placeholder="Digite o nome do produto"
+            value={nome}
+            onChangeText={setNome}
+          />
+
+          {/* Preço */}
+          <Text style={styles.label}>Preço *</Text>
+
+          <TextInput
+            style={styles.input}
+            placeholder="Digite o preço"
+            keyboardType="numeric"
+            value={preco}
+            onChangeText={setPreco}
+          />
+
+          {/* Categoria */}
+          <Text style={styles.label}>Categoria *</Text>
+
+          <View style={styles.categoriaContainer}>
+
+            <TouchableOpacity
+              style={[
+                styles.categoriaBotao,
+                categoria === 'Eletrônicos' &&
+                  styles.categoriaSelecionada,
+              ]}
+              onPress={() => setCategoria('Eletrônicos')}
+            >
+              <Text
+                style={[
+                  styles.categoriaBotaoTexto,
+                  categoria === 'Eletrônicos' &&
+                    styles.categoriaSelecionadaTexto,
+                ]}
+              >
+                Eletrônicos
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={[
+                styles.categoriaBotao,
+                categoria === 'Roupas' &&
+                  styles.categoriaSelecionada,
+              ]}
+              onPress={() => setCategoria('Roupas')}
+            >
+              <Text
+                style={[
+                  styles.categoriaBotaoTexto,
+                  categoria === 'Roupas' &&
+                    styles.categoriaSelecionadaTexto,
+                ]}
+              >
+                Roupas
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={[
+                styles.categoriaBotao,
+                categoria === 'Alimentos' &&
+                  styles.categoriaSelecionada,
+              ]}
+              onPress={() => setCategoria('Alimentos')}
+            >
+              <Text
+                style={[
+                  styles.categoriaBotaoTexto,
+                  categoria === 'Alimentos' &&
+                    styles.categoriaSelecionadaTexto,
+                ]}
+              >
+                Alimentos
+              </Text>
+            </TouchableOpacity>
+
+          </View>
+
+          {/* Descrição */}
+          <Text style={styles.label}>Descrição</Text>
+
+          <TextInput
+            style={[styles.input, styles.descricaoInput]}
+            placeholder="Digite a descrição"
+            multiline
+            value={descricao}
+            onChangeText={setDescricao}
+          />
+
+          {/* BOTÕES */}
+          <View style={styles.botaoContainer}>
+
+            <TouchableOpacity
+              style={[styles.botao, styles.botaoEditar]}
+              onPress={cadastrarProduto}
+            >
+              <Text style={styles.textoBotao}>CADASTRAR</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={[styles.botao, styles.botaoDeletar]}
+              onPress={limparCampos}
+            >
+              <Text style={styles.textoBotao}>LIMPAR</Text>
+            </TouchableOpacity>
+
+          </View>
+        </View>
+
+        {/* LISTA */}
+        <View style={styles.listaContainer}>
+          
+          <Text style={styles.headerTitle}>
+            Produtos Cadastrados
+          </Text>
+
+          {produtos.length === 0 ? (
+            <View style={styles.emptyState}>
+              <Text style={styles.emptyStateText}>
+                Nenhum produto cadastrado
+              </Text>
+            </View>
+          ) : (
+            <FlatList
+              data={produtos}
+              keyExtractor={(item) => item.id}
+              renderItem={({ item }) => (
+                <View style={styles.produtoCard}>
+                  
+                  <Text style={styles.produtoNome}>
+                    {item.nome}
+                  </Text>
+
+                  <Text style={styles.produtoPreco}>
+                    R$ {item.preco}
+                  </Text>
+
+                  <Text style={styles.produtoCategoria}>
+                    {item.categoria}
+                  </Text>
+
+                  <Text style={styles.produtoDescricao}>
+                    {item.descricao}
+                  </Text>
+
+                  <View style={styles.botoesContainer}>
+                    
+                    <TouchableOpacity
+                      style={[
+                        styles.botao,
+                        styles.botaoDeletar,
+                      ]}
+                      onPress={() =>
+                        deletarProduto(item.id)
+                      }
+                    >
+                      <Text style={styles.textoBotao}>
+                        DELETAR
+                      </Text>
+                    </TouchableOpacity>
+
+                  </View>
+                </View>
+              )}
+            />
+          )}
+        </View>
+      </ScrollView>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#FFFFFF',
+  },
+
+  header: {
+    backgroundColor: '#1E40AF',
+    padding: 20,
+    paddingTop: 40,
+    alignItems: 'center',
+  },
+
+  headerTitle: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#1E40AF',
+    marginBottom: 15,
+  },
+
+  formularioContainer: {
+    padding: 20,
+  },
+
+  label: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#1E40AF',
+    marginBottom: 8,
+  },
+
+  input: {
+    borderWidth: 1,
+    borderColor: '#DDD',
+    padding: 12,
+    marginBottom: 15,
+    borderRadius: 8,
+    fontSize: 16,
+  },
+
+  descricaoInput: {
+    height: 100,
+    textAlignVertical: 'top',
+  },
+
+  categoriaContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 15,
+    gap: 8,
+  },
+
+  categoriaBotao: {
+    flex: 1,
+    paddingVertical: 10,
+    borderWidth: 1,
+    borderColor: '#DDD',
+    borderRadius: 6,
+    alignItems: 'center',
+  },
+
+  categoriaSelecionada: {
+    backgroundColor: '#1E40AF',
+    borderColor: '#1E40AF',
+  },
+
+  categoriaBotaoTexto: {
+    fontSize: 12,
+    color: '#666',
+    fontWeight: '600',
+  },
+
+  categoriaSelecionadaTexto: {
+    color: '#FFFFFF',
+  },
+
+  botaoContainer: {
+    marginTop: 20,
+    gap: 10,
+  },
+
+  botao: {
+    paddingVertical: 12,
+    borderRadius: 6,
+    alignItems: 'center',
+  },
+
+  botaoEditar: {
+    backgroundColor: '#1E40AF',
+  },
+
+  botaoDeletar: {
+    backgroundColor: '#FF6B6B',
+  },
+
+  textoBotao: {
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+    fontSize: 14,
+  },
+
+  listaContainer: {
+    padding: 20,
+  },
+
+  emptyState: {
+    alignItems: 'center',
+    marginTop: 20,
+  },
+
+  emptyStateText: {
+    color: '#999',
+    fontSize: 16,
+  },
+
+  produtoCard: {
+    backgroundColor: '#F9FAFB',
+    borderLeftWidth: 5,
+    borderLeftColor: '#1E40AF',
+    padding: 15,
+    marginBottom: 12,
+    borderRadius: 8,
+  },
+
+  produtoNome: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#1E40AF',
+    marginBottom: 8,
+  },
+
+  produtoPreco: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#059669',
+    marginBottom: 4,
+  },
+
+  produtoCategoria: {
+    fontSize: 14,
+    color: '#666',
+    marginBottom: 4,
+  },
+
+  produtoDescricao: {
+    fontSize: 14,
+    color: '#999',
+    marginBottom: 12,
+  },
+
+  botoesContainer: {
+    flexDirection: 'row',
+    gap: 10,
+  },
+});
 
