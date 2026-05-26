@@ -276,22 +276,69 @@ DATA:  12/ 05 /2026
 Bimestre: 2º Bimestre
 **********************************************************************/
 
+// Importa o React
 import React from 'react';
+
+// Importa os componentes do React Native
 import {
   View,
   Text,
   StyleSheet,
   TouchableOpacity,
   Image,
+  Alert,
+  ScrollView,
 } from 'react-native';
 
+// Função principal
 export default function App() {
-  return (
-    <View style={styles.container}>
 
-      {/* Imagem no topo */}
+  // Função para mostrar mensagem ao clicar
+  const mostrarMensagem = (item) => {
+
+    // Verifica se clicou no card Celular
+    if (item === 'Celular') {
+
+      Alert.alert(
+        'Bem-vindo 📱',
+        'Seja bem-vindo à área de telefone!'
+      );
+
+    } else {
+
+      // Mensagem para os outros cards
+      Alert.alert(
+        'Bem-vindo 👋',
+        `Você clicou no card: ${item}`
+      );
+
+    }
+  };
+
+  // Lista dos cards
+  const cards = [
+    { nome: 'Celular', emoji: '📱', cor: '#1abc9c' },
+    { nome: 'Notebook', emoji: '💻', cor: '#3498db' },
+    { nome: 'Áudio', emoji: '🎧', cor: '#9b59b6' },
+    { nome: 'Câmera', emoji: '📷', cor: '#e67e22' },
+    { nome: 'Games', emoji: '🎮', cor: '#2ecc71' },
+    { nome: 'Estudo', emoji: '📚', cor: '#34495e' },
+    { nome: 'Favorito', emoji: '⭐', cor: '#f1c40f' },
+    { nome: 'Música', emoji: '🎵', cor: '#e74c3c' },
+    { nome: 'Internet', emoji: '🌐', cor: '#16a085' },
+    { nome: 'Chat', emoji: '💬', cor: '#8e44ad' },
+  ];
+
+  return (
+
+    // Scroll para evitar cortes na tela
+    <ScrollView contentContainerStyle={styles.container}>
+
+      {/* Imagem do topo */}
       <Image
-        source={{ uri: 'https://i.redd.it/8mntsmtdl8sb1.jpg' }}
+        source={{
+          uri: 'https://i.redd.it/8mntsmtdl8sb1.jpg',
+        }}
         style={styles.imagemTopo}
       />
 
@@ -302,125 +349,154 @@ export default function App() {
 
       {/* Subtítulo */}
       <Text style={styles.subtitulo}>
-        "Wendel, aluno do 3º ano de informatica, cada esforço de hoje é um passo mais perto do seu futuro de sucesso."
+        Wendel, aluno do 3º ano de informática.
+        Cada esforço de hoje é um passo mais perto
+        do seu futuro de sucesso.
       </Text>
 
-      {/* Cards */}
+      {/* Área dos cards */}
       <View style={styles.grid}>
 
-        <View style={[styles.card, { backgroundColor: '#1abc9c' }]}>
-          <Text style={styles.icone}>📱</Text>
-          <Text style={styles.textoCard}>Celular</Text>
-        </View>
+        {/* Cria os cards automaticamente */}
+        {cards.map((card, index) => (
+          <TouchableOpacity
+            key={index}
+            style={[
+              styles.card,
+              { backgroundColor: card.cor }
+            ]}
+            onPress={() => mostrarMensagem(card.nome)}
+          >
 
-        <View style={[styles.card, { backgroundColor: '#3498db' }]}>
-          <Text style={styles.icone}>💻</Text>
-          <Text style={styles.textoCard}>Notebook</Text>
-        </View>
+            {/* Emoji */}
+            <Text style={styles.icone}>
+              {card.emoji}
+            </Text>
 
-        <View style={[styles.card, { backgroundColor: '#9b59b6' }]}>
-          <Text style={styles.icone}>🎧</Text>
-          <Text style={styles.textoCard}>Áudio</Text>
-        </View>
+            {/* Nome */}
+            <Text style={styles.textoCard}>
+              {card.nome}
+            </Text>
 
-        <View style={[styles.card, { backgroundColor: '#e67e22' }]}>
-          <Text style={styles.icone}>📷</Text>
-          <Text style={styles.textoCard}>Câmera</Text>
-        </View>
-
-        <View style={[styles.card, { backgroundColor: '#2ecc71' }]}>
-          <Text style={styles.icone}>🎮</Text>
-          <Text style={styles.textoCard}>Games</Text>
-        </View>
-
-        <View style={[styles.card, { backgroundColor: '#34495e' }]}>
-          <Text style={styles.icone}>📚</Text>
-          <Text style={styles.textoCard}>Estudo</Text>
-        </View>
-
-        <View style={[styles.card, { backgroundColor: '#f1c40f' }]}>
-          <Text style={styles.icone}>⭐</Text>
-          <Text style={styles.textoCard}>Favorito</Text>
-        </View>
+          </TouchableOpacity>
+        ))}
 
       </View>
 
-      {/* Botão */}
-      <TouchableOpacity style={styles.botao}>
+      {/* Botão inferior */}
+      <TouchableOpacity
+        style={styles.botao}
+        onPress={() =>
+          Alert.alert(
+            'Informação',
+            'Você clicou em Ver mais!'
+          )
+        }
+      >
+
         <Text style={styles.textoBotao}>
           Ver mais
         </Text>
+
       </TouchableOpacity>
 
-    </View>
+    </ScrollView>
   );
 }
 
+// Estilos
 const styles = StyleSheet.create({
 
+  // Container principal
   container: {
-    flex: 1,
-    backgroundColor: '#f4f6f7',
+    flexGrow: 1,
+    backgroundColor: '#0f172a',
     alignItems: 'center',
     padding: 15,
+    paddingBottom: 40,
   },
 
+  // Imagem superior
   imagemTopo: {
     width: '100%',
-    height: 180,
-    borderRadius: 15,
+    height: 200,
+    borderRadius: 20,
     marginBottom: 15,
+    borderWidth: 3,
+    borderColor: '#38bdf8',
   },
 
+  // Título
   titulo: {
-    fontSize: 26,
+    fontSize: 28,
     fontWeight: 'bold',
-    color: '#2c3e50',
+    color: '#ffffff',
+    marginBottom: 10,
   },
 
+  // Texto abaixo do título
   subtitulo: {
     fontSize: 16,
-    color: '#7f8c8d',
-    marginBottom: 20,
+    color: '#cbd5e1',
     textAlign: 'center',
+    marginBottom: 20,
+    lineHeight: 24,
   },
 
+  // Área dos cards
   grid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
   },
 
+  // Estilo dos cards
   card: {
-    width: 90,
-    height: 90,
+    width: 95,
+    height: 95,
     margin: 8,
-    borderRadius: 15,
+    borderRadius: 18,
     justifyContent: 'center',
     alignItems: 'center',
+
+    // Sombra Android
+    elevation: 5,
+
+    // Sombra iOS
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
   },
 
+  // Emoji
   icone: {
-    fontSize: 26,
+    fontSize: 28,
   },
 
+  // Texto do card
   textoCard: {
-    fontSize: 12,
     color: '#fff',
+    fontSize: 13,
     fontWeight: 'bold',
     marginTop: 5,
   },
 
+  // Botão
   botao: {
-    marginTop: 20,
-    backgroundColor: 'black',
-    paddingVertical: 12,
-    paddingHorizontal: 40,
-    borderRadius: 10,
+    marginTop: 25,
+    backgroundColor: '#38bdf8',
+    paddingVertical: 14,
+    paddingHorizontal: 45,
+    borderRadius: 12,
   },
 
+  // Texto do botão
   textoBotao: {
-    color: '#fff',
+    color: '#0f172a',
     fontSize: 16,
     fontWeight: 'bold',
   },
