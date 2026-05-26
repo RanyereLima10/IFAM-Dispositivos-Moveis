@@ -1183,4 +1183,22 @@ const styles = StyleSheet.create({
     fontSize: 16, // Tamanho da fonte
     fontWeight: 'bold', // Texto em negrito
   },
+
+  /*
+1. Para que serve a View no React Native?
+Serve como um contêiner para agrupar e estruturar outros componentes, funcionando de forma semelhante à tag <div> do HTML.
+
+2. Qual propriedade organiza elementos em linha?
+A propriedade flexDirection: 'row'.
+
+3. O que faz o justifyContent?
+Alinha os elementos filhos ao longo do eixo principal (vertical por padrão, ou horizontal se usar flexDirection: 'row').
+
+4. Para que serve o StyleSheet?
+Serve para criar objetos de estilo encapsulados e otimizados, melhorando o desempenho e a organização do código.
+
+5. Qual a vantagem do Snack para iniciantes?
+Permite testar e rodar aplicativos React Native direto no navegador, sem precisar instalar nenhuma ferramenta ou configurar o ambiente no computador.
+*/
+
 });
