@@ -112,56 +112,59 @@ const stylesAtividade = StyleSheet.create({
  * 
  * DISCIPLINA: Desenvolvimento Mobile
  * ALUNO: Walter Isaias de Lima Silva
- * DATA: 26.05.2026
- * EXERCICIO: Interface de Cursos Combinada com Layout Extremo
+  *DATA: 26.05.2026
+ * EXERCICIO: Interface de Cursos Fiel a Imagem Enviada (Duas Colunas)
  **********************************************************************/
 
-// 1. LAYOUT EXTREMOS (CIMA/BAIXO)
-// Descricao: Distribuicao de elementos nos quatro cantos e centro usando space-between.
 // Importa o React para criar componentes
 import React from 'react'; 
-// Importa os componentes do React Native
-import { StyleSheet, Text, View, ScrollView, Image, TouchableOpacity, Alert, Dimensions } from 'react-native'; 
+// Importa os componentes estruturais do React Native
+import { StyleSheet, Text, View, ScrollView, Image, TouchableOpacity, Alert } from 'react-native'; 
 // Importa os icones do pacote Expo
 import { MaterialIcons } from '@expo/vector-icons'; 
 
 // Cria o componente principal do app
 export default function App() { 
   
-  // Cria a funcao para o clique do botao
+  // Cria a funcao para gerenciar o clique de cada card de curso individual
+  const clicarCurso = (nomeCurso) => {
+    // Dispara um alerta informando qual curso foi selecionado pelo usuario
+    Alert.alert("Curso Selecionado", `Voce entrou no modulo de ${nomeCurso}!`);
+  };
+
+  // Cria a funcao para o clique do botao principal inferior
   const executarBotao = () => { 
-    // Mostra um alerta nativo na tela
+    // Mostra um alerta nativo na tela indicando inicio geral
     Alert.alert("Acao", "Botao Comecar Agora clicado!"); 
   }; 
 
-  // Cria a lista com os dados dos oito cards da imagem
+  // Lista de cards contendo os 8 originais organizados em pares mais os 2 novos (Total: 10)
   const cards = [ 
-    // Dados do card de HTML
+    // Linha 1
     { id: 1, titulo: 'HTML', desc: 'Estrutura de paginas web', icone: 'code', cor: '#9b5de5' }, 
-    // Dados do card de CSS
     { id: 2, titulo: 'CSS', desc: 'Estilizacao e layout', icone: 'brush', cor: '#f15bb5' }, 
-    // Dados do card de JavaScript
+    // Linha 2
     { id: 3, titulo: 'JavaScript', desc: 'Logica e interatividade', icone: 'extension', cor: '#00f5d4' }, 
-    // Dados do card de React Native
     { id: 4, titulo: 'React Native', desc: 'Desenvolvimento mobile', icone: 'phonelink-setup', cor: '#00bbf9' }, 
-    // Dados do card de Mobile UI
+    // Linha 3
     { id: 5, titulo: 'Mobile UI', desc: 'Interfaces bonitas e responsivas', icone: 'stay-current-portrait', cor: '#f72585' }, 
-    // Dados do card de API
     { id: 6, titulo: 'API', desc: 'Integracao com servicos', icone: 'cloud', cor: '#4cc9f0' }, 
-    // Dados do card de Banco de Dados
+    // Linha 4
     { id: 7, titulo: 'Banco de Dados', desc: 'Armazenamento de informacoes', icone: 'storage', cor: '#ee9b00' }, 
-    // Dados do card de Deploy
     { id: 8, titulo: 'Deploy', desc: 'Publicando seu aplicativo', icone: 'rocket-launch', cor: '#7209b7' }, 
+    // Linha 5 (Novos cards adicionados mantendo a ordem em pares)
+    { id: 9, titulo: 'Git e GitHub', desc: 'Controle de versao de codigo', icone: 'folder-shared', cor: '#2a9d8f' },
+    { id: 10, titulo: 'TypeScript', desc: 'Tipagem estatica para JS', icone: 'verified', cor: '#264653' },
   ]; 
 
   // Retorna a estrutura visual do app
   return ( 
-    // Abre a area com rolagem vertical
+    // Abre a area com rolagem vertical de fundo branco puro
     <ScrollView contentContainerStyle={styles.container}> 
       
-      {/* Componente que exibe a nova imagem sobre compartilhamento de conhecimento enviada */}
+      {/* Imagem da mente com formulas de fisica inserida corretamente aqui no topo */}
       <Image 
-        source={{ uri: 'https://www.jrmcoaching.com.br/wp-content/uploads/2015/10/shutterstock_194620346.jpg' }} 
+        source={{ uri: 'https://bbci.co.uk' }} 
         style={styles.imagemTopo} 
       /> 
 
@@ -169,19 +172,23 @@ export default function App() {
       <Text style={styles.tituloPagina}>Aprendendo Juntos</Text> 
       
       {/* Caixa de texto para o subtitulo explicativo da imagem */}
-      <Text style={styles.subtituloPagina}>Cursos e conteudos para impulsionar seus estudos!</Text> 
+      <Text style={styles.subtituloPagina}>Cursos e conteúdos para impulsionar seus estudos!</Text> 
 
-      {/* Caixa que serve como grid responsivo */}
+      {/* Caixa que serve como grid responsivo estruturado para duas colunas por linha */}
       <View style={styles.grid}> 
-        {/* Mapeia a lista para gerar os cards */}
+        {/* Mapeia a lista para gerar os cards convertidos em botoes */}
         {cards.map((card) => ( 
-          // Container visual de cada card individual
-          <View key={card.id} style={[styles.card, { backgroundColor: card.cor }]}> 
-            {/* Caixa para alinhar icone e textos lado a lado */}
+          // Componente clicavel que renderiza dois cards por linha lado a lado
+          <TouchableOpacity 
+            key={card.id} 
+            style={[styles.card, { backgroundColor: card.cor }]}
+            onPress={() => clicarCurso(card.titulo)}
+          > 
+            {/* Caixa para alinhar icone e textos lado a lado dentro do botao */}
             <View style={styles.cardLayout}>
-              {/* Desenha o icone dentro do card */}
+              {/* Desenha o icone correspondente dentro do card */}
               <MaterialIcons name={card.icone} size={28} color="#FFF" /> 
-              {/* Caixa para agrupar os textos internamente */}
+              {/* Caixa para agrupar os textos internamente sem esmagamento */}
               <View style={styles.textoContainer}>
                 {/* Mostra o titulo dentro do card */}
                 <Text style={styles.tituloCard}>{card.titulo}</Text> 
@@ -189,7 +196,7 @@ export default function App() {
                 <Text style={styles.descCard}>{card.desc}</Text> 
               </View>
             </View>
-          </View> 
+          </TouchableOpacity> 
         ))} 
       </View> 
 
@@ -207,10 +214,7 @@ export default function App() {
   ); 
 } 
 
-// Pega a largura do dispositivo atual
-const larguraTela = Dimensions.get('window').width; 
-
-// Cria o objeto com os estilos visuais
+// Cria o objeto com os estilos visuais identicos ao design
 const styles = StyleSheet.create({ 
   // Estilo para o container de rolagem
   container: { 
@@ -225,87 +229,81 @@ const styles = StyleSheet.create({
   }, 
   // Estilo para o titulo da pagina
   tituloPagina: { 
-    fontSize: 24, 
+    fontSize: 26, 
     fontWeight: 'bold', 
-    color: '#1a1a2e', 
+    color: '#1F2421', 
     textAlign: 'center',
-    marginTop: 20, 
+    marginTop: 25, 
   }, 
   // Estilo para o subtitulo da pagina
   subtituloPagina: { 
-    fontSize: 14, 
-    color: '#666666', 
+    fontSize: 13, 
+    color: '#7F8C8D', 
     textAlign: 'center',
     marginHorizontal: 30,
-    marginTop: 5,
-    marginBottom: 20, 
+    marginTop: 8,
+    marginBottom: 25, 
   }, 
-  // Estilo para a grade dos cards
+  // Estilo para a grade que mantem dois cards por linha descendo em pares
   grid: { 
     flexDirection: 'row', 
     flexWrap: 'wrap', 
     justifyContent: 'space-between', 
     paddingHorizontal: 15, 
   }, 
-  // Estilo estrutural de cada card
+  // Estilo estrutural de cada card travado em 48% da largura para formar a grade perfeita
   card: { 
-    width: (larguraTela - 40) / 2, 
-    height: 90, 
+    width: '48%', 
+    height: 85, 
     borderRadius: 15, 
-    padding: 12, 
+    paddingHorizontal: 12, 
+    justifyContent: 'center',
     marginBottom: 12, 
-    justifyContent: 'center', 
-    elevation: 2, 
-    shadowColor: '#000', 
-    shadowOffset: { width: 0, height: 1 }, 
-    shadowOpacity: 0.1, 
-    shadowRadius: 2, 
   }, 
-  // Alinhamento dos itens dentro do card
+  // Alinhamento horizontal dos itens dentro do card
   cardLayout: {
     flexDirection: 'row',
     alignItems: 'center',
   },
-  // Container dos textos para nao esmagar o icone
+  // Container dos textos para manter alinhamento correto
   textoContainer: {
     flex: 1,
     marginLeft: 8,
+    justifyContent: 'center',
   },
-  // Estilo para o titulo do card
+  // Estilo para o titulo interno do card
   tituloCard: { 
     color: '#FFF', 
     fontSize: 14, 
     fontWeight: 'bold', 
   }, 
-  // Estilo para a descricao do card
+  // Estilo para a descricao curta interna do card
   descCard: { 
     color: '#FFF', 
     fontSize: 10, 
     opacity: 0.9,
-    marginTop: 2,
+    marginTop: 1,
   }, 
-  // Estilo para o botao do rodape
+  // Estilo para o grande botao azul posicionado no rodape
   botaoInferior: { 
     backgroundColor: '#3F51B5', 
     marginHorizontal: 15, 
-    marginTop: 15, 
-    height: 55, 
+    marginTop: 20, 
+    height: 52, 
     borderRadius: 25, 
     justifyContent: 'center', 
     alignItems: 'center', 
   }, 
-  // Alinhamento do icone e do texto dentro do botao
+  // Alinhamento do icone e do texto dentro do botao do rodape
   botaoLayout: {
     flexDirection: 'row',
     alignItems: 'center',
   },
-  // Estilo para o texto do botao
+  // Estilo para o texto em caixa alta do botao do rodape
   textoBotao: { 
     color: '#FFF', 
-    fontSize: 16, 
+    fontSize: 15, 
     fontWeight: 'bold', 
+    letterSpacing: 0.5,
   }, 
 });
-
-
-
