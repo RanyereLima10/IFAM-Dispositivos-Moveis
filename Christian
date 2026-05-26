@@ -1171,3 +1171,325 @@ const styles = StyleSheet.create({
   },
 
 });
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Christian Keven de Paiva Farias
+DATA:  26/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição: Aplicativo em React Native para cadastro de produtos, permitindo adicionar, editar e remover itens. 
+O sistema possui validação de campos, lista dinâmica de produtos e interface simples e organizada para gerenciamento das informações.
+**********************************************************************/
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  FlatList,
+  StyleSheet,
+  Alert,
+  ScrollView
+} from 'react-native';
+
+export default function App() {
+
+  // Estados dos campos
+  const [nome, setNome] = useState('');
+  const [preco, setPreco] = useState('');
+  const [categoria, setCategoria] = useState('');
+  const [descricao, setDescricao] = useState('');
+
+  // Lista de produtos
+  const [produtos, setProdutos] = useState([]);
+
+  // Guarda o produto em edição
+  const [editandoId, setEditandoId] = useState(null);
+
+  // Função para cadastrar ou editar produto
+  function salvarProduto() {
+
+    // Validação dos campos
+    if (
+      nome.trim() === '' ||
+      preco.trim() === '' ||
+      categoria.trim() === '' ||
+      descricao.trim() === ''
+    ) {
+      Alert.alert('Erro', 'Preencha todos os campos!');
+      return;
+    }
+
+    // Verifica se o preço é válido
+    if (isNaN(preco) || Number(preco) <= 0) {
+      Alert.alert('Erro', 'Digite um preço válido!');
+      return;
+    }
+
+    // Se estiver editando
+    if (editandoId !== null) {
+
+      // Atualiza produto
+      const novaLista = produtos.map((item) => {
+        if (item.id === editandoId) {
+          return {
+            id: editandoId,
+            nome,
+            preco,
+            categoria,
+            descricao
+          };
+        }
+        return item;
+      });
+
+      setProdutos(novaLista);
+      setEditandoId(null);
+
+      Alert.alert('Sucesso', 'Produto atualizado!');
+    }
+
+    // Novo cadastro
+    else {
+
+      const novoProduto = {
+        id: Date.now().toString(),
+        nome,
+        preco,
+        categoria,
+        descricao
+      };
+
+      setProdutos([...produtos, novoProduto]);
+
+      Alert.alert('Sucesso', 'Produto cadastrado!');
+    }
+
+    // Limpa os campos
+    limparCampos();
+  }
+
+  // Função para limpar inputs
+  function limparCampos() {
+    setNome('');
+    setPreco('');
+    setCategoria('');
+    setDescricao('');
+  }
+
+  // Função editar
+  function editarProduto(produto) {
+
+    setNome(produto.nome);
+    setPreco(produto.preco);
+    setCategoria(produto.categoria);
+    setDescricao(produto.descricao);
+
+    setEditandoId(produto.id);
+  }
+
+  // Função deletar
+  function deletarProduto(id) {
+
+    const novaLista = produtos.filter((item) => item.id !== id);
+
+    setProdutos(novaLista);
+
+    Alert.alert('Produto removido!');
+  }
+
+  return (
+
+    <ScrollView style={styles.container}>
+
+      {/* Título */}
+      <Text style={styles.titulo}>
+        Cadastro de Produtos
+      </Text>
+
+      {/* Campo Nome */}
+      <TextInput
+        placeholder="Nome do produto"
+        style={styles.input}
+        value={nome}
+        onChangeText={setNome}
+      />
+
+      {/* Campo Preço */}
+      <TextInput
+        placeholder="Preço"
+        style={styles.input}
+        keyboardType="numeric"
+        value={preco}
+        onChangeText={setPreco}
+      />
+
+      {/* Campo Categoria */}
+      <TextInput
+        placeholder="Categoria"
+        style={styles.input}
+        value={categoria}
+        onChangeText={setCategoria}
+      />
+
+      {/* Campo Descrição */}
+      <TextInput
+        placeholder="Descrição"
+        style={[styles.input, { height: 80 }]}
+        multiline
+        value={descricao}
+        onChangeText={setDescricao}
+      />
+
+      {/* Botão Salvar */}
+      <TouchableOpacity
+        style={styles.botao}
+        onPress={salvarProduto}
+      >
+        <Text style={styles.textoBotao}>
+          {editandoId ? 'ATUALIZAR' : 'CADASTRAR'}
+        </Text>
+      </TouchableOpacity>
+
+      {/* Lista de produtos */}
+      <Text style={styles.subtitulo}>
+        Produtos Cadastrados
+      </Text>
+
+      <FlatList
+        data={produtos}
+        keyExtractor={(item) => item.id}
+        scrollEnabled={false}
+        renderItem={({ item }) => (
+
+          <View style={styles.card}>
+
+            <Text style={styles.nomeProduto}>
+              {item.nome}
+            </Text>
+
+            <Text>
+              💰 Preço: R$ {item.preco}
+            </Text>
+
+            <Text>
+              📦 Categoria: {item.categoria}
+            </Text>
+
+            <Text>
+              📝 {item.descricao}
+            </Text>
+
+            {/* Botões */}
+            <View style={styles.areaBotoes}>
+
+              {/* Editar */}
+              <TouchableOpacity
+                style={[styles.botaoAcao, { backgroundColor: '#3498DB' }]}
+                onPress={() => editarProduto(item)}
+              >
+                <Text style={styles.textoBotao}>
+                  Editar
+                </Text>
+              </TouchableOpacity>
+
+              {/* Deletar */}
+              <TouchableOpacity
+                style={[styles.botaoAcao, { backgroundColor: '#E74C3C' }]}
+                onPress={() => deletarProduto(item.id)}
+              >
+                <Text style={styles.textoBotao}>
+                  Deletar
+                </Text>
+              </TouchableOpacity>
+
+            </View>
+
+          </View>
+
+        )}
+      />
+
+    </ScrollView>
+  );
+}
+
+const styles = StyleSheet.create({
+
+  container: {
+    flex: 1,
+    backgroundColor: '#F4F4F4',
+    padding: 20,
+    marginTop: 40
+  },
+
+  titulo: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 20,
+    color: '#2C3E50'
+  },
+
+  subtitulo: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginTop: 25,
+    marginBottom: 10
+  },
+
+  input: {
+    backgroundColor: 'white',
+    borderRadius: 10,
+    padding: 12,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: '#DDD'
+  },
+
+  botao: {
+    backgroundColor: '#2ECC71',
+    padding: 15,
+    borderRadius: 10,
+    alignItems: 'center',
+    marginBottom: 20
+  },
+
+  textoBotao: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 16
+  },
+
+  card: {
+    backgroundColor: 'white',
+    padding: 15,
+    borderRadius: 10,
+    marginBottom: 15,
+    elevation: 3
+  },
+
+  nomeProduto: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 5
+  },
+
+  areaBotoes: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 15
+  },
+
+  botaoAcao: {
+    padding: 10,
+    borderRadius: 8,
+    width: '48%',
+    alignItems: 'center'
+  }
+
+});
+
