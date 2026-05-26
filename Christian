@@ -860,3 +860,314 @@ export default function App() {
   );
 }
 
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Christian Keven de Paiva Farias
+DATA:  12/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição: Aplicativo em React Native com cards interativos de cursos de tecnologia.
+Possui ícones, cores personalizadas, alertas ao clicar e um botão “COMEÇAR AGORA”, criando uma interface moderna e organizada.
+**********************************************************************/
+import React from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+  Alert,
+} from 'react-native';
+
+// Biblioteca de ícones do Expo
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+
+export default function App() {
+
+  // Função que mostra um alerta quando o card é clicado
+  function mostrarMensagem(nome) {
+    Alert.alert(
+      'Curso Selecionado',
+      `Você clicou em ${nome}!`
+    );
+  }
+
+  // Lista de cards do aplicativo
+  const cards = [
+    {
+      titulo: 'HTML',
+      desc: 'Estrutura de páginas web',
+      cor: '#6C63FF',
+      icon: 'language-html5',
+    },
+
+    {
+      titulo: 'CSS',
+      desc: 'Estilização visual',
+      cor: '#FF9F43',
+      icon: 'language-css3',
+    },
+
+    {
+      titulo: 'JavaScript',
+      desc: 'Lógica e interatividade',
+      cor: '#10AC84',
+      icon: 'language-javascript',
+    },
+
+    {
+      titulo: 'React Native',
+      desc: 'Apps para celular',
+      cor: '#2E86DE',
+      icon: 'react',
+    },
+
+    {
+      titulo: 'Mobile UI',
+      desc: 'Interfaces modernas',
+      cor: '#E84393',
+      icon: 'cellphone',
+    },
+
+    {
+      titulo: 'API',
+      desc: 'Integração de sistemas',
+      cor: '#00CEC9',
+      icon: 'cloud',
+    },
+
+    {
+      titulo: 'Banco de Dados',
+      desc: 'Armazenamento de dados',
+      cor: '#FDCB6E',
+      icon: 'database',
+    },
+
+    {
+      titulo: 'Deploy',
+      desc: 'Publicação do app',
+      cor: '#5F27CD',
+      icon: 'rocket-launch',
+    },
+  ];
+
+  return (
+
+    // ScrollView permite rolar a tela
+    <ScrollView style={styles.container}>
+
+      {/* Imagem principal do topo */}
+      <Image
+        source={{
+          uri: 'https://cdn-icons-png.flaticon.com/512/1055/1055687.png',
+        }}
+        style={styles.imagemTopo}
+      />
+
+      {/* Título principal */}
+      <Text style={styles.titulo}>
+        Aprendendo Juntos
+      </Text>
+
+      {/* Subtítulo */}
+      <Text style={styles.subtitulo}>
+        Cursos e conteúdos para impulsionar seus estudos!
+      </Text>
+
+      {/* Área onde os cards aparecem */}
+      <View style={styles.areaCards}>
+
+        {/* Percorre o array de cards */}
+        {cards.map((item, index) => (
+
+          // Card clicável
+          <TouchableOpacity
+            key={index}
+            style={[
+              styles.card,
+              { backgroundColor: item.cor }
+            ]}
+            onPress={() => mostrarMensagem(item.titulo)}
+          >
+
+            {/* Botão do ícone */}
+            <TouchableOpacity
+              style={styles.circuloIcone}
+              onPress={() =>
+                Alert.alert(
+                  'Ícone',
+                  `Você apertou o ícone de ${item.titulo}`
+                )
+              }
+            >
+
+              {/* Ícone do card */}
+              <MaterialCommunityIcons
+                name={item.icon}
+                size={32}
+                color={item.cor}
+              />
+
+            </TouchableOpacity>
+
+            {/* Área dos textos do card */}
+            <View style={styles.textosCard}>
+
+              {/* Título do card */}
+              <Text style={styles.tituloCard}>
+                {item.titulo}
+              </Text>
+
+              {/* Descrição do card */}
+              <Text style={styles.descCard}>
+                {item.desc}
+              </Text>
+
+            </View>
+
+          </TouchableOpacity>
+
+        ))}
+
+      </View>
+
+      {/* Botão principal da tela */}
+      <TouchableOpacity
+        style={styles.botao}
+        onPress={() =>
+          Alert.alert(
+            'Botão',
+            'Você clicou em COMEÇAR AGORA!'
+          )
+        }
+      >
+
+        {/* Ícone do botão */}
+        <MaterialCommunityIcons
+          name="rocket-launch"
+          size={22}
+          color="#fff"
+        />
+
+        {/* Texto do botão */}
+        <Text style={styles.textoBotao}>
+          COMEÇAR AGORA
+        </Text>
+
+      </TouchableOpacity>
+
+    </ScrollView>
+  );
+}
+
+// Área de estilos do aplicativo
+const styles = StyleSheet.create({
+
+  // Container principal
+  container: {
+    flex: 1,
+    backgroundColor: '#EAF4FF',
+    padding: 20,
+  },
+
+  // Imagem superior
+  imagemTopo: {
+    width: '100%',
+    height: 180,
+    resizeMode: 'contain',
+    marginTop: 20,
+  },
+
+  // Título principal
+  titulo: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    color: '#1E3A8A',
+    textAlign: 'center',
+    marginTop: 10,
+  },
+
+  // Texto secundário
+  subtitulo: {
+    fontSize: 14,
+    color: '#555',
+    textAlign: 'center',
+    marginBottom: 20,
+  },
+
+  // Área dos cards
+  areaCards: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
+
+  // Estilo dos cards
+  card: {
+    width: '48%',
+    height: 105,
+    borderRadius: 14,
+    padding: 12,
+    marginBottom: 15,
+    flexDirection: 'row',
+    alignItems: 'center',
+    elevation: 4,
+  },
+
+  // Círculo branco do ícone
+  circuloIcone: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    backgroundColor: '#fff',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 10,
+  },
+
+  // Área de textos do card
+  textosCard: {
+    flex: 1,
+  },
+
+  // Título do card
+  tituloCard: {
+    color: '#fff',
+    fontSize: 15,
+    fontWeight: 'bold',
+  },
+
+  // Descrição do card
+  descCard: {
+    color: '#fff',
+    fontSize: 11,
+    marginTop: 4,
+  },
+
+  // Botão inferior
+  botao: {
+    backgroundColor: '#2563EB',
+    height: 55,
+    borderRadius: 12,
+    marginTop: 10,
+    marginBottom: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: 8,
+    elevation: 5,
+  },
+
+  // Texto do botão
+  textoBotao: {
+    color: '#fff',
+    fontSize: 15,
+    fontWeight: 'bold',
+    marginLeft: 8,
+  },
+
+});
