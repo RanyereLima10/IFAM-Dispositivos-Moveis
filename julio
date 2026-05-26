@@ -853,6 +853,61 @@ PROFESSOR: Ranyere Lima
 ALUNO(A): Julio Cesar de Souza Albuquerque
 DATA: 26/05/2026
 BIMESTRE: 2º Bimestre
+DESCRIÇÃO: Atividade de Fixação layout
+
+Questões
+
+1. Para que serve a View no React Native? 
+2. Qual propriedade organiza elementos em linha? 
+3. O que faz o justifyContent? 
+4. Para que serve o StyleSheet? 
+5. Qual a vantagem do Snack para iniciantes?
+
+**********************************************************************/
+
+1. A React Native `View` serve como um contêiner para organizar e agrupar componentes na tela. Ela funciona de forma parecida com uma `<div>` no React para web.
+
+2. A propriedade que organiza elementos em linha é `flexDirection: 'row'`.
+
+Exemplo:
+<View style={{ flexDirection: 'row' }}>
+
+3. O `justifyContent` controla o alinhamento dos elementos no eixo principal do layout (`row` ou `column`).
+
+Exemplos:
+
+* `center` → centraliza
+* `space-between` → cria espaço entre os itens
+* `flex-start` → coloca no início
+* `flex-end` → coloca no final
+
+4. O `StyleSheet` serve para criar e organizar estilos de forma mais limpa e reutilizável no React Native.
+
+Exemplo:
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff'
+  }
+})
+
+Vantagens:
+
+* código mais organizado
+* reutilização de estilos
+* melhor desempenho
+
+5. O Expo Snack é vantajoso para iniciantes porque permite programar e testar aplicativos diretamente no navegador, sem precisar instalar Android Studio ou configurar ambiente complexo. Também facilita compartilhar projetos rapidamente por link.
+
+/**********************************************************************
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Julio Cesar de Souza Albuquerque
+DATA: 26/05/2026
+BIMESTRE: 2º Bimestre
 DESCRIÇÃO: Projeto de App de Cadastro de Produtos
 
 **********************************************************************/
