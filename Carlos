@@ -214,4 +214,600 @@ export default function App() {
 
   );
 }
+**********************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Carlos Augusto de Freitas Saraiva
+DATA:  26 / 05 /2026
+Bimestre: 2º Bimestre
+Descrição: Esta atividade teve como objetivo desenvolver uma interface mobile responsiva utilizando React Native no Expo Snack. O tema escolhido foi futebol americano infantil, utilizando cores vibrantes, ícones, cards informativos, imagem no topo e um botão interativo. Foram aplicados conceitos de layout responsivo, estilização com StyleSheet, organização de componentes visuais e uso de elementos como View, Text, Image e TouchableOpacity para criar uma experiência visual moderna e divertida.
+*************************************************************************
+// Importa o React para criar componentes
+import React from 'react';
+
+// Importa componentes do React Native
+import {
+  View, // Container visual
+  Text, // Texto na tela
+  StyleSheet, // Criação de estilos
+  Image, // Exibir imagens
+  TouchableOpacity, // Botão clicável
+  ScrollView, // Permite rolagem da tela
+} from 'react-native';
+
+// Componente principal do aplicativo
+export default function App() {
+
+  // Array contendo os cards do app
+  const cards = [
+    { icon: '🏈', title: 'Touchdown', desc: 'Treino de ataque' },
+    { icon: '🛡️', title: 'Defesa', desc: 'Formação defensiva' },
+    { icon: '⚡', title: 'Blitz', desc: 'Jogada rápida' },
+    { icon: '🎯', title: 'Quarterback', desc: 'Passe preciso' },
+    { icon: '🐻', title: 'Chicago Bears', desc: 'Time tradicional' },
+    { icon: '⭐', title: 'Dallas Cowboys', desc: 'Equipe lendária' },
+  ];
+
+  // Retorno visual da aplicação
+  return (
+
+    // ScrollView permite rolagem vertical
+    <ScrollView contentContainerStyle={styles.container}>
+
+      {/* Imagem principal do topo */}
+      <Image
+
+        // Imagem online
+        source={{
+          uri: 'https://images.unsplash.com/photo-1508098682722-e99c643e7485?q=80&w=1200&auto=format&fit=crop',
+        }}
+
+        // Aplica estilo da imagem
+        style={styles.banner}
+      />
+
+      {/* Título principal */}
+      <Text style={styles.titulo}>
+        Football Kids
+      </Text>
+
+      {/* Subtítulo */}
+      <Text style={styles.subtitulo}>
+        Aprenda futebol americano brincando
+      </Text>
+
+      {/* Área que contém todos os cards */}
+      <View style={styles.cardsContainer}>
+
+        {/* Percorre o array de cards */}
+        {cards.map((card, index) => (
+
+          // Card individual
+          <View key={index} style={styles.card}>
+
+            {/* Ícone do card */}
+            <Text style={styles.icon}>
+              {card.icon}
+            </Text>
+
+            {/* Título do card */}
+            <Text style={styles.cardTitle}>
+              {card.title}
+            </Text>
+
+            {/* Descrição do card */}
+            <Text style={styles.cardDesc}>
+              {card.desc}
+            </Text>
+
+          </View>
+        ))}
+      </View>
+
+      {/* Botão principal */}
+      <TouchableOpacity style={styles.button}>
+
+        {/* Texto do botão */}
+        <Text style={styles.buttonText}>
+          Começar Treino
+        </Text>
+
+      </TouchableOpacity>
+
+    </ScrollView>
+  );
+}
+
+// Criação dos estilos do aplicativo
+const styles = StyleSheet.create({
+
+  // Container principal
+  container: {
+
+    // Espaçamento vertical interno
+    paddingVertical: 40,
+
+    // Espaçamento horizontal interno
+    paddingHorizontal: 20,
+
+    // Centraliza elementos horizontalmente
+    alignItems: 'center',
+
+    // Cor de fundo
+    backgroundColor: '#0B1F3A',
+  },
+
+  // Estilo da imagem do topo
+  banner: {
+
+    // Largura total
+    width: '100%',
+
+    // Altura fixa
+    height: 180,
+
+    // Bordas arredondadas
+    borderRadius: 25,
+
+    // Espaço abaixo da imagem
+    marginBottom: 25,
+  },
+
+  // Estilo do título
+  titulo: {
+
+    // Tamanho da fonte
+    fontSize: 34,
+
+    // Fonte grossa
+    fontWeight: '900',
+
+    // Cor amarela
+    color: '#FFD93D',
+  },
+
+  // Estilo do subtítulo
+  subtitulo: {
+
+    // Tamanho da fonte
+    fontSize: 18,
+
+    // Cor clara
+    color: '#DDE6F5',
+
+    // Espaço acima
+    marginTop: 8,
+
+    // Espaço abaixo
+    marginBottom: 30,
+
+    // Centraliza texto
+    textAlign: 'center',
+  },
+
+  // Área dos cards
+  cardsContainer: {
+
+    // Largura total
+    width: '100%',
+
+    // Organiza os itens em linha
+    flexDirection: 'row',
+
+    // Permite quebrar linha
+    flexWrap: 'wrap',
+
+    // Espaçamento entre os cards
+    justifyContent: 'space-between',
+  },
+
+  // Card individual
+  card: {
+
+    // Largura de quase metade da tela
+    width: '47%',
+
+    // Fundo azul
+    backgroundColor: '#163B65',
+
+    // Bordas arredondadas
+    borderRadius: 22,
+
+    // Espaçamento vertical interno
+    paddingVertical: 24,
+
+    // Espaçamento horizontal interno
+    paddingHorizontal: 10,
+
+    // Espaço abaixo
+    marginBottom: 18,
+
+    // Centraliza conteúdo
+    alignItems: 'center',
+
+    // Espessura da borda
+    borderWidth: 3,
+
+    // Cor da borda
+    borderColor: '#FFD93D',
+  },
+
+  // Estilo do ícone
+  icon: {
+
+    // Tamanho do emoji
+    fontSize: 42,
+
+    // Espaço abaixo
+    marginBottom: 10,
+  },
+
+  // Título do card
+  cardTitle: {
+
+    // Tamanho da fonte
+    fontSize: 18,
+
+    // Fonte grossa
+    fontWeight: '800',
+
+    // Cor branca
+    color: '#FFFFFF',
+
+    // Texto centralizado
+    textAlign: 'center',
+  },
+
+  // Descrição do card
+  cardDesc: {
+
+    // Tamanho da fonte
+    fontSize: 14,
+
+    // Cor clara
+    color: '#C9D6EA',
+
+    // Espaço acima
+    marginTop: 8,
+
+    // Texto centralizado
+    textAlign: 'center',
+  },
+
+  // Botão principal
+  button: {
+
+    // Espaço acima
+    marginTop: 20,
+
+    // Fundo amarelo
+    backgroundColor: '#FFD93D',
+
+    // Espaçamento vertical
+    paddingVertical: 18,
+
+    // Espaçamento horizontal
+    paddingHorizontal: 45,
+
+    // Bordas arredondadas
+    borderRadius: 30,
+
+    // Espaço abaixo
+    marginBottom: 40,
+
+    // Sombra Android
+    elevation: 5,
+  },
+
+  // Texto do botão
+  buttonText: {
+
+    // Tamanho da fonte
+    fontSize: 20,
+
+    // Fonte grossa
+    fontWeight: '900',
+
+    // Cor marrom
+    color: '#5A3B00',
+  },
+});
+******************************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Carlos Augusto de Freitas Saraiva
+DATA:  26 / 05 /2026
+Bimestre: 2º Bimestre
+Descrição: Desenvolvimento de uma aplicação mobile em React Native utilizando Expo para realizar o cadastro de produtos. A aplicação permite adicionar, listar, editar e excluir produtos de forma dinâmica, utilizando o hook useState para gerenciamento de estado. Também foram implementadas validações nos campos do formulário, garantindo o preenchimento correto das informações, como nome, preço, categoria e descrição. A interface foi organizada de maneira simples e funcional, proporcionando uma experiência prática ao usuário.
+*******************************************************************************
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  FlatList,
+  StyleSheet,
+  Alert,
+  ScrollView,
+} from "react-native";
+
+export default function App() {
+  // Estado da lista de produtos
+  const [produtos, setProdutos] = useState([]);
+
+  // Estados dos campos do formulário
+  const [nome, setNome] = useState("");
+  const [preco, setPreco] = useState("");
+  const [categoria, setCategoria] = useState("");
+  const [descricao, setDescricao] = useState("");
+
+  // Controla edição
+  const [editandoId, setEditandoId] = useState(null);
+
+  // Função para limpar formulário
+  const limparCampos = () => {
+    setNome("");
+    setPreco("");
+    setCategoria("");
+    setDescricao("");
+    setEditandoId(null);
+  };
+
+  // Validação dos dados
+  const validarCampos = () => {
+    if (!nome || !preco || !categoria || !descricao) {
+      Alert.alert("Erro", "Todos os campos são obrigatórios.");
+      return false;
+    }
+
+    if (isNaN(preco) || Number(preco) <= 0) {
+      Alert.alert("Erro", "Digite um preço válido.");
+      return false;
+    }
+
+    return true;
+  };
+
+  // Adicionar ou editar produto
+  const salvarProduto = () => {
+    if (!validarCampos()) return;
+
+    const novoProduto = {
+      id: editandoId ? editandoId : Date.now().toString(),
+      nome,
+      preco,
+      categoria,
+      descricao,
+    };
+
+    // Se estiver editando
+    if (editandoId) {
+      const listaAtualizada = produtos.map((produto) =>
+        produto.id === editandoId ? novoProduto : produto
+      );
+
+      setProdutos(listaAtualizada);
+
+      Alert.alert("Sucesso", "Produto atualizado!");
+    } else {
+      // Novo cadastro
+      setProdutos([...produtos, novoProduto]);
+
+      Alert.alert("Sucesso", "Produto cadastrado!");
+    }
+
+    limparCampos();
+  };
+
+  // Editar produto
+  const editarProduto = (produto) => {
+    setNome(produto.nome);
+    setPreco(produto.preco);
+    setCategoria(produto.categoria);
+    setDescricao(produto.descricao);
+    setEditandoId(produto.id);
+  };
+
+  // Deletar produto
+  const deletarProduto = (id) => {
+    Alert.alert(
+      "Confirmar",
+      "Deseja realmente excluir este produto?",
+      [
+        {
+          text: "Cancelar",
+          style: "cancel",
+        },
+        {
+          text: "Excluir",
+          onPress: () => {
+            const novaLista = produtos.filter(
+              (produto) => produto.id !== id
+            );
+
+            setProdutos(novaLista);
+          },
+        },
+      ]
+    );
+  };
+
+  // Renderização de cada item da lista
+  const renderItem = ({ item }) => (
+    <View style={styles.card}>
+      <Text style={styles.titulo}>{item.nome}</Text>
+
+      <Text>Preço: R$ {item.preco}</Text>
+      <Text>Categoria: {item.categoria}</Text>
+      <Text>Descrição: {item.descricao}</Text>
+
+      <View style={styles.botoesContainer}>
+        <TouchableOpacity
+          style={[styles.botao, styles.botaoEditar]}
+          onPress={() => editarProduto(item)}
+        >
+          <Text style={styles.textoBotao}>Editar</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[styles.botao, styles.botaoExcluir]}
+          onPress={() => deletarProduto(item.id)}
+        >
+          <Text style={styles.textoBotao}>Excluir</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+
+  return (
+    <ScrollView style={styles.container}>
+      <Text style={styles.header}>
+        Cadastro de Produtos
+      </Text>
+
+      {/* Campo Nome */}
+      <TextInput
+        style={styles.input}
+        placeholder="Nome do produto"
+        value={nome}
+        onChangeText={setNome}
+      />
+
+      {/* Campo Preço */}
+      <TextInput
+        style={styles.input}
+        placeholder="Preço"
+        value={preco}
+        onChangeText={setPreco}
+        keyboardType="numeric"
+      />
+
+      {/* Campo Categoria */}
+      <TextInput
+        style={styles.input}
+        placeholder="Categoria"
+        value={categoria}
+        onChangeText={setCategoria}
+      />
+
+      {/* Campo Descrição */}
+      <TextInput
+        style={[styles.input, styles.textArea]}
+        placeholder="Descrição"
+        value={descricao}
+        onChangeText={setDescricao}
+        multiline
+      />
+
+      {/* Botão Salvar */}
+      <TouchableOpacity
+        style={styles.botaoSalvar}
+        onPress={salvarProduto}
+      >
+        <Text style={styles.textoBotao}>
+          {editandoId ? "Atualizar Produto" : "Cadastrar Produto"}
+        </Text>
+      </TouchableOpacity>
+
+      {/* Lista de Produtos */}
+      <Text style={styles.subtitulo}>
+        Produtos Cadastrados
+      </Text>
+
+      <FlatList
+        data={produtos}
+        keyExtractor={(item) => item.id}
+        renderItem={renderItem}
+        scrollEnabled={false}
+      />
+    </ScrollView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    marginTop: 40,
+    backgroundColor: "#f2f2f2",
+  },
+
+  header: {
+    fontSize: 28,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 20,
+  },
+
+  input: {
+    backgroundColor: "#fff",
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 12,
+  },
+
+  textArea: {
+    height: 80,
+  },
+
+  botaoSalvar: {
+    backgroundColor: "#007bff",
+    padding: 15,
+    borderRadius: 8,
+    alignItems: "center",
+    marginBottom: 20,
+  },
+
+  subtitulo: {
+    fontSize: 22,
+    fontWeight: "bold",
+    marginBottom: 10,
+  },
+
+  card: {
+    backgroundColor: "#fff",
+    padding: 15,
+    borderRadius: 10,
+    marginBottom: 15,
+  },
+
+  titulo: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 5,
+  },
+
+  botoesContainer: {
+    flexDirection: "row",
+    marginTop: 10,
+    justifyContent: "space-between",
+  },
+
+  botao: {
+    flex: 1,
+    padding: 10,
+    borderRadius: 6,
+    alignItems: "center",
+    marginHorizontal: 5,
+  },
+
+  botaoEditar: {
+    backgroundColor: "#28a745",
+  },
+
+  botaoExcluir: {
+    backgroundColor: "#dc3545",
+  },
+
+  textoBotao: {
+    color: "#fff",
+    fontWeight: "bold",
+  },
+});
+********************************************************************
 
