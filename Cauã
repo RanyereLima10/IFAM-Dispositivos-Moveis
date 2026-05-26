@@ -1548,3 +1548,42 @@ const styles = StyleSheet.create({
     backgroundColor: '#dc3545',
   },
 });
+
+************+***************************************************************************+***************************************************************************+***************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Cauã Fonseca da S. Vieira
+DATA:  26/ 05 /2026
+Bimestre: 2º Bimestre
+AS 5 QUESTAO DE FXAÇAO
+************+***************************************************************************+***************************************************************************+*********************
+1- <View>
+  <Text>Olá</Text>
+</View>
+
+
+2-flexDirection: 'row'
+
+
+3-<View style={{ flexDirection: 'row' }}>
+  <Text>A</Text>
+  <Text>B</Text>
+</View>
+
+
+4-const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'blue',
+  },
+});
+
+
+5-O Expo Snack permite testar projetos React Native direto no navegador, sem precisar instalar Android Studio, Xcode ou configurar ambiente.
+
+Vantagens principais:
+
+fácil de usar
+roda online
+permite testar no celular via QR Code
+ideal para aprender e praticar rapidamente
