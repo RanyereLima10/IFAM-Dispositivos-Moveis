@@ -1168,3 +1168,383 @@ const styles = StyleSheet.create({
   },
 });
 
+
+
+************+***************************************************************************+***************************************************************************+***************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Cauã Fonseca da S. Vieira
+DATA:  26/ 05 /2026
+Bimestre: 2º Bimestre
+ESSE CODIGO FALA SOBRE A CRIAÇÃO DE BOTOES E ETC
+************+***************************************************************************+***************************************************************************+*********************
+import React, { useState } from 'react';
+
+// Importação dos componentes do React Native
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  FlatList,
+  StyleSheet,
+  Alert,
+} from 'react-native';
+
+// Importação do Picker para seleção de categorias
+import { Picker } from '@react-native-picker/picker';
+
+// Componente principal do aplicativo
+export default function App() {
+
+  // =========================
+  // ESTADOS DOS CAMPOS
+  // =========================
+
+  // Armazena o nome do produto
+  const [nome, setNome] = useState('');
+
+  // Armazena o preço do produto
+  const [preco, setPreco] = useState('');
+
+  // Armazena a categoria escolhida
+  const [categoria, setCategoria] = useState('');
+
+  // Armazena a descrição do produto
+  const [descricao, setDescricao] = useState('');
+
+  // Lista de produtos cadastrados
+  const [produtos, setProdutos] = useState([]);
+
+  // Guarda o ID do produto em edição
+  const [editandoId, setEditandoId] = useState(null);
+
+  // =========================
+  // FUNÇÃO SALVAR PRODUTO
+  // =========================
+  const salvarProduto = () => {
+
+    // Verifica se todos os campos foram preenchidos
+    if (!nome || !preco || !categoria || !descricao) {
+      Alert.alert('Erro', 'Preencha todos os campos!');
+      return;
+    }
+
+    // Verifica se o preço é válido
+    if (isNaN(preco) || Number(preco) <= 0) {
+      Alert.alert('Erro', 'Digite um preço válido!');
+      return;
+    }
+
+    // Criação do objeto produto
+    const novoProduto = {
+      id: editandoId ? editandoId : Date.now().toString(),
+      nome,
+      preco,
+      categoria,
+      descricao,
+    };
+
+    // =========================
+    // EDITAR PRODUTO
+    // =========================
+    if (editandoId) {
+
+      // Atualiza o produto editado
+      const listaAtualizada = produtos.map((produto) =>
+        produto.id === editandoId ? novoProduto : produto
+      );
+
+      setProdutos(listaAtualizada);
+
+      // Finaliza o modo edição
+      setEditandoId(null);
+
+    } else {
+
+      // =========================
+      // ADICIONAR NOVO PRODUTO
+      // =========================
+
+      setProdutos([...produtos, novoProduto]);
+    }
+
+    // Limpa os campos após salvar
+    limparCampos();
+  };
+
+  // =========================
+  // LIMPAR CAMPOS
+  // =========================
+  const limparCampos = () => {
+    setNome('');
+    setPreco('');
+    setCategoria('');
+    setDescricao('');
+  };
+
+  // =========================
+  // EDITAR PRODUTO
+  // =========================
+  const editarProduto = (produto) => {
+
+    // Preenche os campos com os dados do produto
+    setNome(produto.nome);
+    setPreco(produto.preco);
+    setCategoria(produto.categoria);
+    setDescricao(produto.descricao);
+
+    // Define qual produto está sendo editado
+    setEditandoId(produto.id);
+  };
+
+  // =========================
+  // DELETAR PRODUTO
+  // =========================
+  const deletarProduto = (id) => {
+
+    // Remove o produto da lista
+    const novaLista = produtos.filter(
+      (produto) => produto.id !== id
+    );
+
+    setProdutos(novaLista);
+  };
+
+  // =========================
+  // RENDERIZAÇÃO DOS PRODUTOS
+  // =========================
+  const renderItem = ({ item }) => (
+    <View style={styles.card}>
+
+      {/* Nome do produto */}
+      <Text style={styles.titulo}>
+        {item.nome}
+      </Text>
+
+      {/* Informações do produto */}
+      <Text>Preço: R$ {item.preco}</Text>
+      <Text>Categoria: {item.categoria}</Text>
+      <Text>Descrição: {item.descricao}</Text>
+
+      {/* Botões de ação */}
+      <View style={styles.botoes}>
+
+        {/* Botão editar */}
+        <TouchableOpacity
+          style={[styles.botao, styles.editar]}
+          onPress={() => editarProduto(item)}
+        >
+          <Text style={styles.textoBotao}>
+            Editar
+          </Text>
+        </TouchableOpacity>
+
+        {/* Botão excluir */}
+        <TouchableOpacity
+          style={[styles.botao, styles.deletar]}
+          onPress={() => deletarProduto(item.id)}
+        >
+          <Text style={styles.textoBotao}>
+            Excluir
+          </Text>
+        </TouchableOpacity>
+
+      </View>
+    </View>
+  );
+
+  // =========================
+  // INTERFACE DO APP
+  // =========================
+  return (
+    <View style={styles.container}>
+
+      {/* Título */}
+      <Text style={styles.header}>
+        Cadastro de Produtos
+      </Text>
+
+      {/* Campo Nome */}
+      <TextInput
+        style={styles.input}
+        placeholder="Nome do produto"
+        value={nome}
+        onChangeText={setNome}
+      />
+
+      {/* Campo Preço */}
+      <TextInput
+        style={styles.input}
+        placeholder="Preço"
+        value={preco}
+        onChangeText={setPreco}
+        keyboardType="numeric"
+      />
+
+      {/* Campo Categoria com seleção */}
+      <View style={styles.pickerContainer}>
+        <Picker
+          selectedValue={categoria}
+          onValueChange={(itemValue) =>
+            setCategoria(itemValue)
+          }
+        >
+          <Picker.Item
+            label="Selecione uma categoria"
+            value=""
+          />
+
+          <Picker.Item
+            label="Eletrônicos"
+            value="Eletrônicos"
+          />
+
+          <Picker.Item
+            label="Roupas"
+            value="Roupas"
+          />
+
+          <Picker.Item
+            label="Alimentos"
+            value="Alimentos"
+          />
+
+          <Picker.Item
+            label="Beleza"
+            value="Beleza"
+          />
+        </Picker>
+      </View>
+
+      {/* Campo Descrição */}
+      <TextInput
+        style={styles.input}
+        placeholder="Descrição"
+        value={descricao}
+        onChangeText={setDescricao}
+      />
+
+      {/* Botão salvar */}
+      <TouchableOpacity
+        style={styles.salvar}
+        onPress={salvarProduto}
+      >
+        <Text style={styles.textoBotao}>
+
+          {/* Texto muda ao editar */}
+          {editandoId
+            ? 'Atualizar Produto'
+            : 'Cadastrar Produto'}
+
+        </Text>
+      </TouchableOpacity>
+
+      {/* Lista de produtos */}
+      <FlatList
+        data={produtos}
+        keyExtractor={(item) => item.id}
+        renderItem={renderItem}
+        showsVerticalScrollIndicator={false}
+      />
+
+    </View>
+  );
+}
+
+// =========================
+// ESTILOS
+// =========================
+const styles = StyleSheet.create({
+
+  // Container principal
+  container: {
+    flex: 1,
+    padding: 20,
+    marginTop: 40,
+    backgroundColor: '#f2f2f2',
+  },
+
+  // Título principal
+  header: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+
+  // Campos de texto
+  input: {
+    backgroundColor: '#fff',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    padding: 10,
+    marginBottom: 10,
+  },
+
+  // Container do Picker
+  pickerContainer: {
+    backgroundColor: '#fff',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    marginBottom: 10,
+  },
+
+  // Botão salvar
+  salvar: {
+    backgroundColor: '#007bff',
+    padding: 15,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+
+  // Texto dos botões
+  textoBotao: {
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+
+  // Card do produto
+  card: {
+    backgroundColor: '#fff',
+    padding: 15,
+    borderRadius: 8,
+    marginBottom: 15,
+  },
+
+  // Nome do produto
+  titulo: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 5,
+  },
+
+  // Área dos botões
+  botoes: {
+    flexDirection: 'row',
+    marginTop: 10,
+    justifyContent: 'space-between',
+  },
+
+  // Estilo padrão dos botões
+  botao: {
+    padding: 10,
+    borderRadius: 6,
+    width: '48%',
+    alignItems: 'center',
+  },
+
+  // Botão editar
+  editar: {
+    backgroundColor: '#28a745',
+  },
+
+  // Botão excluir
+  deletar: {
+    backgroundColor: '#dc3545',
+  },
+});
