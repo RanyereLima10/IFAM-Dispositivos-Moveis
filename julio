@@ -1,6 +1,478 @@
+**********************************************************************/
 
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Julio Cesar de Souza Albuquerque
+DATA:  12/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição:
+Aplicação mobile simples desenvolvida em React Native
+utilizando layouts responsivos, imagens e componentes
+visuais para praticar flexbox e estilização.
+*******************************************************
+*/  
+**********************************************************************/
+
+import React from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  Dimensions,
+  ScrollView
+} from 'react-native';
+
+export default function App() {
+
+  const larguraTela = Dimensions.get('window').width;
+
+  // Lista dos cards
+  const cards = [
+    {
+      id: 1,
+      titulo: 'Pedra',
+      emoji: '🗿',
+      cor: '#4A90E2'
+    },
+    {
+      id: 2,
+      titulo: 'Papel',
+      emoji: '📜',
+      cor: '#27AE60'
+    },
+    {
+      id: 3,
+      titulo: 'Tesoura',
+      emoji: '✂️',
+      cor: '#E67E22'
+    },
+    {
+      id: 4,
+      titulo: 'Fogo',
+      emoji: '🔥',
+      cor: '#9B59B6'
+    },
+    {
+      id: 5,
+      titulo: 'Água',
+      emoji: '💧',
+      cor: '#3498DB'
+    },
+    {
+      id: 6,
+      titulo: 'Raio',
+      emoji: '⚡',
+      cor: '#E74C3C'
+    },
+    {
+      id: 7,
+      titulo: 'Estrela',
+      emoji: '🌟',
+      cor: '#F1C40F'
+    }
+  ];
+
+  return (
+
+    <ScrollView contentContainerStyle={styles.container}>
+
+      {/* Imagem principal */}
+      <Image
+        source={{ uri: 'https://picsum.photos/300' }}
+        style={[
+          styles.imagemTopo,
+          {
+            width: larguraTela * 0.38,
+            height: larguraTela * 0.38
+          }
+        ]}
+      />
+
+      {/* Título */}
+      <Text style={styles.titulo}>
+        Meu Aplicativo
+      </Text>
+
+      {/* Subtítulo */}
+      <Text style={styles.subtitulo}>
+        Aula de Layout Responsivo com React Native
+      </Text>
+
+      {/* Cards */}
+      <View style={styles.linha}>
+
+        {cards.map((item) => (
+
+          <View
+            key={item.id}
+            style={[
+              styles.card,
+              {
+                width: larguraTela * 0.26,
+                backgroundColor: item.cor
+              }
+            ]}
+          >
+
+            <Text style={styles.icone}>
+              {item.emoji}
+            </Text>
+
+            <Text style={styles.textoCard}>
+              {item.titulo}
+            </Text>
+
+          </View>
+
+        ))}
+
+      </View>
+
+      {/* Botão */}
+      <TouchableOpacity
+        style={[
+          styles.botao,
+          { width: larguraTela * 0.7 }
+        ]}
+      >
+
+        <Text style={styles.textoBotao}>
+          ENTRAR
+        </Text>
+
+      </TouchableOpacity>
+
+    </ScrollView>
+  );
+}
+
+const styles = StyleSheet.create({
+
+  container: {
+    flexGrow: 1,
+    backgroundColor: '#121212',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20
+  },
+
+  imagemTopo: {
+    borderRadius: 100,
+    marginBottom: 20
+  },
+
+  titulo: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+    textAlign: 'center',
+    marginBottom: 10
+  },
+
+  subtitulo: {
+    fontSize: 17,
+    color: '#CCCCCC',
+    textAlign: 'center',
+    marginBottom: 25
+  },
+
+  linha: {
+    width: '100%',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    marginBottom: 30
+  },
+
+  card: {
+    height: 110,
+    borderRadius: 14,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 12,
+    elevation: 5
+  },
+
+  icone: {
+    fontSize: 32,
+    marginBottom: 6
+  },
+
+  textoCard: {
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+    fontSize: 15
+  },
+
+  botao: {
+    backgroundColor: '#2ECC71',
+    paddingVertical: 14,
+    borderRadius: 12,
+    alignItems: 'center',
+    marginBottom: 20
+  },
+
+  textoBotao: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    fontWeight: 'bold'
+  }
+
+});
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Julio Cesar de Souza Albuquerque
+DATA:  19/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição: Exercicio de mobile feito com o intuito de fortalecer o aprendizado, simulando uma tela onde foi adicionado mais um botão e mais um subtexto
+*******************************************************
+*/  
+**********************************************************************/
+
+import React from 'react';
+import {
+  View,
+  Text,
+  Button,
+  Alert,
+  StyleSheet,
+  SafeAreaView,
+  StatusBar,
+} from 'react-native';
+
+export default function App() {
+  const mostrarMensagem = () => {
+    Alert.alert(
+      'Bem-vindo ',
+      'Sua nova jornada começou com sucesso!'
+    );
+  };
+
+  const mostrarInfo = () => {
+    Alert.alert(
+      'Informação ',
+      'Continue estudando React Native todos os dias!'
+    );
+  };
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="dark-content" />
+
+      <View style={styles.card}>
+        <Text style={styles.titulo}>
+          Seja bem-vindo, Julio 
+        </Text>
+
+        <Text style={styles.subtitulo}>
+          Pronto para começar uma nova jornada?
+        </Text>
+
+        <Text style={styles.subtextoExtra}>
+          Aprender programação é um passo importante para o seu futuro 
+        </Text>
+
+        <View style={styles.botao}>
+          <Button
+            title="Iniciar"
+            onPress={mostrarMensagem}
+            color="#4F46E5"
+          />
+        </View>
+
+        <View style={styles.botaoSecundario}>
+          <Button
+            title="Saiba Mais"
+            onPress={mostrarInfo}
+            color="#10B981"
+          />
+        </View>
+      </View>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#F3F4F6',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+
+  card: {
+    width: '100%',
+    backgroundColor: '#FFFFFF',
+    padding: 25,
+    borderRadius: 16,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+    elevation: 5,
+  },
+
+  titulo: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#111827',
+    marginBottom: 12,
+    textAlign: 'center',
+  },
+
+  subtitulo: {
+    fontSize: 16,
+    color: '#6B7280',
+    textAlign: 'center',
+    marginBottom: 10,
+    lineHeight: 24,
+  },
+
+  subtextoExtra: {
+    fontSize: 15,
+    color: '#4B5563',
+    textAlign: 'center',
+    marginBottom: 25,
+    lineHeight: 22,
+  },
+
+  botao: {
+    borderRadius: 10,
+    overflow: 'hidden',
+    marginBottom: 15,
+  },
+
+  botaoSecundario: {
+    borderRadius: 10,
+    overflow: 'hidden',
+  },
+});
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Julio Cesar de Souza Albuquerque
+DATA:  19/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição:
+Tipos de Fontes
+*******************************************************
+*/  
+**********************************************************************/
+
+import React from 'react';
+import { Text, View } from 'react-native';
+
+export default function App() {
+
+  return (
+
+    // Caixa principal
+    <View style={{ marginTop: 100, alignItems: 'center' }}>
+
+      {/* Texto com estilos de fonte */}
+      <Text
+        style={{
+          margin: 20,
+          fontSize: 20,
+        }}
+      >
+        Estilos de fonte:
+      </Text>
+
+      <Text
+        style={{
+          fontSize: 15,
+          fontWeight: '900', // Muito grosso
+        }}
+      >
+        Muito grosso
+      </Text>
+      <Text
+        style={{
+          fontSize: 15,
+          fontWeight: 'bold', // Negrito
+        }}
+      >
+        Negrito
+      </Text>
+      <Text
+        style={{
+          fontSize: 15,
+          fontWeight: '400', // Normal
+        }}
+      >
+        Normal
+      </Text>
+      <Text
+        style={{
+          fontSize: 15,
+          fontWeight: '100', // Muito fino
+        }}
+      >
+        Muito Fino
+      </Text>
+
+      <Text
+        style={{
+          margin: 20,
+          fontSize: 20,
+        }}
+      >
+        Tipos de Fontes:
+      </Text>
+
+      <Text
+        style={{
+          margin: 5,
+          fontSize: 15,
+          fontFamily: 'sans-serif'
+        }}
+      >
+        Texto em Sans Seriff
+      </Text>
+
+      <Text
+        style={{
+          margin: 5,
+          fontSize: 15,
+          fontFamily: 'sans-serif'
+        }}
+      >
+        Texto em Sans Serif
+      </Text>
+
+      <Text
+        style={{
+          margin: 5,
+          fontSize: 15,
+          fontFamily: 'serif'
+        }}
+      >
+        Texto em Serif
+      </Text>
+
+      <Text
+        style={{
+          margin: 5,
+          fontSize: 15,
+          fontFamily: 'Normal'
+        }}
+      >
+        Texto Normal
       </Text>
 
     </View>
-  );
-}
