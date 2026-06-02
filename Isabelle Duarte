@@ -198,6 +198,70 @@ borderRadius: 10
 }
 });
 
+
+*****************************************************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Isabelle Christine J Duarte
+DATA:  19/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição: Fontes.
+
+
+import React from 'react';
+import { Text, View, StyleSheet } from 'react-native';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.tituloSans}>Ilia Topuria</Text>
+      <Text style={styles.tituloSerif}>Charles do Bronx</Text>
+      <Text style={styles.tituloMono}>Poatan</Text>
+      <Text style={styles.tituloMonof}>Carlos Prates</Text>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    padding: 20,
+  },
+  tituloSans: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    fontStyle: 'italic', // Aplica o itálico corretamente
+    fontFamily: 'sans-serif', // Fonte nativa limpa
+    color: '#571427',
+    marginBottom: 60,
+  },
+  tituloSerif: {
+    fontSize: 40,
+    fontWeight: 'bold',
+    fontStyle: 'italic', // Aplica o itálico corretamente
+    fontFamily: 'serif', // Fonte clássica com serifas
+    color: '#431427',
+    marginBottom: 60,
+  },
+  tituloMono: {
+    fontSize: 50,
+    fontWeight: 'bold',
+    fontFamily: 'monospace', // Fonte estilo código
+    color: '#391427',
+    marginBottom: 60,
+  },
+  tituloMonof: {
+    fontSize: 35,
+    fontWeight: 'normal',
+    fontFamily: 'monospace', // Adicionado para o quarto elemento do seu layout
+    color: '#611427',
+    marginBottom: 60,
+  },
+});
 *******************************************************************************************************
 INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
 DISCIPLINA: Dispositivos Móveis
