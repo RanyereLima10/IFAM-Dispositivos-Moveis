@@ -344,4 +344,360 @@ const styles = StyleSheet.create({
 });
 
 
+*****************************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Isabelle Christine J Duarte
+DATA:  26/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição da Atividade: 
+APP DE CADASTRO DE PRODUTOS - REACT NATIVE
+Aplicação completa para cadastrar, listar, editar e deletar produtos.
+
+
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView,
+  Alert,
+} from 'react-native';
+
+export default function App() {
+  const [titulo, setTitulo] = useState('');
+  const [autor, setAutor] = useState('');
+  const [genero, setGenero] = useState('');
+  const [ano, setAno] = useState('');
+  const [sinopse, setSinopse] = useState('');
+
+  const [livros, setLivros] = useState([]);
+
+  const cadastrarLivro = () => {
+    if (
+      titulo.trim() === '' ||
+      autor.trim() === '' ||
+      genero.trim() === '' ||
+      ano.trim() === '' ||
+      sinopse.trim() === ''
+    ) {
+      Alert.alert('Erro', 'Preencha todos os campos!');
+      return;
+    }
+
+    if (isNaN(ano) || ano.length !== 4) {
+      Alert.alert('Erro', 'Digite um ano válido!');
+      return;
+    }
+
+    const novoLivro = {
+      id: Date.now(),
+      titulo,
+      autor,
+      genero,
+      ano,
+      sinopse,
+    };
+
+    setLivros([...livros, novoLivro]);
+
+    limparCampos();
+
+    Alert.alert('Sucesso', 'Livro cadastrado!');
+  };
+
+  const limparCampos = () => {
+    setTitulo('');
+    setAutor('');
+    setGenero('');
+    setAno('');
+    setSinopse('');
+  };
+
+  const excluirLivro = (id) => {
+    setLivros(livros.filter((livro) => livro.id !== id));
+  };
+
+  return (
+    <ScrollView style={styles.container}>
+      <Text style={styles.tituloPrincipal}>
+        Cadastro de Livros
+      </Text>
+
+      <Text style={styles.label}>Título do Livro *</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Digite o título"
+        placeholderTextColor="#777"
+        value={titulo}
+        onChangeText={setTitulo}
+      />
+
+      <Text style={styles.label}>Autor *</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Digite o autor"
+        placeholderTextColor="#777"
+        value={autor}
+        onChangeText={setAutor}
+      />
+
+      <Text style={styles.label}>Gênero *</Text>
+
+      <View style={styles.generos}>
+        {['Romance', 'Fantasia', 'Ficção', 'Outros'].map((item) => (
+          <TouchableOpacity
+            key={item}
+            style={[
+              styles.generoBtn,
+              genero === item && styles.generoSelecionado,
+            ]}
+            onPress={() => setGenero(item)}
+          >
+            <Text
+              style={[
+                styles.generoTexto,
+                genero === item && styles.generoTextoSelecionado,
+              ]}
+            >
+              {item}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+
+      <Text style={styles.label}>Ano de Publicação *</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Ex: 2025"
+        placeholderTextColor="#777"
+        keyboardType="numeric"
+        value={ano}
+        onChangeText={setAno}
+      />
+
+      <Text style={styles.label}>Sinopse *</Text>
+      <TextInput
+        style={styles.textArea}
+        placeholder="Digite uma breve sinopse"
+        placeholderTextColor="#777"
+        multiline
+        numberOfLines={4}
+        value={sinopse}
+        onChangeText={setSinopse}
+      />
+
+      <TouchableOpacity
+        style={styles.btnCadastrar}
+        onPress={cadastrarLivro}
+      >
+        <Text style={styles.textoBotao}>
+          CADASTRAR
+        </Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.btnLimpar}
+        onPress={limparCampos}
+      >
+        <Text style={styles.textoBotao}>
+          LIMPAR
+        </Text>
+      </TouchableOpacity>
+
+      <Text style={styles.listaTitulo}>
+        Livros Cadastrados
+      </Text>
+
+      {livros.length === 0 ? (
+        <Text style={styles.semLivros}>
+          Nenhum livro cadastrado.
+        </Text>
+      ) : (
+        livros.map((livro) => (
+          <View key={livro.id} style={styles.card}>
+            <Text style={styles.cardTitulo}>
+              {livro.titulo}
+            </Text>
+
+            <Text style={styles.cardTexto}>
+              Autor: {livro.autor}
+            </Text>
+
+            <Text style={styles.cardTexto}>
+              Gênero: {livro.genero}
+            </Text>
+
+            <Text style={styles.cardTexto}>
+              Ano: {livro.ano}
+            </Text>
+
+            <Text style={styles.cardSinopse}>
+              {livro.sinopse}
+            </Text>
+
+            <TouchableOpacity
+              style={styles.btnExcluir}
+              onPress={() => excluirLivro(livro.id)}
+            >
+              <Text style={styles.textoBotao}>
+                EXCLUIR
+              </Text>
+            </TouchableOpacity>
+          </View>
+        ))
+      )}
+    </ScrollView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#F8F5F6',
+    padding: 20,
+  },
+
+  tituloPrincipal: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: '#571427',
+    textAlign: 'center',
+    marginBottom: 25,
+    marginTop: 20,
+  },
+
+  label: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#611427',
+    marginBottom: 6,
+    marginTop: 10,
+  },
+
+  input: {
+    backgroundColor: '#FFFFFF',
+    borderWidth: 1,
+    borderColor: '#4D1427',
+    borderRadius: 10,
+    padding: 12,
+    color: '#391427',
+  },
+
+  textArea: {
+    backgroundColor: '#FFFFFF',
+    borderWidth: 1,
+    borderColor: '#4D1427',
+    borderRadius: 10,
+    padding: 12,
+    height: 120,
+    textAlignVertical: 'top',
+    color: '#391427',
+  },
+
+  generos: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginBottom: 10,
+  },
+
+  generoBtn: {
+    borderWidth: 1,
+    borderColor: '#4D1427',
+    borderRadius: 8,
+    padding: 10,
+    marginRight: 8,
+    marginTop: 5,
+    backgroundColor: '#FFFFFF',
+  },
+
+  generoSelecionado: {
+    backgroundColor: '#571427',
+  },
+
+  generoTexto: {
+    color: '#391427',
+  },
+
+  generoTextoSelecionado: {
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+  },
+
+  btnCadastrar: {
+    backgroundColor: '#611427',
+    padding: 15,
+    borderRadius: 10,
+    marginTop: 20,
+    alignItems: 'center',
+  },
+
+  btnLimpar: {
+    backgroundColor: '#431427',
+    padding: 15,
+    borderRadius: 10,
+    marginTop: 10,
+    alignItems: 'center',
+  },
+
+  textoBotao: {
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+
+  listaTitulo: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#571427',
+    marginTop: 30,
+    marginBottom: 15,
+  },
+
+  semLivros: {
+    textAlign: 'center',
+    color: '#4D1427',
+    marginBottom: 20,
+    fontSize: 16,
+  },
+
+  card: {
+    backgroundColor: '#391427',
+    padding: 15,
+    borderRadius: 12,
+    marginBottom: 15,
+    elevation: 3,
+  },
+
+  cardTitulo: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+    marginBottom: 10,
+  },
+
+  cardTexto: {
+    color: '#FFFFFF',
+    marginBottom: 4,
+    fontSize: 15,
+  },
+
+  cardSinopse: {
+    color: '#FFFFFF',
+    marginTop: 8,
+    lineHeight: 20,
+  },
+
+  btnExcluir: {
+    backgroundColor: '#611427',
+    padding: 10,
+    borderRadius: 8,
+    marginTop: 12,
+    alignItems: 'center',
+  },
+});
+
 
