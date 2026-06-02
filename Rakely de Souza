@@ -528,6 +528,573 @@ export default function App() {
   );
 }
 
+***************************************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A):Rakely da Silva de Souza
+DADOS: 02 / 06 / 2026
+BIMESTRE: 2º Bimestre
+
+DESCRIÇÃO DE ATIVIDADE:
+Cadastro de produtos
+
+import React, { useState } from 'react';
+
+import {
+View,
+Text,
+TextInput,
+TouchableOpacity,
+Alert,
+StyleSheet,
+ScrollView,
+} from 'react-native';
+
+export default function App() {
+
+// =========================
+// ESTADOS
+// =========================
+
+const [nome, setNome] = useState('');
+const [preco, setPreco] = useState('');
+const [categoria, setCategoria] = useState('Roupas');
+const [descricao, setDescricao] = useState('');
+
+// Lista de produtos
+const [produtos, setProdutos] = useState([]);
+
+// =========================
+// CADASTRAR PRODUTO
+// =========================
+
+const cadastrarProduto = () => {
+
+// Verifica campos vazios
+if (
+nome.trim() === '' ||
+preco.trim() === '' ||
+descricao.trim() === ''
+) {
+
+Alert.alert(
+'Erro',
+'Preencha todos os campos.'
+);
+
+return;
+}
+
+// Verifica se o preço é válido
+if (isNaN(preco)) {
+
+Alert.alert(
+'Erro',
+'Digite um preço válido.'
+);
+
+return;
+}
+
+// Novo produto
+const novoProduto = {
+id: Date.now().toString(),
+nome,
+preco,
+categoria,
+descricao,
+};
+
+// Adiciona na lista
+setProdutos((prev) => [...prev, novoProduto]);
+
+// Mensagem
+Alert.alert(
+'Produto cadastrado',
+`${nome} foi cadastrado com sucesso!`
+);
+
+// Limpa os campos
+limparCamposSemMensagem();
+};
+
+// =========================
+// DELETAR PRODUTO
+// =========================
+
+const deletarProduto = (id, nomeProduto) => {
+
+// Remove da lista
+const novaLista = produtos.filter(
+(item) => item.id !== id
+);
+
+setProdutos(novaLista);
+
+// Mensagem
+Alert.alert(
+'Produto removido',
+`${nomeProduto} foi excluído.`
+);
+};
+
+// =========================
+// LIMPAR CAMPOS
+// =========================
+
+const limparCampos = () => {
+
+setNome('');
+setPreco('');
+setCategoria('Roupas');
+setDescricao('');
+
+Alert.alert(
+'Campos limpos',
+'Todos os campos foram apagados.'
+);
+};
+
+// Limpa sem mostrar mensagem
+const limparCamposSemMensagem = () => {
+
+setNome('');
+setPreco('');
+setCategoria('Roupas');
+setDescricao('');
+};
+
+// =========================
+// TELA
+// =========================
+
+return (
+
+<View style={styles.container}>
+
+{/* CABEÇALHO */}
+
+<View style={styles.header}>
+
+<Text style={styles.titulo}>
+Cadastro de Produtos
+</Text>
+
+<Text style={styles.subtitulo}>
+Cadatre seu produto
+</Text>
+
+</View>
+
+{/* SCROLL */}
+
+<ScrollView
+showsVerticalScrollIndicator={false}
+>
+
+{/* FORMULÁRIO */}
+
+<View style={styles.formulario}>
+
+{/* NOME */}
+
+<Text style={styles.label}>
+Nome do Produto
+</Text>
+
+<TextInput
+style={styles.input}
+placeholder="Digite o nome"
+placeholderTextColor="#8B7355"
+value={nome}
+onChangeText={setNome}
+/>
+
+{/* PREÇO */}
+
+<Text style={styles.label}>
+Preço
+</Text>
+
+<TextInput
+style={styles.input}
+placeholder="Digite o preço"
+placeholderTextColor="#8B7355"
+keyboardType="numeric"
+value={preco}
+onChangeText={setPreco}
+/>
+
+{/* CATEGORIA */}
+
+<Text style={styles.label}>
+Categoria
+</Text>
+
+<View style={styles.categoriasContainer}>
+
+{[
+'Roupas',
+'Alimentos',
+'Games',
+'Outros',
+].map((item) => (
+
+<TouchableOpacity
+key={item}
+
+style={[
+styles.botaoCategoria,
+
+categoria === item &&
+styles.categoriaAtiva,
+]}
+
+onPress={() => {
+
+setCategoria(item);
+
+Alert.alert(
+'Categoria selecionada',
+`Você escolheu ${item}`
+);
+}}
+>
+
+<Text
+style={[
+styles.textoCategoria,
+
+categoria === item &&
+styles.textoCategoriaAtivo,
+]}
+>
+{item}
+</Text>
+
+</TouchableOpacity>
+
+))}
+
+</View>
+
+{/* DESCRIÇÃO */}
+
+<Text style={styles.label}>
+Descrição
+</Text>
+
+<TextInput
+style={[
+styles.input,
+styles.inputDescricao,
+]}
+placeholder="Digite a descrição"
+placeholderTextColor="#8B7355"
+multiline
+value={descricao}
+onChangeText={setDescricao}
+/>
+
+{/* BOTÃO CADASTRAR */}
+
+<TouchableOpacity
+style={styles.botaoCadastrar}
+onPress={cadastrarProduto}
+>
+
+<Text style={styles.textoBotao}>
+CADASTRAR
+</Text>
+
+</TouchableOpacity>
+
+{/* BOTÃO LIMPAR */}
+
+<TouchableOpacity
+style={styles.botaoLimpar}
+onPress={limparCampos}
+>
+
+<Text style={styles.textoBotao}>
+LIMPAR
+</Text>
+
+</TouchableOpacity>
+
+</View>
+
+{/* =========================
+LISTA DE PRODUTOS
+========================= */}
+
+<View style={styles.listaContainer}>
+
+<Text style={styles.listaTitulo}>
+Produtos Cadastrados
+</Text>
+
+{/* Se não houver produtos */}
+
+{produtos.length === 0 ? (
+
+<Text style={styles.semProdutos}>
+Nenhum produto cadastrado.
+</Text>
+
+) : (
+
+produtos.map((item) => (
+
+<View
+key={item.id}
+style={styles.cardProduto}
+>
+
+{/* Nome */}
+<Text style={styles.nomeProduto}>
+{item.nome}
+</Text>
+
+{/* Preço */}
+<Text style={styles.precoProduto}>
+R$ {item.preco}
+</Text>
+
+{/* Categoria */}
+<Text style={styles.categoriaProduto}>
+{item.categoria}
+</Text>
+
+{/* Descrição */}
+<Text style={styles.descricaoProduto}>
+{item.descricao}
+</Text>
+
+{/* BOTÃO EXCLUIR */}
+
+<TouchableOpacity
+style={styles.botaoExcluir}
+
+onPress={() =>
+deletarProduto(
+item.id,
+item.nome
+)
+}
+>
+
+<Text style={styles.textoBotao}>
+EXCLUIR
+</Text>
+
+</TouchableOpacity>
+
+</View>
+))
+
+)}
+
+</View>
+
+</ScrollView>
+
+</View>
+);
+}
+
+// =========================
+// ESTILOS
+// =========================
+
+const styles = StyleSheet.create({
+
+// Fundo principal
+container: {
+flex: 1,
+backgroundColor: '#F5E6D3',
+},
+
+// Cabeçalho
+header: {
+backgroundColor: '#B08968',
+paddingTop: 55,
+paddingBottom: 25,
+alignItems: 'center',
+},
+
+// Título
+titulo: {
+fontSize: 28,
+fontWeight: 'bold',
+color: '#FFF8F0',
+},
+
+// Subtítulo
+subtitulo: {
+fontSize: 15,
+color: '#FDF6EC',
+marginTop: 5,
+},
+
+// Área formulário
+formulario: {
+padding: 20,
+},
+
+// Labels
+label: {
+fontSize: 16,
+fontWeight: 'bold',
+color: '#6F4E37',
+marginBottom: 8,
+},
+
+// Inputs
+input: {
+backgroundColor: '#FFF8F0',
+borderWidth: 1,
+borderColor: '#D2B48C',
+borderRadius: 12,
+padding: 14,
+marginBottom: 18,
+fontSize: 15,
+color: '#5C4033',
+},
+
+// Input descrição
+inputDescricao: {
+height: 100,
+textAlignVertical: 'top',
+},
+
+// Categorias
+categoriasContainer: {
+flexDirection: 'row',
+flexWrap: 'wrap',
+gap: 10,
+marginBottom: 20,
+},
+
+// Botão categoria
+botaoCategoria: {
+backgroundColor: '#E6CCB2',
+paddingVertical: 10,
+paddingHorizontal: 15,
+borderRadius: 10,
+},
+
+// Categoria ativa
+categoriaAtiva: {
+backgroundColor: '#7F5539',
+},
+
+// Texto categoria
+textoCategoria: {
+color: '#5C4033',
+fontWeight: 'bold',
+},
+
+// Texto categoria ativo
+textoCategoriaAtivo: {
+color: '#FFFFFF',
+},
+
+// Botão cadastrar
+botaoCadastrar: {
+backgroundColor: '#9C6644',
+padding: 15,
+borderRadius: 14,
+alignItems: 'center',
+marginBottom: 12,
+},
+
+// Botão limpar
+botaoLimpar: {
+backgroundColor: '#D4A373',
+padding: 15,
+borderRadius: 14,
+alignItems: 'center',
+},
+
+// Texto botão
+textoBotao: {
+color: '#FFFFFF',
+fontWeight: 'bold',
+fontSize: 15,
+},
+
+// Lista
+listaContainer: {
+paddingHorizontal: 20,
+paddingBottom: 30,
+},
+
+// Título lista
+listaTitulo: {
+fontSize: 24,
+fontWeight: 'bold',
+color: '#6F4E37',
+marginBottom: 20,
+},
+
+// Sem produtos
+semProdutos: {
+textAlign: 'center',
+color: '#8B7355',
+marginTop: 20,
+fontSize: 16,
+},
+
+// Card produto
+cardProduto: {
+backgroundColor: '#FFF8F0',
+padding: 18,
+borderRadius: 16,
+marginBottom: 15,
+borderLeftWidth: 6,
+borderLeftColor: '#9C6644',
+},
+
+// Nome produto
+nomeProduto: {
+fontSize: 20,
+fontWeight: 'bold',
+color: '#5C4033',
+marginBottom: 8,
+},
+
+// Preço produto
+precoProduto: {
+fontSize: 17,
+fontWeight: 'bold',
+color: '#7F5539',
+marginBottom: 5,
+},
+
+// Categoria produto
+categoriaProduto: {
+color: '#8B7355',
+marginBottom: 5,
+},
+
+// Descrição produto
+descricaoProduto: {
+color: '#6F4E37',
+marginBottom: 15,
+},
+
+// Botão excluir
+botaoExcluir: {
+backgroundColor: '#A47148',
+padding: 13,
+borderRadius: 10,
+alignItems: 'center',
+},
+
+});
+
 
 
 
