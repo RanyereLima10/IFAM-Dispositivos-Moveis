@@ -546,3 +546,497 @@ const styles = StyleSheet.create({
     color: '#000',
   },
 });
+import React, { useState } from 'react';
+
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  FlatList,
+  StyleSheet,
+  Alert,
+  ScrollView
+} from 'react-native';
+
+// Componente Picker
+import { Picker } from '@react-native-picker/picker';
+
+export default function App() {
+
+  // ======================================================
+  // ESTADOS
+  // ======================================================
+
+  // Lista que armazenará todos os professores cadastrados
+  const [professores, setProfessores] = useState([]);
+
+  // Campos do formulário
+  const [nome, setNome] = useState('');
+  const [disciplina, setDisciplina] = useState('');
+  const [formacao, setFormacao] = useState('');
+  const [cargaHoraria, setCargaHoraria] = useState('');
+
+  // Curso selecionado no Picker
+  const [curso, setCurso] = useState('Informática');
+
+  // Controle de edição
+  const [editandoId, setEditandoId] = useState(null);
+
+  // ======================================================
+  // LIMPAR CAMPOS
+  // ======================================================
+
+  const limparCampos = () => {
+
+    setNome('');
+    setDisciplina('');
+    setFormacao('');
+    setCargaHoraria('');
+    setCurso('Informática');
+
+    // Remove modo edição
+    setEditandoId(null);
+  };
+
+  // ======================================================
+  // VALIDAR CAMPOS
+  // ======================================================
+
+  const validarCampos = () => {
+
+    // Verifica se todos os campos foram preenchidos
+    if (
+      !nome ||
+      !disciplina ||
+      !formacao ||
+      !cargaHoraria
+    ) {
+
+      Alert.alert(
+        'Erro',
+        'Todos os campos são obrigatórios!'
+      );
+
+      return false;
+    }
+
+    // Verifica se carga horária é válida
+    if (
+      isNaN(cargaHoraria) ||
+      Number(cargaHoraria) <= 0
+    ) {
+
+      Alert.alert(
+        'Erro',
+        'Digite uma carga horária válida!'
+      );
+
+      return false;
+    }
+
+    return true;
+  };
+
+  // ======================================================
+  // CADASTRAR / ATUALIZAR PROFESSOR
+  // ======================================================
+
+  const salvarProfessor = () => {
+
+    // Executa validação
+    if (!validarCampos()) return;
+
+    // Objeto professor
+    const novoProfessor = {
+
+      id: editandoId
+        ? editandoId
+        : Date.now().toString(),
+
+      nome,
+      disciplina,
+      formacao,
+      cargaHoraria,
+      curso
+    };
+
+    // ==========================================
+    // ATUALIZAR PROFESSOR
+    // ==========================================
+
+    if (editandoId) {
+
+      const listaAtualizada = professores.map(
+        (professor) =>
+          professor.id === editandoId
+            ? novoProfessor
+            : professor
+      );
+
+      setProfessores(listaAtualizada);
+
+      Alert.alert(
+        'Sucesso',
+        'Professor atualizado com sucesso!'
+      );
+    }
+
+    // ==========================================
+    // NOVO CADASTRO
+    // ==========================================
+
+    else {
+
+      setProfessores([
+        ...professores,
+        novoProfessor
+      ]);
+
+      Alert.alert(
+        'Sucesso',
+        'Professor cadastrado com sucesso!'
+      );
+    }
+
+    limparCampos();
+  };
+
+  // ======================================================
+  // EXCLUIR PROFESSOR
+  // ======================================================
+
+  const deletarProfessor = (id) => {
+
+    Alert.alert(
+      'Confirmação',
+      'Deseja realmente excluir este professor?',
+      [
+        {
+          text: 'Cancelar',
+          style: 'cancel'
+        },
+        {
+          text: 'Excluir',
+          onPress: () => {
+
+            const novaLista =
+              professores.filter(
+                (professor) =>
+                  professor.id !== id
+              );
+
+            setProfessores(novaLista);
+          }
+        }
+      ]
+    );
+  };
+
+  // ======================================================
+  // EDITAR PROFESSOR
+  // ======================================================
+
+  const editarProfessor = (professor) => {
+
+    // Carrega os dados nos inputs
+
+    setNome(professor.nome);
+    setDisciplina(professor.disciplina);
+    setFormacao(professor.formacao);
+    setCargaHoraria(professor.cargaHoraria);
+    setCurso(professor.curso);
+
+    // Guarda o ID que será editado
+    setEditandoId(professor.id);
+  };
+
+  // ======================================================
+  // INTERFACE
+  // ======================================================
+
+  return (
+
+    <ScrollView style={styles.container}>
+
+      {/* TÍTULO */}
+      <Text style={styles.titulo}>
+        CRUD DE PROFESSORES
+      </Text>
+
+      {/* NOME */}
+      <TextInput
+        style={styles.input}
+        placeholder="Nome do Professor"
+        value={nome}
+        onChangeText={setNome}
+      />
+
+      {/* DISCIPLINA */}
+      <TextInput
+        style={styles.input}
+        placeholder="Disciplina"
+        value={disciplina}
+        onChangeText={setDisciplina}
+      />
+
+      {/* FORMAÇÃO */}
+      <TextInput
+        style={styles.input}
+        placeholder="Formação Acadêmica"
+        value={formacao}
+        onChangeText={setFormacao}
+      />
+
+      {/* CARGA HORÁRIA */}
+      <TextInput
+        style={styles.input}
+        placeholder="Carga Horária"
+        keyboardType="numeric"
+        value={cargaHoraria}
+        onChangeText={setCargaHoraria}
+      />
+
+      {/* CURSO */}
+      <Text style={styles.label}>
+        Curso Vinculado
+      </Text>
+
+      <View style={styles.pickerContainer}>
+
+        <Picker
+          selectedValue={curso}
+          onValueChange={(valor) =>
+            setCurso(valor)
+          }
+        >
+
+          <Picker.Item
+            label="Informática"
+            value="Informática"
+          />
+
+          <Picker.Item
+            label="Administração"
+            value="Administração"
+          />
+
+          <Picker.Item
+            label="Enfermagem"
+            value="Enfermagem"
+          />
+
+          <Picker.Item
+            label="Edificações"
+            value="Edificações"
+          />
+
+        </Picker>
+
+      </View>
+
+      {/* BOTÃO CADASTRAR / ATUALIZAR */}
+
+      <TouchableOpacity
+        style={styles.botao}
+        onPress={salvarProfessor}
+      >
+
+        <Text style={styles.textoBotao}>
+
+          {editandoId
+            ? 'ATUALIZAR PROFESSOR'
+            : 'CADASTRAR PROFESSOR'}
+
+        </Text>
+
+      </TouchableOpacity>
+
+      {/* LISTA */}
+
+      <Text style={styles.subtitulo}>
+        Professores Cadastrados
+      </Text>
+
+      <FlatList
+
+        data={professores}
+
+        keyExtractor={(item) => item.id}
+
+        scrollEnabled={false}
+
+        renderItem={({ item }) => (
+
+          <View style={styles.card}>
+
+            {/* NOME */}
+            <Text style={styles.nomeProfessor}>
+              {item.nome}
+            </Text>
+
+            {/* DISCIPLINA */}
+            <Text>
+              Disciplina: {item.disciplina}
+            </Text>
+
+            {/* FORMAÇÃO */}
+            <Text>
+              Formação: {item.formacao}
+            </Text>
+
+            {/* CARGA HORÁRIA */}
+            <Text>
+              Carga Horária: {item.cargaHoraria}h
+            </Text>
+
+            {/* CURSO */}
+            <Text>
+              Curso: {item.curso}
+            </Text>
+
+            {/* BOTÕES */}
+            <View style={styles.botoesContainer}>
+
+              {/* EDITAR */}
+              <TouchableOpacity
+                style={[
+                  styles.botaoAcao,
+                  styles.editar
+                ]}
+                onPress={() =>
+                  editarProfessor(item)
+                }
+              >
+
+                <Text style={styles.textoBotao}>
+                  Editar
+                </Text>
+
+              </TouchableOpacity>
+
+              {/* EXCLUIR */}
+
+              <TouchableOpacity
+                style={[
+                  styles.botaoAcao,
+                  styles.deletar
+                ]}
+                onPress={() =>
+                  deletarProfessor(item.id)
+                }
+              >
+
+                <Text style={styles.textoBotao}>
+                  Excluir
+                </Text>
+
+              </TouchableOpacity>
+
+            </View>
+
+          </View>
+
+        )}
+      />
+
+    </ScrollView>
+  );
+}
+
+// ======================================================
+// ESTILOS
+// ======================================================
+
+const styles = StyleSheet.create({
+
+  container: {
+    flex: 1,
+    backgroundColor: '#F2F2F2',
+    padding: 20,
+    marginTop: 40
+  },
+
+  titulo: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 20
+  },
+
+  subtitulo: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginTop: 30,
+    marginBottom: 15
+  },
+
+  label: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 5
+  },
+
+  input: {
+    backgroundColor: '#FFF',
+    borderWidth: 1,
+    borderColor: '#CCC',
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 15
+  },
+
+  pickerContainer: {
+    backgroundColor: '#FFF',
+    borderWidth: 1,
+    borderColor: '#CCC',
+    borderRadius: 8,
+    marginBottom: 15
+  },
+
+
+  botao: {
+    backgroundColor: '#007BFF',
+    padding: 15,
+    borderRadius: 8,
+    alignItems: 'center'
+  },
+  textoBotao: {
+    color: '#FFF',
+    fontWeight: 'bold'
+  },
+
+  card: {
+    backgroundColor: '#FFF',
+    padding: 15,
+    borderRadius: 8,
+    marginBottom: 15
+  },
+
+  nomeProfessor: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 8
+  },
+
+  botoesContainer: {
+    flexDirection: 'row',
+    marginTop: 10
+  },
+
+  botaoAcao: {
+    flex: 1,
+    padding: 10,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginHorizontal: 5
+  },
+
+  editar: {
+    backgroundColor: '#28A745'
+  },
+
+  deletar: {
+    backgroundColor: '#DC3545'
+  }
+});
