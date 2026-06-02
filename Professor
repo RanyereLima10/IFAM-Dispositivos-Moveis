@@ -1,3 +1,63 @@
+//////////// 3 Validação de Login - Inicio ////////////////////////////
+
+import React from 'react';
+import { View, Button, Alert } from 'react-native';
+
+export default function App() {
+
+  const validarLogin = () => {
+
+    try {
+
+      // DADOS PARA TESTE
+      const usuario = "admin";
+      const senha = "1234";
+
+      // Verifica se o login está correto
+      if (usuario !== "admin" || senha !== "1234") {
+        throw new Error("Usuário ou senha inválidos!");
+      }
+
+      Alert.alert(
+        "LOGIN",
+        "Acesso permitido!"
+      );
+
+    } catch (erro) {
+
+      Alert.alert(
+        "ERRO",
+        erro.message
+      );
+
+    } finally {
+
+      console.log("Tentativa de login finalizada.");
+
+    }
+  };
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+      }}
+    >
+      <Button
+        title="Fazer Login"
+        onPress={validarLogin}
+      />
+    </View>
+  );
+}
+
+//////////// 3 Validação de Login - FIM ////////////////////////////
+
+
+
+
 //////////// 2 Conversão de Texto - Inicio ////////////////////////////
 
 import React from 'react';
