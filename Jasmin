@@ -1572,3 +1572,397 @@ O StyleSheet serve para criar objetos de estilo isolados, melhorando o desempenh
 A maior vantagem do Expo Snack é permitir programar e testar o código direto no navegador ou celular em tempo real, sem precisar instalar nada no computador.
 */
 
+
+************+***************************************************************************+***************************************************************************+***************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Jasmin Silva De Lima
+DATA:  26/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição: 
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  FlatList,
+  Alert,
+  StyleSheet,
+} from 'react-native';
+
+export default function App() {
+
+  /* ==================================================
+     ESTADOS DO FORMULÁRIO
+  ================================================== */
+  const [nome, setNome] = useState('');
+  const [preco, setPreco] = useState('');
+  const [categoria, setCategoria] = useState('Eletrônicos');
+  const [descricao, setDescricao] = useState('');
+
+  /* ==================================================
+     LISTA DE PRODUTOS
+  ================================================== */
+  const [produtos, setProdutos] = useState([]);
+
+  /* ==================================================
+     CONTROLA QUAL PRODUTO ESTÁ SENDO EDITADO
+  ================================================== */
+  const [produtoEditando, setProdutoEditando] = useState(null);
+
+  /* ==================================================
+     CADASTRAR OU ATUALIZAR PRODUTO
+  ================================================== */
+  const salvarProduto = () => {
+    if (
+      nome.trim() === '' ||
+      preco.trim() === '' ||
+      descricao.trim() === ''
+    ) {
+      Alert.alert(
+        'Erro',
+        'Preencha todos os campos obrigatórios.'
+      );
+      return;
+    }
+
+    if (produtoEditando) {
+      const listaAtualizada = produtos.map((item) =>
+        item.id === produtoEditando
+          ? { ...item, nome, preco, categoria, descricao }
+          : item
+      );
+
+      setProdutos(listaAtualizada);
+      Alert.alert('Sucesso', 'Produto atualizado com sucesso!');
+      setProdutoEditando(null);
+    } else {
+      const novoProduto = {
+        id: Date.now().toString(),
+        nome,
+        preco,
+        categoria,
+        descricao,
+      };
+
+      setProdutos([...produtos, novoProduto]);
+      Alert.alert('Sucesso', 'Produto cadastrado com sucesso!');
+    }
+
+    limparCampos();
+  };
+
+  /* ==================================================
+     CARREGAR PRODUTO PARA EDIÇÃO
+  ================================================== */
+  const editarProduto = (produto) => {
+    setNome(produto.nome);
+    setPreco(produto.preco);
+    setCategoria(produto.categoria);
+    setDescricao(produto.descricao);
+    setProdutoEditando(produto.id);
+  };
+
+  /* ==================================================
+     EXCLUIR PRODUTO
+  ================================================== */
+  const excluirProduto = (id) => {
+    const novaLista = produtos.filter((item) => item.id !== id);
+    setProdutos(novaLista);
+
+    if (produtoEditando === id) {
+      limparCampos();
+    }
+  };
+
+  /* ==================================================
+     LIMPAR FORMULÁRIO
+  ================================================== */
+  const limparCampos = () => {
+    setNome('');
+    setPreco('');
+    setCategoria('Eletrônicos');
+    setDescricao('');
+    setProdutoEditando(null);
+  };
+
+  /* ==================================================
+     CARD DE PRODUTO
+  ================================================== */
+  const renderItem = ({ item }) => (
+    <View style={styles.card}>
+      <Text style={styles.nomeProduto}>{item.nome}</Text>
+      <Text style={styles.precoProduto}>R$ {item.preco}</Text>
+      <Text style={styles.infoProduto}>Categoria: {item.categoria}</Text>
+      <Text style={styles.infoProduto}>{item.descricao}</Text>
+
+      <View style={styles.areaBotoesCard}>
+        <TouchableOpacity
+          style={styles.botaoEditar}
+          onPress={() => editarProduto(item)}
+        >
+          <Text style={styles.textoBotaoCard}>EDITAR</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.botaoExcluir}
+          onPress={() => excluirProduto(item.id)}
+        >
+          <Text style={styles.textoBotaoCard}>EXCLUIR</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+
+  /* ==================================================
+     CABEÇALHO DA LISTA (FORMULÁRIO)
+  ================================================== */
+  const renderHeader = () => (
+    <View>
+      <Text style={styles.titulo}>Cadastro de Produtos</Text>
+
+      <Text style={styles.label}>Nome do Produto *</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Digite o nome"
+        placeholderTextColor="#888"
+        value={nome}
+        onChangeText={setNome}
+      />
+
+      <Text style={styles.label}>Preço *</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Digite o preço"
+        placeholderTextColor="#888"
+        keyboardType="numeric"
+        value={preco}
+        onChangeText={setPreco}
+      />
+
+      <Text style={styles.label}>Categoria *</Text>
+      <View style={styles.categorias}>
+        <TouchableOpacity
+          style={[
+            styles.categoria,
+            categoria === 'Eletrônicos' && styles.categoriaSelecionada,
+          ]}
+          onPress={() => setCategoria('Eletrônicos')}
+        >
+          <Text style={[
+            styles.textoCategoria,
+            categoria === 'Eletrônicos' && styles.textoCategoriaSelecionada
+          ]}>
+            Eletrônicos
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[
+            styles.categoria,
+            categoria === 'Roupas' && styles.categoriaSelecionada,
+          ]}
+          onPress={() => setCategoria('Roupas')}
+        >
+          <Text style={[
+            styles.textoCategoria,
+            categoria === 'Roupas' && styles.textoCategoriaSelecionada
+          ]}>
+            Roupas
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[
+            styles.categoria,
+            categoria === 'Alimentos' && styles.categoriaSelecionada,
+          ]}
+          onPress={() => setCategoria('Alimentos')}
+        >
+          <Text style={[
+            styles.textoCategoria,
+            categoria === 'Alimentos' && styles.textoCategoriaSelecionada
+          ]}>
+            Alimentos
+          </Text>
+        </TouchableOpacity>
+      </View>
+
+      <Text style={styles.label}>Descrição *</Text>
+      <TextInput
+        style={[styles.input, styles.inputDescricao]}
+        multiline
+        value={descricao}
+        onChangeText={setDescricao}
+        placeholder="Digite a descrição"
+        placeholderTextColor="#888"
+      />
+
+      <TouchableOpacity style={styles.botaoSalvar} onPress={salvarProduto}>
+        <Text style={styles.textoBotaoPrincipal}>
+          {produtoEditando ? 'ATUALIZAR' : 'CADASTRAR'}
+        </Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.botaoLimpar} onPress={limparCampos}>
+        <Text style={styles.textoBotaoSecundario}>LIMPAR</Text>
+      </TouchableOpacity>
+
+      <Text style={styles.subtitulo}>Produtos Cadastrados</Text>
+    </View>
+  );
+
+  return (
+    <FlatList
+      style={styles.container}
+      contentContainerStyle={styles.contentContainer}
+      data={produtos}
+      keyExtractor={(item) => item.id}
+      renderItem={renderItem}
+      ListHeaderComponent={renderHeader}
+      showsVerticalScrollIndicator={false}
+      ListEmptyComponent={
+        <Text style={styles.vazio}>Nenhum produto cadastrado</Text>
+      }
+    />
+  );
+}
+
+/* ==================================================
+   ESTILOS COESOS (MONOCROMÁTICO / PRETO E BRANCO)
+================================================== */
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#FFFFFF',
+  },
+  contentContainer: {
+    padding: 24,
+    paddingTop: 60,
+    paddingBottom: 40,
+  },
+  titulo: {
+    fontSize: 26,
+    fontWeight: '900',
+    textAlign: 'center',
+    color: '#000000',
+    marginBottom: 25,
+    textTransform: 'uppercase',
+    letterSpacing: 1,
+  },
+  subtitulo: {
+    fontSize: 18,
+    fontWeight: '700',
+    color: '#000000',
+    marginTop: 25,
+    marginBottom: 15,
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+  },
+  label: {
+    fontSize: 13,
+    fontWeight: '700',
+    color: '#000000',
+    marginBottom: 6,
+    textTransform: 'uppercase',
+  },
+  input: {
+    backgroundColor: '#FFFFFF',
+    borderWidth: 1.5,
+    borderColor: '#000000',
+    borderRadius: 0, // Visual quadrado minimalista
+    padding: 12,
+    marginBottom: 16,
+    color: '#000000',
+    fontSize: 15,
+  },
+  inputDescricao: {
+    height: 90,
+    textAlignVertical: 'top',
+  },
+  categorias: {
+    flexDirection: 'row',
+    marginBottom: 18,
+  },
+  categoria: {
+    flex: 1,
+    paddingVertical: 10,
+    borderWidth: 1.5,
+    borderColor: '#000000',
+    borderRadius: 0,
+    alignItems: 'center',
+    marginHorizontal: 2,
+    backgroundColor: '#FFFFFF',
+  },
+  categoriaSelecionada: {
+    backgroundColor: '#000000',
+  },
+  textoCategoria: {
+    fontSize: 13,
+    fontWeight: '600',
+    color: '#000000',
+  },
+  textoCategoriaSelecionada: {
+    color: '#FFFFFF',
+  },
+  botaoSalvar: {
+    backgroundColor: '#000000',
+    padding: 14,
+    borderRadius: 0,
+    alignItems: 'center',
+    marginBottom: 10,
+    borderWidth: 1.5,
+    borderColor: '#000000',
+  },
+  botaoLimpar: {
+    backgroundColor: '#FFFFFF',
+    padding: 14,
+    borderRadius: 0,
+    alignItems: 'center',
+    marginBottom: 15,
+    borderWidth: 1.5,
+    borderColor: '#000000',
+  },
+  textoBotaoPrincipal: {
+    color: '#FFFFFF',
+    fontWeight: '800',
+    fontSize: 15,
+    letterSpacing: 1,
+  },
+  textoBotaoSecundario: {
+    color: '#000000',
+    fontWeight: '800',
+    fontSize: 15,
+    letterSpacing: 1,
+  },
+  vazio: {
+    textAlign: 'center',
+    color: '#666666',
+    marginTop: 20,
+    fontSize: 14,
+    fontStyle: 'italic',
+  },
+  card: {
+    backgroundColor: '#FFFFFF',
+    padding: 16,
+    borderRadius: 0,
+    marginBottom: 14,
+    borderWidth: 1.5,
+    borderColor: '#000000',
+  },
+  nomeProduto: {
+    fontSize: 18,
+    fontWeight: '800',
+    color: '#000000',
+    textTransform: 'uppercase',
+  },
+  precoProduto: {
+    fontSize: 16,
+    color: '#000000',
+fontWeight: '700',marginVertical: 4,},infoProduto:
+{color: '#333333',fontSize: 14,marginBottom: 2,},areaBotoesCard: {flexDirection: 'row',justifyContent: 
+'flex-end',marginTop: 14,},botaoEditar: {backgroundColor: '#000000',paddingVertical: 8,paddingHorizontal: 
+16,borderRadius: 0,marginRight: 8,},botaoExcluir: {backgroundColor: '#FFFFFF',paddingVertical: 8,paddingHorizontal:
+16,borderRadius: 0,borderWidth: 1.5,borderColor: '#000000',},textoBotaoCard: {fontSize: 12,fontWeight: '700',letterSpacing: 0.5,},});
