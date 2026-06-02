@@ -1045,6 +1045,606 @@ const styles = StyleSheet.create({
 });
 
 
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Ana Moser M. de Oliveira
+DATA:  02/ 06 /2026
+Bimestre: 2º Bimestre
+Descrição: NESTA ATIVIDADE MUDAMOS O PROJETO INTERMEDIARIO, SENDO PEDIDO
+Entregáveis
+1 Código fonte comentado e b e m estruturado
+2 Aplicação funcionando no Expo Snack
+3 Documentação explicando as funcionalidades
+4 Apresentação do projeto em sala de aula
+Avaliação: Funcionalidade (0,4%), Códi go (0,3%),
+Documentação (0,2%), Apresentação (0,1%)
+**********************************************************************/
+
+
+import React, { useState } from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+  Alert,
+  ScrollView
+} from 'react-native';
+
+
+export default function App() {
+  // --- ESTADOS EXISTENTES (Mantidos) ---
+  const [produtos, setProdutos] = useState([]);
+  const [nome, setNome] = useState('');
+  const [preco, setPreco] = useState('');
+  const [categoria, setCategoria] = useState('Comésticos');
+  const [descricao, setDescricao] = useState('');
+  const [editandoId, setEditandoId] = useState(null);
+
+
+  // --- NOVOS ESTADOS (Adicionados) ---
+  const [sku, setSku] = useState('');
+  const [estoque, setEstoque] = useState('');
+
+
+  // --- CÁLCULOS AUTOMÁTICOS PARA O DASHBOARD ---
+  const totalItensEstoque = produtos.reduce((acc, curr) => acc + parseInt(curr.estoque || 0), 0);
+  const valorTotalEstoque = produtos.reduce((acc, curr) => acc + (parseFloat(curr.preco) * parseInt(curr.estoque || 0)), 0);
+
+
+  // --- FUNÇÕES DE MANIPULAÇÃO ---
+
+
+  // Salvar ou Atualizar Produto
+  const salvarProduto = () => {
+    // Validação de dados (Todos os campos se tornaram obrigatórios)
+    if (!nome.trim() || !preco.trim() || !descricao.trim() || !sku.trim() || !estoque.trim()) {
+      Alert.alert('Campos Incompletos', 'Por favor, preencha todos os campos do formulário.');
+      return;
+    }
+
+
+    // Validação do preço
+    const precoNum = parseFloat(preco.replace(',', '.'));
+    if (isNaN(precoNum) || precoNum <= 0) {
+      Alert.alert('Preço Inválido', 'Por favor, insira um preço maior que zero.');
+      return;
+    }
+
+
+    // Nova Validação: Estoque (Apenas números inteiros positivos)
+    const estoqueNum = parseInt(estoque);
+    if (isNaN(estoqueNum) || estoqueNum < 0) {
+      Alert.alert('Estoque Inválido', 'A quantidade em estoque deve ser um número maior ou igual a zero.');
+      return;
+    }
+
+
+    if (editandoId) {
+      // Modo Edição: Atualiza o produto existente mantendo a estrutura
+      setProdutos(produtos.map(prod =>
+        prod.id === editandoId
+          ? {
+              ...prod,
+              nome,
+              preco: precoNum.toFixed(2),
+              categoria,
+              descricao,
+              sku: sku.toUpperCase().trim(),
+              estoque: estoqueNum.toString()
+            }
+          : prod
+      ));
+      setEditandoId(null);
+      Alert.alert('Sucesso', 'Produto atualizado com sucesso!');
+    } else {
+      // Modo Cadastro: Cria um novo produto com as novas informações inclusas
+      const novoProduto = {
+        id: Date.now().toString(),
+        nome,
+        preco: precoNum.toFixed(2),
+        categoria,
+        descricao,
+        sku: sku.toUpperCase().trim(),
+        estoque: estoqueNum.toString()
+      };
+      setProdutos([...produtos, novoProduto]);
+      Alert.alert('Sucesso', 'Produto cadastrado com sucesso!');
+    }
+
+
+    limparCampos();
+  };
+
+
+  // Preparar campos para edição (Atualizado com os novos campos)
+  const iniciarEdicao = (produto) => {
+    setEditandoId(produto.id);
+    setNome(produto.nome);
+    setPreco(produto.preco.toString());
+    setCategoria(produto.categoria);
+    setDescricao(produto.descricao);
+    setSku(produto.sku || '');
+    setEstoque(produto.estoque ? produto.estoque.toString() : '');
+  };
+
+
+  // Deletar Produto
+  const deletarProduto = (id) => {
+    Alert.alert(
+      'Excluir Produto',
+      'Tem certeza que deseja deletar este produto?',
+      [
+        { text: 'Cancelar', style: 'cancel' },
+        {
+          text: 'Excluir',
+          style: 'destructive',
+          onPress: () => {
+            setProdutos(produtos.filter(prod => prod.id !== id));
+            if (editandoId === id) limparCampos();
+          }
+        }
+      ]
+    );
+  };
+
+
+  // Limpar o formulário (Atualizado com os novos campos)
+  const limparCampos = () => {
+    setNome('');
+    setPreco('');
+    setCategoria('Comésticos');
+    setDescricao('');
+    setSku('');
+    setEstoque('');
+    setEditandoId(null);
+  };
+
+
+  return (
+    <ScrollView style={styles.container}>
+      <Text style={styles.tituloPrincipal}>Produtos Ivone 💄</Text>
+       <Text style={styles.subtitle}>
+        Comésticos e maquiagens ✨
+      </Text>
+
+     
+      {/* CARD DE DASHBOARD / RESUMO DO ESTOQUE */}
+      <View style={styles.dashboardContainer}>
+        <View style={styles.miniCardDashboard}>
+          <Text style={styles.dashboardLabel}>Total de Itens</Text>
+          <Text style={styles.dashboardValor}> 350 un</Text>
+        </View>
+        <View style={styles.miniCardDashboard}>
+          <Text style={styles.dashboardLabel}>Valor do Estoque</Text>
+          <Text style={[styles.dashboardValor, { color: '#2e7d32' }]}>
+            R$ 350.000
+          </Text>
+        </View>
+      </View>
+
+
+      {/* FORMULÁRIO DE CADASTRO */}
+      <View style={styles.cardFormulario}>
+        <View style={styles.headerForm}>
+          <Text style={styles.tituloForm}>
+            {editandoId ? '✏️ EDITAR PRODUTO' : '📦 NOVO PRODUTO'}
+          </Text>
+        </View>
+
+
+        <View style={styles.corpoForm}>
+         
+          {/* Nova Linha com dois campos menores lado a lado */}
+          <View style={styles.linhaFormulario}>
+            <View style={{ flex: 1, marginRight: 8 }}>
+              <Text style={styles.label}>Código do Poduto *</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Ex: PROD123"
+                autoCapitalize="characters"
+                value={sku}
+                onChangeText={setSku}
+              />
+            </View>
+            <View style={{ flex: 1, marginLeft: 8 }}>
+              <Text style={styles.label}>Qtd. Estoque *</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Ex: 15"
+                keyboardType="numeric"
+                value={estoque}
+                onChangeText={setEstoque}
+              />
+            </View>
+          </View>
+
+
+          <Text style={styles.label}>Nome do Produto *</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Digite o nome do produto"
+            value={nome}
+            onChangeText={setNome}
+          />
+
+
+          <Text style={styles.label}>Preço Unitário *</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Digite o preço (ex: 99.90)"
+            keyboardType="numeric"
+            value={preco}
+            onChangeText={setPreco}
+          />
+
+
+          <Text style={styles.label}>Categoria *</Text>
+          <View style={styles.containerCategorias}>
+            {['Comésticos', 'Maquiagem', 'Perfume', 'Outros'].map((cat) => (
+              <TouchableOpacity
+                key={cat}
+                style={[
+                  styles.botaoCategoria,
+                  categoria === cat && styles.botaoCategoriaSelecionada
+                ]}
+                onPress={() => setCategoria(cat)}
+              >
+                <Text style={[
+                  styles.textoCategoria,
+                  categoria === cat && styles.textoCategoriaSelecionado
+                ]}>
+                  {cat}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+
+
+          <Text style={styles.label}>Descrição *</Text>
+          <TextInput
+            style={[styles.input, styles.inputDescricao]}
+            placeholder="Digite a descrição detalhada do produto"
+            multiline
+            numberOfLines={3}
+            value={descricao}
+            onChangeText={setDescricao}
+          />
+
+
+          {/* BOTÕES DE AÇÃO INTERFACE MELHORADA */}
+          <TouchableOpacity style={styles.btnCadastrar} onPress={salvarProduto}>
+            <Text style={styles.textBtn}>
+              {editandoId ? 'SALVAR ALTERAÇÕES' : 'CADASTRAR NO ESTOQUE'}
+            </Text>
+          </TouchableOpacity>
+
+
+          <TouchableOpacity style={styles.btnLimpar} onPress={limparCampos}>
+            <Text style={styles.textBtn}>LIMPAR CAMPOS</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+
+
+      {/* LISTAGEM DE PRODUTOS CADASTRADOS */}
+      <Text style={styles.tituloLista}>📋 Lista de Itens Cadastrados ({produtos.length})</Text>
+     
+      {produtos.length === 0 ? (
+        <Text style={styles.listaVazia}>Nenhum produto cadastrado no momento.</Text>
+      ) : (
+        <View style={styles.listaContainer}>
+          {produtos.map((item) => (
+            <View key={item.id} style={styles.itemProduto}>
+              <View style={styles.infoProduto}>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <Text style={styles.skuTag}>{item.sku}</Text>
+                  <Text style={styles.nomeProdLista}>{item.nome}</Text>
+                </View>
+               
+                <Text style={styles.categoriaProdLista}>{item.categoria}</Text>
+                <Text style={styles.descProdLista}>{item.descricao}</Text>
+               
+                {/* Novas Informações no Card da Lista */}
+                <View style={styles.linhaInfoCard}>
+                  <Text style={styles.precoProdLista}>R$ {item.preco}</Text>
+                  <Text style={styles.estoqueProdLista}>Estoque: {item.estoque} un</Text>
+                </View>
+              </View>
+             
+              <View style={styles.acoesProduto}>
+                <TouchableOpacity
+                  style={styles.btnEditar}
+                  onPress={() => iniciarEdicao(item)}
+                >
+                  <Text style={styles.textBtnAcao}>Editar</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.btnDeletar}
+                  onPress={() => deletarProduto(item.id)}
+                >
+                  <Text style={styles.textBtnAcao}>Deletar</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          ))}
+        </View>
+      )}
+     
+      <View style={{ height: 50 }} />
+    </ScrollView>
+  );
+}
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#67008F',
+    padding: 16,
+    paddingTop: 40,
+  },
+  tituloPrincipal: {
+    fontSize: 22,
+    fontWeight: '800',
+    color: '#FFFFFF',
+    textAlign: 'center',
+    marginBottom: 16,
+  },
+  subtitle: {
+    fontSize: 16,
+    color: '#DE1FCD',
+    textAlign: 'center',
+    marginBottom: 50,
+  },
+  dashboardContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 20,
+    gap: 12,
+  },
+  miniCardDashboard: {
+    flex: 1,
+    backgroundColor: '#fff',
+    padding: 12,
+    borderRadius: 10,
+    alignItems: 'center',
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+  },
+  dashboardLabel: {
+    fontSize: 12,
+    color: '#DE1FCD',
+    fontWeight: '600',
+    marginBottom: 4,
+  },
+  dashboardValor: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: '#1e293b',
+  },
+  cardFormulario: {
+    backgroundColor: '#fff',
+    borderRadius: 12,
+    overflow: 'hidden',
+    elevation: 4,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.15,
+    shadowRadius: 5,
+    marginBottom: 24,
+  },
+  headerForm: {
+    backgroundColor: '#490A8F',
+    padding: 18,
+  },
+  tituloForm: {
+    color: '#ffff',
+    fontSize: 16,
+    fontWeight: '700',
+    textAlign: 'center',
+    letterSpacing: 1,
+  },
+  corpoForm: {
+    padding: 18,
+  },
+  linhaFormulario: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  label: {
+    fontSize: 13,
+    fontWeight: '700',
+    color: '#490A8F',
+    marginBottom: 6,
+    marginTop: 12,
+  },
+  input: {
+    borderWidth: 1.5,
+    borderColor: '#cbd5e1',
+    borderRadius: 8,
+    padding: 12,
+    fontSize: 14,
+    backgroundColor: '#f8fafc',
+    color: '#1e293b',
+  },
+  inputDescricao: {
+    textAlignVertical: 'top',
+    height: 70,
+  },
+  containerCategorias: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginVertical: 6,
+    flexWrap: 'wrap',
+    gap: 6,
+  },
+  botaoCategoria: {
+    borderWidth: 1.5,
+    borderColor: '#cbd5e1',
+    borderRadius: 8,
+    paddingVertical: 10,
+    paddingHorizontal: 8,
+    minWidth: '23%',
+    alignItems: 'center',
+  },
+  botaoCategoriaSelecionada: {
+    backgroundColor: '#5A0C8A',
+    borderColor: '#1e3a8a',
+  },
+  textoCategoria: {
+    fontSize: 12,
+    color: '#475569',
+    fontWeight: '600',
+  },
+  textoCategoriaSelecionado: {
+    color: '#fff',
+  },
+  btnCadastrar: {
+    backgroundColor: '#490A8F',
+    padding: 16,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginTop: 24,
+    elevation: 2,
+  },
+  btnLimpar: {
+    backgroundColor: '#490A8F',
+    borderWidth: 1,
+    borderColor: '#cbd5e1',
+    padding: 14,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  textBtn: {
+    color: '#fff',
+    fontWeight: '700',
+    fontSize: 14,
+    letterSpacing: 0.5,
+  },
+  tituloLista: {
+    fontSize: 18,
+    fontWeight: '700',
+    color: '#0f172a',
+    marginBottom: 14,
+  },
+   
+  listaVazia: {
+    textAlign: 'center',
+    color: '#64748b',
+    fontStyle: 'italic',
+    marginTop: 15,
+  },
+  listaContainer: {
+    gap: 14,
+  },
+  itemProduto: {
+    backgroundColor: '#fff',
+    padding: 16,
+    borderRadius: 12,
+    borderLeftWidth: 6,
+    borderLeftColor: '#1e3a8a',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+  },
+  infoProduto: {
+    flex: 1,
+    paddingRight: 10,
+  },
+  skuTag: {
+    fontSize: 11,
+    fontWeight: 'bold',
+    backgroundColor: '#3b82f6',
+    color: '#fff',
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    borderRadius: 4,
+    marginRight: 8,
+  },
+  nomeProdLista: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: '#1e293b',
+    flex: 1,
+  },
+  categoriaProdLista: {
+    fontSize: 11,
+    color: '#475569',
+    backgroundColor: '#f1f5f9',
+    alignSelf: 'flex-start',
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    borderRadius: 6,
+    marginVertical: 6,
+    fontWeight: '600',
+  },
+  descProdLista: {
+    fontSize: 13,
+    color: '#475569',
+    marginBottom: 8,
+    lineHeight: 18,
+  },
+  linhaInfoCard: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 4,
+    borderTopWidth: 1,
+    borderTopColor: '#f1f5f9',
+    paddingTop: 8,
+  },
+  precoProdLista: {
+    fontSize: 16,
+    fontWeight: '800',
+    color: '#10b981',
+  },
+  estoqueProdLista: {
+    fontSize: 13,
+    fontWeight: '600',
+    color: '#64748b',
+  },
+  acoesProduto: {
+    justifyContent: 'center',
+    gap: 8,
+    minWidth: 70,
+  },
+  btnEditar: {
+    backgroundColor: '#5A0C8A',
+    paddingVertical: 8,
+    borderRadius: 6,
+    alignItems: 'center',
+  },
+  btnDeletar: {
+    backgroundColor: '#5A0C8A',
+    paddingVertical: 8,
+    borderRadius: 6,
+    alignItems: 'center',
+  },
+  textBtnAcao: {
+    color: '#fff',
+    fontSize: 12,
+    fontWeight: '700',
+  },
+ 
+
+});
+
+
+
+
+
+
 
 
 
