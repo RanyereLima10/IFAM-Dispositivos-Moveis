@@ -1,5 +1,69 @@
 
-////////////////////////////////// Picker /////////////////////////////////////////////
+////////// 01 INICIO Tratamento de exceções   ///////////////////////////////////////////////////////
+
+import React from 'react';
+import { View, Button, Alert } from 'react-native';
+
+export default function App() {
+
+  const testarDivisao = () => {
+
+    try {
+
+      // ALTERE ESTE VALOR PARA TESTAR
+      const divisor = 0;
+
+      // Verifica se haverá divisão por zero
+      if (divisor === 0) {
+        throw new Error('Não é permitido dividir por zero!');
+      }
+
+      const resultado = 10 / divisor;
+
+      Alert.alert(
+        'TRY',
+        'Resultado: ' + resultado
+      );
+
+    } catch (erro) {
+
+      Alert.alert(
+        'CATCH',
+        erro.message
+      );
+
+    } finally {
+
+      Alert.alert(
+        'FINALLY',
+        'Operação encerrada.'
+      );
+
+    }
+  };
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+      }}
+    >
+      <Button
+        title="Testar Divisão"
+        onPress={testarDivisao}
+      />
+    </View>
+  );
+}
+
+
+////////// FIM 01 Tratamento de exceções   ////////////////////////////////////////////////////
+
+
+
+////////////////////////////////// INICIO Picker /////////////////////////////////////////////
 
 import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
@@ -73,7 +137,7 @@ const styles = StyleSheet.create({
 
 
 
-////////////////////////////////// Picker /////////////////////////////////////////////
+////////////////////////////////// FIM Picker /////////////////////////////////////////////
 
 
 
