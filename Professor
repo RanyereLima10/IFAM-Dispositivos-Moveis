@@ -1,4 +1,4 @@
-//////////// 3 Validação de Login - Inicio ////////////////////////////
+//////////// 3 Validação de Login - Inicio /////////////////////////////
 
 import React from 'react';
 import { View, Button, Alert } from 'react-native';
