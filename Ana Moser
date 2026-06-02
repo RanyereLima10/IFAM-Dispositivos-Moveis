@@ -1232,7 +1232,7 @@ export default function App() {
       <View style={styles.cardFormulario}>
         <View style={styles.headerForm}>
           <Text style={styles.tituloForm}>
-            {editandoId ? '✏️ EDITAR PRODUTO' : '📦 NOVO PRODUTO'}
+            {editandoId ? '✏️ EDITAR PRODUTO' : '🌷 NOVO PRODUTO'}
           </Text>
         </View>
 
