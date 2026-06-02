@@ -551,7 +551,10 @@ APP DE CADASTRO DE PRODUTOS - REACT NATIVE
 Aplicação completa para cadastrar, listar, editar e deletar produtos.
 
 
+// Importa o React e o Hook useState para gerenciar estados
 import React, { useState } from 'react';
+
+// Importa os componentes necessários do React Native
 import {
   View,
   Text,
@@ -562,16 +565,23 @@ import {
   Alert,
 } from 'react-native';
 
+// Componente principal da aplicação
 export default function App() {
+
+  // Estados para armazenar os dados digitados pelo usuário
   const [titulo, setTitulo] = useState('');
   const [autor, setAutor] = useState('');
   const [genero, setGenero] = useState('');
   const [ano, setAno] = useState('');
   const [sinopse, setSinopse] = useState('');
 
+  // Estado que armazenará todos os livros cadastrados
   const [livros, setLivros] = useState([]);
 
+  // Função responsável por cadastrar um novo livro
   const cadastrarLivro = () => {
+
+    // Verifica se algum campo está vazio
     if (
       titulo.trim() === '' ||
       autor.trim() === '' ||
@@ -583,13 +593,15 @@ export default function App() {
       return;
     }
 
+    // Verifica se o ano possui apenas números e 4 dígitos
     if (isNaN(ano) || ano.length !== 4) {
       Alert.alert('Erro', 'Digite um ano válido!');
       return;
     }
 
+    // Cria um objeto contendo os dados do livro
     const novoLivro = {
-      id: Date.now(),
+      id: Date.now(), // Gera um ID único usando data e hora atuais
       titulo,
       autor,
       genero,
@@ -597,13 +609,17 @@ export default function App() {
       sinopse,
     };
 
+    // Adiciona o novo livro ao array de livros
     setLivros([...livros, novoLivro]);
 
+    // Limpa os campos do formulário
     limparCampos();
 
+    // Exibe mensagem de sucesso
     Alert.alert('Sucesso', 'Livro cadastrado!');
   };
 
+  // Função para limpar todos os campos do formulário
   const limparCampos = () => {
     setTitulo('');
     setAutor('');
@@ -612,17 +628,26 @@ export default function App() {
     setSinopse('');
   };
 
+  // Função para excluir um livro da lista
   const excluirLivro = (id) => {
+
+    // Mantém apenas os livros com ID diferente do selecionado
     setLivros(livros.filter((livro) => livro.id !== id));
   };
 
   return (
+
+    // ScrollView permite rolagem caso o conteúdo ultrapasse a tela
     <ScrollView style={styles.container}>
+
+      {/* Título principal */}
       <Text style={styles.tituloPrincipal}>
         Cadastro de Livros
       </Text>
 
+      {/* Campo Título */}
       <Text style={styles.label}>Título do Livro *</Text>
+
       <TextInput
         style={styles.input}
         placeholder="Digite o título"
@@ -631,7 +656,9 @@ export default function App() {
         onChangeText={setTitulo}
       />
 
+      {/* Campo Autor */}
       <Text style={styles.label}>Autor *</Text>
+
       <TextInput
         style={styles.input}
         placeholder="Digite o autor"
@@ -640,14 +667,20 @@ export default function App() {
         onChangeText={setAutor}
       />
 
+      {/* Seleção de gênero */}
       <Text style={styles.label}>Gênero *</Text>
 
       <View style={styles.generos}>
+
+        {/* Cria automaticamente os botões de gênero */}
         {['Romance', 'Fantasia', 'Ficção', 'Outros'].map((item) => (
+
           <TouchableOpacity
             key={item}
             style={[
               styles.generoBtn,
+
+              // Destaca o gênero selecionado
               genero === item && styles.generoSelecionado,
             ]}
             onPress={() => setGenero(item)}
@@ -655,7 +688,10 @@ export default function App() {
             <Text
               style={[
                 styles.generoTexto,
-                genero === item && styles.generoTextoSelecionado,
+
+                // Altera a cor do texto do gênero selecionado
+                genero === item &&
+                  styles.generoTextoSelecionado,
               ]}
             >
               {item}
@@ -664,7 +700,9 @@ export default function App() {
         ))}
       </View>
 
+      {/* Campo Ano */}
       <Text style={styles.label}>Ano de Publicação *</Text>
+
       <TextInput
         style={styles.input}
         placeholder="Ex: 2025"
@@ -674,7 +712,9 @@ export default function App() {
         onChangeText={setAno}
       />
 
+      {/* Campo Sinopse */}
       <Text style={styles.label}>Sinopse *</Text>
+
       <TextInput
         style={styles.textArea}
         placeholder="Digite uma breve sinopse"
@@ -685,6 +725,7 @@ export default function App() {
         onChangeText={setSinopse}
       />
 
+      {/* Botão de cadastro */}
       <TouchableOpacity
         style={styles.btnCadastrar}
         onPress={cadastrarLivro}
@@ -694,6 +735,7 @@ export default function App() {
         </Text>
       </TouchableOpacity>
 
+      {/* Botão de limpar formulário */}
       <TouchableOpacity
         style={styles.btnLimpar}
         onPress={limparCampos}
@@ -703,37 +745,49 @@ export default function App() {
         </Text>
       </TouchableOpacity>
 
+      {/* Título da lista */}
       <Text style={styles.listaTitulo}>
         Livros Cadastrados
       </Text>
 
+      {/* Caso não existam livros cadastrados */}
       {livros.length === 0 ? (
         <Text style={styles.semLivros}>
           Nenhum livro cadastrado.
         </Text>
       ) : (
+
+        // Percorre o array e exibe um card para cada livro
         livros.map((livro) => (
+
           <View key={livro.id} style={styles.card}>
+
+            {/* Título do livro */}
             <Text style={styles.cardTitulo}>
               {livro.titulo}
             </Text>
 
+            {/* Autor */}
             <Text style={styles.cardTexto}>
               Autor: {livro.autor}
             </Text>
 
+            {/* Gênero */}
             <Text style={styles.cardTexto}>
               Gênero: {livro.genero}
             </Text>
 
+            {/* Ano */}
             <Text style={styles.cardTexto}>
               Ano: {livro.ano}
             </Text>
 
+            {/* Sinopse */}
             <Text style={styles.cardSinopse}>
               {livro.sinopse}
             </Text>
 
+            {/* Botão para excluir o livro */}
             <TouchableOpacity
               style={styles.btnExcluir}
               onPress={() => excluirLivro(livro.id)}
@@ -742,6 +796,7 @@ export default function App() {
                 EXCLUIR
               </Text>
             </TouchableOpacity>
+
           </View>
         ))
       )}
@@ -749,13 +804,17 @@ export default function App() {
   );
 }
 
+// Criação dos estilos da aplicação
 const styles = StyleSheet.create({
+
+  // Container principal
   container: {
     flex: 1,
     backgroundColor: '#F8F5F6',
     padding: 20,
   },
 
+  // Título principal
   tituloPrincipal: {
     fontSize: 30,
     fontWeight: 'bold',
@@ -765,6 +824,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
 
+  // Rótulos dos campos
   label: {
     fontSize: 16,
     fontWeight: 'bold',
@@ -773,6 +833,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 
+  // Estilo dos inputs comuns
   input: {
     backgroundColor: '#FFFFFF',
     borderWidth: 1,
@@ -782,6 +843,7 @@ const styles = StyleSheet.create({
     color: '#391427',
   },
 
+  // Área de texto da sinopse
   textArea: {
     backgroundColor: '#FFFFFF',
     borderWidth: 1,
@@ -793,12 +855,14 @@ const styles = StyleSheet.create({
     color: '#391427',
   },
 
+  // Container dos botões de gênero
   generos: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     marginBottom: 10,
   },
 
+  // Botão de gênero
   generoBtn: {
     borderWidth: 1,
     borderColor: '#4D1427',
@@ -809,19 +873,23 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
   },
 
+  // Gênero selecionado
   generoSelecionado: {
     backgroundColor: '#571427',
   },
 
+  // Texto padrão dos gêneros
   generoTexto: {
     color: '#391427',
   },
 
+  // Texto do gênero selecionado
   generoTextoSelecionado: {
     color: '#FFFFFF',
     fontWeight: 'bold',
   },
 
+  // Botão cadastrar
   btnCadastrar: {
     backgroundColor: '#611427',
     padding: 15,
@@ -830,6 +898,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
+  // Botão limpar
   btnLimpar: {
     backgroundColor: '#431427',
     padding: 15,
@@ -838,12 +907,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
+  // Texto dos botões
   textoBotao: {
     color: '#FFFFFF',
     fontWeight: 'bold',
     fontSize: 16,
   },
 
+  // Título da lista de livros
   listaTitulo: {
     fontSize: 24,
     fontWeight: 'bold',
@@ -852,6 +923,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
 
+  // Mensagem quando não há livros
   semLivros: {
     textAlign: 'center',
     color: '#4D1427',
@@ -859,6 +931,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 
+  // Card de cada livro
   card: {
     backgroundColor: '#391427',
     padding: 15,
@@ -867,6 +940,7 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
 
+  // Título do card
   cardTitulo: {
     fontSize: 20,
     fontWeight: 'bold',
@@ -874,18 +948,21 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
 
+  // Textos do card
   cardTexto: {
     color: '#FFFFFF',
     marginBottom: 4,
     fontSize: 15,
   },
 
+  // Sinopse exibida no card
   cardSinopse: {
     color: '#FFFFFF',
     marginTop: 8,
     lineHeight: 20,
   },
 
+  // Botão excluir
   btnExcluir: {
     backgroundColor: '#611427',
     padding: 10,
@@ -894,5 +971,3 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-
-
