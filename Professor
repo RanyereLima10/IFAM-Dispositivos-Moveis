@@ -1,5 +1,75 @@
+//////////// 2 Conversão de Texto - Inicio ////////////////////////////
 
-////////// 01 INICIO Tratamento de exceções   ///////////////////////////////////////////////////////
+import React from 'react';
+import { View, Button, Alert } from 'react-native';
+
+export default function App() {
+
+  const testarConversao = () => {
+
+    try {
+
+      // ALTERE ESTE VALOR PARA TESTAR
+      const texto = "abc";
+
+      const numero = Number(texto);
+
+      // Se não for número, gera erro
+      if (isNaN(numero)) {
+        throw new Error("Valor inválido! Digite apenas números.");
+      }
+
+      Alert.alert(
+        "TRY",
+        "Número convertido: " + numero
+      );
+
+    } catch (erro) {
+
+      Alert.alert(
+        "CATCH",
+        erro.message
+      );
+
+    } finally {
+
+      // Como o Alert não aparece bem dentro do finally
+      // usamos o console.log para garantir a execução
+      console.log("FINALLY: Processo encerrado.");
+
+      setTimeout(() => {
+        Alert.alert(
+          "FINALLY",
+          "Processo encerrado."
+        );
+      }, 500);
+
+    }
+  };
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+      }}
+    >
+      <Button
+        title="Testar Conversão"
+        onPress={testarConversao}
+      />
+    </View>
+  );
+}
+
+//////////// 2 Conversão de Texto - FIM ////////////////////////////
+
+
+
+
+
+////////// [01 INICIO] Tratamento de exceções -  Divisão por Zero  /////////////////////////
 
 import React from 'react';
 import { View, Button, Alert } from 'react-native';
