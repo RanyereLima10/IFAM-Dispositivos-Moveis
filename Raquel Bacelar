@@ -460,6 +460,92 @@ ALUNO(A): Raquel Bacelar Pena
 DATA: 05/05/2026
 ////////////////////////////////////////////////////
 
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+
+      <Text style={styles.estrela}>⭐</Text>
+
+      {/* Linha 1 */}
+      <View style={styles.linha}>
+        <Text style={[styles.caixa, { backgroundColor: '#9E82D9' }]}>
+          A
+        </Text>
+      </View>
+
+      {/* Linha 2 */}
+      <View style={styles.linha}>
+        <Text style={[styles.caixa, { backgroundColor: '#F5B0F0' }]}>
+          B
+        </Text>
+
+        <Text style={[styles.caixa, { backgroundColor: '#F5B0F0' }]}>
+          C
+        </Text>
+      </View>
+
+      {/* Linha 3 */}
+      <View style={styles.linha}>
+        <Text style={[styles.caixa, { backgroundColor: '#33AAFF' }]}>
+          D
+        </Text>
+
+        <Text style={[styles.caixa, { backgroundColor: '#3357FF' }]}>
+          E
+        </Text>
+
+        <Text style={[styles.caixa, { backgroundColor: '#33AAFF' }]}>
+          F
+        </Text>
+      </View>
+
+      {/* Tronco */}
+      <View style={styles.tronco} />
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#260B01',
+  },
+
+  estrela: {
+    fontSize: 40,
+    marginBottom: 10,
+  },
+
+  linha: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+
+  caixa: {
+    width: 70,
+    height: 70,
+    margin: 3,
+    color: 'white',
+    fontSize: 28,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    paddingTop: 15,
+  },
+
+  tronco: {
+    width: 60,
+    height: 80,
+    backgroundColor: '#8B4513',
+    marginTop: 5,
+  },
+});
+//////////////////////////////////////////////////
 
 
 
