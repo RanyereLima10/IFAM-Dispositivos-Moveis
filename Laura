@@ -1224,7 +1224,9 @@ import {
   StyleSheet,
 } from 'react-native';
 
+
 export default function App() {
+
 
   /* ==================================================
      ESTADOS DO FORMULÁRIO
@@ -1234,15 +1236,18 @@ export default function App() {
   const [categoria, setCategoria] = useState('Eletrônicos');
   const [descricao, setDescricao] = useState('');
 
+
   /* ==================================================
      LISTA DE PRODUTOS
   ================================================== */
   const [produtos, setProdutos] = useState([]);
 
+
   /* ==================================================
      CONTROLA QUAL PRODUTO ESTÁ SENDO EDITADO
   ================================================== */
   const [produtoEditando, setProdutoEditando] = useState(null);
+
 
   /* ==================================================
      CADASTRAR OU ATUALIZAR PRODUTO
@@ -1260,12 +1265,14 @@ export default function App() {
       return;
     }
 
+
     if (produtoEditando) {
       const listaAtualizada = produtos.map((item) =>
         item.id === produtoEditando
           ? { ...item, nome, preco, categoria, descricao }
           : item
       );
+
 
       setProdutos(listaAtualizada);
       Alert.alert('Sucesso', 'Produto atualizado com sucesso!');
@@ -1279,12 +1286,15 @@ export default function App() {
         descricao,
       };
 
+
       setProdutos([...produtos, novoProduto]);
       Alert.alert('Sucesso', 'Produto cadastrado com sucesso!');
     }
 
+
     limparCampos();
   };
+
 
   /* ==================================================
      CARREGAR PRODUTO PARA EDIÇÃO
@@ -1297,6 +1307,7 @@ export default function App() {
     setProdutoEditando(produto.id);
   };
 
+
   /* ==================================================
      EXCLUIR PRODUTO
   ================================================== */
@@ -1304,10 +1315,12 @@ export default function App() {
     const novaLista = produtos.filter((item) => item.id !== id);
     setProdutos(novaLista);
 
+
     if (produtoEditando === id) {
       limparCampos();
     }
   };
+
 
   /* ==================================================
      LIMPAR FORMULÁRIO
@@ -1320,6 +1333,7 @@ export default function App() {
     setProdutoEditando(null);
   };
 
+
   /* ==================================================
      CARD DE PRODUTO
   ================================================== */
@@ -1330,6 +1344,7 @@ export default function App() {
       <Text style={styles.infoProduto}>Categoria: {item.categoria}</Text>
       <Text style={styles.infoProduto}>{item.descricao}</Text>
 
+
       <View style={styles.areaBotoesCard}>
         <TouchableOpacity
           style={styles.botaoEditar}
@@ -1337,6 +1352,7 @@ export default function App() {
         >
           <Text style={styles.textoBotaoCard}>EDITAR</Text>
         </TouchableOpacity>
+
 
         <TouchableOpacity
           style={styles.botaoExcluir}
@@ -1348,12 +1364,14 @@ export default function App() {
     </View>
   );
 
+
   /* ==================================================
      CABEÇALHO DA LISTA (FORMULÁRIO)
   ================================================== */
   const renderHeader = () => (
     <View>
       <Text style={styles.titulo}>Cadastro de Produtos</Text>
+
 
       <Text style={styles.label}>Nome do Produto *</Text>
       <TextInput
@@ -1364,6 +1382,7 @@ export default function App() {
         onChangeText={setNome}
       />
 
+
       <Text style={styles.label}>Preço *</Text>
       <TextInput
         style={styles.input}
@@ -1373,6 +1392,7 @@ export default function App() {
         value={preco}
         onChangeText={setPreco}
       />
+
 
       <Text style={styles.label}>Categoria *</Text>
       <View style={styles.categorias}>
@@ -1391,6 +1411,7 @@ export default function App() {
           </Text>
         </TouchableOpacity>
 
+
         <TouchableOpacity
           style={[
             styles.categoria,
@@ -1405,6 +1426,7 @@ export default function App() {
             Roupas
           </Text>
         </TouchableOpacity>
+
 
         <TouchableOpacity
           style={[
@@ -1422,6 +1444,7 @@ export default function App() {
         </TouchableOpacity>
       </View>
 
+
       <Text style={styles.label}>Descrição *</Text>
       <TextInput
         style={[styles.input, styles.inputDescricao]}
@@ -1432,19 +1455,23 @@ export default function App() {
         placeholderTextColor="#888"
       />
 
+
       <TouchableOpacity style={styles.botaoSalvar} onPress={salvarProduto}>
         <Text style={styles.textoBotaoPrincipal}>
           {produtoEditando ? 'ATUALIZAR' : 'CADASTRAR'}
         </Text>
       </TouchableOpacity>
 
+
       <TouchableOpacity style={styles.botaoLimpar} onPress={limparCampos}>
         <Text style={styles.textoBotaoSecundario}>LIMPAR</Text>
       </TouchableOpacity>
 
+
       <Text style={styles.subtitulo}>Produtos Cadastrados</Text>
     </View>
   );
+
 
   return (
     <FlatList
@@ -1461,6 +1488,7 @@ export default function App() {
     />
   );
 }
+
 
 /* ==================================================
    ESTILOS COESOS (MONOCROMÁTICO / PRETO E BRANCO)
