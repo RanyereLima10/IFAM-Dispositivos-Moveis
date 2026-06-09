@@ -6,6 +6,241 @@ PROFESSOR: Ranyere Lima
 ALUNO(A):Ed
 DATA:  xx/ xx /2026
 Bimestre: 2º Bimestre
+
+
+
+
+
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+} from "react-native";
+
+export default function App() {
+  const [nome, setNome] = useState("");
+  const [idade, setIdade] = useState("");
+  const [mensagem, setMensagem] = useState("");
+
+  const cadastrar = () => {
+    try {
+      if (!nome.trim()) {
+        throw new Error("Digite seu nome.");
+      }
+
+      const idadeNumero = Number(idade);
+
+      if (isNaN(idadeNumero)) {
+        throw new Error("A idade deve ser um número.");
+      }
+
+      if (idadeNumero < 0) {
+        throw new Error("A idade não pode ser negativa.");
+      }
+
+      if (idadeNumero > 110) {
+        throw new Error("A idade máxima permitida é 110 anos.");
+      }
+
+      setMensagem(
+        `Cadastro realizado com sucesso!\nNome: ${nome}\nIdade: ${idadeNumero} anos`
+      );
+    } catch (error) {
+      setMensagem(`Erro: ${error.message}`);
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titulo}>Cadastro Simples</Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Digite seu nome"
+        value={nome}
+        onChangeText={setNome}
+      />
+
+      <TextInput
+        style={styles.input}
+        placeholder="Digite sua idade"
+        value={idade}
+        onChangeText={setIdade}
+        keyboardType="numeric"
+      />
+
+      <TouchableOpacity
+        style={styles.botao}
+        onPress={cadastrar}
+      >
+        <Text style={styles.textoBotao}>Cadastrar</Text>
+      </TouchableOpacity>
+
+      <Text style={styles.resultado}>{mensagem}</Text>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    padding: 20,
+  },
+  titulo: {
+    fontSize: 24,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 20,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 10,
+  },
+  botao: {
+    backgroundColor: "#28a745",
+    padding: 12,
+    borderRadius: 5,
+  },
+  textoBotao: {
+    color: "#fff",
+    textAlign: "center",
+    fontWeight: "bold",
+  },
+  resultado: {
+    marginTop: 20,
+    fontSize: 16,
+    textAlign: "center",
+  },
+});
+
+
+
+
+
+
+
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+} from "react-native";
+
+export default function App() {
+  const [numero1, setNumero1] = useState("");
+  const [numero2, setNumero2] = useState("");
+  const [resultado, setResultado] = useState("");
+
+  const calcularDivisao = () => {
+    try {
+      const n1 = parseFloat(numero1);
+      const n2 = parseFloat(numero2);
+
+      if (isNaN(n1) || isNaN(n2)) {
+        throw new Error("Digite apenas números.");
+      }
+
+      if (n2 === 0) {
+        throw new Error("Não é permitido dividir por zero.");
+      }
+
+      setResultado(`Resultado: ${n1 / n2}`);
+    } catch (error) {
+      setResultado(error.message);
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titulo}>Divisão Segura</Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Digite o primeiro número"
+        keyboardType="numeric"
+        value={numero1}
+        onChangeText={setNumero1}
+      />
+
+      <TextInput
+        style={styles.input}
+        placeholder="Digite o segundo número"
+        keyboardType="numeric"
+        value={numero2}
+        onChangeText={setNumero2}
+      />
+
+      <TouchableOpacity
+        style={styles.botao}
+        onPress={calcularDivisao}
+      >
+        <Text style={styles.textoBotao}>Calcular</Text>
+      </TouchableOpacity>
+
+      <Text style={styles.resultado}>{resultado}</Text>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    padding: 20,
+  },
+  titulo: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 20,
+    textAlign: "center",
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    padding: 10,
+    marginBottom: 10,
+    borderRadius: 5,
+  },
+  botao: {
+    backgroundColor: "#007AFF",
+    padding: 12,
+    borderRadius: 5,
+  },
+  textoBotao: {
+    color: "#fff",
+    textAlign: "center",
+    fontWeight: "bold",
+  },
+  resultado: {
+    marginTop: 20,
+    fontSize: 18,
+    textAlign: "center",
+  },
+});
+
+
+
+
+
+
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A):Ed
+DATA:  xx/ xx /2026
+Bimestre: 2º Bimestre
 Descrição da Atividade:  exemplo - Nesta atividade foi desenvolvido um aplicativo simples utilizando React Native, com o objetivo de compreender a estrutura básica de um app mobile.
 O aplicativo apresenta uma tela inicial com uma mensagem de boas-vindas e um botão interativo que, ao ser pressionado, exibe um alerta na tela.
 Também foram aplicados conceitos de estilização com StyleSheet, permitindo a personalização de cores e textos.
