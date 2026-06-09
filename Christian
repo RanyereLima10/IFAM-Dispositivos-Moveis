@@ -1492,3 +1492,436 @@ const styles = StyleSheet.create({
   }
 
 });  
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Christian Keven de Paiva Farias
+DATA:  09/ 06 /2026
+Bimestre: 2º Bimestre
+Descrição: Este aplicativo foi desenvolvido em React Native para realizar o cadastro de produtos. 
+O usuário pode adicionar, editar e excluir produtos informando nome, preço, categoria e descrição.
+Os dados são exibidos em uma lista dinâmica, utilizando o hook useState para gerenciar as informações e garantir o funcionamento do sistema.
+**********************************************************************/
+
+import React, { useState } from 'react';
+import {
+  SafeAreaView,
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  FlatList,
+  StyleSheet,
+  Alert,
+  ScrollView,
+} from 'react-native';
+
+export default function App() {
+  const [nome, setNome] = useState('');
+  const [preco, setPreco] = useState('');
+  const [categoria, setCategoria] = useState('');
+  const [descricao, setDescricao] = useState('');
+
+  const [produtos, setProdutos] = useState([]);
+  const [editandoId, setEditandoId] = useState(null);
+
+  function limparCampos() {
+    setNome('');
+    setPreco('');
+    setCategoria('');
+    setDescricao('');
+    setEditandoId(null);
+  }
+
+  function salvarProduto() {
+    if (
+      nome.trim() === '' ||
+      preco.trim() === '' ||
+      categoria.trim() === '' ||
+      descricao.trim() === ''
+    ) {
+      Alert.alert('Erro', 'Preencha todos os campos!');
+      return;
+    }
+
+    if (isNaN(preco) || Number(preco) <= 0) {
+      Alert.alert('Erro', 'Digite um preço válido!');
+      return;
+    }
+
+    if (editandoId) {
+      const novaLista = produtos.map((produto) =>
+        produto.id === editandoId
+          ? {
+              ...produto,
+              nome,
+              preco,
+              categoria,
+              descricao,
+            }
+          : produto
+      );
+
+      setProdutos(novaLista);
+
+      Alert.alert('Sucesso', 'Produto atualizado!');
+    } else {
+      const novoProduto = {
+        id: Date.now().toString(),
+        nome,
+        preco,
+        categoria,
+        descricao,
+      };
+
+      setProdutos([...produtos, novoProduto]);
+
+      Alert.alert('Sucesso', 'Produto cadastrado!');
+    }
+
+    limparCampos();
+  }
+
+  function editarProduto(produto) {
+    setNome(produto.nome);
+    setPreco(produto.preco);
+    setCategoria(produto.categoria);
+    setDescricao(produto.descricao);
+
+    setEditandoId(produto.id);
+  }
+
+  function excluirProduto(id) {
+    Alert.alert(
+      'Excluir',
+      'Deseja realmente excluir este produto?',
+      [
+        {
+          text: 'Cancelar',
+          style: 'cancel',
+        },
+        {
+          text: 'Sim',
+          onPress: () => {
+            const novaLista = produtos.filter(
+              (item) => item.id !== id
+            );
+
+            setProdutos(novaLista);
+          },
+        },
+      ]
+    );
+  }
+
+  const categorias = [
+    'Eletrônicos',
+    'Roupas',
+    'Alimentos',
+    'Outros',
+  ];
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <ScrollView>
+
+        <Text style={styles.titulo}>
+          Projeto de Nível Intermediário
+        </Text>
+
+        <View style={styles.formulario}>
+
+          <Text style={styles.tituloFormulario}>
+            Novo Produto
+          </Text>
+
+          <Text style={styles.label}>
+            Nome do Produto *
+          </Text>
+
+          <TextInput
+            style={styles.input}
+            placeholder="Digite o nome do produto"
+            value={nome}
+            onChangeText={setNome}
+          />
+
+          <Text style={styles.label}>
+            Preço *
+          </Text>
+
+          <TextInput
+            style={styles.input}
+            placeholder="Digite o preço"
+            keyboardType="numeric"
+            value={preco}
+            onChangeText={setPreco}
+          />
+
+          <Text style={styles.label}>
+            Categoria *
+          </Text>
+
+          <View style={styles.categorias}>
+
+            {categorias.map((cat) => (
+              <TouchableOpacity
+                key={cat}
+                style={[
+                  styles.botaoCategoria,
+                  categoria === cat &&
+                    styles.categoriaSelecionada,
+                ]}
+                onPress={() => setCategoria(cat)}
+              >
+                <Text
+                  style={[
+                    styles.textoCategoria,
+                    categoria === cat && {
+                      color: '#fff',
+                    },
+                  ]}
+                >
+                  {cat}
+                </Text>
+              </TouchableOpacity>
+            ))}
+
+          </View>
+
+          <Text style={styles.label}>
+            Descrição *
+          </Text>
+
+          <TextInput
+            style={[styles.input, styles.areaTexto]}
+            multiline
+            placeholder="Digite a descrição do produto"
+            value={descricao}
+            onChangeText={setDescricao}
+          />
+
+          <TouchableOpacity
+            style={styles.botaoCadastrar}
+            onPress={salvarProduto}
+          >
+            <Text style={styles.textoBotao}>
+              {editandoId
+                ? 'ATUALIZAR'
+                : 'CADASTRAR'}
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.botaoLimpar}
+            onPress={limparCampos}
+          >
+            <Text style={styles.textoBotao}>
+              LIMPAR
+            </Text>
+          </TouchableOpacity>
+
+        </View>
+
+        <Text style={styles.subtitulo}>
+          Produtos Cadastrados
+        </Text>
+
+        <FlatList
+          data={produtos}
+          keyExtractor={(item) => item.id}
+          scrollEnabled={false}
+          renderItem={({ item }) => (
+            <View style={styles.card}>
+
+              <Text style={styles.nomeProduto}>
+                {item.nome}
+              </Text>
+
+              <Text>
+                💰 Preço: R$ {item.preco}
+              </Text>
+
+              <Text>
+                📦 Categoria: {item.categoria}
+              </Text>
+
+              <Text>
+                📝 {item.descricao}
+              </Text>
+
+              <View style={styles.areaBotoes}>
+
+                <TouchableOpacity
+                  style={styles.botaoEditar}
+                  onPress={() =>
+                    editarProduto(item)
+                  }
+                >
+                  <Text style={styles.textoBotao}>
+                    Editar
+                  </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  style={styles.botaoExcluir}
+                  onPress={() =>
+                    excluirProduto(item.id)
+                  }
+                >
+                  <Text style={styles.textoBotao}>
+                    Excluir
+                  </Text>
+                </TouchableOpacity>
+
+              </View>
+
+            </View>
+          )}
+        />
+
+      </ScrollView>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#F4F6F9',
+    padding: 15,
+  },
+
+  titulo: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: '#2948B1',
+    marginVertical: 20,
+  },
+
+  formulario: {
+    backgroundColor: '#FFF',
+    borderRadius: 10,
+    padding: 15,
+    elevation: 4,
+  },
+
+  tituloFormulario: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#2948B1',
+    marginBottom: 15,
+  },
+
+  label: {
+    fontWeight: 'bold',
+    marginBottom: 5,
+    marginTop: 10,
+  },
+
+  input: {
+    borderWidth: 1,
+    borderColor: '#DDD',
+    borderRadius: 8,
+    padding: 12,
+    backgroundColor: '#FFF',
+  },
+
+  areaTexto: {
+    height: 90,
+    textAlignVertical: 'top',
+  },
+
+  categorias: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginTop: 5,
+  },
+
+  botaoCategoria: {
+    borderWidth: 1,
+    borderColor: '#CCC',
+    borderRadius: 8,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    marginRight: 8,
+    marginBottom: 8,
+  },
+
+  categoriaSelecionada: {
+    backgroundColor: '#2948B1',
+    borderColor: '#2948B1',
+  },
+
+  textoCategoria: {
+    color: '#333',
+  },
+
+  botaoCadastrar: {
+    backgroundColor: '#2948B1',
+    padding: 15,
+    borderRadius: 8,
+    marginTop: 15,
+    alignItems: 'center',
+  },
+
+  botaoLimpar: {
+    backgroundColor: '#FF6B6B',
+    padding: 15,
+    borderRadius: 8,
+    marginTop: 10,
+    alignItems: 'center',
+  },
+
+  textoBotao: {
+    color: '#FFF',
+    fontWeight: 'bold',
+  },
+
+  subtitulo: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginVertical: 15,
+  },
+
+  card: {
+    backgroundColor: '#FFF',
+    padding: 15,
+    borderRadius: 10,
+    marginBottom: 12,
+    elevation: 3,
+  },
+
+  nomeProduto: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 8,
+  },
+
+  areaBotoes: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 15,
+  },
+
+  botaoEditar: {
+    backgroundColor: '#3498DB',
+    width: '48%',
+    padding: 12,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+
+  botaoExcluir: {
+    backgroundColor: '#E74C3C',
+    width: '48%',
+    padding: 12,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+});
+
