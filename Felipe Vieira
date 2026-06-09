@@ -210,4 +210,615 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',    // Texto em negrito
   },
 });
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Felipe Vieira Cunha
+DATA:  09/ 05 /2026
+Bimestre: 2º Bimestre
+Descrição: descrever o que cada de linha de código faz.
+
+**********************************************************************/
+import React, { useState } from 'react';
+import {
+  Alert,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+  Image,
+} from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
+export default function App() {
+  
+  const [produtos, setProdutos] = useState([]);
+  const [telaAtual, setTelaAtual] = useState('lista'); 
+  const [produtoEmEdicao, setProdutoEmEdicao] = useState(null);
+
+  
+  const [nome, setNome] = useState('');
+  const [preco, setPreco] = useState('');
+  const [categoria, setCategoria] = useState('Eletrônicos');
+  const [descricao, setDescricao] = useState('');
+  const [imagem, setImagem] = useState(null);
+
+  
+  const escolherImagem = async () => {
+    
+    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+    if (status !== 'granted') {
+      Alert.alert(
+        'Permissão necessária',
+        'Precisamos de acesso às suas fotos para carregar uma imagem!'
+      );
+      return;
+    }
+
+    let resultado = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 0.7, 
+    });
+
+    if (!resultado.canceled) {
+      setImagem(resultado.assets[0].uri);
+    }
+  };
+
+  const validarFormulario = () => {
+    if (!nome.trim() || nome.trim().length < 3) {
+      Alert.alert(
+        'Erro de Validação',
+        'O nome do produto precisa ter pelo menos 3 letras.'
+      );
+      return false;
+    }
+
+    const precoNum = parseFloat(preco);
+    if (isNaN(precoNum) || precoNum <= 0) {
+      Alert.alert(
+        'Erro de Validação',
+        'Insira um preço numérico válido e maior que zero.'
+      );
+      return false;
+    }
+
+    if (!categoria) {
+      Alert.alert('Erro de Validação', 'Selecione uma categoria.');
+      return false;
+    }
+
+    return true;
+  };
+
+  const limparCampos = () => {
+    setNome('');
+    setPreco('');
+    setCategoria('Eletrônicos');
+    setDescricao('');
+    setImagem(null);
+  };
+
+  const handleCadastrar = () => {
+    if (validarFormulario()) {
+      const novoProduto = {
+        id: Date.now(),
+
+        nome:
+          nome.trim().charAt(0).toUpperCase() +
+          nome.trim().slice(1).toLowerCase(),
+        preco: parseFloat(preco),
+        categoria: categoria,
+        descricao: descricao.trim(),
+        imagem: imagem,
+      };
+
+      setProdutos([...produtos, novoProduto]);
+      limparCampos();
+      Alert.alert('Sucesso', 'Produto cadastrado com sucesso!');
+      setTelaAtual('lista');
+    }
+  };
+
+  const handleEditarInicio = (produto) => {
+    setProdutoEmEdicao(produto);
+    setNome(produto.nome);
+    setPreco(produto.preco.toString());
+    setCategoria(produto.categoria);
+    setDescricao(produto.descricao);
+    setImagem(produto.imagem);
+    setTelaAtual('edicao');
+  };
+
+  const handleAtualizar = () => {
+    if (validarFormulario()) {
+      const produtosAtualizados = produtos.map((produto) => {
+        if (produto.id === produtoEmEdicao.id) {
+          return {
+            id: produto.id,
+            nome:
+              nome.trim().charAt(0).toUpperCase() +
+              nome.trim().slice(1).toLowerCase(),
+            preco: parseFloat(preco),
+            categoria: categoria,
+            descricao: descricao.trim(),
+            imagem: imagem,
+          };
+        }
+        return produto;
+      });
+
+      setProdutos(produtosAtualizados);
+      limparCampos();
+      setProdutoEmEdicao(null);
+      Alert.alert('Sucesso', 'Produto atualizado com sucesso!');
+      setTelaAtual('lista');
+    }
+  };
+
+  const handleDeletar = (id) => {
+    Alert.alert(
+      'Confirmar Exclusão',
+      'Tem certeza que deseja deletar este produto?',
+      [
+        { text: 'Cancelar', style: 'cancel' },
+        {
+          text: 'Deletar',
+          style: 'destructive',
+          onPress: () => {
+            const filtrados = produtos.filter((p) => p.id !== id);
+            setProdutos(filtrados);
+          },
+        },
+      ]
+    );
+  };
+
+  const renderFormulario = (titulo, acaoSalvar) => (
+    <ScrollView contentContainerStyle={styles.containerForm}>
+      <Text style={styles.tituloTela}>{titulo}</Text>
+
+      <Text style={styles.label}>Nome do Produto</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Ex: Camiseta preta"
+        value={nome}
+        onChangeText={setNome}
+      />
+
+      <Text style={styles.label}>Preço (R$)</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Ex: 49.90"
+        keyboardType="decimal-pad"
+        value={preco}
+        onChangeText={setPreco}
+      />
+
+      <Text style={styles.label}>Categoria</Text>
+      <View style={styles.categoriaContainer}>
+        {['Eletrônicos', 'Roupas', 'Alimentos'].map((cat) => (
+          <TouchableOpacity
+            key={cat}
+            style={[
+              styles.botaoCategoria,
+              categoria === cat && styles.botaoCategoriaAtivo,
+            ]}
+            onPress={() => setCategoria(cat)}>
+            <Text
+              style={[
+                styles.textoCategoria,
+                categoria === cat && styles.textoCategoriaAtivo,
+              ]}>
+              {cat}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+
+      <Text style={styles.label}>Descrição (Opcional)</Text>
+      <TextInput
+        style={[styles.input, styles.inputDescricao]}
+        placeholder="Detalhes do produto..."
+        multiline
+        numberOfLines={3}
+        value={descricao}
+        onChangeText={setDescricao}
+      />
+
+      {/* SELETOR DE IMAGEM */}
+      <Text style={styles.label}>Imagem do Produto</Text>
+      <TouchableOpacity style={styles.botaoUpload} onPress={escolherImagem}>
+        {imagem ? (
+          <Image source={{ uri: imagem }} style={styles.previewImagemForm} />
+        ) : (
+          <Text style={styles.textoBotaoUpload}>
+            📷 Selecionar Foto da Galeria
+          </Text>
+        )}
+      </TouchableOpacity>
+
+      {/* BOTÕES DE AÇÃO */}
+      <TouchableOpacity
+        style={[styles.botaoSalvar, styles.botaoPrincipal]}
+        onPress={acaoSalvar}>
+        <Text style={styles.textoBotaoPrincipal}>Salvar Produto</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.botaoVoltar}
+        onPress={() => {
+          limparCampos();
+          setTelaAtual('lista');
+        }}>
+        <Text style={styles.textoBotaoVoltar}>Cancelar e Voltar</Text>
+      </TouchableOpacity>
+    </ScrollView>
+  );
+
+  if (telaAtual === 'cadastro') {
+    return renderFormulario('Cadastrar Novo Produto', handleCadastrar);
+  }
+
+  if (telaAtual === 'edicao') {
+    return renderFormulario('Editar Produto', handleAtualizar);
+  }
+
+  return (
+    <View style={styles.containerPrincipal}>
+      {/* Cabeçalho */}
+      <View style={styles.header}>
+        <Text style={styles.tituloHeader}>Meus Produtos</Text>
+        <TouchableOpacity
+          style={styles.botaoNovo}
+          onPress={() => setTelaAtual('cadastro')}>
+          <Text style={styles.textoBotaoNovo}>+ Novo</Text>
+        </TouchableOpacity>
+      </View>
+
+      {/* Lista de Itens */}
+      <ScrollView contentContainerStyle={styles.listaContainer}>
+        {produtos.length === 0 ? (
+          <Text style={styles.textoListaVazia}>
+            Nenhum produto cadastrado ainda.
+          </Text>
+        ) : (
+          produtos.map((produto) => (
+            <View key={produto.id} style={styles.produtoCard}>
+              {/* Estrutura Lado a Lado (Imagem + Informações) */}
+              <View style={styles.produtoLayoutItem}>
+                {produto.imagem ? (
+                  <Image
+                    source={{ uri: produto.imagem }}
+                    style={styles.produtoImagemThumb}
+                  />
+                ) : (
+                  <View
+                    style={[styles.produtoImagemThumb, styles.semImagemThumb]}>
+                    <Text
+                      style={{
+                        fontSize: 10,
+                        color: '#9CA3AF',
+                        textAlign: 'center',
+                      }}>
+                      Sem Foto
+                    </Text>
+                  </View>
+                )}
+
+                <View style={styles.produtoTextoContainer}>
+                  <Text style={styles.produtoNome}>{produto.nome}</Text>
+                  <Text style={styles.produtoPreco}>
+                    R$ {produto.preco.toFixed(2)}
+                  </Text>
+                  <Text style={styles.produtoCategoriaTag}>
+                    {produto.categoria}
+                  </Text>
+                  {produto.descricao ? (
+                    <Text style={styles.produtoDescricao} numberOfLines={2}>
+                      {produto.descricao}
+                    </Text>
+                  ) : null}
+                </View>
+              </View>
+
+              {/* Botões de Ação na Base do Card */}
+              <View style={styles.botoesContainer}>
+                <TouchableOpacity
+                  style={[styles.botaoCard, styles.botaoEditar]}
+                  onPress={() => handleEditarInicio(produto)}>
+                  <Text style={styles.textoBotaoCard}>Editar</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={[styles.botaoCard, styles.botaoDeletar]}
+                  onPress={() => handleDeletar(produto.id)}>
+                  <Text style={styles.textoBotaoCard}>Deletar</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          ))
+        )}
+      </ScrollView>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+
+  // Layout Principal
+  containerPrincipal: {
+    flex: 1,
+    backgroundColor: '#F3F4F6',
+    paddingTop: 50,
+  },
+
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingBottom: 15,
+    borderBottomWidth: 1,
+    borderColor: '#E5E7EB',
+    backgroundColor: '#FFF',
+  },
+
+  tituloHeader: {
+    fontSize: 22,
+    fontWeight: '700',
+    color: '#1E40AF',
+  },
+
+  botaoNovo: {
+    backgroundColor: '#059669',
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 6,
+  },
+
+  textoBotaoNovo: {
+    color: '#FFF',
+    fontWeight: '600',
+    fontSize: 14,
+  },
+
+  listaContainer: {
+    padding: 20,
+  },
+
+  textoListaVazia: {
+    textAlign: 'center',
+    color: '#6B7280',
+    marginTop: 40,
+    fontSize: 16,
+  },
+
+  // Card Produto
+  produtoCard: {
+    backgroundColor: '#FFF',
+    borderRadius: 12,
+    padding: 16,
+    marginBottom: 16,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.05,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+
+  produtoLayoutItem: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    marginBottom: 12,
+  },
+
+  produtoImagemThumb: {
+    width: 80,
+    height: 80,
+    borderRadius: 8,
+    marginRight: 16,
+    backgroundColor: '#E5E7EB',
+  },
+
+  semImagemThumb: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#D1D5DB',
+    borderStyle: 'dashed',
+  },
+
+  produtoTextoContainer: {
+    flex: 1,
+  },
+
+  produtoNome: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#111827',
+    marginBottom: 2,
+  },
+
+  produtoPreco: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: '#059669',
+    marginBottom: 4,
+  },
+
+  produtoCategoriaTag: {
+    fontSize: 11,
+    color: '#4B5563',
+    backgroundColor: '#E5E7EB',
+    paddingHorizontal: 8,
+    paddingVertical: 2,
+    borderRadius: 4,
+    alignSelf: 'flex-start',
+    marginBottom: 6,
+    overflow: 'hidden',
+  },
+
+  produtoDescricao: {
+    fontSize: 13,
+    color: '#6B7280',
+  },
+
+  botoesContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    borderTopWidth: 1,
+    borderColor: '#F3F4F6',
+    paddingTop: 12,
+  },
+
+  botaoCard: {
+    paddingVertical: 6,
+    paddingHorizontal: 14,
+    borderRadius: 6,
+    marginLeft: 8,
+  },
+
+  botaoEditar: {
+    backgroundColor: '#3B82F6',
+  },
+
+  botaoDeletar: {
+    backgroundColor: '#EF4444',
+  },
+
+  textoBotaoCard: {
+    color: '#FFF',
+    fontWeight: '600',
+    fontSize: 13,
+  },
+
+  // Formulário
+  containerForm: {
+    padding: 24,
+    paddingTop: 60,
+    backgroundColor: '#FFF',
+    flexGrow: 1,
+  },
+
+  tituloTela: {
+    fontSize: 22,
+    fontWeight: '700',
+    color: '#1E40AF',
+    marginBottom: 24,
+    textAlign: 'center',
+  },
+
+  label: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#374151',
+    marginBottom: 6,
+  },
+
+  input: {
+    borderWidth: 1,
+    borderColor: '#D1D5DB',
+    borderRadius: 8,
+    padding: 12,
+    fontSize: 15,
+    marginBottom: 16,
+    backgroundColor: '#F9FAFB',
+  },
+
+  inputDescricao: {
+    height: 80,
+    textAlignVertical: 'top',
+  },
+
+  categoriaContainer: {
+    flexDirection: 'row',
+    marginBottom: 16,
+  },
+
+  botaoCategoria: {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: '#D1D5DB',
+    paddingVertical: 10,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginRight: 6,
+    backgroundColor: '#F9FAFB',
+  },
+
+  botaoCategoriaAtivo: {
+    backgroundColor: '#1E40AF',
+    borderColor: '#1E40AF',
+  },
+
+  textoCategoria: {
+    color: '#4B5563',
+    fontWeight: '600',
+  },
+
+  textoCategoriaAtivo: {
+    color: '#FFF',
+  },
+
+  // Upload de Imagem
+  botaoUpload: {
+    width: '100%',
+    height: 140,
+    backgroundColor: '#F3F4F6',
+    borderWidth: 1,
+    borderColor: '#D1D5DB',
+    borderStyle: 'dashed',
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 24,
+    overflow: 'hidden',
+  },
+
+  textoBotaoUpload: {
+    color: '#4B5563',
+    fontWeight: '600',
+  },
+
+  previewImagemForm: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
+  },
+
+  // Botões do Formulário
+  botaoPrincipal: {
+    backgroundColor: '#1E40AF',
+    paddingVertical: 14,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+
+  textoBotaoPrincipal: {
+    color: '#FFF',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+
+  botaoVoltar: {
+    paddingVertical: 12,
+    alignItems: 'center',
+  },
+
+  textoBotaoVoltar: {
+    color: '#6B7280',
+    fontSize: 14,
+    fontWeight: '600',
+  },
+});
 
