@@ -623,5 +623,363 @@ const styles = StyleSheet.create({
   }
 
 });
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Amanda Medeiros Lins
+DATA:  09 / 06 /2026
+Bimestre: 2º Bimestre
+Assunto: Criar um formulario
+**********************************************************************/
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView,
+  Alert,
+} from 'react-native';
+
+export default function App() {
+  const [nome, setNome] = useState('');
+  const [telefone, setTelefone] = useState('');
+  const [servico, setServico] = useState('');
+  const [idade, setIdade] = useState('');
+  const [observacoes, setObservacoes] = useState('');
+
+  const [clientes, setClientes] = useState([]);
+
+  const cadastrarCliente = () => {
+    if (
+      nome.trim() === '' ||
+      telefone.trim() === '' ||
+      servico.trim() === '' ||
+      idade.trim() === '' ||
+      observacoes.trim() === ''
+    ) {
+      Alert.alert('Erro', 'Preencha todos os campos!');
+      return;
+    }
+
+    if (isNaN(idade)) {
+      Alert.alert('Erro', 'Digite uma idade válida!');
+      return;
+    }
+
+    const novoCliente = {
+      id: Date.now(),
+      nome,
+      telefone,
+      servico,
+      idade,
+      observacoes,
+    };
+
+    setClientes([...clientes, novoCliente]);
+
+    limparCampos();
+
+    Alert.alert('Sucesso', 'Cliente cadastrado com sucesso!');
+  };
+
+  const limparCampos = () => {
+    setNome('');
+    setTelefone('');
+    setServico('');
+    setIdade('');
+    setObservacoes('');
+  };
+
+  const excluirCliente = (id) => {
+    setClientes(clientes.filter((cliente) => cliente.id !== id));
+  };
+
+  return (
+    <ScrollView style={styles.container}>
+      <Text style={styles.tituloPrincipal}>
+        Salão Glamour
+      </Text>
+
+      <Text style={styles.subtitulo}>
+        Cadastro de Clientes
+      </Text>
+
+      <Text style={styles.label}>Nome do Cliente *</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Digite o nome"
+        placeholderTextColor="#777"
+        value={nome}
+        onChangeText={setNome}
+      />
+
+      <Text style={styles.label}>Telefone *</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="(92) 99999-9999"
+        placeholderTextColor="#777"
+        keyboardType="phone-pad"
+        value={telefone}
+        onChangeText={setTelefone}
+      />
+
+      <Text style={styles.label}>Serviço *</Text>
+
+      <View style={styles.servicos}>
+        {['Corte', 'Escova', 'Manicure', 'Coloração'].map((item) => (
+          <TouchableOpacity
+            key={item}
+            style={[
+              styles.servicoBtn,
+              servico === item && styles.servicoSelecionado,
+            ]}
+            onPress={() => setServico(item)}
+          >
+            <Text
+              style={[
+                styles.servicoTexto,
+                servico === item &&
+                  styles.servicoTextoSelecionado,
+              ]}
+            >
+              {item}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+
+      <Text style={styles.label}>Idade *</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Digite a idade"
+        placeholderTextColor="#777"
+        keyboardType="numeric"
+        value={idade}
+        onChangeText={setIdade}
+      />
+
+      <Text style={styles.label}>Observações *</Text>
+      <TextInput
+        style={styles.textArea}
+        placeholder="Preferências ou observações"
+        placeholderTextColor="#777"
+        multiline
+        numberOfLines={4}
+        value={observacoes}
+        onChangeText={setObservacoes}
+      />
+
+      <TouchableOpacity
+        style={styles.btnCadastrar}
+        onPress={cadastrarCliente}
+      >
+        <Text style={styles.textoBotao}>
+          CADASTRAR CLIENTE
+        </Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.btnLimpar}
+        onPress={limparCampos}
+      >
+        <Text style={styles.textoBotao}>
+          LIMPAR CAMPOS
+        </Text>
+      </TouchableOpacity>
+
+      <Text style={styles.listaTitulo}>
+        Clientes Cadastrados
+      </Text>
+
+      {clientes.length === 0 ? (
+        <Text style={styles.semClientes}>
+          Nenhum cliente cadastrado.
+        </Text>
+      ) : (
+        clientes.map((cliente) => (
+          <View key={cliente.id} style={styles.card}>
+            <Text style={styles.cardTitulo}>
+              {cliente.nome}
+            </Text>
+
+            <Text style={styles.cardTexto}>
+              Telefone: {cliente.telefone}
+            </Text>
+
+            <Text style={styles.cardTexto}>
+              Serviço: {cliente.servico}
+            </Text>
+
+            <Text style={styles.cardTexto}>
+              Idade: {cliente.idade}
+            </Text>
+
+            <Text style={styles.cardObservacao}>
+              {cliente.observacoes}
+            </Text>
+
+            <TouchableOpacity
+              style={styles.btnExcluir}
+              onPress={() => excluirCliente(cliente.id)}
+            >
+              <Text style={styles.textoBotao}>
+                EXCLUIR
+              </Text>
+            </TouchableOpacity>
+          </View>
+        ))
+      )}
+    </ScrollView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#FFF5F7',
+    padding: 20,
+  },
+
+  tituloPrincipal: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    color: '#C2185B',
+    textAlign: 'center',
+    marginTop: 20,
+  },
+
+  subtitulo: {
+    fontSize: 20,
+    textAlign: 'center',
+    color: '#880E4F',
+    marginBottom: 25,
+  },
+
+  label: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#880E4F',
+    marginBottom: 6,
+    marginTop: 10,
+  },
+
+  input: {
+    backgroundColor: '#FFFFFF',
+    borderWidth: 1,
+    borderColor: '#C2185B',
+    borderRadius: 10,
+    padding: 12,
+  },
+
+  textArea: {
+    backgroundColor: '#FFFFFF',
+    borderWidth: 1,
+    borderColor: '#C2185B',
+    borderRadius: 10,
+    padding: 12,
+    height: 120,
+    textAlignVertical: 'top',
+  },
+
+  servicos: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+
+  servicoBtn: {
+    borderWidth: 1,
+    borderColor: '#C2185B',
+    borderRadius: 8,
+    padding: 10,
+    marginRight: 8,
+    marginTop: 5,
+    backgroundColor: '#FFFFFF',
+  },
+
+  servicoSelecionado: {
+    backgroundColor: '#C2185B',
+  },
+
+  servicoTexto: {
+    color: '#880E4F',
+  },
+
+  servicoTextoSelecionado: {
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+  },
+
+  btnCadastrar: {
+    backgroundColor: '#C2185B',
+    padding: 15,
+    borderRadius: 10,
+    marginTop: 20,
+    alignItems: 'center',
+  },
+
+  btnLimpar: {
+    backgroundColor: '#880E4F',
+    padding: 15,
+    borderRadius: 10,
+    marginTop: 10,
+    alignItems: 'center',
+  },
+
+  textoBotao: {
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+
+  listaTitulo: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#C2185B',
+    marginTop: 30,
+    marginBottom: 15,
+  },
+
+  semClientes: {
+    textAlign: 'center',
+    color: '#880E4F',
+    fontSize: 16,
+  },
+
+  card: {
+    backgroundColor: '#AD1457',
+    padding: 15,
+    borderRadius: 12,
+    marginBottom: 15,
+  },
+
+  cardTitulo: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+    marginBottom: 10,
+  },
+
+  cardTexto: {
+    color: '#FFFFFF',
+    marginBottom: 4,
+  },
+
+  cardObservacao: {
+    color: '#FFFFFF',
+    marginTop: 8,
+  },
+
+  btnExcluir: {
+    backgroundColor: '#880E4F',
+    padding: 10,
+    borderRadius: 8,
+    marginTop: 12,
+    alignItems: 'center',
+  },
+});
 
 
