@@ -1424,4 +1424,87 @@ const styles = StyleSheet.create({
       });
 
 
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Fabiano Batista Mesquita
+DATA:  09/ 06 /2026
+Bimestre: 2º Bimestre
+Descrição: Divisão Segura: Peça dois n ú me r o s e t r a t e a
+divisão por zero.
+
+**********************************************************************/
+//////////// 1 Divisão Segura - Inicio /////////////////////////////
+
+import React from 'react';
+import { View, Button, Alert } from 'react-native';
+
+export default function App() {
+
+  const calcularDivisao = () => {
+
+    try {
+
+      // DADOS PARA TESTE (Altere os valores para testar os cenários)
+      const numerador = 10;
+      const denominador = 0; // Teste com 0 e depois com outro número
+
+      // Verifica se o denominador é zero
+      if (denominador === 0) {
+        throw new Error("Não é possível dividir um número por zero!");
+      }
+
+      // Verifica se os dados inseridos são números válidos
+      if (isNaN(numerador) || isNaN(denominador)) {
+        throw new Error("Por favor, insira apenas números válidos.");
+      }
+
+      const resultado = numerador / denominador;
+
+      Alert.alert(
+        "DIVISÃO",
+        `O resultado é: ${resultado}`
+      );
+
+    } catch (erro) {
+
+      Alert.alert(
+        "ERRO",
+        erro.message
+      );
+
+    } finally {
+
+      console.log("Cálculo de divisão finalizado.");
+
+    }
+  };
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+      }}
+    >
+      <Button
+        title="Calcular Divisão"
+        onPress={calcularDivisao}
+      />
+    </View>
+  );
+}
+
+//////////// 1 Divisão Segura - FIM ////////////////////////////
+
+
+
+
+
+
+
+
 
