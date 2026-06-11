@@ -1500,8 +1500,81 @@ export default function App() {
 
 //////////// 1 Divisão Segura - FIM ////////////////////////////
 
+**********************************************************************/
 
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Fabiano Batista Mesquita
+DATA:  09/ 06 /2026
+Bimestre: 2º Bimestre
+Descrição: C a d a s t r o Simples: Valide se a id a d e digitada
+é um n ú me r o válido.
 
+**********************************************************************/
+
+//////////// 2 Validação de Idade - Inicio /////////////////////////////
+
+import React from 'react';
+import { View, Button, Alert } from 'react-native';
+
+export default function App() {
+
+  const validarIdade = () => {
+
+    try {
+
+      // DADOS PARA TESTE (Altere para testar letras, números negativos ou idades altas)
+      const idadeInput = "25";
+     
+      const idade = Number(idadeInput);
+
+      // Verifica se o valor digitado não é um número
+      if (isNaN(idade) || idadeInput.trim() === "") {
+        throw new Error("A idade digitada deve ser um número válido!");
+      }
+
+      // Verifica se a idade está em uma faixa realista
+      if (idade < 0 || idade > 120) {
+        throw new Error("Por favor, digite uma idade realista entre 0 e 120 anos.");
+      }
+
+      Alert.alert(
+        "CADASTRO",
+        `Cadastro realizado! Idade salva: ${idade}`
+      );
+
+    } catch (erro) {
+
+      Alert.alert(
+        "ERRO",
+        erro.message
+      );
+
+    } finally {
+
+      console.log("Validação de idade finalizada.");
+
+    }
+  };
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+      }}
+    >
+      <Button
+        title="Validar Idade"
+        onPress={validarIdade}
+      />
+    </View>
+  );
+}
+
+//////////// 2 Validação de Idade - FIM ////////////////////////////
 
 
 
