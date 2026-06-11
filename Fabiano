@@ -934,3 +934,494 @@ const styles = StyleSheet.create({
  
 });
 
+
+************+***************************************************************************+***************************************************************************+***************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Fabiano Batista Mesquita
+DATA:  26/ 05 /2026
+Bimestre: 2º Bimestre
+Assunto:Eventos em Aplicações Móveis
+Aplicações Movéis de cadastro
+************+***************************************************************************+***************************************************************************+***************************************************************
+
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  FlatList,
+  StyleSheet,
+  Alert,
+  ScrollView,
+  SafeAreaView,
+} from 'react-native';
+
+export default function App() {
+
+  // ============================================================================
+  // ESTADOS DA APLICAÇÃO
+  // ============================================================================
+
+  // Controle de Navegação ('inicio' ou 'cadastro')
+  const [tela, setTela] = useState('inicio');
+
+  // Campos do formulário
+  const [nome, setNome] = useState('');
+  const [preco, setPreco] = useState('');
+  const [categoria, setCategoria] = useState('Perfumaria');
+  const [descricao, setDescricao] = useState('');
+
+  // Lista de produtos cadastrados
+  const [produtos, setProdutos] = useState([]);
+
+  // Controle de edição
+  const [editandoId, setEditandoId] = useState(null);
+
+  // ============================================================================
+  // FUNÇÃO: VALIDAR FORMULÁRIO
+  // ============================================================================
+
+  const validarFormulario = () => {
+    if (!nome || nome.trim().length < 3) {
+      Alert.alert('Erro', 'O nome deve ter no mínimo 3 caracteres.');
+      return false;
+    }
+
+    if (!preco || isNaN(preco.replace(',', '.')) || parseFloat(preco.replace(',', '.')) <= 0) {
+      Alert.alert('Erro', 'Digite um preço válido maior que 0.');
+      return false;
+    }
+
+    if (!categoria) {
+      Alert.alert('Erro', 'Selecione uma categoria.');
+      return false;
+    }
+
+    return true;
+  };
+
+  // ============================================================================
+  // FUNÇÃO: LIMPAR CAMPOS
+  // ============================================================================
+
+  const limparCampos = () => {
+    setNome('');
+    setPreco('');
+    setCategoria('Perfumaria');
+    setDescricao('');
+    setEditandoId(null);
+  };
+
+  // ============================================================================
+  // FUNÇÃO: CADASTRAR OU ATUALIZAR PRODUTO
+  // ============================================================================
+
+  const cadastrarProduto = () => {
+    if (!validarFormulario()) {
+      return;
+    }
+
+    const precoFormatado = parseFloat(preco.replace(',', '.'));
+
+    const novoProduto = {
+      id: editandoId || Date.now().toString(),
+      nome: nome.trim(),
+      preco: precoFormatado.toFixed(2),
+      categoria,
+      descricao: descricao.trim(),
+    };
+
+    if (editandoId) {
+      const listaAtualizada = produtos.map((item) =>
+        item.id === editandoId ? novoProduto : item
+      );
+      setProdutos(listaAtualizada);
+      Alert.alert('Sucesso', 'Produto atualizado com sucesso!');
+    } else {
+      setProdutos([...produtos, novoProduto]);
+      Alert.alert('Sucesso', 'Produto cadastrado com sucesso!');
+    }
+
+    limparCampos();
+  };
+
+  // ============================================================================
+  // FUNÇÃO: EDITAR PRODUTO
+  // ============================================================================
+
+  const editarProduto = (produto) => {
+    setNome(produto.nome);
+    setPreco(produto.preco.toString());
+    setCategoria(produto.categoria);
+    setDescricao(produto.descricao);
+    setEditandoId(produto.id);
+  };
+
+  // ============================================================================
+  // FUNÇÃO: DELETAR PRODUTO
+  // ============================================================================
+
+  const deletarProduto = (id) => {
+    Alert.alert(
+      'Confirmar Exclusão',
+      'Deseja realmente excluir este produto?',
+      [
+        { text: 'Cancelar', style: 'cancel' },
+        {
+          text: 'Excluir',
+          style: 'destructive',
+          onPress: () => {
+            const novaLista = produtos.filter((item) => item.id !== id);
+            setProdutos(novaLista);
+            Alert.alert('Sucesso', 'Produto removido com sucesso!');
+            if (editandoId === id) limparCampos();
+          },
+        },
+      ]
+    );
+  };
+
+  const categorias = ['Perfumaria', 'Maquiagem', 'Cosmético', 'Outros'];
+
+  // ============================================================================
+  // TELA 1: MENU INICIAL
+  // ============================================================================
+  if (tela === 'inicio') {
+    return (
+      <SafeAreaView style={styles.containerBoasVindas}>
+        <View style={styles.cardBoasVindas}>
+          <Text style={styles.tituloPrincipal}>⚱ Produtos da Natura 𖠞༄</Text>
+          <Text style={styles.subtituloPrincipal}></Text>
+          
+          <TouchableOpacity 
+            style={styles.botaoEntrar} 
+            onPress={() => setTela('cadastro')}
+          >
+            <Text style={styles.textoBotao}>ACESSAR SISTEMA</Text>
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
+    );
+  }
+
+  // ============================================================================
+  // TELA 2: FORMULÁRIO E LISTAGEM
+  // ============================================================================
+  return (
+    <SafeAreaView style={styles.container}>
+      
+      {/* HEADER */}
+      <View style={styles.header}>
+        <Text style={styles.titulo}>⚱ Produtos da Natura 𖠞༄</Text>
+        <Text style={styles.subtitulo}>
+          Aqui você encontra produtos de perfumaria, maquiagem e cosméticos em geral com o melhor da tecnologia, ciência e natureza para seus cuidados diários.
+        </Text>
+      </View>
+
+      {/* LISTA DE PRODUTOS COMPLETA COM O FORMULÁRIO NO HEADER DA FLATLIST */}
+      <FlatList
+        data={produtos}
+        keyExtractor={(item) => item.id}
+        showsVerticalScrollIndicator={false}
+        ListHeaderComponent={
+          <View style={styles.formulario}>
+            {/* Nome */}
+            <Text style={styles.label}>Nome do Produto *</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Digite o nome do produto"
+              placeholderTextColor="#999"
+              value={nome}
+              onChangeText={setNome}
+            />
+
+            {/* Preço */}
+            <Text style={styles.label}>Preço *</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Digite o preço (ex: 99.90)"
+              placeholderTextColor="#999"
+              value={preco}
+              onChangeText={setPreco}
+              keyboardType="numeric"
+            />
+
+            {/* Categoria */}
+            <Text style={styles.label}>Categoria *</Text>
+            <View style={styles.categoriaContainer}>
+              {categorias.map((item) => (
+                <TouchableOpacity
+                  key={item}
+                  style={[
+                    styles.categoriaBotao,
+                    categoria === item && styles.categoriaSelecionada,
+                  ]}
+                  onPress={() => setCategoria(item)}
+                >
+                  <Text
+                    style={[
+                      styles.categoriaTexto,
+                      categoria === item && styles.categoriaTextoSelecionado,
+                    ]}
+                  >
+                    {item}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+
+            {/* Descrição */}
+            <Text style={styles.label}>Descrição</Text>
+            <TextInput
+              style={[styles.input, styles.textArea]}
+              placeholder="Digite a descrição do produto"
+              placeholderTextColor="#999"
+              value={descricao}
+              onChangeText={setDescricao}
+              multiline
+              numberOfLines={3}
+            />
+
+            {/* Botão Cadastrar/Atualizar */}
+            <TouchableOpacity style={styles.botaoCadastrar} onPress={cadastrarProduto}>
+              <Text style={styles.textoBotao}>
+                {editandoId ? 'ATUALIZAR PRODUTO' : 'CADASTRAR PRODUTO'}
+              </Text>
+            </TouchableOpacity>
+
+            {/* Botão Limpar */}
+            <TouchableOpacity style={styles.botaoLimpar} onPress={limparCampos}>
+              <Text style={styles.textoBotao}>LIMPAR CAMPOS</Text>
+            </TouchableOpacity>
+
+            {/* AÇÃO DO SEU COMANDO: BOTÃO VOLTAR */}
+            <TouchableOpacity 
+              style={styles.botaoVoltar} 
+              onPress={() => {
+                limparCampos();
+                setTela('inicio');
+              }}
+            >
+              <Text style={styles.textoBotao}>VOLTAR</Text>
+            </TouchableOpacity>
+
+            <Text style={styles.tituloSecao}>
+             Produtos da Natura ({produtos.length})
+            </Text>
+          </View>
+        }
+        ListEmptyComponent={
+          <Text style={styles.textoListaVazia}>Nenhum produto em estoque.</Text>
+        }
+        renderItem={({ item }) => (
+          <View style={styles.cardProduto}>
+            <View style={styles.infoProduto}>
+              <Text style={styles.nomeProduto}>{item.nome}</Text>
+              <Text style={styles.categoriaProduto}>{item.categoria}</Text>
+              {item.descricao ? <Text style={styles.descProduto}>{item.descricao}</Text> : null}
+              <Text style={styles.precoProduto}>R\$ {item.preco}</Text>
+            </View>
+            <View style={styles.acoesProduto}>
+              <TouchableOpacity style={styles.botaoEditar} onPress={() => editarProduto(item)}>
+                <Text style={styles.textoAcao}>Editar</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.botaoExcluir} onPress={() => deletarProduto(item.id)}>
+                <Text style={styles.textoAcao}>Excluir</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        )}
+        contentContainerStyle={styles.listaContainer}
+      />
+    </SafeAreaView>
+  );
+}
+
+// ============================================================================
+// FOLHA DE ESTILOS (STYLESHEET)
+// ============================================================================
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#f5f6fa',
+    },
+    containerBoasVindas: {
+      flex: 1,
+      backgroundColor: '#059C22',
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: 20,
+      },
+      cardBoasVindas: {backgroundColor: '#fff',
+      padding: 25,
+      borderRadius: 10,
+      width: '100%',
+      maxWidth: 340,
+      alignItems: 'center',
+      elevation: 4,
+      },
+      tituloPrincipal: {fontSize: 18,
+      fontWeight: 'bold',
+      color: '#059C22',
+      textAlign: 'center',
+      },
+      subtituloPrincipal: {fontSize: 10,
+      color: '#059C22',
+      marginTop: 5,
+      marginBottom: 20,
+      },
+      botaoEntrar: {backgroundColor: '#059C22',
+      padding: 12,
+      borderRadius: 6,
+      width: '100%',
+      alignItems: 'center',
+      },
+      header: {backgroundColor: '#059C22',
+      padding: 16,
+      alignItems: 'center',
+      },
+      titulo: {fontSize: 40,
+      fontWeight: 'bold',
+      color: '#fff',
+      },
+      subtitulo: {fontSize: 15,
+      color: '#fff',
+      textAlign: 'center',
+      marginTop: 4,
+      },
+      formulario: {backgroundColor: '#fff',
+      margin: 12,
+      padding: 14,
+      borderRadius: 8,
+      elevation: 2,
+      },
+      label: {fontSize: 13,
+      fontWeight: '700',
+      color: '#059C22',
+      marginTop: 8,
+      marginBottom: 4,
+      },
+      input: {borderWidth: 1,borderColor: '#09E334',
+      borderRadius: 6,
+      padding: 10,
+      fontSize: 14,
+      backgroundColor: '##059C22',
+      color: '#059C22',
+      },
+      textArea: {height: 70,
+      textAlignVertical: 'top',
+      },
+      categoriaContainer: {flexDirection: 'row',
+      justifyContent: 'space-between',
+      marginVertical: 4,
+      },
+      categoriaBotao: {flex: 1,
+      borderWidth: 1,
+      borderColor: '#09E334',
+      paddingVertical: 8,
+      borderRadius: 6,
+      alignItems: 'center',
+      marginHorizontal: 2,
+      backgroundColor: '#fff',
+      },
+      categoriaSelecionada: {backgroundColor: '#09E334',
+      borderColor: '#1e3799',
+      },
+      categoriaTexto: {fontSize: 11,
+      color: '#2f3640',
+      },
+      categoriaTextoSelecionado: {color: '#fff',
+      fontWeight: 'bold',
+      },
+      botaoCadastrar: {backgroundColor: '#09BD23',
+      padding: 12,
+      borderRadius: 6,
+      alignItems: 'center',
+      marginTop: 15,
+      },
+      botaoLimpar: {backgroundColor: '#e84118',
+      padding: 12,
+      borderRadius: 6,
+      alignItems: 'center',
+      marginTop: 8,
+      },
+      botaoVoltar: {backgroundColor: '#10B8EB',
+      padding: 12,
+      borderRadius: 6,
+      alignItems: 'center',
+      marginTop: 8,
+      },
+      textoBotao: {color: '#fff',
+      fontWeight: 'bold',
+      fontSize: 13},
+      tituloSecao: {fontSize: 15,
+      fontWeight: 'bold',
+      color: '#2f3640',
+      marginTop: 20,
+      borderBottomWidth: 1,
+      borderBottomColor: '#dcdde1',
+      paddingBottom: 5,
+      },
+      listaContainer: {paddingBottom: 25,
+      },
+      textoListaVazia: {textAlign: 'center',
+      color: '#7f8c8d',
+      marginTop: 10,
+      },
+      cardProduto: {backgroundColor: '#09E334',
+      marginHorizontal: 12,
+      marginBottom: 8,
+      padding: 12,
+      borderRadius: 6,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      borderLeftWidth: 4,
+      borderLeftColor: '#1e3799',
+      elevation: 1,
+      },
+      infoProduto: {flex: 3,
+      },
+      nomeProduto: {fontSize: 15,
+      fontWeight: 'bold',
+      color: '#',
+      },
+      categoriaProduto: {fontSize: 11,
+      color: '#7f8c8d',
+      marginVertical: 2,
+      },
+      descProduto: {fontSize: 12,
+      color: '#57606f',
+      marginBottom: 4,
+      },
+      precoProduto: {fontSize: 14,
+      fontWeight: 'bold',
+      color: '#4cd137',
+      },
+      acoesProduto: {flex: 1,
+      alignItems: 'flex-end',
+      },
+      botaoEditar: {backgroundColor: '#fbc531',
+      paddingVertical: 6,
+      width: '100%',
+      borderRadius: 4,
+      alignItems: 'center',
+      marginBottom: 6,
+      },
+      botaoExcluir: {backgroundColor: '#c23616',
+      paddingVertical: 6,
+      width: '100%',
+      borderRadius: 4,
+      alignItems: 'center',
+      },
+      textoAcao: {color: '#fff',
+      fontSize: 11,
+      fontWeight: '700',
+      },
+      });
+
+
+
