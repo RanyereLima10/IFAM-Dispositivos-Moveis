@@ -6,6 +6,138 @@ ALUNO(A): Yuri Lima Macedo
 DATA:  16/ 06 /2026
 Bimestre: 2º Bimestre
 Nesta atividade foi desenvolvido um aplicativo simples utilizando React Native, com o objetivo de compreender a estrutura básica de um app mobile.
+O aplicativo apresenta uma tela inicial com uma tela de verificação que indica verifivva se a nota r valida ou se ela não e valida 
+************+***************************************************************
+// Importa o React e o hook useState
+import React, { useState } from 'react';
+
+// Importa os componentes necessários do React Native
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  StyleSheet
+} from 'react-native';
+
+// Componente principal da aplicação
+export default function App() {
+
+  // Armazena a nota digitada pelo usuário
+  const [nota, setNota] = useState('');
+
+  // Armazena a mensagem que será exibida na tela
+  const [mensagem, setMensagem] = useState('');
+
+  // Função responsável por validar a nota
+  const validarNota = () => {
+
+    try {
+
+      // Converte o valor digitado para número
+      const notaNumero = Number(nota);
+
+      // Verifica se o usuário digitou um valor inválido
+      if (isNaN(notaNumero)) {
+        throw new Error('Digite uma nota válida.');
+      }
+
+      // Verifica se a nota é menor que 0
+      if (notaNumero < 0) {
+        throw new Error('Erro: a nota não pode ser menor que 0.');
+      }
+
+      // Verifica se a nota é maior que 10
+      if (notaNumero > 10) {
+        throw new Error('Erro: a nota não pode ser maior que 10.');
+      }
+
+      // Se passou pelas validações, a nota é válida
+      setMensagem(`Nota válida: ${notaNumero}`);
+
+    } catch (erro) {
+
+      // Exibe a mensagem de erro
+      setMensagem(erro.message);
+
+    } finally {
+
+      // Executa sempre ao final da validação
+      console.log('Validação da nota concluída.');
+    }
+  };
+
+  // Interface da aplicação
+  return (
+    <View style={styles.container}>
+
+      {/* Título */}
+      <Text style={styles.titulo}>Validação de Nota Escolar</Text>
+
+      {/* Campo para digitar a nota */}
+      <TextInput
+        style={styles.input}
+        placeholder="Digite uma nota de 0 a 10"
+        keyboardType="numeric"
+        value={nota}
+        onChangeText={setNota}
+      />
+
+      {/* Botão para validar a nota */}
+      <Button
+        title="Validar Nota"
+        onPress={validarNota}
+      />
+
+      {/* Exibe o resultado da validação */}
+      <Text style={styles.resultado}>
+        {mensagem}
+      </Text>
+
+    </View>
+  );
+}
+
+// Estilos da aplicação
+const styles = StyleSheet.create({
+
+  // Container principal
+  container: {
+    flex: 1,                  // Ocupa toda a tela
+    justifyContent: 'center', // Centraliza os itens verticalmente
+    padding: 20,              // Espaçamento interno
+  },
+
+  // Estilo do título
+  titulo: {
+    fontSize: 24,             // Tamanho da fonte
+    textAlign: 'center',      // Centraliza o texto
+    marginBottom: 20,         // Espaço abaixo do título
+  },
+
+  // Estilo do campo de texto
+  input: {
+    borderWidth: 1,           // Espessura da borda
+    borderRadius: 5,          // Bordas arredondadas
+    padding: 10,              // Espaçamento interno
+    marginBottom: 15,         // Espaço abaixo do campo
+  },
+
+  // Estilo da mensagem de resultado
+  resultado: {
+    marginTop: 20,            // Espaço acima da mensagem
+    fontSize: 18,             // Tamanho da fonte
+    textAlign: 'center',      // Centraliza o texto
+  },
+});
+************+***************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Yuri Lima Macedo
+DATA:  16/ 06 /2026
+Bimestre: 2º Bimestre
+Nesta atividade foi desenvolvido um aplicativo simples utilizando React Native, com o objetivo de compreender a estrutura básica de um app mobile.
 O aplicativo apresenta uma tela inicial com uma tela de verificação de saldos de um banco e o saque que e feito do sace do banco
 ************+***************************************************************
 // Importa o React e o hook useState para criar estados
