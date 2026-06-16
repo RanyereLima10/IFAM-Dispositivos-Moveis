@@ -2239,3 +2239,448 @@ const styles = StyleSheet.create({
   },
 
 });
+
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Christian Keven de Paiva Farias
+DATA:  16/ 06 /2026
+Bimestre: 2º Bimestre
+Descrição da atividade: Desenvolver um aplicativo em React Native que simule um saque bancário.
+O sistema deve exibir o saldo disponível, permitir que o usuário informe o valor do saque e validar.
+A operação utilizando `try`, `catch`, `throw` e `finally`.
+Caso o valor seja inválido ou maior que o saldo disponível, uma mensagem de erro deve ser exibida.
+Se o saque for realizado com sucesso, o saldo será atualizado e mostrado ao usuário.
+**********************************************************************/
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Alert,
+  StyleSheet
+} from 'react-native';
+
+export default function App() {
+  const [saldo, setSaldo] = useState(1000);
+  const [saque, setSaque] = useState('');
+  const [historico, setHistorico] = useState('');
+
+  const realizarSaque = () => {
+    try {
+      const valor = Number(saque);
+
+      if (isNaN(valor)) {
+        throw new Error('Digite apenas números.');
+      }
+
+      if (valor <= 0) {
+        throw new Error('O valor deve ser maior que zero.');
+      }
+
+      if (valor > saldo) {
+        throw new Error('Saldo insuficiente.');
+      }
+
+      const novoSaldo = saldo - valor;
+
+      setSaldo(novoSaldo);
+
+      setHistorico(
+        `Saldo anterior: R$ ${saldo}\n` +
+        `Valor sacado: R$ ${valor}\n` +
+        `Saldo atual: R$ ${novoSaldo}`
+      );
+
+      setSaque('');
+
+      Alert.alert('Sucesso', 'Saque realizado com sucesso!');
+    } catch (erro) {
+      Alert.alert('Erro', erro.message);
+    } finally {
+      console.log('Operação encerrada.');
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titulo}> Banco Digital</Text>
+
+      <Text style={styles.saldo}>
+        Saldo Atual: R$ {saldo.toFixed(2)}
+      </Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Digite o valor do saque"
+        keyboardType="numeric"
+        value={saque}
+        onChangeText={setSaque}
+      />
+
+      <TouchableOpacity
+        style={styles.botao}
+        onPress={realizarSaque}
+      >
+        <Text style={styles.textoBotao}>Realizar Saque</Text>
+      </TouchableOpacity>
+
+      {historico !== '' && (
+        <View style={styles.caixaHistorico}>
+          <Text style={styles.tituloHistorico}>
+            Última Operação
+          </Text>
+          <Text>{historico}</Text>
+        </View>
+      )}
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 25,
+    justifyContent: 'center',
+    backgroundColor: '#f5f5f5'
+  },
+  titulo: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 30
+  },
+  saldo: {
+    fontSize: 22,
+    textAlign: 'center',
+    marginBottom: 20,
+    color: 'green'
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    padding: 12,
+    marginBottom: 15
+  },
+  botao: {
+    backgroundColor: '#4CAF50',
+    padding: 15,
+    borderRadius: 10
+  },
+  textoBotao: {
+    color: '#fff',
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 16
+  },
+  caixaHistorico: {
+    marginTop: 20,
+    padding: 15,
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#ddd'
+  },
+  tituloHistorico: {
+    fontWeight: 'bold',
+    marginBottom: 8
+  }
+});
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Christian Keven de Paiva Farias
+DATA:  16/ 06 /2026
+Bimestre: 2º Bimestre
+Descrição: Aplicativo em React Native que verifica se o usuário possui idade suficiente para entrar em um evento, exibindo uma mensagem de acesso permitido ou negado.
+Utiliza try, catch, throw e finally para validação e tratamento de erros.
+**********************************************************************/
+
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Alert,
+  StyleSheet
+} from 'react-native';
+
+export default function App() {
+  const [idade, setIdade] = useState('');
+  const [resultado, setResultado] = useState('');
+
+  const verificarEntrada = () => {
+    try {
+      const idadeNumero = Number(idade);
+
+      if (idade === '') {
+        throw new Error('Informe sua idade.');
+      }
+
+      if (isNaN(idadeNumero) || idadeNumero < 0) {
+        throw new Error('Digite uma idade válida.');
+      }
+
+      if (idadeNumero < 18) {
+        throw new Error(
+          'Entrada não permitida. É necessário ter pelo menos 18 anos.'
+        );
+      }
+
+      setResultado(
+        '✅ Entrada liberada! Aproveite o evento.'
+      );
+
+      Alert.alert('Sucesso', 'Acesso autorizado!');
+    } catch (erro) {
+      setResultado(`❌ ${erro.message}`);
+      Alert.alert('Erro', erro.message);
+    } finally {
+      console.log('Verificação concluída.');
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titulo}>
+       Controle de Entrada</Text>
+
+      <Text style={styles.evento}>
+        Evento: Festa Exclusiva 18+
+      </Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Digite sua idade"
+        keyboardType="numeric"
+        value={idade}
+        onChangeText={setIdade}
+      />
+
+      <TouchableOpacity
+        style={styles.botao}
+        onPress={verificarEntrada}
+      >
+        <Text style={styles.textoBotao}>
+          Verificar Entrada
+        </Text>
+      </TouchableOpacity>
+
+      {resultado !== '' && (
+        <View style={styles.caixaResultado}>
+          <Text style={styles.textoResultado}>
+            {resultado}
+          </Text>
+        </View>
+      )}
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 25,
+    backgroundColor: '#F5F5F5',
+  },
+  titulo: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 10,
+  },
+  evento: {
+    textAlign: 'center',
+    fontSize: 18,
+    marginBottom: 25,
+    color: '#555',
+  },
+  input: {
+    backgroundColor: '#FFF',
+    borderWidth: 1,
+    borderColor: '#CCC',
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 15,
+  },
+  botao: {
+    backgroundColor: '#6A0DAD',
+    padding: 15,
+    borderRadius: 8,
+  },
+  textoBotao: {
+    color: '#FFF',
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  caixaResultado: {
+    marginTop: 20,
+    padding: 15,
+    backgroundColor: '#FFF',
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#DDD',
+  },
+  textoResultado: {
+    textAlign: 'center',
+    fontSize: 16,
+  },
+});
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Christian Keven de Paiva Farias
+DATA:  16/ 06 /2026
+Bimestre: 2º Bimestre
+Descrição: Aplicativo desenvolvido em React Native para validar notas escolares informadas pelo usuário.
+O sistema verifica se a nota está entre 0 e 10, exibindo uma mensagem de validação ou erro quando necessário, utilizando as estruturas try, catch, throw e finally para tratamento de exceções.
+**********************************************************************/
+
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Alert,
+  StyleSheet
+} from 'react-native';
+
+export default function App() {
+  const [nota, setNota] = useState('');
+  const [resultado, setResultado] = useState('');
+
+  const validarNota = () => {
+    try {
+      const valorNota = Number(nota);
+
+      if (nota === '') {
+        throw new Error('Digite uma nota.');
+      }
+
+      if (isNaN(valorNota)) {
+        throw new Error('Digite apenas números.');
+      }
+
+      if (valorNota < 0) {
+        throw new Error('A nota não pode ser menor que 0.');
+      }
+
+      if (valorNota > 10) {
+        throw new Error('A nota não pode ser maior que 10.');
+      }
+
+      let situacao = '';
+
+      if (valorNota >= 7) {
+        situacao = '✅ Aprovado';
+      } else if (valorNota <= 5) {
+        situacao = '🟡 Recuperação';
+      } else {
+        situacao = '❌ Reprovado';
+      }
+
+      setResultado(
+        `Nota: ${valorNota}\nSituação: ${situacao}`
+      );
+
+      Alert.alert('Sucesso', 'Nota válida!');
+    } catch (erro) {
+      setResultado(`Erro: ${erro.message}`);
+      Alert.alert('Erro', erro.message);
+    } finally {
+      console.log('Validação concluída.');
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titulo}> Sistema Escolar</Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Digite a nota (0 a 10)"
+        keyboardType="numeric"
+        value={nota}
+        onChangeText={setNota}
+      />
+
+      <TouchableOpacity
+        style={styles.botao}
+        onPress={validarNota}
+      >
+        <Text style={styles.textoBotao}>
+          Validar Nota
+        </Text>
+      </TouchableOpacity>
+
+      {resultado !== '' && (
+        <View style={styles.caixaResultado}>
+          <Text style={styles.textoResultado}>
+            {resultado}
+          </Text>
+        </View>
+      )}
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 25,
+    backgroundColor: '#f5f5f5',
+  },
+  titulo: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 25,
+  },
+  input: {
+    backgroundColor: '#fff',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 15,
+  },
+  botao: {
+    backgroundColor: '#2196F3',
+    padding: 15,
+    borderRadius: 8,
+  },
+  textoBotao: {
+    color: '#fff',
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
+  caixaResultado: {
+    marginTop: 20,
+    padding: 15,
+    backgroundColor: '#fff',
+    borderRadius: 8,
+  },
+  textoResultado: {
+    textAlign: 'center',
+    fontSize: 16,
+  },
+});
+
+
