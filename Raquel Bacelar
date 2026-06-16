@@ -1435,3 +1435,313 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
 });
+/////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Raquel Bacelar Pena
+DATA: 16/06/2026
+Atv:Projeto 1 – Validação de Idade
+////////////////////////////////////////////////////
+
+import React, { useState } from 'react';
+import { View, Text, TextInput, Button, Alert } from 'react-native';
+
+export default function App() {
+  const [idade, setIdade] = useState('');
+
+  const verificarIdade = () => {
+    try {
+      const idadeNumero = Number(idade);
+
+      if (idadeNumero < 18) {
+        throw new Error('Acesso negado! Menor de idade.');
+      }
+
+      Alert.alert('Sucesso', 'Entrada permitida!');
+    } catch (erro) {
+      Alert.alert('Erro', erro.message);
+    } finally {
+      console.log('Verificação concluída.');
+    }
+  };
+
+  return (
+    <View style={{ padding: 20 }}>
+      <Text>Digite sua idade:</Text>
+      <TextInput
+        keyboardType="numeric"
+        value={idade}
+        onChangeText={setIdade}
+        style={{ borderWidth: 1, marginVertical: 10 }}
+      />
+      <Button title="Verificar" onPress={verificarIdade} />
+    </View>
+  );
+}
+/////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Raquel Bacelar Pena
+DATA: 16/06/2026
+Atv: Projeto 2 – Saque Bancário
+////////////////////////////////////////////////////
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Alert,
+  StyleSheet,
+} from 'react-native';
+
+export default function App() {
+  const [saque, setSaque] = useState('');
+  const [saldo, setSaldo] = useState(5000);
+
+  const realizarSaque = () => {
+    try {
+      const valor = Number(saque);
+
+      if (saque === '') {
+        throw new Error('Digite um valor para saque.');
+      }
+
+      if (isNaN(valor)) {
+        throw new Error('Digite apenas números.');
+      }
+
+      if (valor <= 0) {
+        throw new Error('O valor do saque deve ser maior que zero.');
+      }
+
+      if (valor > saldo) {
+        throw new Error('Saldo insuficiente para realizar o saque.');
+      }
+
+      const novoSaldo = saldo - valor;
+      setSaldo(novoSaldo);
+
+      Alert.alert(
+        '✅ Saque realizado',
+        `Você sacou R$ ${valor.toFixed(2)}\n\nSaldo restante: R$ ${novoSaldo.toFixed(2)}`
+      );
+
+      setSaque('');
+    } catch (erro) {
+      Alert.alert('❌ Erro', erro.message);
+    } finally {
+      console.log('Operação finalizada.');
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titulo}> Banco Digital</Text>
+
+      <Text style={styles.saldo}>
+        Saldo Atual: R$ {saldo.toFixed(2)}
+      </Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Digite o valor do saque"
+        keyboardType="numeric"
+        value={saque}
+        onChangeText={setSaque}
+      />
+
+      <TouchableOpacity
+        style={styles.botao}
+        onPress={realizarSaque}
+      >
+        <Text style={styles.textoBotao}>Realizar Saque</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 20,
+    backgroundColor: '#BFB9FF',
+  },
+
+  titulo: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 30,
+  },
+
+  saldo: {
+    fontSize: 22,
+    textAlign: 'center',
+    marginBottom: 20,
+    color: 'green',
+    fontWeight: 'bold',
+  },
+
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 10,
+    padding: 12,
+    backgroundColor: '#fff',
+    marginBottom: 15,
+  },
+
+  botao: {
+    backgroundColor: '#0066cc',
+    padding: 15,
+    borderRadius: 10,
+  },
+
+  textoBotao: {
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+});
+/////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Raquel Bacelar Pena
+DATA: 16/06/2026
+Atv:Projeto 3 – Nota Escolar
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Alert,
+  StyleSheet,
+} from "react-native";
+
+export default function App() {
+  const [nota, setNota] = useState("");
+
+  const validarNota = () => {
+    try {
+      if (nota.trim() === "") {
+        throw new Error("Digite uma nota!");
+      }
+
+      const valor = parseFloat(nota);
+
+      if (isNaN(valor)) {
+        throw new Error("Digite apenas números.");
+      }
+
+      if (valor < 0) {
+        throw new Error("A nota não pode ser menor que 0.");
+      }
+
+      if (valor > 10) {
+        throw new Error("A nota não pode ser maior que 10.");
+      }
+
+      let situacao = "";
+
+      if (valor < 5) {
+        situacao = " Reprovado";
+      } else if (valor < 7) {
+        situacao = " Recuperação";
+      } else {
+        situacao = " Aprovado";
+      }
+
+      Alert.alert(
+        "📚 Nota Válida",
+        `Nota: ${valor}\nSituação: ${situacao}`
+      );
+
+      setNota("");
+
+    } catch (erro) {
+      Alert.alert(
+        "🚨 Aviso",
+        erro.message
+      );
+    } finally {
+      console.log("Validação concluída.");
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titulo}>
+        Sistema de Notas
+      </Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Digite a nota"
+        keyboardType="numeric"
+        value={nota}
+        onChangeText={setNota}
+      />
+
+      <TouchableOpacity
+        style={styles.botao}
+        onPress={validarNota}
+      >
+        <Text style={styles.textoBotao}>
+          Validar Nota
+        </Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    padding: 20,
+  },
+
+  titulo: {
+    fontSize: 28,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 20,
+  },
+
+  input: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 10,
+    padding: 12,
+    marginBottom: 15,
+  },
+
+  botao: {
+    backgroundColor: "#007AFF",
+    padding: 15,
+    borderRadius: 10,
+  },
+
+  textoBotao: {
+    color: "#fff",
+    textAlign: "center",
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+});
