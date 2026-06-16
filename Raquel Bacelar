@@ -714,6 +714,134 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
+/////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Raquel Bacelar Pena
+DATA: 12/05/2026
+////////////////////////////////////////////////////
+
+import React from 'react';
+import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+
+
+export default function App() {
+ 
+  const cards = [
+    { id: 1, title: 'Rocket 1', icon: 'rocket' },
+    { id: 2, title: 'star 2', icon: 'star' },
+    { id: 3, title: 'Heart 3', icon: 'heart' },
+    { id: 4, title: 'camera 4', icon: 'camera' },
+    { id: 5, title: 'check-circle 5', icon: 'check-circle' },
+    { id: 6, title: 'bell 6', icon: 'bell' },
+  ];
+
+
+  return (
+    <ScrollView style={styles.container}>
+     
+      <Image
+        source={{ uri: 'https://picsum.photos' }}
+        style={styles.headerImage}
+      />
+
+
+      <Text style={styles.title}>Meu Layout Responsivo</Text>
+
+
+      {/* Container dos Cards */}
+      <View style={styles.cardContainer}>
+        {cards.map((card) => (
+          <View key={card.id} style={styles.card}>
+            {/* 3. Adicionar ícones */}
+            <MaterialCommunityIcons name={card.icon} size={50} color="#BFB9FF" />
+            <Text style={styles.cardText}>{card.title}</Text>
+          </View>
+        ))}
+      </View>
+ 
+      {/* 5. Botão abaixo dos cards */}
+      <TouchableOpacity style={styles.button}>
+        <Text style={styles.buttonText}>Confirmar Atividade</Text>
+      </TouchableOpacity>
+    </ScrollView>
+  );
+}
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#070C26', // Cor de fundo escuro
+  },
+  headerImage: {
+    width: '100%',
+    height: 140,
+  },
+  title: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginVertical: 20,
+    color: '#D7D9D7',
+  },
+  cardContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap', // Faz os cards "quebrarem" para a linha de baixo
+    justifyContent: 'space-around',
+    paddingHorizontal: 10,
+  },
+  card: {
+    // 1 e 2. Mais cards e novas cores
+    backgroundColor: '#00506A',
+    width: '45%', // Garante 2 cards por linha
+    height: 120,
+    borderRadius: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 15,
+    // Sombra para o card
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+  },
+  cardText: {
+    color: '#fff',
+    marginTop: 10,
+    fontWeight: 'bold',
+  },
+  button: {
+    backgroundColor: '#2ECC71',
+    margin: 20,
+    padding: 15,
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+});
+/////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Raquel Bacelar Pena
+DATA: 12/05/2026
+////////////////////////////////////////////////////
+
+
+
 
 
 
