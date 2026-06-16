@@ -2437,9 +2437,7 @@ export default function App() {
         );
       }
 
-      setResultado(
-        '✅ Entrada liberada! Aproveite o evento.'
-      );
+      setResultado('✅ Entrada liberada! Aproveite o evento.');
 
       Alert.alert('Sucesso', 'Acesso autorizado!');
     } catch (erro) {
@@ -2453,7 +2451,8 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text style={styles.titulo}>
-       Controle de Entrada</Text>
+        Validação de Idade
+      </Text>
 
       <Text style={styles.evento}>
         Evento: Festa Exclusiva 18+
