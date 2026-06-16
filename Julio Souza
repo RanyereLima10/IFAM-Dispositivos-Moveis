@@ -1782,3 +1782,236 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
+
+
+/**********************************************************************
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Julio Cesar de Souza Albuquerque
+DATA: 16/06/2026
+BIMESTRE: 2º Bimestre
+DESCRIÇÃO: Mini Projetos
+
+**********************************************************************/
+
+// Importa o React e o hook useState para controlar os estados da aplicação
+import React, { useState } from 'react';
+
+// Importa componentes do React Native
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  Alert,
+  StyleSheet,
+} from 'react-native';
+
+// Componente principal da aplicação
+export default function App() {
+
+  // Estado para armazenar a idade digitada pelo usuário
+  const [idade, setIdade] = useState('');
+
+  // Estado para armazenar o valor do saque
+  const [saque, setSaque] = useState('');
+
+  // Estado para armazenar a nota digitada
+  const [nota, setNota] = useState('');
+
+  // Saldo fixo da conta bancária
+  const saldo = 1000;
+
+  // ====================================================
+  // PROJETO 1 - VALIDAÇÃO DE IDADE
+  // ====================================================
+  const validarIdade = () => {
+    try {
+      // Converte o valor digitado para número
+      const idadeNumero = Number(idade);
+
+      // Verifica se a idade é menor que 18
+      if (idadeNumero < 18) {
+        // Gera um erro personalizado
+        throw new Error('Menor de idade. Entrada não permitida.');
+      }
+
+      // Exibe mensagem de sucesso
+      Alert.alert('Sucesso', 'Entrada permitida!');
+    } catch (erro) {
+      // Captura e exibe o erro
+      Alert.alert('Erro', erro.message);
+    } finally {
+      // Executa independentemente de erro ou sucesso
+      console.log('Validação de idade finalizada.');
+    }
+  };
+
+  // ====================================================
+  // PROJETO 2 - SAQUE BANCÁRIO
+  // ====================================================
+  const realizarSaque = () => {
+    try {
+      // Converte o valor digitado para número
+      const valorSaque = Number(saque);
+
+      // Verifica se o saque é maior que o saldo
+      if (valorSaque > saldo) {
+        // Lança um erro caso não haja saldo suficiente
+        throw new Error('Saldo insuficiente.');
+      }
+
+      // Calcula o saldo restante
+      const saldoRestante = saldo - valorSaque;
+
+      // Exibe mensagem de sucesso
+      Alert.alert(
+        'Sucesso',
+        `Saque realizado! Saldo restante: R$ ${saldoRestante}`
+      );
+
+    } catch (erro) {
+      // Exibe a mensagem de erro
+      Alert.alert('Erro', erro.message);
+    } finally {
+      // Executa ao final da operação
+      console.log('Operação de saque finalizada.');
+    }
+  };
+
+  // ====================================================
+  // PROJETO 3 - NOTA ESCOLAR
+  // ====================================================
+  const validarNota = () => {
+    try {
+      // Converte o valor digitado para número
+      const valorNota = Number(nota);
+
+      // Verifica se a nota é menor que 0
+      if (valorNota < 0) {
+        throw new Error('A nota não pode ser menor que 0.');
+      }
+
+      // Verifica se a nota é maior que 10
+      if (valorNota > 10) {
+        throw new Error('A nota não pode ser maior que 10.');
+      }
+
+      // Exibe mensagem de sucesso
+      Alert.alert('Sucesso', `Nota válida: ${valorNota}`);
+
+    } catch (erro) {
+      // Captura qualquer erro gerado
+      Alert.alert('Erro', erro.message);
+    } finally {
+      // Executa sempre ao final
+      console.log('Validação da nota finalizada.');
+    }
+  };
+
+  // ====================================================
+  // INTERFACE DA APLICAÇÃO
+  // ====================================================
+  return (
+    <View style={styles.container}>
+
+      {/* Título do Projeto 1 */}
+      <Text style={styles.titulo}>
+        Projeto 1 - Validação de Idade
+      </Text>
+
+      {/* Campo para digitar a idade */}
+      <TextInput
+        style={styles.input}
+        placeholder="Digite sua idade"
+        keyboardType="numeric"
+        value={idade}
+        onChangeText={setIdade}
+      />
+
+      {/* Botão para validar a idade */}
+      <Button
+        title="Validar Idade"
+        onPress={validarIdade}
+      />
+
+      {/* Título do Projeto 2 */}
+      <Text style={styles.titulo}>
+        Projeto 2 - Saque Bancário
+      </Text>
+
+      {/* Exibe o saldo disponível */}
+      <Text>
+        Saldo disponível: R$ {saldo}
+      </Text>
+
+      {/* Campo para informar o valor do saque */}
+      <TextInput
+        style={styles.input}
+        placeholder="Digite o valor do saque"
+        keyboardType="numeric"
+        value={saque}
+        onChangeText={setSaque}
+      />
+
+      {/* Botão para realizar o saque */}
+      <Button
+        title="Realizar Saque"
+        onPress={realizarSaque}
+      />
+
+      {/* Título do Projeto 3 */}
+      <Text style={styles.titulo}>
+        Projeto 3 - Nota Escolar
+      </Text>
+
+      {/* Campo para digitar a nota */}
+      <TextInput
+        style={styles.input}
+        placeholder="Digite a nota"
+        keyboardType="numeric"
+        value={nota}
+        onChangeText={setNota}
+      />
+
+      {/* Botão para validar a nota */}
+      <Button
+        title="Validar Nota"
+        onPress={validarNota}
+      />
+
+    </View>
+  );
+}
+
+// ====================================================
+// ESTILOS DA APLICAÇÃO
+// ====================================================
+const styles = StyleSheet.create({
+
+  // Container principal
+  container: {
+    flex: 1,
+    padding: 20,
+    marginTop: 50,
+  },
+
+  // Estilo dos títulos
+  titulo: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginTop: 20,
+    marginBottom: 10,
+  },
+
+  // Estilo dos campos de texto
+  input: {
+    borderWidth: 1,
+    padding: 10,
+    marginBottom: 10,
+    borderRadius: 5,
+  },
+
+});
