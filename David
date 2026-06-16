@@ -1058,5 +1058,316 @@ const styles = StyleSheet.create({
 
 
 
+**********************************************************************/
 
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): David Yuri Da Cruz Moreira
+DATA:  02/ 06 /2026
+Bimestre: 2º Bimestre
+Descrição: Projeto 1 – Validação de Idade
+Objetivo
+Verificar se a pessoa tem idade suficiente para entrar em um
+evento.
+**********************************************************************/
+
+
+import React, { useState } from 'react';
+import { StyleSheet, Text, TextInput, View, Button, SafeAreaView } from 'react-native';
+
+
+export default function App() {
+  // Variáveis de estado
+  const [entradaIdade, setEntradaIdade] = useState('');
+  const [resultado, setResultado] = useState('');
+  const [mensagemFinally, setMensagemFinally] = useState('');
+
+
+  const verificarEntrada = () => {
+    // Limpa mensagens anteriores
+    setResultado('');
+    setMensagemFinally('');
+
+
+    try {
+      // Converte a entrada para número inteiro
+      const idade = parseInt(entradaIdade, 10);
+
+
+      // Condição IF e uso do THROW para lançar exceções
+      if (isNaN(idade)) {
+        throw new Error('Por favor, digite um número válido.');
+      }
+     
+      if (idade < 0) {
+        throw new Error('A idade não pode ser negativa.');
+      }
+
+
+      if (idade < 18) {
+        throw new Error('Entrada proibida: Menor de 18 anos.');
+      }
+
+
+      // Se passar por todas as validações
+      setResultado('Acesso autorizado! Divirta-se no evento.');
+
+
+    } catch (error) {
+      // CATCH captura o erro lançado pelo THROW ou pelo sistema
+      setResultado(`Erro: ${error.message}`);
+
+
+    } finally {
+      // FINALLY sempre executa, independente de erro ou sucesso
+      setMensagemFinally('Processo de verificação encerrado.');
+    }
+  };
+
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <View style={styles.card}>
+        <Text style={styles.titulo}>Validação de Idade</Text>
+        <Text style={styles.subtitulo}>Verifique a permissão para o evento</Text>
+
+
+        <TextInput
+          style={styles.input}
+          placeholder="Digite sua idade"
+          keyboardType="numeric"
+          value={entradaIdade}
+          onChangeText={setEntradaIdade}
+        />
+
+
+        <Button title="Verificar Idade" onPress={verificarEntrada} color="#6200ee" />
+
+
+        {resultado ? <Text style={styles.textoResultado}>{resultado}</Text> : null}
+        {mensagemFinally ? <Text style={styles.textoFinally}>{mensagemFinally}</Text> : null}
+      </View>
+    </SafeAreaView>
+  );
+}
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#C18BCC',
+    justifyContent: 'center',
+    padding: 16,
+  },
+  card: {
+    backgroundColor: '#F2F2F2',
+    borderRadius: 8,
+    padding: 24,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  titulo: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: '#333',
+  },
+  subtitulo: {
+    fontSize: 14,
+    textAlign: 'center',
+    color: '#666',
+    marginBottom: 24,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#9315C1',
+    borderRadius: 4,
+    padding: 12,
+    fontSize: 16,
+    marginBottom: 16,
+    backgroundColor: '#ccc',
+  },
+  textoResultado: {
+    marginTop: 20,
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  textoFinally: {
+    marginTop: 10,
+    fontSize: 12,
+    color: '#888',
+    fontStyle: 'Lobster',
+    textAlign: 'center',
+  },
+});
+
+
+
+
+
+
+
+
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): David Yuri Da Cruz Moreira
+DATA:  02/ 06 /2026
+Bimestre: 2º Bimestre
+Descrição:Projeto 2 – Saque Bancário
+Objetivo
+
+Verificar se existe saldo suficiente para realizar um saque.
+Conceitos utilizados
+**********************************************************************/
+
+import React, { useState } from 'react';
+import { Text, TextInput, Button, View } from 'react-native';
+
+
+export default function App() {
+  // Variáveis com valores iniciais
+  const [saldo, setSaldo] = useState(1000.00); // Saldo inicial de R$ 500
+  const [valorSaque, setValorSaque] = useState('');
+  const [status, setStatus] = useState('');
+  const [fim, setFim] = useState('');
+
+
+  const realizarSaque = () => {
+    try {
+      const saque = parseFloat(valorSaque);
+
+
+      // Validações usando Condição e Operações Matemáticas
+      if (isNaN(saque) || saque <= 0) {
+        throw 'Digite um valor de saque válido!';
+      }
+      if (saque > saldo) {
+        throw 'Voce e Pobre!! coloque um valor que tenha na conta.';
+      }
+
+
+      // Operação matemática: Subtração do saldo
+      const novoSaldo = saldo - saque;
+      setSaldo(novoSaldo);
+      setStatus(` Saque de R$ ${saque.toFixed(2)} realizado com sucesso!`);
+     
+    } catch (erro) {
+      // Captura as mensagens do throw
+      setStatus(` Erro: ${erro}`);
+    } finally {
+      // Executa sempre ao terminar
+      setFim('Operação bancária finalizada.');
+    }
+  };
+
+
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', padding: 20 }}>
+      <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Caixa Eletrônico</Text>
+      <Text style={{ fontSize: 16, marginVertical: 10, color: '#690B7D' }}>
+        Saldo Atual: R$ {saldo.toFixed(2)}
+      </Text>
+     
+      <TextInput
+        style={{ borderWidth: 1, padding: 10, marginBottom: 10 }}
+        placeholder="Valor do saque"
+        keyboardType="numeric"
+        onChangeText={setValorSaque}
+      />
+     
+      <Button title="Sacar Dinheiro" onPress={realizarSaque} color="#690B7D" />
+
+
+      <Text style={{ marginTop: 20, fontWeight: 'bold' }}>{status}</Text>
+      <Text style={{ color: '#690B7D', fontStyle: 'italic', marginTop: 5 }}>{fim}</Text>
+    </View>
+  );
+}
+
+
+
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): David Yuri Da Cruz Moreira
+DATA:  02/ 06 /2026
+Bimestre: 2º Bimestre
+Descrição: Projeto 3 – Nota Escolar
+Criar um programa que valide uma nota.
+Regras
+**********************************************************************/
+
+
+
+import React, { useState } from 'react';
+import { Text, TextInput, Button, View } from 'react-native';
+
+
+export default function App() {
+  const [notaInput, setNotaInput] = useState('');
+  const [status, setStatus] = useState('');
+  const [fim, setFim] = useState('');
+
+
+  const validarNota = () => {
+    try {
+      const nota = parseFloat(notaInput);
+
+
+      // Regras de validação utilizando Condição e Throw
+      if (isNaN(nota)) {
+        throw 'Por favor, digite um número válido! (acha que ta no Estados Unidos e!? 🤔)';
+      }
+      if (nota < 0) {
+        throw 'Nota inválida! A nota não pode ser menor que 0.  (voce conseguiu tirar uma nota menor que 0!? 🐴)';
+      }
+      if (nota > 10) {
+        throw 'Nota inválida! A nota não pode ser maior que 10. (Deve ser o orgulho da mamãe! 🥰)';
+      }
+
+
+      // Se passar por todas as regras
+      setStatus(` Nota válida cadastrada: ${nota.toFixed(1)}`);
+    } catch (erro) {
+      // Captura o texto enviado pelo throw
+      setStatus(` Erro: ${erro}`);
+    } finally {
+      // Executa sempre ao terminar
+      setFim('Validação de nota encerrada.');
+    }
+  };
+ 
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', padding: 20 }}>
+      <Text style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 10 }}>
+        Sistema de Notas Escolares
+      </Text>
+     
+      <TextInput
+        style={{ borderWidth: 1, padding: 10, marginBottom: 10 }}
+        placeholder="Qual e sua nota meu fi? (0-10)"
+        keyboardType="numeric"
+        onChangeText={setNotaInput}
+      />
+     
+      <Button title="Validar Nota" onPress={validarNota} color="#690B7D" />
+
+
+      <Text style={{ marginTop: 20, fontWeight: 'bold' }}>{status}</Text>
+      <Text style={{ color: 'gray', fontStyle: 'italic', marginTop: 5 }}>{fim}</Text>
+    </View>
+  );
+}
 
