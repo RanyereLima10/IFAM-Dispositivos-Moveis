@@ -2780,3 +2780,204 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
 });
+
+************+***************************************************************************+***************************************************************************+***************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Bruno Guilherme Alves de Souza
+DATA:  16/ 06 /2026
+Bimestre: 2º Bimestre
+Projeto 1 – Validação de Idade
+************+***************************************
+import React, { useState } from 'react';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+
+export default function App() {
+  const [idade, setIdade] = useState('');
+  const [resultado, setResultado] = useState('');
+
+  const verificarIdade = () => {
+    try {
+      const valor = Number(idade);
+
+      if (valor < 18) {
+        throw new Error('Você não tem idade suficiente para entrar.');
+      }
+
+      setResultado('Entrada permitida!');
+    } catch (erro) {
+      setResultado(erro.message);
+    } finally {
+      console.log('Verificação concluída.');
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titulo}>Validação de Idade</Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Digite sua idade"
+        keyboardType="numeric"
+        value={idade}
+        onChangeText={setIdade}
+      />
+
+      <Button title="Verificar" onPress={verificarIdade} />
+
+      <Text style={styles.resultado}>{resultado}</Text>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: { flex: 1, justifyContent: 'center', padding: 20 },
+  titulo: { fontSize: 24, fontWeight: 'bold', marginBottom: 15 },
+  input: {
+    borderWidth: 1,
+    padding: 10,
+    marginBottom: 15,
+  },
+  resultado: { marginTop: 15, fontSize: 18 },
+});
+
+************+***************************************************************************+***************************************************************************+***************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Bruno Guilherme Alves de Souza
+DATA:  16/ 06 /2026
+Bimestre: 2º Bimestre
+Projeto 2 – Saque Bancário
+************+***************************************
+import React, { useState } from 'react';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+
+export default function App() {
+  const [saldo, setSaldo] = useState('');
+  const [saque, setSaque] = useState('');
+  const [resultado, setResultado] = useState('');
+
+  const realizarSaque = () => {
+    try {
+      const saldoAtual = Number(saldo);
+      const valorSaque = Number(saque);
+
+      if (valorSaque > saldoAtual) {
+        throw new Error('Saldo insuficiente.');
+      }
+
+      const novoSaldo = saldoAtual - valorSaque;
+      setResultado(`Saque realizado! Novo saldo: R$ ${novoSaldo}`);
+    } catch (erro) {
+      setResultado(erro.message);
+    } finally {
+      console.log('Operação finalizada.');
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titulo}>Saque Bancário</Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Digite o saldo"
+        keyboardType="numeric"
+        value={saldo}
+        onChangeText={setSaldo}
+      />
+
+      <TextInput
+        style={styles.input}
+        placeholder="Digite o valor do saque"
+        keyboardType="numeric"
+        value={saque}
+        onChangeText={setSaque}
+      />
+
+      <Button title="Sacar" onPress={realizarSaque} />
+
+      <Text style={styles.resultado}>{resultado}</Text>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: { flex: 1, justifyContent: 'center', padding: 20 },
+  titulo: { fontSize: 24, fontWeight: 'bold', marginBottom: 15 },
+  input: {
+    borderWidth: 1,
+    padding: 10,
+    marginBottom: 15,
+  },
+  resultado: { marginTop: 15, fontSize: 18 },
+});
+
+************+***************************************************************************+***************************************************************************+***************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Bruno Guilherme Alves de Souza
+DATA:  16/ 06 /2026
+Bimestre: 2º Bimestre
+Projeto 3 – Nota Escolar
+************+***************************************
+import React, { useState } from 'react';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+
+export default function App() {
+  const [nota, setNota] = useState('');
+  const [resultado, setResultado] = useState('');
+
+  const validarNota = () => {
+    try {
+      const valor = Number(nota);
+
+      if (valor < 0) {
+        throw new Error('Erro: nota menor que 0.');
+      }
+
+      if (valor > 10) {
+        throw new Error('Erro: nota maior que 10.');
+      }
+
+      setResultado(`Nota válida: ${valor}`);
+    } catch (erro) {
+      setResultado(erro.message);
+    } finally {
+      console.log('Validação concluída.');
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titulo}>Nota Escolar</Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Digite a nota"
+        keyboardType="numeric"
+        value={nota}
+        onChangeText={setNota}
+      />
+
+      <Button title="Validar" onPress={validarNota} />
+
+      <Text style={styles.resultado}>{resultado}</Text>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: { flex: 1, justifyContent: 'center', padding: 20 },
+  titulo: { fontSize: 24, fontWeight: 'bold', marginBottom: 15 },
+  input: {
+    borderWidth: 1,
+    padding: 10,
+    marginBottom: 15,
+  },
+  resultado: { marginTop: 15, fontSize: 18 },
+});
