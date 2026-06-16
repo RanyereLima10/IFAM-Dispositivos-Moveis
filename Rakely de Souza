@@ -1095,6 +1095,53 @@ alignItems: 'center',
 
 });
 
+********************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Rakely da Silva de Souza
+DADOS: 16 / 06 / 2026
+BIMESTRE: 2º Bimestre
+
+DESCRIÇÃO DA ATIVIDADE:
+mini projeto, verificação de idade
+
+import React, { useState } from "react";
+import { View, TextInput, Button, Alert } from "react-native";
+
+export default function App() {
+  const [idade, setIdade] = useState("");
+
+  function validarIdade() {
+    try {
+      const valor = Number(idade);
+
+      if (valor < 18) {
+        throw new Error("Menor de idade. Entrada não permitida.");
+      }
+
+      Alert.alert("Sucesso", "Entrada liberada!");
+    } catch (erro) {
+      Alert.alert("Erro", erro.message);
+    } finally {
+      console.log("Verificação concluída.");
+    }
+  }
+
+  return (
+    <View style={{ padding: 20, marginTop: 50 }}>
+      <TextInput
+        placeholder="Digite sua idade"
+        keyboardType="numeric"
+        value={idade}
+        onChangeText={setIdade}
+        style={{ borderWidth: 1, marginBottom: 10, padding: 10 }}
+      />
+      <Button title="Validar Idade" onPress={validarIdade} />
+    </View>
+  );
+}
+
 
 
 
