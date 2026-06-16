@@ -6,6 +6,145 @@ ALUNO(A): Yuri Lima Macedo
 DATA:  16/ 06 /2026
 Bimestre: 2º Bimestre
 Nesta atividade foi desenvolvido um aplicativo simples utilizando React Native, com o objetivo de compreender a estrutura básica de um app mobile.
+O aplicativo apresenta uma tela inicial com uma tela de verificação de saldos de um banco e o saque que e feito do sace do banco
+************+***************************************************************
+// Importa o React e o hook useState para criar estados
+import React, { useState } from 'react';
+
+// Importa componentes do React Native
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+
+// Componente principal do aplicativo
+export default function App() {
+
+  // Estado para armazenar o saldo informado pelo usuário
+  const [saldo, setSaldo] = useState('');
+
+  // Estado para armazenar o valor do saque
+  const [saque, setSaque] = useState('');
+
+  // Estado para armazenar a mensagem exibida na tela
+  const [mensagem, setMensagem] = useState('');
+
+  // Função executada ao clicar no botão
+  const realizarSaque = () => {
+
+    try {
+
+      // Converte os valores digitados para número
+      const saldoNumero = Number(saldo);
+      const saqueNumero = Number(saque);
+
+      // Verifica se os valores digitados são válidos
+      if (isNaN(saldoNumero) || isNaN(saqueNumero)) {
+        throw new Error('Digite valores válidos.');
+      }
+
+      // Verifica se o valor do saque é maior que o saldo
+      if (saqueNumero > saldoNumero) {
+        throw new Error('Saldo insuficiente para realizar o saque.');
+      }
+
+      // Calcula o saldo restante após o saque
+      const novoSaldo = saldoNumero - saqueNumero;
+
+      // Exibe mensagem de sucesso e o saldo restante
+      setMensagem(
+        `Saque realizado com sucesso!\nSaldo restante: R$ ${novoSaldo}`
+      );
+
+    } catch (erro) {
+
+      // Captura e exibe a mensagem de erro
+      setMensagem(erro.message);
+
+    } finally {
+
+      // Executa sempre ao final da operação
+      console.log('Operação bancária finalizada.');
+    }
+  };
+
+  // Interface exibida na tela
+  return (
+    <View style={styles.container}>
+
+      {/* Título do aplicativo */}
+      <Text style={styles.titulo}>Saque Bancário</Text>
+
+      {/* Campo para digitar o saldo disponível */}
+      <TextInput
+        style={styles.input}
+        placeholder="Digite o saldo"
+        keyboardType="numeric"
+        value={saldo}
+        onChangeText={setSaldo}
+      />
+
+      {/* Campo para digitar o valor do saque */}
+      <TextInput
+        style={styles.input}
+        placeholder="Digite o valor do saque"
+        keyboardType="numeric"
+        value={saque}
+        onChangeText={setSaque}
+      />
+
+      {/* Botão que executa a função de saque */}
+      <Button
+        title="Realizar Saque"
+        onPress={realizarSaque}
+      />
+
+      {/* Exibe o resultado da operação */}
+      <Text style={styles.resultado}>
+        {mensagem}
+      </Text>
+
+    </View>
+  );
+}
+
+// Estilos da aplicação
+const styles = StyleSheet.create({
+
+  // Container principal
+  container: {
+    flex: 1,                  // Ocupa toda a tela
+    justifyContent: 'center', // Centraliza verticalmente
+    padding: 20,              // Espaçamento interno
+  },
+
+  // Estilo do título
+  titulo: {
+    fontSize: 24,             // Tamanho da fonte
+    textAlign: 'center',      // Centraliza o texto
+    marginBottom: 20,         // Espaço abaixo do título
+  },
+
+  // Estilo dos campos de entrada
+  input: {
+    borderWidth: 1,           // Espessura da borda
+    padding: 10,              // Espaçamento interno
+    marginBottom: 15,         // Espaço abaixo do campo
+    borderRadius: 5,          // Bordas arredondadas
+  },
+
+  // Estilo da mensagem de resultado
+  resultado: {
+    marginTop: 20,            // Espaço acima da mensagem
+    fontSize: 18,             // Tamanho da fonte
+    textAlign: 'center',      // Centraliza o texto
+  },
+});
+************+***************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Yuri Lima Macedo
+DATA:  16/ 06 /2026
+Bimestre: 2º Bimestre
+Nesta atividade foi desenvolvido um aplicativo simples utilizando React Native, com o objetivo de compreender a estrutura básica de um app mobile.
 O aplicativo apresenta uma tela inicial com uma tela de verificações de idades e se ele verifica se a pessoa e de maior ou de menor de idade 
 ************+***************************************************************
 // Importa o React e o hook useState para criar estados
