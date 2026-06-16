@@ -2682,4 +2682,380 @@ const styles = StyleSheet.create({
   },
 });
 
+**********************************************************************/
 
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Christian Keven de Paiva Farias
+DATA:  16/ 06 /2026
+Bimestre: 2º Bimestre
+Descrição: Aplicativo desenvolvido em React Native que realiza a divisão de dois números informados pelo usuário.
+O sistema valida os valores digitados e trata possíveis erros, como a tentativa de divisão por zero, utilizando as estruturas try, catch, throw e finally.
+**********************************************************************/
+
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Alert,
+  StyleSheet
+} from 'react-native';
+
+export default function App() {
+  const [numero1, setNumero1] = useState('');
+  const [numero2, setNumero2] = useState('');
+  const [resultado, setResultado] = useState('');
+
+  const realizarDivisao = () => {
+    try {
+      if (numero1 === '' || numero2 === '') {
+        throw new Error('Preencha todos os campos.');
+      }
+
+      const n1 = Number(numero1);
+      const n2 = Number(numero2);
+
+      if (isNaN(n1) || isNaN(n2)) {
+        throw new Error('Digite apenas números.');
+      }
+
+      if (n2 === 0) {
+        throw new Error('Não é possível dividir por zero.');
+      }
+
+      const divisao = n1 / n2;
+
+      setResultado(
+        `${n1} ÷ ${n2} = ${divisao.toFixed(2)}`
+      );
+
+      Alert.alert('Sucesso', 'Divisão realizada!');
+    } catch (erro) {
+      setResultado(`Erro: ${erro.message}`);
+      Alert.alert('Erro', erro.message);
+    } finally {
+      console.log('Operação finalizada.');
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titulo}>Divisão Segura</Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Primeiro número"
+        keyboardType="numeric"
+        value={numero1}
+        onChangeText={setNumero1}
+      />
+
+      <TextInput
+        style={styles.input}
+        placeholder="Segundo número"
+        keyboardType="numeric"
+        value={numero2}
+        onChangeText={setNumero2}
+      />
+
+      <TouchableOpacity
+        style={styles.botao}
+        onPress={realizarDivisao}
+      >
+        <Text style={styles.textoBotao}>
+          Calcular
+        </Text>
+      </TouchableOpacity>
+
+      {resultado !== '' && (
+        <View style={styles.caixaResultado}>
+          <Text style={styles.textoResultado}>
+            {resultado}
+          </Text>
+        </View>
+      )}
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 25,
+    backgroundColor: '#F5F5F5',
+  },
+  titulo: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 25,
+  },
+  input: {
+    backgroundColor: '#FFF',
+    borderWidth: 1,
+    borderColor: '#CCC',
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 15,
+  },
+  botao: {
+    backgroundColor: '#4CAF50',
+    padding: 15,
+    borderRadius: 8,
+  },
+  textoBotao: {
+    color: '#FFF',
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  caixaResultado: {
+    marginTop: 20,
+    padding: 15,
+    backgroundColor: '#FFF',
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#DDD',
+  },
+  textoResultado: {
+    textAlign: 'center',
+    fontSize: 16,
+  },
+});
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Christian Keven de Paiva Farias
+DATA:  16/ 06 /2026
+Bimestre: 2º Bimestre
+Descrição: Aplicativo desenvolvido em React Native para validar a idade informada pelo usuário. 
+O sistema verifica se o valor digitado é um número válido e exibe mensagens de sucesso ou erro, utilizando try, catch, throw e finally para o tratamento de exceções.
+**********************************************************************/
+
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Alert,
+  StyleSheet
+} from 'react-native';
+
+export default function App() {
+  const [idade, setIdade] = useState('');
+  const [resultado, setResultado] = useState('');
+
+  const validarIdade = () => {
+    try {
+      if (idade === '') {
+        throw new Error('Digite sua idade.');
+      }
+
+      const idadeNumero = Number(idade);
+
+      if (isNaN(idadeNumero)) {
+        throw new Error('A idade deve conter apenas números.');
+      }
+
+      if (idadeNumero < 0 || idadeNumero > 120) {
+        throw new Error('Digite uma idade válida.');
+      }
+
+      setResultado(`✅ Idade válida: ${idadeNumero} anos`);
+      Alert.alert('Sucesso', 'Idade validada com sucesso!');
+    } catch (erro) {
+      setResultado(`❌ ${erro.message}`);
+      Alert.alert('Erro', erro.message);
+    } finally {
+      console.log('Validação concluída.');
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titulo}>Validação de Idade</Text>
+
+      <Text style={styles.subtitulo}>
+        Informe sua idade para validação
+      </Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Digite sua idade"
+        keyboardType="numeric"
+        value={idade}
+        onChangeText={setIdade}
+      />
+
+      <TouchableOpacity
+        style={styles.botao}
+        onPress={validarIdade}
+      >
+        <Text style={styles.textoBotao}>
+          Validar Idade
+        </Text>
+      </TouchableOpacity>
+
+      {resultado !== '' && (
+        <View style={styles.caixaResultado}>
+          <Text style={styles.textoResultado}>
+            {resultado}
+          </Text>
+        </View>
+      )}
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 25,
+    backgroundColor: '#F5F5F5',
+  },
+  titulo: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 10,
+  },
+  subtitulo: {
+    fontSize: 16,
+    textAlign: 'center',
+    marginBottom: 20,
+    color: '#555',
+  },
+  input: {
+    backgroundColor: '#FFF',
+    borderWidth: 1,
+    borderColor: '#CCC',
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 15,
+  },
+  botao: {
+    backgroundColor: '#2196F3',
+    padding: 15,
+    borderRadius: 8,
+  },
+  textoBotao: {
+    color: '#FFF',
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  caixaResultado: {
+    marginTop: 20,
+    padding: 15,
+    backgroundColor: '#FFF',
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#DDD',
+  },
+  textoResultado: {
+    textAlign: 'center',
+    fontSize: 16,
+  },
+});
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Christian Keven de Paiva Farias
+DATA:  16/ 06 /2026
+Bimestre: 2º Bimestre
+Descrição: Aplicativo desenvolvido em React Native que permite acessar elementos de uma lista de números por meio de um índice informado pelo usuário.
+O sistema verifica se o índice existe no vetor e trata possíveis erros, utilizando try, catch, throw e finally para garantir uma execução segura.
+**********************************************************************/
+
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Alert,
+  StyleSheet
+} from 'react-native';
+
+export default function App() {
+  const numeros = [10, 20, 30, 40, 50];
+  const [indice, setIndice] = useState('');
+  const [resultado, setResultado] = useState('');
+
+  const buscarNumero = () => {
+    try {
+      if (indice === '') {
+        throw new Error('Digite um índice.');
+      }
+
+      const posicao = Number(indice);
+
+      if (isNaN(posicao)) {
+        throw new Error('Digite apenas números.');
+      }
+
+      if (posicao < 0 || posicao >= numeros.length) {
+        throw new Error('Índice inexistente.');
+      }
+
+      setResultado(
+        `✅ Número encontrado: ${numeros[posicao]}`
+      );
+
+      Alert.alert('Sucesso', 'Número encontrado!');
+    } catch (erro) {
+      setResultado(`❌ ${erro.message}`);
+      Alert.alert('Erro', erro.message);
+    } finally {
+      console.log('Busca finalizada.');
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titulo}>Lista de Números</Text>
+
+      <Text style={styles.lista}>
+        Vetor: [10, 20, 30, 40, 50]
+      </Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Digite um índice"
+        keyboardType="numeric"
+        value={indice}
+        onChangeText={setIndice}
+      />
+
+      <TouchableOpacity style={styles.botao} onPress={buscarNumero}>
+        <Text style={styles.textoBotao}>Buscar</Text>
+      </TouchableOpacity>
+
+      {resultado !== '' && (
+        <Text style={styles.resultado}>{resultado}</Text>
+      )}
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: { flex: 1, justifyContent: 'center', padding: 20 },
+  titulo: { fontSize: 28, fontWeight: 'bold', textAlign: 'center', marginBottom: 20 },
+  lista: { textAlign: 'center', marginBottom: 15, fontSize: 16 },
+  input: { borderWidth: 1, borderRadius: 8, padding: 10, marginBottom: 10 },
+  botao: { backgroundColor: '#4CAF50', padding: 15, borderRadius: 8 },
+  textoBotao: { color: '#fff', textAlign: 'center', fontWeight: 'bold' },
+  resultado: { marginTop: 20, textAlign: 'center', fontSize: 16 }
+});
