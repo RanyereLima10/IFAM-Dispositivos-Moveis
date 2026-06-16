@@ -1150,4 +1150,256 @@ Ver resultados em tempo real
 Usar no celular com QR Code (Expo Go)
 Facilita o aprendizado para iniciantes
 
+*************************************************************************************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Carlos Augusto de Freitas Saraiva
+DATA:  16 / 06 /2026
+DESCRIÇÃO:  projeto 1 da aula do dia 16/06/2026
 
+import React, { useState } from 'react';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+
+export default function App() {
+  const [idade, setIdade] = useState('');
+  const [resultado, setResultado] = useState('');
+
+  const verificarIdade = () => {
+    try {
+      // Converte o valor digitado para número
+      const idadeNumero = Number(idade);
+
+      // Verifica se foi digitado um número válido
+      if (isNaN(idadeNumero)) {
+        throw new Error('Digite uma idade válida.');
+      }
+
+      // Verifica se a idade é menor que 18
+      if (idadeNumero < 18) {
+        throw new Error('Entrada não permitida. Menor de idade.');
+      }
+
+      setResultado('Entrada permitida!');
+    } catch (erro) {
+      setResultado(`Erro: ${erro.message}`);
+    } finally {
+      console.log('Verificação finalizada.');
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titulo}>Validação de Idade</Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Digite sua idade"
+        keyboardType="numeric"
+        value={idade}
+        onChangeText={setIdade}
+      />
+
+      <Button title="Verificar" onPress={verificarIdade} />
+
+      <Text style={styles.resultado}>{resultado}</Text>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 20,
+  },
+  titulo: {
+    fontSize: 24,
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  input: {
+    borderWidth: 1,
+    padding: 10,
+    marginBottom: 15,
+  },
+  resultado: {
+    marginTop: 20,
+    fontSize: 18,
+    textAlign: 'center',
+  },
+});
+##############################################################################################################
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Carlos Augusto de Freitas Saraiva
+DATA:  16 / 06 /2026
+DESCRIÇÃO:  projeto 2 da aula do dia 16/06/2026
+import React, { useState } from 'react';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+
+export default function App() {
+  const [saldo] = useState(1000);
+  const [saque, setSaque] = useState('');
+  const [resultado, setResultado] = useState('');
+
+  const realizarSaque = () => {
+    try {
+      // Converte o valor digitado para número
+      const valorSaque = Number(saque);
+
+      // Verifica se o valor é válido
+      if (isNaN(valorSaque) || valorSaque <= 0) {
+        throw new Error('Digite um valor válido para saque.');
+      }
+
+      // Verifica se há saldo suficiente
+      if (valorSaque > saldo) {
+        throw new Error('Saldo insuficiente.');
+      }
+
+      const novoSaldo = saldo - valorSaque;
+
+      setResultado(
+        `Saque realizado com sucesso!\nSaldo restante: R$ ${novoSaldo}`
+      );
+    } catch (erro) {
+      setResultado(`Erro: ${erro.message}`);
+    } finally {
+      console.log('Operação encerrada.');
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titulo}>Saque Bancário</Text>
+
+      <Text style={styles.saldo}>Saldo disponível: R$ {saldo}</Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Valor do saque"
+        keyboardType="numeric"
+        value={saque}
+        onChangeText={setSaque}
+      />
+
+      <Button title="Sacar" onPress={realizarSaque} />
+
+      <Text style={styles.resultado}>{resultado}</Text>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 20,
+  },
+  titulo: {
+    fontSize: 24,
+    textAlign: 'center',
+    marginBottom: 20,
+  },
+  saldo: {
+    fontSize: 18,
+    marginBottom: 15,
+    textAlign: 'center',
+  },
+  input: {
+    borderWidth: 1,
+    padding: 10,
+    marginBottom: 15,
+  },
+  resultado: {
+    marginTop: 20,
+    fontSize: 18,
+    textAlign: 'center',
+  },
+});
+##################################################################################################
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Carlos Augusto de Freitas Saraiva
+DATA:  16 / 06 /2026
+DESCRIÇÃO:  projeto 3 da aula do dia 16/06/2026
+import React, { useState } from 'react';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+
+export default function App() {
+  const [nota, setNota] = useState('');
+  const [resultado, setResultado] = useState('');
+
+  const validarNota = () => {
+    try {
+      // Converte a nota digitada para número
+      const notaNumero = Number(nota);
+
+      // Verifica se o valor digitado é válido
+      if (isNaN(notaNumero)) {
+        throw new Error('Digite uma nota válida.');
+      }
+
+      // Verifica se a nota é menor que 0
+      if (notaNumero < 0) {
+        throw new Error('Nota menor que 0.');
+      }
+
+      // Verifica se a nota é maior que 10
+      if (notaNumero > 10) {
+        throw new Error('Nota maior que 10.');
+      }
+
+      setResultado(`Nota válida: ${notaNumero}`);
+    } catch (erro) {
+      setResultado(`Erro: ${erro.message}`);
+    } finally {
+      console.log('Validação finalizada.');
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titulo}>Validação de Nota</Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Digite a nota"
+        keyboardType="numeric"
+        value={nota}
+        onChangeText={setNota}
+      />
+
+      <Button title="Validar" onPress={validarNota} />
+
+      <Text style={styles.resultado}>{resultado}</Text>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 20,
+  },
+  titulo: {
+    fontSize: 24,
+    textAlign: 'center',
+    marginBottom: 20,
+  },
+  input: {
+    borderWidth: 1,
+    padding: 10,
+    marginBottom: 15,
+  },
+  resultado: {
+    marginTop: 20,
+    fontSize: 18,
+    textAlign: 'center',
+  },
+});
+#################################################################################################
