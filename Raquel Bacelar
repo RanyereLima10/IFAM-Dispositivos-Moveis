@@ -1531,13 +1531,13 @@ export default function App() {
       setSaldo(novoSaldo);
 
       Alert.alert(
-        '✅ Saque realizado',
+        ' Saque realizado',
         `Você sacou R$ ${valor.toFixed(2)}\n\nSaldo restante: R$ ${novoSaldo.toFixed(2)}`
       );
 
       setSaque('');
     } catch (erro) {
-      Alert.alert('❌ Erro', erro.message);
+      Alert.alert(' Erro', erro.message);
     } finally {
       console.log('Operação finalizada.');
     }
@@ -1630,55 +1630,52 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  Alert,
   StyleSheet,
 } from "react-native";
 
 export default function App() {
   const [nota, setNota] = useState("");
+  const [mensagem, setMensagem] = useState("");
+  const [corMensagem, setCorMensagem] = useState("black");
 
   const validarNota = () => {
     try {
       if (nota.trim() === "") {
-        throw new Error("Digite uma nota!");
+        throw new Error(" Digite uma nota!");
       }
 
       const valor = parseFloat(nota);
 
       if (isNaN(valor)) {
-        throw new Error("Digite apenas números.");
+        throw new Error(" Digite apenas números.");
       }
 
       if (valor < 0) {
-        throw new Error("A nota não pode ser menor que 0.");
+        throw new Error(" A nota não pode ser menor que 0.");
       }
 
       if (valor > 10) {
-        throw new Error("A nota não pode ser maior que 10.");
+        throw new Error(" A nota não pode ser maior que 10.");
       }
 
       let situacao = "";
 
       if (valor < 5) {
         situacao = " Reprovado";
+        setCorMensagem("red");
       } else if (valor < 7) {
         situacao = " Recuperação";
+        setCorMensagem("orange");
       } else {
         situacao = " Aprovado";
+        setCorMensagem("green");
       }
 
-      Alert.alert(
-        "📚 Nota Válida",
-        `Nota: ${valor}\nSituação: ${situacao}`
-      );
-
-      setNota("");
+      setMensagem(`Nota: ${valor}\nSituação: ${situacao}`);
 
     } catch (erro) {
-      Alert.alert(
-        "🚨 Aviso",
-        erro.message
-      );
+      setMensagem(erro.message);
+      setCorMensagem("red");
     } finally {
       console.log("Validação concluída.");
     }
@@ -1686,9 +1683,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.titulo}>
-        Sistema de Notas
-      </Text>
+      <Text style={styles.titulo}> Sistema de Notas</Text>
 
       <TextInput
         style={styles.input}
@@ -1706,6 +1701,17 @@ export default function App() {
           Validar Nota
         </Text>
       </TouchableOpacity>
+
+      {mensagem !== "" && (
+        <Text
+          style={[
+            styles.mensagem,
+            { color: corMensagem }
+          ]}
+        >
+          {mensagem}
+        </Text>
+      )}
     </View>
   );
 }
@@ -1715,6 +1721,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     padding: 20,
+    backgroundColor: "#D7D9D7",
   },
 
   titulo: {
@@ -1727,8 +1734,9 @@ const styles = StyleSheet.create({
   input: {
     borderWidth: 1,
     borderColor: "#ccc",
-    borderRadius: 10,
+    backgroundColor: "#fff",
     padding: 12,
+    borderRadius: 10,
     marginBottom: 15,
   },
 
@@ -1744,4 +1752,12 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
   },
+
+  mensagem: {
+    marginTop: 20,
+    fontSize: 20,
+    textAlign: "center",
+    fontWeight: "bold",
+  },
 });
+
