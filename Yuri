@@ -3,6 +3,143 @@ INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
 DISCIPLINA: Dispositivos Móveis
 PROFESSOR: Ranyere Lima
 ALUNO(A): Yuri Lima Macedo
+DATA:  16/ 06 /2026
+Bimestre: 2º Bimestre
+Nesta atividade foi desenvolvido um aplicativo simples utilizando React Native, com o objetivo de compreender a estrutura básica de um app mobile.
+O aplicativo apresenta uma tela inicial com uma tela de verificações de idades e se ele verifica se a pessoa e de maior ou de menor de idade 
+************+***************************************************************
+// Importa o React e o hook useState para criar estados
+import React, { useState } from 'react';
+
+// Importa componentes do React Native
+import {
+  View,        // Container para organizar elementos na tela
+  Text,        // Exibe textos
+  TextInput,   // Campo para digitar informações
+  Button,      // Botão clicável
+  StyleSheet   // Permite criar estilos
+} from 'react-native';
+
+// Componente principal do aplicativo
+export default function App() {
+
+  // Estado que armazena a idade digitada pelo usuário
+  const [idade, setIdade] = useState('');
+
+  // Estado que armazena a mensagem exibida na tela
+  const [mensagem, setMensagem] = useState('');
+
+  // Função executada quando o usuário clica no botão
+  const validarIdade = () => {
+
+    try {
+
+      // Converte o valor digitado para número
+      const idadeNumero = Number(idade);
+
+      // Verifica se o valor digitado é inválido
+      if (isNaN(idadeNumero)) {
+
+        // Gera um erro personalizado
+        throw new Error('Digite uma idade válida.');
+      }
+
+      // Verifica se a idade é menor que 18
+      if (idadeNumero < 18) {
+
+        // Exibe mensagem de menor de idade
+        setMensagem('Você é menor de idade.');
+
+      } else {
+
+        // Exibe mensagem de maior de idade
+        setMensagem('Você é maior de idade.');
+      }
+
+    } catch (erro) {
+
+      // Captura o erro e exibe sua mensagem
+      setMensagem(erro.message);
+
+    } finally {
+
+      // Executa sempre, com erro ou sem erro
+      console.log('Verificação concluída.');
+    }
+  };
+
+  // Interface exibida na tela
+  return (
+
+    // Container principal
+    <View style={styles.container}>
+
+      {/* Título do aplicativo */}
+      <Text style={styles.titulo}>
+        Validação de Idade
+      </Text>
+
+      {/* Campo para o usuário digitar a idade */}
+      <TextInput
+        style={styles.input}
+        placeholder="Digite sua idade"
+        keyboardType="numeric"
+        value={idade}
+        onChangeText={setIdade}
+      />
+
+      {/* Botão que chama a função validarIdade */}
+      <Button
+        title="Validar"
+        onPress={validarIdade}
+      />
+
+      {/* Exibe o resultado da validação */}
+      <Text style={styles.resultado}>
+        {mensagem}
+      </Text>
+
+    </View>
+  );
+}
+
+// Criação dos estilos da aplicação
+const styles = StyleSheet.create({
+
+  // Estilo do container principal
+  container: {
+    flex: 1,                  // Ocupa toda a tela
+    justifyContent: 'center', // Centraliza verticalmente
+    padding: 20,              // Espaçamento interno
+  },
+
+  // Estilo do título
+  titulo: {
+    fontSize: 24,             // Tamanho da fonte
+    textAlign: 'center',      // Centraliza o texto
+    marginBottom: 20,         // Espaço abaixo do título
+  },
+
+  // Estilo do campo de texto
+  input: {
+    borderWidth: 1,           // Borda de 1 pixel
+    padding: 10,              // Espaçamento interno
+    marginBottom: 15,         // Espaço abaixo do campo
+    borderRadius: 5,          // Bordas arredondadas
+  },
+
+  // Estilo da mensagem de resultado
+  resultado: {
+    marginTop: 20,            // Espaço acima da mensagem
+    fontSize: 20,             // Tamanho da fonte
+    textAlign: 'center',      // Centraliza o texto
+  },
+});
+************+***************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Yuri Lima Macedo
 DATA:  09/ 06 /2026
 Bimestre: 2º Bimestre
 Nesta atividade foi desenvolvido um aplicativo simples utilizando React Native, com o objetivo de compreender a estrutura básica de um app mobile.
