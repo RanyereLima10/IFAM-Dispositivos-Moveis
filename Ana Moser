@@ -1641,10 +1641,223 @@ const styles = StyleSheet.create({
 });
 
 
+**********************************************************************/
+INSTITUTO FEDERAL DO AMAZONAS – CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Ana Moser M. de Oliveira
+DATA:  16/ 06 /2026
+Bimestre: 2º Bimestre
+Descrição: modificando os projetos 1,2,3.
+
+**********************************************************************/
+PROJETO 1:
+import React, { useState } from 'react';
+import { View, Text, TextInput, Button, Alert, StyleSheet } from 'react-native'; //importa os componentes
+
+
+export default function App() { //defini a função
+  const [idade, setIdade] = useState('');
+  const [status, setStatus] = useState('');
+
+
+  const validarIdade = () => {
+    setStatus(''); // Limpa o status anterior
+   
+    try { //inicia um bloco de tratamentos de erros 
+      const idadeNum = parseInt(idade, 10);  
+
+
+      if (!idade || isNaN(idadeNum)) {
+        throw new Error('Por favor, digite uma idade válida.'); // verifica se a validação e verdadeira
+      }
+      if (idadeNum < 0) {
+        throw new Error('Idade não pode ser negativa.');
+      }
+      if (idadeNum < 18) {
+        throw new Error('Entrada proibida: Menor de 18 anos.');
+      }
+
+
+      Alert.alert('Sucesso', 'Entrada liberada! Divirta-se.'); //exibe um alerta
+      setStatus('Acesso Autorizado');
+
+
+    } catch (error) { //captura os erros
+      Alert.alert('Erro de Validação', error.message);
+      setStatus('Acesso Negado');
+    } finally {
+      console.log('Validação de idade executada.');
+    }
+  };
+
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titulo}>Validação de Idade</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Digite sua idade"
+        keyboardType="numeric"
+        value={idade}
+        onChangeText={setIdade}
+      />
+      <Button title="Verificar Entrada" onPress={validarIdade} color="#1A0AA6" />
+      {status ? <Text style={styles.resultado}>Status: {status}</Text> : null}
+    </View>
+  );
+}
+
+
+const styles = StyleSheet.create({
+  container: { flex: 1, justifyContent: 'center', padding: 20, backgroundColor: '#37A4ED' },
+  titulo: { fontSize: 22, fontWeight: 'bold', marginBottom: 20, textAlign: 'center' },
+  input: { borderWidth: 1, borderColor: '#1A0AA6', padding: 10, marginBottom: 20, borderRadius: 5, backgroundColor: '#fff' },
+  resultado: { marginTop: 20, fontSize: 18, fontWeight: 'bold', textAlign: 'center' },
+});
 
 
 
 
+PROJETO 2:
+import React, { useState } from 'react';
+import { View, Text, TextInput, Button, Alert, StyleSheet } from 'react-native'; //importa os componentes
+
+
+
+export default function App() { //defini a funçaõ
+  const [saldo, setSaldo] = useState(600.00); // Saldo inicial fixo // declara a função sacar 
+  const [valorSaque, setValorSaque] = useState('');
+
+
+  const realizarSaque = () => {
+    try { //inicia um bloco de tratamentos de erros 
+      const saque = parseFloat(valorSaque); // declara a função sacar 
+
+
+      if (!valorSaque || isNaN(saque)) { 
+        throw new Error('Digite um valor numérico válido.');
+      }
+      if (saque <= 0) {
+        throw new Error('O valor do saque deve ser maior que zero.');
+      }
+      if (saque > saldo) { //verifica se o saldo é maior
+        throw new Error('Saldo insuficiente para realizar a operação.');
+      }
+
+
+      // Operação matemática
+      const novoSaldo = saldo - saque;
+      setSaldo(novoSaldo);
+      Alert.alert('Sucesso', `Saque de R$ ${saque.toFixed(2)} realizado!`);
+
+
+    } catch (error) { //captura os erros
+      Alert.alert('Erro na Operação', error.message); //exibe o alerta 
+    } finally {
+      setValorSaque(''); // Limpa o campo de texto sempre
+      console.log('Operação de saque finalizada.');
+    }
+  };
+
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titulo}>Saque Bancário</Text>
+      <Text style={styles.saldo}>Saldo Atual: R$ {saldo.toFixed(2)}</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Valor do saque"
+        keyboardType="numeric"
+        value={valorSaque}
+        onChangeText={setValorSaque}
+      />
+      <Button title="Sacar" onPress={realizarSaque} color="#502687" />
+    </View>
+  );
+}
+
+
+const styles = StyleSheet.create({
+  container: { flex: 1, justifyContent: 'center', padding: 20, backgroundColor: '#E0B7EB' },
+  titulo: { fontSize: 22, fontWeight: 'bold', marginBottom: 10, textAlign: 'center' },
+  saldo: { fontSize: 18, marginBottom: 20, textAlign: 'center', color: '#4B115C', fontWeight: 'bold' },
+  input: { borderWidth: 1, borderColor: '#a5d6a7', padding: 10, marginBottom: 20, borderRadius: 5, backgroundColor: '#fff' },
+});
+
+
+
+
+PROJETO 3:
+import React, { useState } from 'react';
+import { View, Text, TextInput, Button, Alert, StyleSheet } from 'react-native';
+
+
+export default function App() {
+  const [nota, setNota] = useState('');
+  const [notaValida, setNotaValida] = useState(null);
+
+
+  const validarNota = () => {
+    setNotaValida(null);
+
+
+    try {
+      const notaNum = parseFloat(nota);
+
+
+      if (!nota || isNaN(notaNum)) {
+        throw new Error('Insira um número válido.');
+      }
+      if (notaNum < 0) {
+        throw new Error('Erro: A nota não pode ser menor que 0.');
+      }
+      if (notaNum > 10) {
+        throw new Error('Erro: A nota não pode ser maior que 10.');
+      }
+
+
+      // Se passar pelas condições acima, a nota é válida
+      setNotaValida(notaNum);
+
+
+    } catch (error) {
+      Alert.alert('Nota Inválida', error.message);
+    } finally {
+      console.log('Processo de validação de nota concluído.');
+    }
+  };
+
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titulo}>Validador de Notas</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Digite a nota (0 a 10)"
+        keyboardType="numeric"
+        value={nota}
+        onChangeText={setNota}
+      />
+      <Button title="Validar Nota" onPress={validarNota} color="#1565c0" />
+     
+      {notaValida !== null && (
+        <View style={styles.boxResultado}>
+          <Text style={styles.textoResultado}>Nota válida registrada: {notaValida}</Text>
+        </View>
+      )}
+    </View>
+  );
+}
+
+
+const styles = StyleSheet.create({
+  container: { flex: 1, justifyContent: 'center', padding: 20, backgroundColor: '#134B8F' },
+  titulo: { fontSize: 22, fontWeight: 'bold', marginBottom: 20, textAlign: 'center' },
+  input: { borderWidth: 1, borderColor: '#5BA2D9', padding: 10, marginBottom: 20, borderRadius: 5, backgroundColor: '#fff' },
+  boxResultado: { marginTop: 30, padding: 15, backgroundColor: '#bbdefb', borderRadius: 5 },
+  textoResultado: { fontSize: 16, color: '#0d47a1', fontWeight: 'bold', textAlign: 'center' },
+});
 
 
 
