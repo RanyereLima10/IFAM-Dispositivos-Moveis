@@ -1966,3 +1966,354 @@ fontWeight: '700',marginVertical: 4,},infoProduto:
 'flex-end',marginTop: 14,},botaoEditar: {backgroundColor: '#000000',paddingVertical: 8,paddingHorizontal: 
 16,borderRadius: 0,marginRight: 8,},botaoExcluir: {backgroundColor: '#FFFFFF',paddingVertical: 8,paddingHorizontal:
 16,borderRadius: 0,borderWidth: 1.5,borderColor: '#000000',},textoBotaoCard: {fontSize: 12,fontWeight: '700',letterSpacing: 0.5,},});
+************+***************************************************************************+***************************************************************************+***************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Jasmin Silva De Lima
+DATA:  23/ 06 /2026
+Bimestre: 2º Bimestre
+Descrição: 
+1) Divisão Segura (trata divisão por zero)
+
+import React, {useState} from 'react';
+import {View, Text, TextInput, Button} from 'react-native';
+
+export default function App() {
+  const [n1, setN1] = useState('');
+  const [n2, setN2] = useState('');
+  const [resultado, setResultado] = useState('');
+
+  function dividir() {
+    try {
+      let a = Number(n1);
+      let b = Number(n2);
+
+      if (b === 0) {
+        throw new Error('Não pode dividir por zero!');
+      }
+
+      setResultado(`Resultado: ${a / b}`);
+
+    } catch (erro) {
+      setResultado(erro.message);
+    }
+  }
+
+  return (
+    <View>
+      <TextInput placeholder="Número 1" onChangeText={setN1}/>
+      <TextInput placeholder="Número 2" onChangeText={setN2}/>
+
+      <Button title="Dividir" onPress={dividir}/>
+
+      <Text>{resultado}</Text>
+    </View>
+  );
+}
+************+***************************************************************************+***************************************************************************+***************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Jasmin Silva De Lima
+DATA:  23/ 06 /2026
+Bimestre: 2º Bimestre
+Descrição: 
+
+2) Cadastro Simples (valida idade)
+
+import React, {useState} from 'react';
+import {View, Text, TextInput, Button} from 'react-native';
+
+export default function App() {
+  const [idade, setIdade] = useState('');
+  const [resultado, setResultado] = useState('');
+
+  function validar() {
+    try {
+      let valor = Number(idade);
+
+      if (isNaN(valor)) {
+        throw new Error('Digite uma idade válida!');
+      }
+
+      setResultado(`Idade: ${valor}`);
+
+    } catch (erro) {
+      setResultado(erro.message);
+    }
+  }
+
+
+  return (
+    <View>
+      <TextInput 
+        placeholder="Digite sua idade"
+        onChangeText={setIdade}
+      />
+
+      <Button title="Validar" onPress={validar}/>
+
+      <Text>{resultado}</Text>
+    </View>
+  );
+}
+
+************+***************************************************************************+***************************************************************************+***************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Jasmin Silva De Lima
+DATA:  23/ 06 /2026
+Bimestre: 2º Bimestre
+Descrição: 
+
+3) Lista de Números (índice inexistente)
+
+import React, {useState} from 'react';
+import {View, Text, Button} from 'react-native';
+
+export default function App() {
+
+  const [resultado, setResultado] = useState('');
+
+  function buscarNumero() {
+
+    try {
+
+      let numeros = [5, 10, 15];
+
+      let indice = 4;
+
+      if (indice >= numeros.length) {
+        throw new Error('Índice não existe!');
+      }
+
+      setResultado(numeros[indice]);
+
+    } catch(erro) {
+
+      setResultado(erro.message);
+
+    }
+  }
+
+
+  return (
+    <View>
+
+      <Button 
+        title="Buscar número"
+        onPress={buscarNumero}
+      />
+
+      <Text>{resultado}</Text>
+
+    </View>
+  );
+}
+************+***************************************************************************+***************************************************************************+***************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Jasmin Silva De Lima
+DATA:  23/ 06 /2026
+Bimestre: 2º Bimestre
+Descrição: 
+import React, {useState} from 'react';
+import {View, Text, TextInput, Button} from 'react-native';
+
+export default function App() {
+
+  const [idade, setIdade] = useState('');
+  const [mensagem, setMensagem] = useState('');
+
+  function verificarIdade() {
+
+    try {
+
+      let valor = Number(idade);
+
+      if (valor < 18) {
+        throw new Error("Entrada não permitida. Menor de idade.");
+      }
+
+      setMensagem("Entrada permitida!");
+
+    } catch (erro) {
+
+      setMensagem(erro.message);
+
+    } finally {
+
+      console.log("Verificação finalizada");
+
+    }
+
+  }
+
+
+  return (
+    <View>
+
+      <Text>Digite sua idade:</Text>
+
+      <TextInput
+        onChangeText={setIdade}
+        keyboardType="numeric"
+      />
+
+      <Button
+        title="Verificar"
+        onPress={verificarIdade}
+      />
+
+      <Text>{mensagem}</Text>
+
+    </View>
+  );
+}
+
+************+***************************************************************************+***************************************************************************+***************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Jasmin Silva De Lima
+DATA:  23/ 06 /2026
+Bimestre: 2º Bimestre
+Descrição: 
+
+Projeto 2 – Saque Bancário
+
+import React, {useState} from 'react';
+import {View, Text, TextInput, Button} from 'react-native';
+
+export default function App() {
+
+  const [valor, setValor] = useState('');
+  const [mensagem, setMensagem] = useState('');
+
+  let saldo = 500;
+
+
+  function sacar() {
+
+    try {
+
+      let saque = Number(valor);
+
+      if (saque > saldo) {
+        throw new Error("Saldo insuficiente!");
+      }
+
+      saldo = saldo - saque;
+
+      setMensagem(
+        `Saque realizado. Saldo restante: R$ ${saldo}`
+      );
+
+
+    } catch(erro) {
+
+      setMensagem(erro.message);
+
+    } finally {
+
+      console.log("Operação encerrada");
+
+    }
+
+  }
+
+
+  return (
+    <View>
+
+      <Text>Saldo: R$ 500</Text>
+
+      <TextInput
+        placeholder="Valor do saque"
+        keyboardType="numeric"
+        onChangeText={setValor}
+      />
+
+      <Button
+        title="Sacar"
+        onPress={sacar}
+      />
+
+      <Text>{mensagem}</Text>
+
+    </View>
+  );
+}
+
+************+***************************************************************************+***************************************************************************+***************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Jasmin Silva De Lima
+DATA:  23/ 06 /2026
+Bimestre: 2º Bimestre
+Descrição: 
+
+Projeto 3 – Nota Escolar
+
+import React, {useState} from 'react';
+import {View, Text, TextInput, Button} from 'react-native';
+
+export default function App() {
+
+  const [nota, setNota] = useState('');
+  const [mensagem, setMensagem] = useState('');
+
+
+  function validarNota() {
+
+    try {
+
+      let valor = Number(nota);
+
+      if (valor < 0) {
+        throw new Error("Nota não pode ser menor que 0");
+      }
+
+      if (valor > 10) {
+        throw new Error("Nota não pode ser maior que 10");
+      }
+
+      setMensagem("Nota válida!");
+
+    } catch(erro) {
+
+      setMensagem(erro.message);
+
+    } finally {
+
+      console.log("Validação concluída");
+
+    }
+
+  }
+
+
+  return (
+    <View>
+
+      <Text>Digite a nota:</Text>
+
+      <TextInput
+        keyboardType="numeric"
+        onChangeText={setNota}
+      />
+
+      <Button
+        title="Validar nota"
+        onPress={validarNota}
+      />
+
+      <Text>{mensagem}</Text>
+
+    </View>
+  );
+}
