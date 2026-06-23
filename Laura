@@ -1622,3 +1622,286 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#000000',
 fontWeight: '700',marginVertical: 4,},infoProduto: {color: '#333333',fontSize: 14,marginBottom: 2,},areaBotoesCard: {flexDirection: 'row',justifyContent: 'flex-end',marginTop: 14,},botaoEditar: {backgroundColor: '#000000',paddingVertical: 8,paddingHorizontal: 16,borderRadius: 0,marginRight: 8,},botaoExcluir: {backgroundColor: '#FFFFFF',paddingVertical: 8,paddingHorizontal: 16,borderRadius: 0,borderWidth: 1.5,borderColor: '#000000',},textoBotaoCard: {fontSize: 12,fontWeight: '700',letterSpacing: 0.5,},});
+
+
+******************************************************************************************************************************************************************************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Laura Emanuelle Menezes
+DATA:  23/ 06 /2026
+Bimestre: 2º Bimestre
+Descrição: Este código é uma aplicação funcional em React Native que implementa uma tela de verificação de maioridade. O usuário digita sua idade em um campo de texto e, ao pressionar o botão, o app valida se a entrada é válida e se o usuário tem 18 anos ou mais, exibindo alertas de sucesso ou erro.
+****************************************************************************************************************************************************************************************************************************
+
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet, StatusBar } from 'react-native';
+
+
+export default function App() {
+  const [idade, setIdade] = useState('');
+
+
+  const verificarIdade = () => {
+    try {
+      const idadeNumero = Number(idade);
+
+
+      if (idade.trim() === '') {
+        throw new Error('Digite uma idade.');
+      }
+
+
+      if (isNaN(idadeNumero) || idadeNumero <= 0) {
+        throw new Error('Digite uma idade válida.');
+      }
+
+
+      if (idadeNumero < 18) {
+        throw new Error('Entrada permitida apenas para maiores de 18 anos.');
+      }
+
+
+      Alert.alert('Sucesso ', 'Entrada permitida!');
+    } catch (erro) {
+      Alert.alert('Erro ', erro.message);
+    } finally {
+      console.log('Validação concluída.');
+    }
+  };
+
+
+  return (
+    <View style={styles.container}>
+      <StatusBar barStyle="dark-content" backgroundColor="#f3f4f6" />
+     
+      <View style={styles.card}>
+        <Text style={styles.titulo}>Verificação de Acesso</Text>
+        <Text style={styles.subtitulo}>Insira sua idade para continuar</Text>
+
+
+        <TextInput
+          style={styles.input}
+          placeholder="Ex: 20"
+          placeholderTextColor="#9ca3af"
+          keyboardType="numeric"
+          value={idade}
+          onChangeText={setIdade}
+        />
+
+
+        <TouchableOpacity style={styles.botao} onPress={verificarIdade} activeOpacity={0.8}>
+          <Text style={styles.botaoTexto}>Verificar Entrada</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+}
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#f3f4f6',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  card: {
+    width: '100%',
+    maxWidth: 340,
+    backgroundColor: '#ffffff',
+    borderRadius: 16,
+    padding: 24,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 12,
+    elevation: 5,
+  },
+  titulo: {
+    fontSize: 22,
+    fontWeight: '700',
+    color: '#1f2937',
+    textAlign: 'center',
+    marginBottom: 6,
+  },
+  subtitulo: {
+    fontSize: 14,
+    color: '#6b7280',
+    textAlign: 'center',
+    marginBottom: 24,
+  },
+  input: {
+    width: '100%',
+    height: 50,
+    borderWidth: 1,
+    borderColor: '#e5e7eb',
+    borderRadius: 8,
+    paddingHorizontal: 16,
+    fontSize: 16,
+    color: '#1f2937',
+    backgroundColor: '#f9fafb',
+    marginBottom: 16,
+  },
+  botao: {
+    width: '100%',
+    height: 50,
+    backgroundColor: '#4f46e5',
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  botaoTexto: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#ffffff',
+  },
+});
+
+******************************************************************************************************************************************************************************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Laura Emanuelle Menezes
+DATA:  23/ 06 /2026
+Bimestre: 2º Bimestre
+Descrição: Este código React Native cria uma interface simples e interativa para simular um caixa eletrônico. Ele exibe um saldo inicial de R$ 1.000,00 e possui um campo de entrada para o usuário digitar o valor desejado. Ao clicar no botão, o app valida se o valor é numérico e se há saldo suficiente, atualizando o valor na tela e limpando o campo após a confirmação.
+****************************************************************************************************************************************************************************************************************************
+
+import React, { useState } from 'react';
+import { StyleSheet, Text, TextInput, TouchableOpacity, View, Alert, SafeAreaView, StatusBar } from 'react-native';
+
+
+export default function App() {
+  const [saque, setSaque] = useState('');
+  const [saldo, setSaldo] = useState(1000); // Alterado para state para atualizar na tela
+
+
+  const realizarSaque = () => {
+    try {
+      const valor = Number(saque.replace(',', '.')); // Aceita vírgula decimal
+
+
+      if (!saque.trim()) {
+        throw new Error('Digite um valor para saque.');
+      }
+
+
+      if (isNaN(valor) || valor <= 0) {
+        throw new Error('Digite um valor numérico válido.');
+      }
+
+
+      if (valor > saldo) {
+        throw new Error('Saldo insuficiente para esta operação.');
+      }
+
+
+      const novoSaldo = saldo - valor;
+      setSaldo(novoSaldo); // Atualiza o saldo real na interface
+      setSaque(''); // Limpa o campo após o sucesso
+
+
+      Alert.alert(
+        'Sucesso ',
+        `Saque realizado!\nSaldo restante: R$ ${novoSaldo.toFixed(2)}`
+      );
+    } catch (erro) {
+      Alert.alert('Erro ', erro.message);
+    } finally {
+      console.log('Operação finalizada.');
+    }
+  };
+
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="light-content" backgroundColor="#121214" />
+     
+      <View style={styles.card}>
+        <Text style={styles.label}>Saldo disponível</Text>
+        <Text style={styles.saldo}>R$ {saldo.toFixed(2)}</Text>
+      </View>
+
+
+      <View style={styles.inputContainer}>
+        <Text style={styles.inputLabel}>Valor do Saque</Text>
+        <TextInput
+          style={styles.input}
+          keyboardType="numeric"
+          placeholder="R$ 0,00"
+          placeholderTextColor="#7c7c8a"
+          value={saque}
+          onChangeText={setSaque}
+        />
+      </View>
+
+
+      <TouchableOpacity style={styles.button} onPress={realizarSaque} activeOpacity={0.8}>
+        <Text style={styles.buttonText}>Confirmar Saque</Text>
+      </TouchableOpacity>
+    </SafeAreaView>
+  );
+}
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#121214', // Fundo dark moderno
+    padding: 24,
+    justifyContent: 'center',
+  },
+  card: {
+    backgroundColor: '#202024',
+    padding: 24,
+    borderRadius: 16,
+    marginBottom: 32,
+    borderWidth: 1,
+    borderColor: '#29292e',
+  },
+  label: {
+    color: '#7c7c8a',
+    fontSize: 14,
+    fontWeight: '500',
+    textTransform: 'uppercase',
+    marginBottom: 8,
+  },
+  saldo: {
+    color: '#00b37e', // Verde monetário
+    fontSize: 32,
+    fontWeight: 'bold',
+  },
+  inputContainer: {
+    marginBottom: 24,
+  },
+  inputLabel: {
+    color: '#e1e1e6',
+    fontSize: 16,
+    marginBottom: 8,
+    fontWeight: '600',
+  },
+  input: {
+    backgroundColor: '#202024',
+    color: '#ffffff',
+    padding: 16,
+    borderRadius: 12,
+    fontSize: 18,
+    borderWidth: 1,
+    borderColor: '#29292e',
+  },
+  button: {
+    backgroundColor: '#00875f', // Verde institucional
+    padding: 16,
+    borderRadius: 12,
+    alignItems: 'center',
+    marginTop: 8,
+  },
+  buttonText: {
+    color: '#ffffff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+});
+
