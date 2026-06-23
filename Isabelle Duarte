@@ -971,3 +971,288 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+
+*****************************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Isabelle Christine de Jesus Duarte
+DADOS: 17 / 06 / 2026
+BIMESTRE: 2º Bimestre
+
+Projeto 1 - Validação de Idade
+Descrição: Verificar se a pessoa tem idade suficiente para entrar em um
+evento.
+
+// Importa a biblioteca React e o Hook useState.
+// O useState é utilizado para criar variáveis de estado,
+// ou seja, variáveis que podem mudar e atualizar a interface automaticamente.
+import React, { useState } from "react";
+
+// Importa componentes do React Native.
+// View: container que organiza os elementos na tela.
+// TextInput: campo para entrada de texto.
+// Button: botão que executa uma ação.
+// Alert: exibe uma caixa de mensagem para o usuário.
+import { View, TextInput, Button, Alert } from "react-native";
+
+// Exporta o componente principal do aplicativo.
+// Essa será a primeira tela exibida quando o aplicativo iniciar.
+export default function App() {
+
+  // Cria um estado chamado "idade".
+  // O valor inicial é uma string vazia ("").
+  // setIdade é a função responsável por atualizar esse valor.
+  const [idade, setIdade] = useState("");
+
+  // Função responsável por validar a idade informada pelo usuário.
+  function validarIdade() {
+
+    // O bloco try tenta executar o código.
+    // Caso ocorra algum erro, a execução será enviada para o catch.
+    try {
+
+      // Converte o valor digitado (texto) para um número.
+      // Exemplo: "20" → 20
+      const valor = Number(idade);
+
+      // Verifica se a idade é menor que 18 anos.
+      if (valor < 18) {
+
+        // throw cria um erro personalizado.
+        // Quando executado, interrompe o try e envia o erro para o catch.
+        throw new Error("Menor de idade. Entrada não permitida.");
+
+      }
+
+      // Se a condição acima não for verdadeira,
+      // significa que a idade é igual ou maior que 18 anos.
+      // Exibe uma mensagem de sucesso.
+      Alert.alert("Sucesso", "Entrada liberada!");
+
+    }
+
+    // O catch captura qualquer erro lançado pelo throw.
+    // A variável "erro" contém as informações do erro ocorrido.
+    catch (erro) {
+
+      // Exibe uma caixa de mensagem mostrando o erro ao usuário.
+      Alert.alert("Erro", erro.message);
+
+    }
+
+    // O finally sempre será executado,
+    // independentemente de ocorrer erro ou não.
+    finally {
+
+      // Exibe uma mensagem no console do aplicativo.
+      // Essa mensagem serve apenas para depuração do programa.
+      console.log("Verificação concluída.");
+
+    }
+  }
+
+  // O return define tudo o que será mostrado na tela.
+  return (
+
+    // View é o container principal que agrupa os componentes.
+    // padding: adiciona espaço interno de 20 pixels.
+    // marginTop: afasta o conteúdo 50 pixels do topo da tela.
+    <View style={{ padding: 20, marginTop: 50 }}>
+
+      {/* Campo onde o usuário digita sua idade */}
+      <TextInput
+
+        // Texto exibido enquanto o campo está vazio.
+        placeholder="Digite sua idade"
+
+        // Abre o teclado numérico no celular.
+        keyboardType="numeric"
+
+        // O valor exibido no campo é o conteúdo da variável idade.
+        value={idade}
+
+        // Sempre que o usuário digita algo,
+        // setIdade atualiza automaticamente o estado.
+        onChangeText={setIdade}
+
+        // Define a aparência do campo de texto.
+        style={{
+          borderWidth: 1,   // Espessura da borda
+          marginBottom: 10, // Espaço abaixo do campo
+          padding: 10       // Espaço interno entre o texto e a borda
+        }}
+      />
+
+      {/* Botão responsável por iniciar a validação da idade */}
+      <Button
+
+        // Texto exibido no botão.
+        title="Validar Idade"
+
+        // Quando o botão é pressionado,
+        // a função validarIdade é executada.
+        onPress={validarIdade}
+
+      />
+
+    </View>
+  );
+}
+
+*******************************************************
+Projeto 2 – Saque Bancário
+
+Descrição: Verificar se existe saldo suficiente para realizar um saque.
+Conceitos utilizados.
+
+import React, { useState } from "react";
+import { View, TextInput, Button, Alert } from "react-native";
+
+export default function App() {
+  // Estado que armazena o saldo disponível
+  const [saldo, setSaldo] = useState("");
+
+  // Estado que armazena o valor do saque
+  const [saque, setSaque] = useState("");
+
+  // Função executada ao clicar no botão
+  function realizarSaque() {
+    try {
+      // Converte os valores digitados para número
+      const saldoAtual = Number(saldo);
+      const valorSaque = Number(saque);
+
+      // Verifica se o saque é maior que o saldo
+      if (valorSaque > saldoAtual) {
+        // Lança um erro personalizado
+        throw new Error("Saldo insuficiente para realizar o saque.");
+      }
+
+      // Calcula o novo saldo após o saque
+      const novoSaldo = saldoAtual - valorSaque;
+
+      // Exibe mensagem de sucesso
+      Alert.alert(
+        "Sucesso",
+        `Saque realizado!\nSaldo restante: R$ ${novoSaldo}`
+      );
+
+    } catch (erro) {
+      // Captura qualquer erro lançado pelo throw
+      Alert.alert("Erro", erro.message);
+
+    } finally {
+      // Sempre é executado, independentemente de erro ou sucesso
+      console.log("Operação de saque finalizada.");
+    }
+  }
+
+  return (
+    <View style={{ padding: 20, marginTop: 50 }}>
+
+      <TextInput
+        placeholder="Digite o saldo"
+        keyboardType="numeric"
+        value={saldo}
+        onChangeText={setSaldo}
+        style={{
+          borderWidth: 1,
+          marginBottom: 10,
+          padding: 10
+        }}
+      />
+
+      <TextInput
+        placeholder="Digite o valor do saque"
+        keyboardType="numeric"
+        value={saque}
+        onChangeText={setSaque}
+        style={{
+          borderWidth: 1,
+          marginBottom: 10,
+          padding: 10
+        }}
+      />
+
+      <Button
+        title="Realizar Saque"
+        onPress={realizarSaque}
+      />
+
+    </View>
+  );
+}
+
+***********************************************************
+Projeto 3 – Nota Escolar
+Descrição: Criar um programa que valide uma nota.
+
+import React, { useState } from "react";
+import { View, TextInput, Button, Alert } from "react-native";
+
+export default function App() {
+
+  // Estado que armazena a nota digitada
+  const [nota, setNota] = useState("");
+
+  // Função responsável por validar a nota
+  function validarNota() {
+
+    try {
+
+      // Converte o texto para número
+      const valor = Number(nota);
+
+      // Verifica se a nota é menor que zero
+      if (valor < 0) {
+        throw new Error("A nota não pode ser menor que 0.");
+      }
+
+      // Verifica se a nota é maior que dez
+      if (valor > 10) {
+        throw new Error("A nota não pode ser maior que 10.");
+      }
+
+      // Caso passe pelas verificações
+      Alert.alert("Sucesso", "Nota válida!");
+
+    } catch (erro) {
+
+      // Exibe a mensagem do erro encontrado
+      Alert.alert("Erro", erro.message);
+
+    } finally {
+
+      // Sempre executa ao final
+      console.log("Validação da nota concluída.");
+
+    }
+  }
+
+  return (
+    <View style={{ padding: 20, marginTop: 50 }}>
+
+      <TextInput
+        placeholder="Digite a nota"
+        keyboardType="numeric"
+        value={nota}
+        onChangeText={setNota}
+        style={{
+          borderWidth: 1,
+          marginBottom: 10,
+          padding: 10
+        }}
+      />
+
+      <Button
+        title="Validar Nota"
+        onPress={validarNota}
+      />
+
+    </View>
+  );
+}
+
+
+
