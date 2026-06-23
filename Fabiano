@@ -1576,8 +1576,441 @@ export default function App() {
 
 //////////// 2 Validação de Idade - FIM ////////////////////////////
 
+**********************************************************************/
+INSTITUTO FEDERAL DO AMAZONAS – CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Ana Moser M. de Oliveira
+DATA:  16/ 06 /2026
+Bimestre: 2º Bimestre
+Descrição: modificando os projetos 1,2,3.
+
+**********************************************************************/
+
+Atividade: 1
+
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert,
+StatusBar } from 'react-native';
+export default function App() {
+// Estado para capturar a nota digitada pelo usuário
+const [notaInput, setNotaInput] = useState('');
+function handleValidarNota() {
+// Converte o texto digitado para número decimal
+const nota = parseFloat(notaInput);
+try {
+// Validação básica: Campo vazio ou texto que não é número
+if (!notaInput || isNaN(nota)) {
+throw new Error("Por favor, digite uma nota válida.");
+}
+// Regra 1: Nota menor que 0 → erro
+if (nota < 0) {
+throw new Error("Nota menor que 0 é inválida.");
+
+}
+// Regra 2: Nota maior que 10 → erro
+if (nota > 10) {
+throw new Error("Nota maior que 10 é inválida.");
+}
+// Regra 3: Nota entre 0 e 10 → exibir nota válida
+Alert.alert("Nota Válida", `A nota ${nota.toFixed(1)} foi
+registrada com sucesso! 🎓`);
+setNotaInput(''); // Limpa o campo após o sucesso
+} catch (error) {
+// Captura e exibe qualquer erro gerado no bloco try (menor que 0
+ou maior que 10)
+Alert.alert("Erro de Nota", error.message);
+} finally {
+// Executa sempre ao final do processo
+console.log("Sistema de notas atualizado.");
+}
+}
+return (
+<View style={styles.container}>
+<StatusBar barStyle="light-content" backgroundColor="#0F172A" />
+{/* Título do Projeto */}
+<Text style={styles.title}>Validação de Nota</Text>
+{/* Subtítulo Instrutivo */}
+<Text style={styles.subtitle}>
+Insira uma nota de 0 a 10 para verificar se ela cumpre os
+requisitos do sistema escolar.
+</Text>
+{/* Campo de Entrada (Input) */}
+<TextInput
+style={styles.input}
+placeholderTextColor="#64748B"
+keyboardType="numeric" // Abre o teclado de números e pontos
+value={notaInput}
+onChangeText={setNotaInput}
+
+/>
+{/* Botão de Ação */}
+<TouchableOpacity style={styles.button}
+onPress={handleValidarNota}>
+<Text style={styles.buttonText}>Validar Nota</Text>
+</TouchableOpacity>
+</View>
+);
+}
+const styles = StyleSheet.create({
+container: {
+flex: 1,
+backgroundColor: '#27A3F5', // Slate 900
+alignItems: 'center',
+justifyContent: 'center',
+padding: 24,
+},
+title: {
+fontSize: 32,
+fontWeight: 'bold',
+color: '#0F172A', // Slate 50
+marginBottom: 8,
+textAlign: 'center',
+},
+subtitle: {
+fontSize: 16,
+color: '#0F172A', // Slate 400
+marginBottom: 32,
+textAlign: 'center',
+lineHeight: 22,
+},
+input: {
+width: '100%',
+backgroundColor: '#FFF', // Slate 800
+color: '#0F172A',
+fontSize: 18,
+paddingVertical: 16,
+paddingHorizontal: 20,
+
+borderRadius: 12,
+borderWidth: 1,
+borderColor: '#334155',
+marginBottom: 24,
+textAlign: 'center',
+},
+button: {
+backgroundColor: '#22C55E', // Green 500
+width: '100%',
+paddingVertical: 16,
+borderRadius: 12,
+alignItems: 'center',
+justifyContent: 'center',
+elevation: 6,
+shadowColor: '#000',
+shadowOffset: { width: 0, height: 3 },
+shadowOpacity: 0.27,
+shadowRadius: 4.65,
+},
+buttonText: {
+color: '#0F172A',
+fontSize: 18,
+fontWeight: 'bold',
+},
+});
 
 
+Atividade: 2
 
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert,
+StatusBar } from 'react-native';
+
+export default function App() {
+// Estado do saldo atual simulado na conta do usuário
+const [saldoAtual, setSaldoAtual] = useState(1000.00);
+// Estado para capturar o valor que o usuário deseja sacar
+const [valorSaqueInput, setValorSaqueInput] = useState('');
+
+function handleRealizarSaque() {
+// Converte o texto digitado para número decimal
+const valorSaque = parseFloat(valorSaqueInput);
+
+try {
+// Validação 1: Campo vazio ou entrada inválida
+if (!valorSaqueInput || isNaN(valorSaque)) {
+throw new Error("Por favor, informe um valor numérico para o
+saque.");
+}
+
+// Validação 2: Valor menor ou igual a zero
+if (valorSaque <= 0) {
+throw new Error("O valor do saque deve ser maior que zero.");
+}
+// Validação 3: Condicional para checar se há saldo suficiente
+if (valorSaque > saldoAtual) {
+throw new Error("Saldo insuficiente para realizar esta
+transação.");
+}
+
+// Operação matemática de subtração para atualizar o saldo
+const novoSaldo = saldoAtual - valorSaque;
+setSaldoAtual(novoSaldo);
+Alert.alert(
+"Saque Concluído",
+
+`R$ ${valorSaque.toFixed(2)} sacado com sucesso! \nNovo saldo:
+R$ ${novoSaldo.toFixed(2)} 💸`
+);
+setValorSaqueInput(''); // Limpa o campo após o sucesso
+
+} catch (error) {
+// Captura e exibe qualquer erro gerado no bloco try
+Alert.alert("Transação Recusada", error.message);
+
+} finally {
+// Executado sempre após o término do bloco de tentativa
+console.log("Conexão com o sistema bancário encerrada.");
+}
+}
+
+return (
+<View style={styles.container}>
+<StatusBar barStyle="light-content" backgroundColor="#0F172A" />
+
+{/* Título do Projeto */}
+<Text style={styles.title}>Saque Bancário</Text>
+
+{/* Exibição do Saldo Atualizado */}
+<View style={styles.cardSaldo}>
+<Text style={styles.labelSaldo}>Seu Saldo Disponível</Text>
+<Text style={styles.valorSaldo}>R$
+{saldoAtual.toFixed(2)}</Text>
+</View>
+
+{/* Campo de Entrada (Input) */}
+<TextInput
+style={styles.input}
+placeholderTextColor="#64748B"
+keyboardType="numeric"
+value={valorSaqueInput}
+onChangeText={setValorSaqueInput}
+/>
+
+{/* Botão de Ação */}
+<TouchableOpacity style={styles.button}
+onPress={handleRealizarSaque}>
+<Text style={styles.buttonText}>Confirmar Saque</Text>
+</TouchableOpacity>
+</View>
+);
+}
+
+const styles = StyleSheet.create({
+container: {
+flex: 1,
+backgroundColor: '#F59527', // Slate 900
+alignItems: 'center',
+justifyContent: 'center',
+padding: 24,
+},
+
+title: {
+fontSize: 32,
+fontWeight: 'bold',
+color: '#0F172A', // Slate 50
+marginBottom: 24,
+textAlign: 'center',
+},
+
+cardSaldo: {
+width: '100%',
+backgroundColor: '#34D399', // Slate 800
+padding: 20,
+borderRadius: 12,
+borderWidth: 1,
+borderColor: '#334155',
+alignItems: 'center',
+marginBottom: 32,
+},
+
+labelSaldo: {
+fontSize: 14,
+color: '#0F172A', // Slate 400
+textTransform: 'uppercase',
+letterSpacing: 1,
+marginBottom: 6,
+},
+
+valorSaldo: {
+fontSize: 20,
+fontWeight: 'bold',
+color: '#', // Emerald 400 (cor de dinheiro/sucesso)
+},
+
+input: {
+width: '100%',
+backgroundColor: '#34D399',
+color: '#0F172A',
+fontSize: 18,
+paddingVertical: 16,
+paddingHorizontal: 20,
+borderRadius: 12,
+borderWidth: 1,
+borderColor: '#34D399',
+marginBottom: 24,
+textAlign: 'center',
+},
+
+button: {
+backgroundColor: '#34D399', // Green 500
+width: '100%',
+paddingVertical: 16,
+borderRadius: 12,
+alignItems: 'center',
+justifyContent: 'center',
+elevation: 6,
+shadowColor: '#000',
+shadowOffset: { width: 0, height: 3 },
+shadowOpacity: 0.27,
+shadowRadius: 4.65,
+
+},
+
+buttonText: {
+color: '#0F172A',
+fontSize: 18,
+fontWeight: 'bold',
+},
+});
+
+
+Atividade: 3
+
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert,
+StatusBar } from 'react-native';
+
+export default function App() {
+// Estado para capturar a nota digitada pelo usuário
+const [notaInput, setNotaInput] = useState('');
+
+function handleValidarNota() {
+// Converte o texto digitado para número decimal
+const nota = parseFloat(notaInput);
+
+try {
+// Validação básica: Campo vazio ou texto que não é número
+if (!notaInput || isNaN(nota)) {
+throw new Error("Por favor, digite uma nota válida.");
+}
+
+// Regra 1: Nota menor que 0 → erro
+if (nota < 0) {
+throw new Error("Nota menor que 0 é inválida.");
+}
+
+// Regra 2: Nota maior que 10 → erro
+if (nota > 10) {
+throw new Error("Nota maior que 10 é inválida.");
+}
+
+// Regra 3: Nota entre 0 e 10 → exibir nota válida
+Alert.alert("Nota Válida", `A nota ${nota.toFixed(1)} foi
+registrada com sucesso! 🎓`);
+setNotaInput(''); // Limpa o campo após o sucesso
+
+} catch (error) {
+// Captura e exibe qualquer erro gerado no bloco try (menor que 0
+ou maior que 10)
+Alert.alert("Erro de Nota", error.message);
+
+} finally {
+// Executa sempre ao final do processo
+console.log("Sistema de notas atualizado.");
+}
+}
+
+return (
+<View style={styles.container}>
+<StatusBar barStyle="light-content" backgroundColor="#0F172A" />
+
+{/* Título do Projeto */}
+<Text style={styles.title}>Validação de Nota</Text>
+
+{/* Subtítulo Instrutivo */}
+<Text style={styles.subtitle}>
+Insira uma nota de 0 a 10 para verificar se ela cumpre os
+requisitos do sistema escolar.
+</Text>
+
+{/* Campo de Entrada (Input) */}
+<TextInput
+style={styles.input}
+placeholderTextColor="#64748B"
+keyboardType="numeric" // Abre o teclado de números e pontos
+value={notaInput}
+
+onChangeText={setNotaInput}
+/>
+
+{/* Botão de Ação */}
+<TouchableOpacity style={styles.button}
+onPress={handleValidarNota}>
+<Text style={styles.buttonText}>Validar Nota</Text>
+</TouchableOpacity>
+</View>
+);
+}
+
+const styles = StyleSheet.create({
+container: {
+flex: 1,
+backgroundColor: '#F527AD', // Slate 900
+alignItems: 'center',
+justifyContent: 'center',
+padding: 24,
+},
+
+title: {
+fontSize: 32,
+fontWeight: 'bold',
+color: '#0F172A', // Slate 50
+marginBottom: 8,
+textAlign: 'center',
+},
+
+subtitle: {
+fontSize: 16,
+color: '#0F172A', // Slate 400
+marginBottom: 32,
+textAlign: 'center',
+lineHeight: 22,
+},
+
+input: {
+
+width: '100%',
+backgroundColor: '#22C55E', // Slate 800
+color: '#0F172A',
+fontSize: 18,
+paddingVertical: 16,
+paddingHorizontal: 20,
+borderRadius: 12,
+borderWidth: 1,
+borderColor: '#334155',
+marginBottom: 24,
+textAlign: 'center',
+},
+
+button: {
+backgroundColor: '#22C55E', // Green 500
+width: '100%',
+paddingVertical: 16,
+borderRadius: 12,
+alignItems: 'center',
+justifyContent: 'center',
+elevation: 6,
+shadowColor: '#000',
+shadowOffset: { width: 0, height: 3 },
+shadowOpacity: 0.27,
+shadowRadius: 4.65,
+},
+
+buttonText: {
+color: '#0F172A',
+fontSize: 18,
+fontWeight: 'bold',
+},
+});
 
 
