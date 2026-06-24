@@ -1142,6 +1142,110 @@ export default function App() {
   );
 }
 
+********************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Rakely da Silva de Souza
+DADOS: 16 / 06 / 2026
+BIMESTRE: 2º Bimestre
+
+DESCRIÇÃO DA ATIVIDADE:
+mini projeto, saque bancário
+
+import React, { useState } from 'react';
+import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
+
+export default function App() {
+  const [saldo, setSaldo] = useState('1000');
+  const [saque, setSaque] = useState('');
+  const [resultado, setResultado] = useState('');
+
+  const realizarSaque = () => {
+    try {
+      const saldoAtual = parseFloat(saldo);
+      const valorSaque = parseFloat(saque);
+
+      if (isNaN(valorSaque) || valorSaque <= 0) {
+        throw new Error('Digite um valor de saque válido.');
+      }
+
+      if (valorSaque > saldoAtual) {
+        throw new Error('Saldo insuficiente para realizar o saque.');
+      }
+
+      const novoSaldo = saldoAtual - valorSaque;
+
+      setSaldo(novoSaldo.toString());
+      setResultado(
+        `Saque realizado com sucesso!\nNovo saldo: R$ ${novoSaldo.toFixed(2)}`
+      );
+    } catch (erro) {
+      Alert.alert('Erro', erro.message);
+      setResultado(`Erro: ${erro.message}`);
+    } finally {
+      console.log('Operação de saque finalizada.');
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titulo}>Sistema Bancário</Text>
+
+      <Text style={styles.label}>Saldo Atual (R$)</Text>
+      <TextInput
+        style={styles.input}
+        value={saldo}
+        editable={false}
+      />
+
+      <Text style={styles.label}>Valor do Saque (R$)</Text>
+      <TextInput
+        style={styles.input}
+        keyboardType="numeric"
+        value={saque}
+        onChangeText={setSaque}
+        placeholder="Digite o valor"
+      />
+
+      <Button title="Realizar Saque" onPress={realizarSaque} />
+
+      <Text style={styles.resultado}>{resultado}</Text>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    justifyContent: 'center',
+  },
+  titulo: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 20,
+  },
+  label: {
+    fontSize: 16,
+    marginTop: 10,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#999',
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 10,
+  },
+  resultado: {
+    marginTop: 20,
+    fontSize: 16,
+    textAlign: 'center',
+  },
+});
+
+
 
 
 
