@@ -1862,3 +1862,1260 @@ const styles = StyleSheet.create({
 
 
 
+
+
+
+
+**********************************************************************/
+INSTITUTO FEDERAL DO AMAZONAS – CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Ana Moser M. de Oliveira
+DATA:  29/ 07 /2026
+Bimestre: 3º Bimestre
+**********************************************************************/
+
+Questão 1 – Cadastro Inteligente de Usuários
+Uma startup está desenvolvendo um aplicativo de eventos acadêmicos. Durante o cadastro, o
+sistema deve validar automaticamente o nome, e-mail e idade do participante.
+Desenvolva uma aplicação móvel que:
+Possua campos para Nome, E-mail e Idade;
+Valide se todos os campos foram preenchidos;
+Informe mensagens de erro caso algum dado seja inválido;
+Após clicar no botão Cadastrar, apresente uma mensagem personalizada com os
+dados do participante.
+Considere aspectos relacionados aos eventos de clique e validação da interface.
+
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  Alert,
+  StyleSheet,
+} from "react-native";
+
+
+export default function App() {
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
+  const [idade, setIdade] = useState("");
+
+
+  function cadastrar() {
+    if (nome === "" || email === "" || idade === "") {
+      Alert.alert("Erro", "Preencha todos os campos!");
+      return;
+    }
+
+
+    if (!email.includes("@")) {
+      Alert.alert("Erro", "E-mail inválido!");
+      return;
+    }
+
+
+    if (parseInt(idade) <= 0) {
+      Alert.alert("Erro", "Idade inválida!");
+      return;
+    }
+
+
+    Alert.alert(
+      "Cadastro realizado!",
+      `Nome: ${nome}\nE-mail: ${email}\nIdade: ${idade} anos`
+    );
+  }
+
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titulo}>Cadastro de Usuário</Text>
+
+
+      <TextInput
+        style={styles.input}
+        placeholder="Nome"
+        value={nome}
+        onChangeText={setNome}
+      />
+
+
+      <TextInput
+        style={styles.input}
+        placeholder="E-mail"
+        value={email}
+        onChangeText={setEmail}
+        keyboardType="email-address"
+      />
+
+
+      <TextInput
+        style={styles.input}
+        placeholder="Idade"
+        value={idade}
+        onChangeText={setIdade}
+        keyboardType="numeric"
+      />
+
+
+      <Button title="Cadastrar" onPress={cadastrar} />
+    </View>
+  );
+}
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    padding: 20,
+  },
+
+
+  titulo: {
+    fontSize: 24,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 20,
+  },
+
+
+  input: {
+    borderWidth: 1,
+    borderColor: "#999",
+    borderRadius: 8,
+    padding: 10,
+    marginBottom: 15,
+  },
+});
+
+
+
+
+Questão 2 – Controle de Consumo de Água
+Uma prefeitura deseja incentivar hábitos sustentáveis através de um aplicativo.
+Desenvolva uma aplicação que permita:
+Informar a quantidade de litros consumidos por dia;
+Ao pressionar um botão, calcular o consumo semanal;
+
+Classificar o consumo em:
+o Econômico;
+o Moderado;
+o Elevado;
+Exibir o resultado na tela.
+
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  StyleSheet
+} from 'react-native';
+
+
+
+
+export default function App() {
+  const [litros, setLitros] = useState('');
+  const [resultado, setResultado] = useState('');
+
+
+
+
+  function calcularConsumo() {
+    if (litros === '') {
+      setResultado('Informe a quantidade de litros.');
+      return;
+    }
+
+
+
+
+    const consumoDia = parseFloat(litros);
+
+
+
+
+    if (isNaN(consumoDia) || consumoDia <= 0) {
+      setResultado('Valor inválido.');
+      return;
+    }
+
+
+
+
+    const semanal = consumoDia * 7;
+    let classificacao = '';
+
+
+
+
+    if (semanal <= 350) {
+      classificacao = 'Econômico';
+    } else if (semanal <= 700) {
+      classificacao = 'Moderado';
+    } else {
+      classificacao = 'Elevado';
+    }
+
+
+
+
+    setResultado(
+      `Consumo semanal: ${semanal.toFixed(1)} litros\nClassificação: ${classificacao}`
+    );
+  }
+
+
+
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titulo}>
+        Controle de Consumo de Água
+      </Text>
+
+
+
+
+      <TextInput
+        style={styles.input}
+        placeholder="Litros consumidos por dia"
+        keyboardType="numeric"
+        value={litros}
+        onChangeText={setLitros}
+      />
+
+
+
+
+      <Button
+        title="Calcular Consumo"
+        onPress={calcularConsumo}
+      />
+
+
+
+
+      <Text style={styles.resultado}>
+        {resultado}
+      </Text>
+    </View>
+  );
+}
+
+
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 20,
+     backgroundColor: '#7995E8',
+  },
+
+
+
+
+  titulo: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 20,
+     padding: 20,
+     backgroundColor: '#3B9BDB',
+  },
+
+
+
+
+  input: {
+    borderWidth: 1,
+    borderColor: '#999',
+    borderRadius: 8,
+    padding: 10,
+    marginBottom: 20,
+     backgroundColor: '#3B9BDB',
+  },
+
+
+
+
+  resultado: {
+    marginTop: 20,
+    fontSize: 18,
+    textAlign: 'center',
+     padding: 20,
+     backgroundColor: '#3B9BDB',
+  },
+});
+
+
+
+
+Questão 3 – Calculadora de IMC
+Uma clínica de saúde pretende disponibilizar um aplicativo para cálculo do Índice de Massa
+Corporal.
+Sua aplicação deverá:
+Receber peso e altura;
+Executar o cálculo do IMC;
+Informar automaticamente a classificação correspondente;
+Utilizar um botão para iniciar o cálculo.
+Considere boas práticas na interação entre usuário e interface.
+import React, { useState } from "react";
+import { View, Text, TextInput, Button, StyleSheet } from "react-native";
+
+
+export default function App() {
+  const [peso, setPeso] = useState("");
+  const [altura, setAltura] = useState("");
+  const [resultado, setResultado] = useState("");
+
+
+  function calcularIMC() {
+    if (peso === "" || altura === "") {
+      setResultado("Preencha todos os campos.");
+      return;
+    }
+
+
+    const p = parseFloat(peso);
+    const a = parseFloat(altura);
+
+
+    if (isNaN(p) || isNaN(a) || p <= 0 || a <= 0) {
+      setResultado("Valores inválidos.");
+      return;
+    }
+
+
+    const imc = p / (a * a);
+    let classificacao = "";
+
+
+    if (imc < 18.5) {
+      classificacao = "Abaixo do peso";
+    } else if (imc < 25) {
+      classificacao = "Peso normal";
+    } else if (imc < 30) {
+      classificacao = "Sobrepeso";
+    } else if (imc < 35) {
+      classificacao = "Obesidade Grau I";
+    } else if (imc < 40) {
+      classificacao = "Obesidade Grau II";
+    } else {
+      classificacao = "Obesidade Grau III";
+    }
+
+
+    setResultado(
+      `IMC: ${imc.toFixed(2)}\nClassificação: ${classificacao}`
+    );
+  }
+
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titulo}>Calculadora de IMC</Text>
+
+
+      <TextInput
+        style={styles.input}
+        placeholder="Peso (kg)"
+        keyboardType="numeric"
+        value={peso}
+        onChangeText={setPeso}
+      />
+
+
+      <TextInput
+        style={styles.input}
+        placeholder="Altura (m)"
+        keyboardType="numeric"
+        value={altura}
+        onChangeText={setAltura}
+      />
+
+
+      <Button title="Calcular IMC" onPress={calcularIMC} />
+
+
+      <Text style={styles.resultado}>{resultado}</Text>
+    </View>
+  );
+}
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    padding: 20,
+    backgroundColor: '#2773F5'
+  },
+
+
+  titulo: {
+    fontSize: 24,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 20,
+    padding: 20,
+    backgroundColor: '#27ADF5'
+  },
+
+
+  input: {
+    borderWidth: 1,
+    borderColor: "#999",
+    borderRadius: 8,
+    padding: 10,
+    marginBottom: 15,
+    backgroundColor: '#27ADF5'
+  },
+
+
+  resultado: {
+    marginTop: 20,
+    fontSize: 18,
+    textAlign: "center",
+    padding: 20,
+    backgroundColor: '#27ADF5'
+  },
+});
+
+
+
+Questão 4 – Conversor de Temperatura
+Um aplicativo meteorológico necessita converter temperaturas entre Celsius e Fahrenheit.
+Desenvolva uma aplicação que:
+Receba uma temperatura em Celsius;
+Ao clicar em um botão, converta para Fahrenheit;
+Exiba o resultado imediatamente;
+Possua um botão para limpar os campos.
+Utilize corretamente eventos de clique.
+
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  StyleSheet,
+} from "react-native";
+
+
+export default function App() {
+  const [celsius, setCelsius] = useState("");
+  const [resultado, setResultado] = useState("");
+
+
+  function converter() {
+    if (celsius === "") {
+      setResultado("Digite uma temperatura.");
+      return;
+    }
+
+
+    const c = parseFloat(celsius);
+
+
+    if (isNaN(c)) {
+      setResultado("Valor inválido.");
+      return;
+    }
+
+
+    const fahrenheit = (c * 9) / 5 + 32;
+    const kelvin = c + 273.15;
+
+
+    setResultado(
+      `Fahrenheit: ${fahrenheit.toFixed(2)} °F\nKelvin: ${kelvin.toFixed(2)} K`
+    );
+  }
+
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titulo}>Conversor de Temperatura</Text>
+
+
+      <TextInput
+        style={styles.input}
+        placeholder="Temperatura em °C"
+        keyboardType="numeric"
+        value={celsius}
+        onChangeText={setCelsius}
+      />
+
+
+      <Button
+        title="Converter"
+        onPress={converter}
+      />
+
+
+      <Text style={styles.resultado}>
+        {resultado}
+      </Text>
+    </View>
+  );
+}
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    padding: 20,
+    backgroundColor: '#48036B'
+  },
+
+
+  titulo: {
+    fontSize: 24,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 20,
+    padding: 20,
+    backgroundColor: '#E0B7EB'
+  },
+
+
+  input: {
+    borderWidth: 1,
+    borderColor: "#999",
+    borderRadius: 8,
+    padding: 10,
+    marginBottom: 20,
+    backgroundColor: '#E0B7EB'
+  },
+
+
+  resultado: {
+    marginTop: 20,
+    fontSize: 18,
+    textAlign: "center",
+    padding: 20,
+    backgroundColor: '#E0B7EB'
+  },
+});
+
+
+
+Questão 5 – Sistema de Login
+Uma empresa pretende criar um aplicativo interno para seus funcionários.
+Desenvolva uma aplicação contendo:
+Campo Usuário;
+Campo Senha;
+Botão Entrar.
+
+Considere que:
+Usuário: admin
+Senha: 1234
+Caso os dados estejam corretos, exiba uma mensagem de boas-vindas. Caso contrário,
+informe que o acesso foi negado.
+
+
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  StyleSheet,
+  Alert,
+} from "react-native";
+
+
+export default function App() {
+  const [usuario, setUsuario] = useState("");
+  const [senha, setSenha] = useState("");
+
+
+  function entrar() {
+    if (usuario === "" || senha === "") {
+      Alert.alert("Erro", "Preencha todos os campos.");
+      return;
+    }
+
+
+    if (usuario === "admin" && senha === "1234") {
+      Alert.alert("Sucesso", "Login realizado com sucesso!");
+    } else {
+      Alert.alert("Erro", "Usuário ou senha incorretos.");
+    }
+  }
+
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titulo}>Sistema de Login</Text>
+
+
+      <TextInput
+        style={styles.input}
+        placeholder="Usuário"
+        value={usuario}
+        onChangeText={setUsuario}
+      />
+
+
+      <TextInput
+        style={styles.input}
+        placeholder="Senha"
+        secureTextEntry={true}
+        value={senha}
+        onChangeText={setSenha}
+      />
+
+
+      <Button
+        title="Entrar"
+        onPress={entrar}
+      />
+    </View>
+  );
+}
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    padding: 20,
+    backgroundColor: '#1F20A6'
+  },
+
+
+  titulo: {
+    fontSize: 24,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 20,
+    padding: 20,
+    backgroundColor: '#3839EB'
+  },
+
+
+  input: {
+    borderWidth: 1,
+    borderColor: "#999",
+    borderRadius: 8,
+    padding: 10,
+    marginBottom: 15,
+    backgroundColor: '#3839EB'
+  },
+});
+
+
+
+Questão 6 – Simulador de Caixa Eletrônico
+Uma instituição financeira deseja disponibilizar um simulador de saque.
+Desenvolva uma aplicação que:
+ Receba um valor de saque;
+ Verifique se o valor é múltiplo de R$10;
+ Caso seja válido, informe "Saque autorizado";
+ Caso contrário, informe que o valor é inválido.
+Utilize tratamento de eventos e estruturas condicionais.
+
+
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  StyleSheet,
+  Alert,
+} from "react-native";
+
+
+export default function App() {
+  const [saldo, setSaldo] = useState(1000);
+  const [valor, setValor] = useState("");
+
+
+  function sacar() {
+    if (valor === "") {
+      Alert.alert("Erro", "Informe um valor.");
+      return;
+    }
+
+
+    const saque = parseFloat(valor);
+
+
+    if (isNaN(saque) || saque <= 0) {
+      Alert.alert("Erro", "Valor inválido.");
+      return;
+    }
+
+
+    if (saque > saldo) {
+      Alert.alert("Erro", "Saldo insuficiente.");
+      return;
+    }
+
+
+    setSaldo(saldo - saque);
+    Alert.alert("Sucesso", `Saque de R$ ${saque.toFixed(2)} realizado.`);
+    setValor("");
+  }
+
+
+  function depositar() {
+    if (valor === "") {
+      Alert.alert("Erro", "Informe um valor.");
+      return;
+    }
+
+
+    const deposito = parseFloat(valor);
+
+
+    if (isNaN(deposito) || deposito <= 0) {
+      Alert.alert("Erro", "Valor inválido.");
+      return;
+    }
+
+
+    setSaldo(saldo + deposito);
+    Alert.alert("Sucesso", `Depósito de R$ ${deposito.toFixed(2)} realizado.`);
+    setValor("");
+  }
+
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titulo}>Caixa Eletrônico</Text>
+
+
+      <Text style={styles.saldo}>
+        Saldo: R$ {saldo.toFixed(2)}
+      </Text>
+
+
+      <TextInput
+        style={styles.input}
+        placeholder="Digite o valor"
+        keyboardType="numeric"
+        value={valor}
+        onChangeText={setValor}
+      />
+
+
+      <View style={styles.botoes}>
+        <Button title="Depositar" onPress={depositar} />
+      </View>
+
+
+      <View style={styles.botoes}>
+        <Button title="Sacar" onPress={sacar} />
+      </View>
+    </View>
+  );
+}
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    padding: 20,
+  },
+
+
+  titulo: {
+    fontSize: 24,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 20,
+  },
+
+
+  saldo: {
+    fontSize: 20,
+    textAlign: "center",
+    marginBottom: 20,
+  },
+
+
+  input: {
+    borderWidth: 1,
+    borderColor: "#999",
+    borderRadius: 8,
+    padding: 10,
+    marginBottom: 20,
+  },
+
+
+  botoes: {
+    marginBottom: 10,
+  },
+});
+
+
+
+Questão 7 – Aplicativo de Lista de Compras
+Um supermercado deseja um aplicativo simples para organizar compras.
+Desenvolva uma aplicação que permita:
+Inserir produtos em uma lista;
+Adicionar novos itens através de um botão;
+Exibir todos os produtos cadastrados;
+Permitir limpar completamente a lista.
+Utilize componentes de lista e eventos de clique.
+
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  FlatList,
+  StyleSheet,
+} from "react-native";
+
+
+export default function App() {
+  const [produto, setProduto] = useState("");
+  const [lista, setLista] = useState([]);
+
+
+  function adicionarProduto() {
+    if (produto.trim() === "") {
+      return;
+    }
+
+
+    setLista([...lista, { id: Date.now().toString(), nome: produto }]);
+    setProduto("");
+  }
+
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titulo}>Lista de Compras</Text>
+
+
+      <TextInput
+        style={styles.input}
+        placeholder="Digite um produto"
+        value={produto}
+        onChangeText={setProduto}
+      />
+
+
+      <Button
+        title="Adicionar Produto"
+        onPress={adicionarProduto}
+      />
+
+
+      <FlatList
+        data={lista}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <Text style={styles.item}>• {item.nome}</Text>
+        )}
+      />
+    </View>
+  );
+}
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    marginTop: 50,
+    backgroundColor: '#540F7D'
+  },
+
+
+  titulo: {
+    fontSize: 24,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 20,
+    padding: 20,
+    backgroundColor: '#AC60DB'
+  },
+
+
+  input: {
+    borderWidth: 1,
+    borderColor: "#999",
+    borderRadius: 8,
+    padding: 10,
+    marginBottom: 15,
+    backgroundColor: '#E0B7EB',
+  },
+
+
+  item: {
+    fontSize: 18,
+    padding: 8,
+    borderBottomWidth: 1,
+    borderBottomColor: "#ddd",
+    backgroundColor: '#E0B7EB',
+  },
+});
+
+
+Questão 8 – Contador de Cliques
+Uma empresa de testes de interface deseja medir a interação dos usuários com um botão.
+Desenvolva uma aplicação que:
+Possua um botão "Clique Aqui";
+Conte quantas vezes o botão foi pressionado;
+Atualize automaticamente a quantidade de cliques na tela;
+Tenha um botão para reiniciar o contador.
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  Button,
+  StyleSheet,
+} from "react-native";
+
+
+export default function App() {
+  const [contador, setContador] = useState(0);
+
+
+  function incrementar() {
+    setContador(contador + 1);
+  }
+
+
+  function decrementar() {
+    setContador(contador - 1);
+  }
+
+
+  function zerar() {
+    setContador(0);
+  }
+
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titulo}>Contador de Cliques</Text>
+
+
+      <Text style={styles.contador}>{contador}</Text>
+
+
+      <View style={styles.botao}>
+        <Button
+          title="Incrementar"
+          onPress={incrementar}
+        />
+      </View>
+
+
+      <View style={styles.botao}>
+        <Button
+          title="Decrementar"
+          onPress={decrementar}
+        />
+      </View>
+
+
+      <View style={styles.botao}>
+        <Button
+          title="Zerar"
+          onPress={zerar}
+        />
+      </View>
+    </View>
+  );
+}
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    padding: 20,
+  },
+
+
+  titulo: {
+    fontSize: 26,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 20,
+  },
+
+
+  contador: {
+    fontSize: 50,
+    textAlign: "center",
+    marginBottom: 30,
+    fontWeight: "bold",
+  },
+
+
+  botao: {
+    marginBottom: 15,
+  },
+});
+
+
+
+
+Questão 9 – Escolha de Plano de Internet
+Uma operadora deseja disponibilizar um simulador de contratação.
+Crie uma aplicação contendo três opções de plano:
+Básico
+Intermediário
+Premium
+Ao selecionar um plano e pressionar um botão, apresente:
+Nome do plano;
+Valor mensal;
+Benefícios principais.
+Utilize componentes de seleção e tratamento de eventos.
+
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  Button,
+  StyleSheet,
+} from "react-native";
+
+
+export default function App() {
+  const [plano, setPlano] = useState("");
+
+
+  function escolherPlano(tipo) {
+    setPlano(tipo);
+  }
+
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titulo}>Escolha seu Plano</Text>
+
+
+      <View style={styles.botao}>
+        <Button
+          title="Plano Básico"
+          onPress={() => escolherPlano("Plano Básico\n100 MB\nR$ 59,90/mês")}
+        />
+      </View>
+
+
+      <View style={styles.botao}>
+        <Button
+          title="Plano Intermediário"
+          onPress={() =>
+            escolherPlano("Plano Intermediário\n300 MB\nR$ 89,90/mês")
+          }
+        />
+      </View>
+
+
+      <View style={styles.botao}>
+        <Button
+          title="Plano Premium"
+          onPress={() =>
+            escolherPlano("Plano Premium\n600 MB\nR$ 129,90/mês")
+          }
+        />
+      </View>
+
+
+      <Text style={styles.resultado}>{plano}</Text>
+    </View>
+  );
+}
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    padding: 20,
+  },
+
+
+  titulo: {
+    fontSize: 26,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 25,
+  },
+
+
+  botao: {
+    marginBottom: 15,
+  },
+
+
+  resultado: {
+    marginTop: 30,
+    fontSize: 20,
+    textAlign: "center",
+    fontWeight: "bold",
+  },
+});
+
+
+Questão 10 – Aplicativo de Controle Escolar
+Uma escola pretende desenvolver um aplicativo para cálculo da média dos alunos.
+A aplicação deverá:
+Receber três notas;
+Calcular automaticamente a média;
+Informar:
+o Aprovado;
+o Recuperação;
+o Reprovado.
+
+O cálculo deverá ocorrer quando o usuário pressionar um botão.
+Além disso, implemente um botão para limpar todos os campos.
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  StyleSheet,
+} from "react-native";
+
+
+export default function App() {
+  const [nome, setNome] = useState("");
+  const [nota1, setNota1] = useState("");
+  const [nota2, setNota2] = useState("");
+  const [resultado, setResultado] = useState("");
+
+
+  function calcularMedia() {
+    if (nome === "" || nota1 === "" || nota2 === "") {
+      setResultado("Preencha todos os campos.");
+      return;
+    }
+
+
+    const n1 = parseFloat(nota1);
+    const n2 = parseFloat(nota2);
+
+
+    if (isNaN(n1) || isNaN(n2)) {
+      setResultado("Digite notas válidas.");
+      return;
+    }
+
+
+    const media = (n1 + n2) / 2;
+
+
+    let situacao = "";
+
+
+    if (media >= 7) {
+      situacao = "Aprovado";
+    } else if (media >= 5) {
+      situacao = "Recuperação";
+    } else {
+      situacao = "Reprovado";
+    }
+
+
+    setResultado(
+      `Aluno: ${nome}\nMédia: ${media.toFixed(1)}\nSituação: ${situacao}`
+    );
+  }
+
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titulo}>Controle Escolar</Text>
+
+
+      <TextInput
+        style={styles.input}
+        placeholder="Nome do aluno"
+        value={nome}
+        onChangeText={setNome}
+      />
+
+
+      <TextInput
+        style={styles.input}
+        placeholder="1ª Nota"
+        keyboardType="numeric"
+        value={nota1}
+        onChangeText={setNota1}
+      />
+
+
+      <TextInput
+        style={styles.input}
+        placeholder="2ª Nota"
+        keyboardType="numeric"
+        value={nota2}
+        onChangeText={setNota2}
+      />
+
+
+      <Button
+        title="Calcular Média"
+        onPress={calcularMedia}
+      />
+
+
+      <Text style={styles.resultado}>
+        {resultado}
+      </Text>
+    </View>
+  );
+}
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    padding: 20,
+    backgroundColor: '#4A8BF7',
+  },
+
+
+  titulo: {
+    fontSize: 24,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 20,
+  },
+
+
+  input: {
+    borderWidth: 1,
+    borderColor: "#999",
+    borderRadius: 8,
+    padding: 10,
+    marginBottom: 15,
+  },
+
+
+  resultado: {
+    marginTop: 20,
+    fontSize: 18,
+    textAlign: "center",
+  },
+});
+
+
+
+
+
+
