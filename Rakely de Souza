@@ -1332,8 +1332,186 @@ const styles = StyleSheet.create({
   },
 });
 
+*********************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Rakely da Silva de Souza
+DADOS: 12 / 08 / 2026
+BIMESTRE: 3º Bimestre
+Descrição: Revisão
 
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+} from 'react-native';
 
+export default function App() {
+  const [nome, setNome] = useState('');
+  const [email, setEmail] = useState('');
+  const [idade, setIdade] = useState('');
+  const [mensagem, setMensagem] = useState('');
+  const [erro, setErro] = useState(false);
 
+  function cadastrar() {
+    setMensagem('');
+    setErro(false);
+
+    // Validação do nome
+    if (nome.trim() === '') {
+      setMensagem('Por favor, informe seu nome.');
+      setErro(true);
+      return;
+    }
+
+    // Validação do e-mail
+    if (email.trim() === '') {
+      setMensagem('Por favor, informe seu e-mail.');
+      setErro(true);
+      return;
+    }
+
+    // Validação do formato do e-mail
+    if (!email.includes('@') || !email.includes('.')) {
+      setMensagem('Informe um e-mail válido.');
+      setErro(true);
+      return;
+    }
+
+    // Validação da idade
+    if (idade.trim() === '') {
+      setMensagem('Por favor, informe sua idade.');
+      setErro(true);
+      return;
+    }
+
+    if (isNaN(Number(idade)) || Number(idade) <= 0) {
+      setMensagem('Informe uma idade válida.');
+      setErro(true);
+      return;
+    }
+
+    // Cadastro realizado
+    setMensagem(
+      `Cadastro realizado com sucesso!\n\n` +
+      `Olá, ${nome}! 👋\n` +
+      `E-mail: ${email}\n` +
+      `Idade: ${idade} anos.`
+    );
+  }
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titulo}>Cadastro de Participante</Text>
+
+      <Text style={styles.label}>Nome</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Digite seu nome"
+        value={nome}
+        onChangeText={setNome}
+      />
+
+      <Text style={styles.label}>E-mail</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Digite seu e-mail"
+        keyboardType="email-address"
+        autoCapitalize="none"
+        value={email}
+        onChangeText={setEmail}
+      />
+
+      <Text style={styles.label}>Idade</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Digite sua idade"
+        keyboardType="numeric"
+        value={idade}
+        onChangeText={setIdade}
+      />
+
+      <TouchableOpacity
+        style={styles.botao}
+        onPress={cadastrar}
+      >
+        <Text style={styles.textoBotao}>CADASTRAR</Text>
+      </TouchableOpacity>
+
+      {mensagem !== '' && (
+        <Text style={[styles.mensagem, erro && styles.erro]}>
+          {mensagem}
+        </Text>
+      )}
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#f2f4f8',
+    padding: 25,
+    justifyContent: 'center',
+  },
+
+  titulo: {
+    fontSize: 25,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 30,
+    color: '#222',
+  },
+
+  label: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 5,
+    color: '#333',
+  },
+
+  input: {
+    backgroundColor: '#fff',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    padding: 12,
+    fontSize: 16,
+    marginBottom: 15,
+  },
+
+  botao: {
+    backgroundColor: '#2563eb',
+    padding: 15,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginTop: 10,
+  },
+
+  textoBotao: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+
+  mensagem: {
+    marginTop: 20,
+    padding: 15,
+    borderRadius: 8,
+    backgroundColor: '#dcfce7',
+    color: '#166534',
+    fontSize: 16,
+    textAlign: 'center',
+  },
+
+  erro: {
+    backgroundColor: '#fee2e2',
+    color: '#b91c1c',
+  },
+});
 
 
