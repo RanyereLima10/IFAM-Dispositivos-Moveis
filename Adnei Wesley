@@ -417,3 +417,798 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
+
+
+----------------------------------------/////----------------------------------------
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Adnei Wesley R. Guedes
+DATA:  12/ 08 /2026
+Bimestre: 3º Bimestre
+Assunto: Revisao
+**********************************************************************/
+
+import React, { useEffect, useRef, useState } from 'react';
+
+import {
+  SafeAreaView,
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  Alert,
+  ActivityIndicator,
+  Animated,
+  Keyboard,
+  Platform,
+  ScrollView,
+} from 'react-native';
+
+// =====================================================
+// CONFIGURAÇÃO
+// =====================================================
+
+// Depois substitua pela URL real do seu backend.
+//
+// Exemplo:
+// const API_URL = 'http://192.168.1.10:3000/api/tips';
+
+const API_URL = 'http://SEU_BACKEND_AQUI:3000/api/tips';
+
+// =====================================================
+// APP
+// =====================================================
+
+export default function App() {
+  const [litrosPorDia, setLitrosPorDia] = useState('');
+  const [semanal, setSemanal] = useState(null);
+  const [classificacao, setClassificacao] = useState('');
+  const [loadingTips, setLoadingTips] = useState(false);
+  const [dicasIa, setDicasIa] = useState('');
+
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const scaleAnim = useRef(new Animated.Value(0.8)).current;
+
+  // =====================================================
+  // ANIMAÇÃO
+  // =====================================================
+
+  useEffect(() => {
+    if (semanal !== null) {
+      fadeAnim.setValue(0);
+      scaleAnim.setValue(0.8);
+
+      Animated.parallel([
+        Animated.timing(fadeAnim, {
+          toValue: 1,
+          duration: 500,
+          useNativeDriver: true,
+        }),
+        Animated.spring(scaleAnim, {
+          toValue: 1,
+          friction: 7,
+          tension: 50,
+          useNativeDriver: true,
+        }),
+      ]).start();
+    } else {
+      fadeAnim.setValue(0);
+      scaleAnim.setValue(0.8);
+    }
+  }, [semanal]);
+
+  // =====================================================
+  // CONVERTER TEXTO PARA NÚMERO
+  // =====================================================
+
+  function converterLitros(valor) {
+    if (typeof valor !== 'string') {
+      return NaN;
+    }
+
+    const numero = valor
+      .replace(',', '.')
+      .trim();
+
+    return Number(numero);
+  }
+
+  // =====================================================
+  // COR DA CLASSIFICAÇÃO
+  // =====================================================
+
+  function getClassificacaoCor(valor) {
+    if (valor === 'Econômico') {
+      return '#2ecc71';
+    }
+
+    if (valor === 'Moderado') {
+      return '#f39c12';
+    }
+
+    if (valor === 'Elevado') {
+      return '#e74c3c';
+    }
+
+    return '#95a5a6';
+  }
+
+  // =====================================================
+  // CALCULAR
+  // =====================================================
+
+  function calcularConsumo() {
+    Keyboard.dismiss();
+
+    const litros = converterLitros(litrosPorDia);
+
+    if (!Number.isFinite(litros) || litros <= 0) {
+      Alert.alert(
+        'Entrada inválida',
+        'Digite uma quantidade válida de litros por dia.'
+      );
+
+      return;
+    }
+
+    const consumoSemanal = litros * 7;
+
+    let novaClassificacao = '';
+
+    if (consumoSemanal <= 350) {
+      novaClassificacao = 'Econômico';
+    } else if (consumoSemanal <= 1050) {
+      novaClassificacao = 'Moderado';
+    } else {
+      novaClassificacao = 'Elevado';
+    }
+
+    setSemanal(consumoSemanal);
+    setClassificacao(novaClassificacao);
+    setDicasIa('');
+  }
+
+  // =====================================================
+  // ADICIONAR 10 LITROS
+  // =====================================================
+
+  function adicionarDezLitros() {
+    const atual = converterLitros(litrosPorDia);
+
+    if (!Number.isFinite(atual)) {
+      setLitrosPorDia('10');
+      return;
+    }
+
+    setLitrosPorDia(String(atual + 10));
+  }
+
+  // =====================================================
+  // LIMPAR
+  // =====================================================
+
+  function limpar() {
+    Keyboard.dismiss();
+
+    setLitrosPorDia('');
+    setSemanal(null);
+    setClassificacao('');
+    setDicasIa('');
+    setLoadingTips(false);
+  }
+
+  // =====================================================
+  // DICAS DA IA
+  // =====================================================
+
+  async function obterDicasIa() {
+    if (semanal === null || classificacao === '') {
+      Alert.alert(
+        'Calcule primeiro',
+        'Calcule seu consumo semanal antes de solicitar dicas.'
+      );
+
+      return;
+    }
+
+    if (API_URL.includes('sua api')) {
+      Alert.alert(
+        'Backend não configurado',
+        'Você precisa colocar o endereço do seu backend na constante API_URL.'
+      );
+
+      return;
+    }
+
+    setLoadingTips(true);
+    setDicasIa('');
+
+    try {
+      const resposta = await fetch(API_URL, {
+        method: 'POST',
+
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+
+        body: JSON.stringify({
+          weeklyLiters: semanal,
+          classification: classificacao,
+        }),
+      });
+
+      const texto = await resposta.text();
+
+      let dados = null;
+
+      try {
+        dados = JSON.parse(texto);
+      } catch (erroJson) {
+        dados = null;
+      }
+
+      if (!resposta.ok) {
+        const mensagem =
+          dados && dados.message
+            ? dados.message
+            : dados && dados.error
+              ? dados.error
+              : 'Erro no servidor.';
+
+        throw new Error(mensagem);
+      }
+
+      if (!dados || typeof dados.tips !== 'string') {
+        throw new Error(
+          'O servidor não retornou as dicas no formato esperado.'
+        );
+      }
+
+      setDicasIa(dados.tips);
+    } catch (erro) {
+      console.log('Erro:', erro);
+
+      Alert.alert(
+        'Erro',
+        'Não foi possível obter as dicas da IA.\n\n' +
+          (erro && erro.message
+            ? erro.message
+            : 'Erro desconhecido.')
+      );
+    } finally {
+      setLoadingTips(false);
+    }
+  }
+
+  // =====================================================
+  // INTERFACE
+  // =====================================================
+
+  return (
+    <SafeAreaView style={styles.safe}>
+      <ScrollView
+        contentContainerStyle={styles.scrollContent}
+        keyboardShouldPersistTaps="handled"
+      >
+
+        {/* CABEÇALHO */}
+
+        <View style={styles.header}>
+          <Text style={styles.waterIcon}>💧</Text>
+
+          <Text style={styles.headerTitle}>
+            Controle de Água
+          </Text>
+
+          <Text style={styles.headerSubtitle}>
+            Registre seu consumo diário e receba dicas para
+            economizar água.
+          </Text>
+        </View>
+
+        {/* CONTEÚDO */}
+
+        <View style={styles.container}>
+
+          {/* CARD DE ENTRADA */}
+
+          <View style={styles.card}>
+
+            <Text style={styles.label}>
+              Litros por dia
+            </Text>
+
+            <View style={styles.inputRow}>
+
+              <TextInput
+                style={styles.input}
+                value={litrosPorDia}
+                onChangeText={setLitrosPorDia}
+                keyboardType={
+                  Platform.OS === 'ios'
+                    ? 'decimal-pad'
+                    : 'numeric'
+                }
+                placeholder="Ex.: 120"
+                placeholderTextColor="#999"
+                returnKeyType="done"
+                onSubmitEditing={calcularConsumo}
+              />
+
+              <TouchableOpacity
+                style={styles.addButton}
+                onPress={adicionarDezLitros}
+                activeOpacity={0.8}
+              >
+                <Text style={styles.addButtonText}>
+                  +
+                </Text>
+              </TouchableOpacity>
+
+            </View>
+
+            {/* CALCULAR */}
+
+            <TouchableOpacity
+              style={styles.primaryButton}
+              onPress={calcularConsumo}
+              activeOpacity={0.8}
+            >
+              <Text style={styles.primaryButtonText}>
+                🧮 Calcular Consumo Semanal
+              </Text>
+            </TouchableOpacity>
+
+            {/* LIMPAR */}
+
+            <TouchableOpacity
+              style={styles.clearButton}
+              onPress={limpar}
+              activeOpacity={0.7}
+            >
+              <Text style={styles.clearButtonText}>
+                Limpar
+              </Text>
+            </TouchableOpacity>
+
+          </View>
+
+          {/* RESULTADO */}
+
+          {semanal !== null && (
+            <Animated.View
+              style={[
+                styles.resultCard,
+                {
+                  opacity: fadeAnim,
+                  transform: [
+                    {
+                      scale: scaleAnim,
+                    },
+                  ],
+                },
+              ]}
+            >
+
+              <View style={styles.resultHeader}>
+
+                <View style={styles.resultInfo}>
+
+                  <Text style={styles.resultLabel}>
+                    Consumo semanal
+                  </Text>
+
+                  <Text style={styles.resultDescription}>
+                    Estimativa baseada no consumo diário.
+                  </Text>
+
+                </View>
+
+                <Text style={styles.resultValue}>
+                  {semanal.toFixed(1)} L
+                </Text>
+
+              </View>
+
+              {/* CLASSIFICAÇÃO */}
+
+              <View style={styles.classificationRow}>
+
+                <View
+                  style={[
+                    styles.pill,
+                    {
+                      backgroundColor:
+                        getClassificacaoCor(
+                          classificacao
+                        ),
+                    },
+                  ]}
+                >
+                  <Text style={styles.pillText}>
+                    {classificacao}
+                  </Text>
+                </View>
+
+                <View style={styles.spacer} />
+
+                <TouchableOpacity
+                  style={[
+                    styles.tipsButton,
+                    loadingTips && styles.disabledButton,
+                  ]}
+                  onPress={obterDicasIa}
+                  disabled={loadingTips}
+                  activeOpacity={0.8}
+                >
+                  <Text style={styles.tipsButtonText}>
+                    {loadingTips
+                      ? 'Carregando...'
+                      : '💡 Dicas IA'}
+                  </Text>
+                </TouchableOpacity>
+
+              </View>
+
+              {/* CARREGANDO */}
+
+              {loadingTips && (
+                <View style={styles.loadingContainer}>
+
+                  <ActivityIndicator
+                    size="small"
+                    color="#27ae60"
+                  />
+
+                  <Text style={styles.loadingText}>
+                    Gerando dicas...
+                  </Text>
+
+                </View>
+              )}
+
+              {/* DICAS */}
+
+              {dicasIa !== '' && !loadingTips && (
+                <View style={styles.tipsBox}>
+
+                  <Text style={styles.tipsTitle}>
+                    💡 Dicas da IA
+                  </Text>
+
+                  <Text style={styles.tipsText}>
+                    {dicasIa}
+                  </Text>
+
+                </View>
+              )}
+
+            </Animated.View>
+          )}
+
+        </View>
+
+        {/* RODAPÉ */}
+
+        <View style={styles.footer}>
+
+          <Text style={styles.footerText}>
+            Prefeitura • Incentive hábitos sustentáveis
+          </Text>
+
+          <Text style={styles.smallText}>
+            {Platform.OS === 'android'
+              ? 'Android'
+              : 'iOS'}{' '}
+            • Expo
+          </Text>
+
+        </View>
+
+      </ScrollView>
+    </SafeAreaView>
+  );
+}
+
+// =====================================================
+// ESTILOS
+// =====================================================
+
+const styles = StyleSheet.create({
+
+  safe: {
+    flex: 1,
+    backgroundColor: '#f5f7ff',
+  },
+
+  scrollContent: {
+    flexGrow: 1,
+  },
+
+  header: {
+    backgroundColor: '#5563DE',
+    paddingTop: 40,
+    paddingBottom: 28,
+    paddingHorizontal: 20,
+  },
+
+  waterIcon: {
+    fontSize: 32,
+    marginBottom: 5,
+  },
+
+  headerTitle: {
+    color: '#ffffff',
+    fontSize: 25,
+    fontWeight: '700',
+  },
+
+  headerSubtitle: {
+    color: '#eeeeff',
+    fontSize: 14,
+    lineHeight: 20,
+    marginTop: 8,
+  },
+
+  container: {
+    padding: 20,
+    flex: 1,
+  },
+
+  card: {
+    backgroundColor: '#ffffff',
+    borderRadius: 14,
+    padding: 16,
+
+    elevation: 3,
+
+    shadowColor: '#000000',
+    shadowOpacity: 0.08,
+    shadowRadius: 6,
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+  },
+
+  label: {
+    color: '#333333',
+    fontSize: 15,
+    fontWeight: '600',
+    marginBottom: 8,
+  },
+
+  inputRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  input: {
+    flex: 1,
+    height: 48,
+
+    borderWidth: 1,
+    borderColor: '#e0e4ef',
+
+    borderRadius: 8,
+
+    paddingHorizontal: 12,
+
+    color: '#222222',
+
+    fontSize: 16,
+
+    backgroundColor: '#ffffff',
+  },
+
+  addButton: {
+    width: 48,
+    height: 48,
+
+    marginLeft: 8,
+
+    borderRadius: 8,
+
+    backgroundColor: '#5563DE',
+
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  addButtonText: {
+    color: '#ffffff',
+    fontSize: 28,
+    fontWeight: '400',
+    lineHeight: 30,
+  },
+
+  primaryButton: {
+    marginTop: 12,
+
+    minHeight: 48,
+
+    borderRadius: 10,
+
+    backgroundColor: '#2b6cff',
+
+    justifyContent: 'center',
+    alignItems: 'center',
+
+    paddingHorizontal: 12,
+  },
+
+  primaryButtonText: {
+    color: '#ffffff',
+    fontSize: 14,
+    fontWeight: '700',
+  },
+
+  clearButton: {
+    marginTop: 10,
+    padding: 8,
+    alignItems: 'center',
+  },
+
+  clearButtonText: {
+    color: '#888888',
+    fontSize: 14,
+    fontWeight: '600',
+  },
+
+  resultCard: {
+    marginTop: 18,
+
+    padding: 16,
+
+    borderRadius: 14,
+
+    backgroundColor: '#ffffff',
+
+    elevation: 2,
+
+    shadowColor: '#000000',
+    shadowOpacity: 0.05,
+    shadowRadius: 6,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+  },
+
+  resultHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+
+  resultInfo: {
+    flex: 1,
+  },
+
+  resultLabel: {
+    color: '#666666',
+    fontSize: 14,
+    fontWeight: '600',
+  },
+
+  resultDescription: {
+    color: '#999999',
+    fontSize: 11,
+    marginTop: 4,
+  },
+
+  resultValue: {
+    color: '#1f3b8a',
+    fontSize: 20,
+    fontWeight: '800',
+    marginLeft: 10,
+  },
+
+  classificationRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 14,
+  },
+
+  pill: {
+    paddingVertical: 7,
+    paddingHorizontal: 12,
+    borderRadius: 20,
+  },
+
+  pillText: {
+    color: '#ffffff',
+    fontSize: 12,
+    fontWeight: '700',
+  },
+
+  spacer: {
+    flex: 1,
+  },
+
+  tipsButton: {
+    minHeight: 40,
+
+    paddingVertical: 9,
+    paddingHorizontal: 13,
+
+    borderRadius: 10,
+
+    backgroundColor: '#27ae60',
+
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  tipsButtonText: {
+    color: '#ffffff',
+    fontSize: 13,
+    fontWeight: '700',
+  },
+
+  disabledButton: {
+    opacity: 0.6,
+  },
+
+  loadingContainer: {
+    marginTop: 14,
+
+    flexDirection: 'row',
+
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  loadingText: {
+    color: '#27ae60',
+    fontSize: 13,
+    marginLeft: 8,
+  },
+
+  tipsBox: {
+    marginTop: 14,
+
+    padding: 14,
+
+    borderRadius: 10,
+
+    backgroundColor: '#f0fff4',
+
+    borderWidth: 1,
+    borderColor: '#d6f5df',
+  },
+
+  tipsTitle: {
+    color: '#245c3f',
+    fontSize: 15,
+    fontWeight: '800',
+    marginBottom: 8,
+  },
+
+  tipsText: {
+    color: '#2d6a4f',
+    fontSize: 14,
+    lineHeight: 21,
+  },
+
+  footer: {
+    alignItems: 'center',
+    padding: 18,
+  },
+
+  footerText: {
+    color: '#7b85a6',
+    textAlign: 'center',
+    fontSize: 13,
+  },
+
+  smallText: {
+    color: '#b0b8cf',
+    fontSize: 12,
+    marginTop: 6,
+  },
+
+});
