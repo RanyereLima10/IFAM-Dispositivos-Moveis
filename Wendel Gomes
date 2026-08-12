@@ -1474,6 +1474,1603 @@ INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
 DISCIPLINA: Dispositivos Móveis
 PROFESSOR: Ranyere Lima
 ALUNO(A): Wendel Gomes Da Silva
-DATA:  00/ 06 /2026
+DATA:  12/ 08 /2026
+Bimestre: 2º Bimestre
+**********************************************************************/
+1
+
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  Alert
+} from 'react-native';
+
+export default function App() {
+  const [nome, setNome] = useState('');
+  const [email, setEmail] = useState('');
+  const [idade, setIdade] = useState('');
+
+  const cadastrar = () => {
+    // Verifica se todos os campos foram preenchidos
+    if (!nome.trim() || !email.trim() || !idade.trim()) {
+      Alert.alert(
+        'Erro',
+        'Por favor, preencha todos os campos.'
+      );
+      return;
+    }
+
+    // Validação do e-mail
+    const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailValido.test(email)) {
+      Alert.alert(
+        'Erro',
+        'Digite um e-mail válido.'
+      );
+      return;
+    }
+
+    // Validação da idade
+    const idadeNumero = Number(idade);
+
+    if (isNaN(idadeNumero) || idadeNumero <= 0) {
+      Alert.alert(
+        'Erro',
+        'Digite uma idade válida.'
+      );
+      return;
+    }
+
+    // Cadastro realizado com sucesso
+    Alert.alert(
+      'Cadastro realizado!',
+      `Olá, ${nome}!\n\nSeu cadastro foi realizado com sucesso.\n\nNome: ${nome}\nE-mail: ${email}\nIdade: ${idadeNumero} anos`
+    );
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titulo}>Cadastro de Usuário</Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Digite seu nome"
+        value={nome}
+        onChangeText={setNome}
+      />
+
+      <TextInput
+        style={styles.input}
+        placeholder="Digite seu e-mail"
+        keyboardType="email-address"
+        autoCapitalize="none"
+        value={email}
+        onChangeText={setEmail}
+      />
+
+      <TextInput
+        style={styles.input}
+        placeholder="Digite sua idade"
+        keyboardType="numeric"
+        value={idade}
+        onChangeText={setIdade}
+      />
+
+      <TouchableOpacity
+        style={styles.botao}
+        onPress={cadastrar}
+      >
+        <Text style={styles.textoBotao}>Cadastrar</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 25,
+    justifyContent: 'center',
+    backgroundColor: '#f2f2f2'
+  },
+
+  titulo: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 30
+  },
+
+  input: {
+    backgroundColor: '#fff',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    padding: 14,
+    marginBottom: 15,
+    fontSize: 16
+  },
+
+  botao: {
+    backgroundColor: '#007bff',
+    padding: 15,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginTop: 10
+  },
+
+  textoBotao: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold'
+  }
+});
+
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Wendel Gomes Da Silva
+DATA:  12/ 08 /2026
+Bimestre: 2º Bimestre
+**********************************************************************/
+2
+
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet
+} from 'react-native';
+
+export default function App() {
+  const [litros, setLitros] = useState('');
+  const [resultado, setResultado] = useState('');
+
+  function calcularConsumo() {
+    const consumoDiario = Number(litros);
+
+    // Verifica se o valor é válido
+    if (litros === '' || isNaN(consumoDiario) || consumoDiario < 0) {
+      setResultado('Digite uma quantidade válida de litros.');
+      return;
+    }
+
+    // Calcula o consumo semanal
+    const consumoSemanal = consumoDiario * 7;
+
+    // Classifica o consumo
+    let classificacao;
+
+    if (consumoDiario < 100) {
+      classificacao = 'Econômico';
+    } else if (consumoDiario <= 200) {
+      classificacao = 'Moderado';
+    } else {
+      classificacao = 'Elevado';
+    }
+
+    setResultado(
+      `Consumo diário: ${consumoDiario} litros\n` +
+      `Consumo semanal: ${consumoSemanal} litros\n` +
+      `Classificação: ${classificacao}`
+    );
+  }
+
+  return (
+    <View style={styles.container}>
+
+      <Text style={styles.titulo}>
+        Controle de Consumo de Água
+      </Text>
+
+      <Text style={styles.label}>
+        Litros consumidos por dia:
+      </Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Ex: 80"
+        keyboardType="numeric"
+        value={litros}
+        onChangeText={setLitros}
+      />
+
+      <TouchableOpacity
+        style={styles.botao}
+        onPress={calcularConsumo}
+      >
+        <Text style={styles.textoBotao}>
+          Calcular Consumo
+        </Text>
+      </TouchableOpacity>
+
+      {resultado !== '' && (
+        <View style={styles.resultado}>
+          <Text style={styles.textoResultado}>
+            {resultado}
+          </Text>
+        </View>
+      )}
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 20,
+    backgroundColor: '#f5f5f5'
+  },
+
+  titulo: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 30
+  },
+
+  label: {
+    fontSize: 16,
+    marginBottom: 8
+  },
+
+  input: {
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    padding: 12,
+    fontSize: 16,
+    marginBottom: 15
+  },
+
+  botao: {
+    backgroundColor: '#007bff',
+    padding: 15,
+    borderRadius: 8,
+    alignItems: 'center'
+  },
+
+  textoBotao: {
+    color: 'white',
+    fontSize: 17,
+    fontWeight: 'bold'
+  },
+
+  resultado: {
+    marginTop: 25,
+    padding: 20,
+    backgroundColor: 'white',
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#ccc'
+  },
+
+  textoResultado: {
+    fontSize: 17,
+    lineHeight: 28
+  }
+});
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Wendel Gomes Da Silva
+DATA:  12/ 08 /2026
+Bimestre: 2º Bimestre
+**********************************************************************/
+3
+
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  Alert
+} from 'react-native';
+
+export default function App() {
+  const [peso, setPeso] = useState('');
+  const [altura, setAltura] = useState('');
+  const [resultado, setResultado] = useState('');
+
+  function calcularIMC() {
+    const pesoNumero = Number(peso);
+    const alturaNumero = Number(altura);
+
+    // Verifica se os campos foram preenchidos
+    if (peso === '' || altura === '') {
+      Alert.alert(
+        'Atenção',
+        'Preencha o peso e a altura.'
+      );
+      return;
+    }
+
+    // Verifica se os valores são válidos
+    if (
+      isNaN(pesoNumero) ||
+      isNaN(alturaNumero) ||
+      pesoNumero <= 0 ||
+      alturaNumero <= 0
+    ) {
+      Alert.alert(
+        'Erro',
+        'Digite valores válidos para peso e altura.'
+      );
+      return;
+    }
+
+    // Calcula o IMC
+    const imc = pesoNumero / (alturaNumero * alturaNumero);
+
+    let classificacao;
+
+    if (imc < 18.5) {
+      classificacao = 'Abaixo do peso';
+    } else if (imc < 25) {
+      classificacao = 'Peso adequado';
+    } else if (imc < 30) {
+      classificacao = 'Sobrepeso';
+    } else {
+      classificacao = 'Obesidade';
+    }
+
+    setResultado(
+      `IMC: ${imc.toFixed(2)}\n` +
+      `Classificação: ${classificacao}`
+    );
+  }
+
+  return (
+    <View style={styles.container}>
+
+      <Text style={styles.titulo}>
+        Calculadora de IMC
+      </Text>
+
+      <Text style={styles.label}>
+        Peso (kg):
+      </Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Ex: 70"
+        keyboardType="numeric"
+        value={peso}
+        onChangeText={setPeso}
+      />
+
+      <Text style={styles.label}>
+        Altura (metros):
+      </Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Ex: 1.75"
+        keyboardType="numeric"
+        value={altura}
+        onChangeText={setAltura}
+      />
+
+      <TouchableOpacity
+        style={styles.botao}
+        onPress={calcularIMC}
+      >
+        <Text style={styles.textoBotao}>
+          Calcular IMC
+        </Text>
+      </TouchableOpacity>
+
+      {resultado !== '' && (
+        <View style={styles.resultado}>
+          <Text style={styles.textoResultado}>
+            {resultado}
+          </Text>
+        </View>
+      )}
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 20,
+    backgroundColor: '#f5f5f5'
+  },
+
+  titulo: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 30
+  },
+
+  label: {
+    fontSize: 16,
+    marginBottom: 8
+  },
+
+  input: {
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    padding: 12,
+    fontSize: 16,
+    marginBottom: 15
+  },
+
+  botao: {
+    backgroundColor: '#007bff',
+    padding: 15,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginTop: 10
+  },
+
+  textoBotao: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold'
+  },
+
+  resultado: {
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 8,
+    marginTop: 25,
+    borderWidth: 1,
+    borderColor: '#ccc'
+  },
+
+  textoResultado: {
+    fontSize: 18,
+    textAlign: 'center',
+    lineHeight: 30
+  }
+});
+
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Wendel Gomes Da Silva
+DATA:  12/ 08 /2026
+Bimestre: 2º Bimestre
+**********************************************************************/
+4
+
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet
+} from 'react-native';
+
+export default function App() {
+  const [celsius, setCelsius] = useState('');
+  const [resultado, setResultado] = useState('');
+
+  function converterTemperatura() {
+    if (celsius === '') {
+      setResultado('Digite uma temperatura em Celsius.');
+      return;
+    }
+
+    const valor = Number(celsius);
+
+    if (isNaN(valor)) {
+      setResultado('Digite um valor válido.');
+      return;
+    }
+
+    // Fórmula: Fahrenheit = (Celsius × 9/5) + 32
+    const fahrenheit = (valor * 9 / 5) + 32;
+
+    setResultado(
+      `${valor} °C = ${fahrenheit.toFixed(2)} °F`
+    );
+  }
+
+  function limparCampos() {
+    setCelsius('');
+    setResultado('');
+  }
+
+  return (
+    <View style={styles.container}>
+
+      <Text style={styles.titulo}>
+        Conversor de Temperatura
+      </Text>
+
+      <Text style={styles.label}>
+        Temperatura em Celsius:
+      </Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Ex: 25"
+        keyboardType="numeric"
+        value={celsius}
+        onChangeText={setCelsius}
+      />
+
+      <TouchableOpacity
+        style={styles.botao}
+        onPress={converterTemperatura}
+      >
+        <Text style={styles.textoBotao}>
+          Converter
+        </Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.botaoLimpar}
+        onPress={limparCampos}
+      >
+        <Text style={styles.textoBotao}>
+          Limpar
+        </Text>
+      </TouchableOpacity>
+
+      {resultado !== '' && (
+        <View style={styles.resultado}>
+          <Text style={styles.textoResultado}>
+            {resultado}
+          </Text>
+        </View>
+      )}
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 20,
+    backgroundColor: '#f5f5f5'
+  },
+
+  titulo: {
+    fontSize: 25,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 30
+  },
+
+  label: {
+    fontSize: 16,
+    marginBottom: 8
+  },
+
+  input: {
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    padding: 12,
+    fontSize: 16,
+    marginBottom: 15
+  },
+
+  botao: {
+    backgroundColor: '#007bff',
+    padding: 15,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginBottom: 10
+  },
+
+  botaoLimpar: {
+    backgroundColor: '#555',
+    padding: 15,
+    borderRadius: 8,
+    alignItems: 'center'
+  },
+
+  textoBotao: {
+    color: 'white',
+    fontSize: 17,
+    fontWeight: 'bold'
+  },
+
+  resultado: {
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 8,
+    marginTop: 25,
+    borderWidth: 1,
+    borderColor: '#ccc'
+  },
+
+  textoResultado: {
+    fontSize: 20,
+    textAlign: 'center',
+    fontWeight: 'bold'
+  }
+});
+
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Wendel Gomes Da Silva
+DATA:  12/ 08 /2026
+Bimestre: 2º Bimestre
+**********************************************************************/
+5 
+
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  Alert
+} from 'react-native';
+
+export default function App() {
+  const [usuario, setUsuario] = useState('');
+  const [senha, setSenha] = useState('');
+
+  function entrar() {
+    // Verifica usuário e senha
+    if (usuario === 'admin' && senha === '1234') {
+      Alert.alert(
+        'Login realizado',
+        'Bem-vindo, administrador!'
+      );
+    } else {
+      Alert.alert(
+        'Acesso negado',
+        'Usuário ou senha incorretos.'
+      );
+    }
+  }
+
+  return (
+    <View style={styles.container}>
+
+      <Text style={styles.titulo}>
+        Sistema de Login
+      </Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Usuário"
+        value={usuario}
+        onChangeText={setUsuario}
+        autoCapitalize="none"
+      />
+
+      <TextInput
+        style={styles.input}
+        placeholder="Senha"
+        value={senha}
+        onChangeText={setSenha}
+        secureTextEntry={true}
+      />
+
+      <TouchableOpacity
+        style={styles.botao}
+        onPress={entrar}
+      >
+        <Text style={styles.textoBotao}>
+          Entrar
+        </Text>
+      </TouchableOpacity>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 20,
+    backgroundColor: '#f5f5f5'
+  },
+
+  titulo: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 30
+  },
+
+  input: {
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 15,
+    fontSize: 16
+  },
+
+  botao: {
+    backgroundColor: '#007bff',
+    padding: 15,
+    borderRadius: 8,
+    alignItems: 'center'
+  },
+
+  textoBotao: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold'
+  }
+});
+
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Wendel Gomes Da Silva
+DATA:  12/ 08 /2026
+Bimestre: 2º Bimestre
+**********************************************************************/
+6
+
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  Alert
+} from 'react-native';
+
+export default function App() {
+  const [valor, setValor] = useState('');
+
+  function realizarSaque() {
+    const valorSaque = Number(valor);
+
+    // Verifica se o campo foi preenchido
+    if (valor === '') {
+      Alert.alert(
+        'Atenção',
+        'Digite um valor para saque.'
+      );
+      return;
+    }
+
+    // Verifica se o valor é válido
+    if (isNaN(valorSaque) || valorSaque <= 0) {
+      Alert.alert(
+        'Erro',
+        'Digite um valor válido.'
+      );
+      return;
+    }
+
+    // Verifica se é múltiplo de R$10
+    if (valorSaque % 10 === 0) {
+      Alert.alert(
+        'Saque autorizado',
+        `O saque de R$ ${valorSaque.toFixed(2)} foi autorizado.`
+      );
+    } else {
+      Alert.alert(
+        'Valor inválido',
+        'O valor do saque deve ser múltiplo de R$ 10.'
+      );
+    }
+  }
+
+  return (
+    <View style={styles.container}>
+
+      <Text style={styles.titulo}>
+        Simulador de Caixa Eletrônico
+      </Text>
+
+      <Text style={styles.label}>
+        Valor do saque:
+      </Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Ex: 100"
+        keyboardType="numeric"
+        value={valor}
+        onChangeText={setValor}
+      />
+
+      <TouchableOpacity
+        style={styles.botao}
+        onPress={realizarSaque}
+      >
+        <Text style={styles.textoBotao}>
+          Realizar Saque
+        </Text>
+      </TouchableOpacity>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 20,
+    backgroundColor: '#f5f5f5'
+  },
+
+  titulo: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 30
+  },
+
+  label: {
+    fontSize: 16,
+    marginBottom: 8
+  },
+
+  input: {
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    padding: 12,
+    fontSize: 16,
+    marginBottom: 15
+  },
+
+  botao: {
+    backgroundColor: '#007bff',
+    padding: 15,
+    borderRadius: 8,
+    alignItems: 'center'
+  },
+
+  textoBotao: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold'
+  }
+});
+
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Wendel Gomes Da Silva
+DATA:  12/ 08 /2026
+Bimestre: 2º Bimestre
+**********************************************************************/
+7
+
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  FlatList,
+  StyleSheet
+} from 'react-native';
+
+export default function App() {
+  const [produto, setProduto] = useState('');
+  const [lista, setLista] = useState([]);
+
+  // Adiciona um produto à lista
+  function adicionarProduto() {
+    if (produto.trim() === '') {
+      return;
+    }
+
+    setLista([...lista, produto.trim()]);
+    setProduto('');
+  }
+
+  // Limpa toda a lista
+  function limparLista() {
+    setLista([]);
+  }
+
+  return (
+    <View style={styles.container}>
+
+      <Text style={styles.titulo}>
+        Lista de Compras
+      </Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Digite um produto"
+        value={produto}
+        onChangeText={setProduto}
+      />
+
+      <TouchableOpacity
+        style={styles.botao}
+        onPress={adicionarProduto}
+      >
+        <Text style={styles.textoBotao}>
+          Adicionar Produto
+        </Text>
+      </TouchableOpacity>
+
+      <Text style={styles.subtitulo}>
+        Produtos:
+      </Text>
+
+      <FlatList
+        data={lista}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({ item, index }) => (
+          <View style={styles.item}>
+            <Text style={styles.textoItem}>
+              {index + 1}. {item}
+            </Text>
+          </View>
+        )}
+        ListEmptyComponent={
+          <Text style={styles.vazio}>
+            Nenhum produto cadastrado.
+          </Text>
+        }
+      />
+
+      <TouchableOpacity
+        style={styles.botaoLimpar}
+        onPress={limparLista}
+      >
+        <Text style={styles.textoBotao}>
+          Limpar Lista
+        </Text>
+      </TouchableOpacity>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    paddingTop: 60,
+    backgroundColor: '#f5f5f5'
+  },
+
+  titulo: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 25
+  },
+
+  input: {
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    padding: 12,
+    fontSize: 16,
+    marginBottom: 10
+  },
+
+  botao: {
+    backgroundColor: '#007bff',
+    padding: 15,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginBottom: 20
+  },
+
+  botaoLimpar: {
+    backgroundColor: '#555',
+    padding: 15,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginTop: 15
+  },
+
+  textoBotao: {
+    color: 'white',
+    fontSize: 17,
+    fontWeight: 'bold'
+  },
+
+  subtitulo: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10
+  },
+
+  item: {
+    backgroundColor: 'white',
+    padding: 15,
+    borderRadius: 8,
+    marginBottom: 8,
+    borderWidth: 1,
+    borderColor: '#ddd'
+  },
+
+  textoItem: {
+    fontSize: 17
+  },
+
+  vazio: {
+    textAlign: 'center',
+    fontSize: 16,
+    color: '#777',
+    marginTop: 20
+  }
+});
+
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Wendel Gomes Da Silva
+DATA:  12/ 08 /2026
+Bimestre: 2º Bimestre
+**********************************************************************/
+8
+
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet
+} from 'react-native';
+
+export default function App() {
+  const [cliques, setCliques] = useState(0);
+
+  // Incrementa o contador
+  function contarClique() {
+    setCliques(cliques + 1);
+  }
+
+  // Reinicia o contador
+  function reiniciarContador() {
+    setCliques(0);
+  }
+
+  return (
+    <View style={styles.container}>
+
+      <Text style={styles.titulo}>
+        Contador de Cliques
+      </Text>
+
+      <Text style={styles.contador}>
+        Cliques: {cliques}
+      </Text>
+
+      <TouchableOpacity
+        style={styles.botao}
+        onPress={contarClique}
+      >
+        <Text style={styles.textoBotao}>
+          Clique Aqui
+        </Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.botaoReiniciar}
+        onPress={reiniciarContador}
+      >
+        <Text style={styles.textoBotao}>
+          Reiniciar
+        </Text>
+      </TouchableOpacity>
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+    backgroundColor: '#f5f5f5'
+  },
+
+  titulo: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    marginBottom: 30
+  },
+
+  contador: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    marginBottom: 30
+  },
+
+  botao: {
+    backgroundColor: '#007bff',
+    paddingVertical: 15,
+    paddingHorizontal: 50,
+    borderRadius: 8,
+    marginBottom: 15
+  },
+
+  botaoReiniciar: {
+    backgroundColor: '#555',
+    paddingVertical: 15,
+    paddingHorizontal: 45,
+    borderRadius: 8
+  },
+
+  textoBotao: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold'
+  }
+});
+
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Wendel Gomes Da Silva
+DATA:  12/ 08 /2026
+Bimestre: 2º Bimestre
+**********************************************************************/
+9
+
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet
+} from 'react-native';
+
+export default function App() {
+  const [planoSelecionado, setPlanoSelecionado] = useState('');
+  const [resultado, setResultado] = useState('');
+
+  const planos = {
+    Basico: {
+      nome: 'Básico',
+      valor: 'R$ 49,90',
+      beneficios: '100 Mbps de internet e suporte online.'
+    },
+
+    Intermediario: {
+      nome: 'Intermediário',
+      valor: 'R$ 79,90',
+      beneficios: '300 Mbps de internet, Wi-Fi grátis e suporte prioritário.'
+    },
+
+    Premium: {
+      nome: 'Premium',
+      valor: 'R$ 119,90',
+      beneficios: '600 Mbps de internet, Wi-Fi grátis e suporte 24 horas.'
+    }
+  };
+
+  function selecionarPlano(plano) {
+    setPlanoSelecionado(plano);
+    setResultado('');
+  }
+
+  function contratar() {
+    if (planoSelecionado === '') {
+      setResultado('Selecione um plano primeiro.');
+      return;
+    }
+
+    const plano = planos[planoSelecionado];
+
+    setResultado(
+      `Plano: ${plano.nome}\n\n` +
+      `Valor mensal: ${plano.valor}\n\n` +
+      `Benefícios: ${plano.beneficios}`
+    );
+  }
+
+  return (
+    <View style={styles.container}>
+
+      <Text style={styles.titulo}>
+        Escolha seu Plano de Internet
+      </Text>
+
+      <TouchableOpacity
+        style={[
+          styles.opcao,
+          planoSelecionado === 'Basico' && styles.selecionado
+        ]}
+        onPress={() => selecionarPlano('Basico')}
+      >
+        <Text style={styles.textoOpcao}>
+          Básico
+        </Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={[
+          styles.opcao,
+          planoSelecionado === 'Intermediario' && styles.selecionado
+        ]}
+        onPress={() => selecionarPlano('Intermediario')}
+      >
+        <Text style={styles.textoOpcao}>
+          Intermediário
+        </Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={[
+          styles.opcao,
+          planoSelecionado === 'Premium' && styles.selecionado
+        ]}
+        onPress={() => selecionarPlano('Premium')}
+      >
+        <Text style={styles.textoOpcao}>
+          Premium
+        </Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.botao}
+        onPress={contratar}
+      >
+        <Text style={styles.textoBotao}>
+          Ver Plano
+        </Text>
+      </TouchableOpacity>
+
+      {resultado !== '' && (
+        <View style={styles.resultado}>
+          <Text style={styles.textoResultado}>
+            {resultado}
+          </Text>
+        </View>
+      )}
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 20,
+    backgroundColor: '#f5f5f5'
+  },
+
+  titulo: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 25
+  },
+
+  opcao: {
+    backgroundColor: 'white',
+    borderWidth: 2,
+    borderColor: '#ccc',
+    padding: 16,
+    borderRadius: 8,
+    marginBottom: 12,
+    alignItems: 'center'
+  },
+
+  selecionado: {
+    borderColor: '#007bff',
+    backgroundColor: '#e7f1ff'
+  },
+
+  textoOpcao: {
+    fontSize: 18,
+    fontWeight: 'bold'
+  },
+
+  botao: {
+    backgroundColor: '#007bff',
+    padding: 15,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginTop: 10
+  },
+
+  textoBotao: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold'
+  },
+
+  resultado: {
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    padding: 20,
+    marginTop: 25
+  },
+
+  textoResultado: {
+    fontSize: 17,
+    lineHeight: 26
+  }
+});
+
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Wendel Gomes Da Silva
+DATA:  12/ 08 /2026
+Bimestre: 2º Bimestre
+**********************************************************************/
+10
+
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet
+} from 'react-native';
+
+export default function App() {
+  const [nota1, setNota1] = useState('');
+  const [nota2, setNota2] = useState('');
+  const [nota3, setNota3] = useState('');
+  const [resultado, setResultado] = useState('');
+
+  function calcularMedia() {
+    // Verifica se todas as notas foram preenchidas
+    if (nota1 === '' || nota2 === '' || nota3 === '') {
+      setResultado('Preencha todas as notas.');
+      return;
+    }
+
+    const n1 = Number(nota1);
+    const n2 = Number(nota2);
+    const n3 = Number(nota3);
+
+    // Verifica se os valores são válidos
+    if (
+      isNaN(n1) ||
+      isNaN(n2) ||
+      isNaN(n3) ||
+      n1 < 0 ||
+      n1 > 10 ||
+      n2 < 0 ||
+      n2 > 10 ||
+      n3 < 0 ||
+      n3 > 10
+    ) {
+      setResultado('Digite notas válidas entre 0 e 10.');
+      return;
+    }
+
+    // Calcula a média
+    const media = (n1 + n2 + n3) / 3;
+
+    let situacao;
+
+    // Classificação do aluno
+    if (media >= 7) {
+      situacao = 'Aprovado';
+    } else if (media >= 5) {
+      situacao = 'Recuperação';
+    } else {
+      situacao = 'Reprovado';
+    }
+
+    setResultado(
+      `Média: ${media.toFixed(2)}\n` +
+      `Situação: ${situacao}`
+    );
+  }
+
+  function limparCampos() {
+    setNota1('');
+    setNota2('');
+    setNota3('');
+    setResultado('');
+  }
+
+  return (
+    <View style={styles.container}>
+
+      <Text style={styles.titulo}>
+        Controle Escolar
+      </Text>
+
+      <Text style={styles.label}>
+        Primeira nota:
+      </Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Digite a primeira nota"
+        keyboardType="numeric"
+        value={nota1}
+        onChangeText={setNota1}
+      />
+
+      <Text style={styles.label}>
+        Segunda nota:
+      </Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Digite a segunda nota"
+        keyboardType="numeric"
+        value={nota2}
+        onChangeText={setNota2}
+      />
+
+      <Text style={styles.label}>
+        Terceira nota:
+      </Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Digite a terceira nota"
+        keyboardType="numeric"
+        value={nota3}
+        onChangeText={setNota3}
+      />
+
+      <TouchableOpacity
+        style={styles.botao}
+        onPress={calcularMedia}
+      >
+        <Text style={styles.textoBotao}>
+          Calcular Média
+        </Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.botaoLimpar}
+        onPress={limparCampos}
+      >
+        <Text style={styles.textoBotao}>
+          Limpar
+        </Text>
+      </TouchableOpacity>
+
+      {resultado !== '' && (
+        <View style={styles.resultado}>
+          <Text style={styles.textoResultado}>
+            {resultado}
+          </Text>
+        </View>
+      )}
+
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 20,
+    backgroundColor: '#f5f5f5'
+  },
+
+  titulo: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 25
+  },
+
+  label: {
+    fontSize: 16,
+    marginBottom: 5
+  },
+
+  input: {
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    padding: 12,
+    fontSize: 16,
+    marginBottom: 12
+  },
+
+  botao: {
+    backgroundColor: '#007bff',
+    padding: 15,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginTop: 5,
+    marginBottom: 10
+  },
+
+  botaoLimpar: {
+    backgroundColor: '#555',
+    padding: 15,
+    borderRadius: 8,
+    alignItems: 'center'
+  },
+
+  textoBotao: {
+    color: 'white',
+    fontSize: 17,
+    fontWeight: 'bold'
+  },
+
+  resultado: {
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    padding: 20,
+    marginTop: 20
+  },
+
+  textoResultado: {
+    fontSize: 19,
+    textAlign: 'center',
+    lineHeight: 30,
+    fontWeight: 'bold'
+  }
+});
+
+**********************************************************************/
+
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Wendel Gomes Da Silva
+DATA:  00/ 08 /2026
 Bimestre: 2º Bimestre
 **********************************************************************/
