@@ -3119,3 +3119,195 @@ const styles = StyleSheet.create({
 
 
 
+
+**********************************************************************/
+INSTITUTO FEDERAL DO AMAZONAS – CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Ana Moser M. de Oliveira
+DATA:  12/ 08 /2026
+Bimestre: 3º Bimestre
+descrição: implementar I.a no projeto consumo de agua
+**********************************************************************/
+
+
+
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, SafeAreaView, ActivityIndicator, ScrollView } from 'react-native';
+
+export default function App() {
+  const [consumoDiario, setConsumoDiario] = useState('');
+  const [resultado, setResultado] = useState('');
+  const [classificacao, setClassificacao] = useState('');
+  const [dicaIA, setDicaIA] = useState('');
+  const [carregando, setCarregando] = useState(false);
+
+  // Função que simula as respostas que a IA do Google traria
+  const simularDicaIA = (gastoSemanal, status) => {
+    setCarregando(true);
+    setDicaIA('A IA está analisando seu consumo...');
+
+    // Pequeno atraso para simular o tempo de resposta da internet
+    setTimeout(() => {
+      let conselho = '';
+
+      if (gastoSemanal <= 700) {
+        const dicasEco = [
+          "Excelente trabalho! Seu consumo está exemplar. Continue fechando a torneira enquanto escova os dentes para manter esse nível.",
+          "Parabéns pelo consumo sustentável! Uma boa dica para melhorar ainda mais é reaproveitar a água da máquina de lavar para limpar o quintal.",
+          "Sua rotina protege o planeta! Continue monitorando pequenos vazamentos para manter o status econômico."
+        ];
+        conselho = dicasEco[Math.floor(Math.random() * dicasEco.length)];
+      } else if (gastoSemanal <= 1400) {
+        const dicasMod = [
+          "Seu consumo está na média, mas pode melhorar. Tente reduzir o tempo de banho em apenas 2 minutos para entrar na zona verde.",
+          "Atenção moderada. Evite usar a mangueira para lavar a calçada; adote a vassoura e o balde para economizar dezenas de litros.",
+          "Consumo estável, mas com margem de economia. Lave roupas apenas quando a máquina estiver na capacidade máxima."
+        ];
+        conselho = dicasMod[Math.floor(Math.random() * dicasMod.length)];
+      } else {
+        const dicasAlt = [
+          "Alerta de consumo elevado! Reduza urgentemente o tempo de banho e verifique se há descargas com vazamento na sua residência.",
+          "Seu gasto semanal está acima do recomendado. Evite lavar o carro com mangueira e adote hábitos mais conscientes imediatamente.",
+          "Atenção: Consumo crítico! Pequenas mudanças diárias, como fechar a torneira ao ensaboar a louça, cortam seu gasto pela metade."
+        ];
+        conselho = dicasAlt[Math.floor(Math.random() * dicasAlt.length)];
+      }
+
+      setDicaIA(conselho);
+      setCarregando(false);
+    }, 1200); // 1.2 segundos de simulação
+  };
+
+  const calcularConsumo = () => {
+    const diario = parseFloat(consumoDiario);
+    if (isNaN(diario) || diario < 0) {
+      setResultado('Por favor, insira um valor válido.');
+      setClassificacao('');
+      setDicaIA('');
+      return;
+    }
+
+    const semanal = diario * 7;
+    setResultado(`Consumo Semanal: ${semanal.toFixed(1)} Litros`);
+
+    let status = '';
+    if (semanal <= 700) {
+      status = 'Econômico 🌱';
+    } else if (semanal <= 1400) {
+      status = 'Moderado ⚠️';
+    } else {
+      status = 'Elevado 🚨';
+    }
+    
+    setClassificacao(status);
+    
+    // Executa a resposta instantânea na tela
+    simularDicaIA(semanal, status);
+  };
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <Text style={styles.titulo}>Controle de Consumo de Água</Text>
+        
+        <TextInput 
+          style={styles.input} 
+          placeholder="Litros consumidos por dia" 
+          keyboardType="numeric" 
+          value={consumoDiario} 
+          onChangeText={setConsumoDiario} 
+        />
+        
+        <TouchableOpacity style={styles.botao} onPress={calcularConsumo} disabled={carregando}>
+          {carregando ? (
+            <ActivityIndicator color="#ffffff" />
+          ) : (
+            <Text style={styles.botaoTexto}>Calcular Semanal</Text>
+          )}
+        </TouchableOpacity>
+
+        {resultado ? (
+          <View style={styles.painelResultado}>
+            <Text style={styles.textoResultado}>{resultado}</Text>
+            <Text style={styles.textoClassificacao}>Classificação: {classificacao}</Text>
+            
+            <View style={styles.linhaDivisoria} />
+            
+            <Text style={styles.tituloIA}> Insights do Assistente:</Text>
+            <Text style={styles.textoIA}>{dicaIA}</Text>
+          </View>
+        ) : null}
+      </ScrollView>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: { flex: 1, 
+  backgroundColor: '#000080' },
+  scrollContainer: { padding: 20,
+  justifyContent: 'center',
+  flexGrow: 1 },
+
+  titulo: { fontSize: 24,
+  fontWeight: 'bold',
+  marginBottom: 20, 
+  textAlign: 'center', 
+  color: '#aff' },
+
+  input: { backgroundColor: '#fff', 
+  padding: 15,
+  borderRadius: 8,
+  marginBottom: 15, 
+  borderWidth: 1, 
+  borderColor: '#cbd5e1', 
+  fontSize: 16 },
+
+  botao: { backgroundColor: '#C70300', 
+  padding: 15, 
+  borderRadius: 8, 
+  alignItems: 'center', 
+  minHeight: 55, 
+  justifyContent: 'center' },
+  botaoTexto: { color: '#aff', 
+  fontWeight: 'bold', 
+  fontSize: 16 },
+
+  painelResultado: { marginTop: 25, 
+  padding: 20,
+  backgroundColor: '#aff', 
+  borderRadius: 8,
+  elevation: 2,
+  shadowColor: '#000', 
+  shadowOpacity: 0.1, 
+  shadowRadius: 4, 
+  shadowOffset: { width: 0, 
+  height: 2 } },
+
+  textoResultado: { fontSize: 18, 
+  fontWeight: '600', 
+  color: '#333', 
+  textAlign: 'center' },
+
+  textoClassificacao: { fontSize: 18, 
+  fontWeight: 'bold', 
+  color: '#2b6cb0', 
+  marginTop: 10, 
+  textAlign: 'center' },
+  linhaDivisoria: { height: 1,
+  backgroundColor: '#e2e8f0', 
+  marginVertical: 15 },
+
+  tituloIA: { fontSize: 15,
+  fontWeight: 'bold',
+  color: '#2f855a', 
+  marginBottom: 6 },
+  textoIA: { fontSize: 15, 
+  color: '#4a5568', 
+  lineHeight: 22 }
+});
+
+
+
+
