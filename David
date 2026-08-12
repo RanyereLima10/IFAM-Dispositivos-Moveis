@@ -1391,183 +1391,489 @@ assuto:implementar ia no projeto;Consumo de Agua
 **********************************************************************/
 
 
+import React, { useState, useEffect } from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+  SafeAreaView,
+  ScrollView,
+  Keyboard,
+  ActivityIndicator,
+  Alert,
+  StatusBar,
+} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, SafeAreaView, ActivityIndicator, ScrollView } from 'react-native';
+// =====================================================
+// OPENROUTER
+// =====================================================
+const OPENROUTER_API_KEY = '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'; 
+const MODEL = 'openai/gpt-4o-mini';
+
+const STORAGE_KEY = '@ecomonitor_historico';
 
 export default function App() {
-  const [consumoDiario, setConsumoDiario] = useState('');
-  const [resultado, setResultado] = useState('');
-  const [classificacao, setClassificacao] = useState('');
-  const [dicaIA, setDicaIA] = useState('');
+  const [litrosDiarios, setLitrosDiarios] = useState('');
   const [carregando, setCarregando] = useState(false);
+  const [resultadoIA, setResultadoIA] = useState(null);
+  const [historico, setHistorico] = useState([]);
 
-  // Função que simula as respostas que a IA do Google traria
-  const simularDicaIA = (gastoSemanal, status) => {
-    setCarregando(true);
-    setDicaIA('A IA está analisando seu consumo...');
+  useEffect(() => {
+    carregarHistorico();
+  }, []);
 
-    // Pequeno atraso para simular o tempo de resposta da internet
-    setTimeout(() => {
-      let conselho = '';
-
-      if (gastoSemanal <= 700) {
-        const dicasEco = [
-          "Excelente trabalho! Seu consumo está exemplar. Continue fechando a torneira enquanto escova os dentes para manter esse nível.",
-          "Parabéns pelo consumo sustentável! Uma boa dica para melhorar ainda mais é reaproveitar a água da máquina de lavar para limpar o quintal.",
-          "Sua rotina protege o planeta! Continue monitorando pequenos vazamentos para manter o status econômico."
-        ];
-        conselho = dicasEco[Math.floor(Math.random() * dicasEco.length)];
-      } else if (gastoSemanal <= 1400) {
-        const dicasMod = [
-          "Seu consumo está na média, mas pode melhorar. Tente reduzir o tempo de banho em apenas 2 minutos para entrar na zona verde.",
-          "Atenção moderada. Evite usar a mangueira para lavar a calçada; adote a vassoura e o balde para economizar dezenas de litros.",
-          "Consumo estável, mas com margem de economia. Lave roupas apenas quando a máquina estiver na capacidade máxima."
-        ];
-        conselho = dicasMod[Math.floor(Math.random() * dicasMod.length)];
-      } else {
-        const dicasAlt = [
-          "Alerta de consumo elevado! Reduza urgentemente o tempo de banho e verifique se há descargas com vazamento na sua residência.",
-          "Seu gasto semanal está acima do recomendado. Evite lavar o carro com mangueira e adote hábitos mais conscientes imediatamente.",
-          "Atenção: Consumo crítico! Pequenas mudanças diárias, como fechar a torneira ao ensaboar a louça, cortam seu gasto pela metade."
-        ];
-        conselho = dicasAlt[Math.floor(Math.random() * dicasAlt.length)];
+  const carregarHistorico = async () => {
+    try {
+      const dados = await AsyncStorage.getItem(STORAGE_KEY);
+      if (dados) {
+        setHistorico(JSON.parse(dados));
       }
-
-      setDicaIA(conselho);
-      setCarregando(false);
-    }, 1200); // 1.2 segundos de simulação
+    } catch (erro) {
+      console.log('Erro ao carregar histórico:', erro);
+    }
   };
 
-  const calcularConsumo = () => {
-    const diario = parseFloat(consumoDiario);
-    if (isNaN(diario) || diario < 0) {
-      setResultado('Por favor, insira um valor válido.');
-      setClassificacao('');
-      setDicaIA('');
+  const salvarNoHistorico = async (analise) => {
+    try {
+      const novoItem = {
+        id: Date.now().toString(),
+        ...analise,
+        criado_em: new Date().toISOString(),
+      };
+
+      const dados = await AsyncStorage.getItem(STORAGE_KEY);
+      const lista = dados ? JSON.parse(dados) : [];
+      const novaLista = [novoItem, ...lista];
+
+      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(novaLista));
+      setHistorico(novaLista);
+    } catch (erro) {
+      console.log('Erro ao salvar:', erro);
+    }
+  };
+
+  const deletarAnalise = async (id) => {
+    try {
+      const novaLista = historico.filter((item) => item.id !== id);
+      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(novaLista));
+      setHistorico(novaLista);
+    } catch (erro) {
+      console.log('Erro ao deletar:', erro);
+    }
+  };
+
+  const limparHistorico = async () => {
+    try {
+      await AsyncStorage.removeItem(STORAGE_KEY);
+      setHistorico([]);
+    } catch (erro) {
+      console.log('Erro ao limpar:', erro);
+    }
+  };
+
+  const converterResposta = (texto) => {
+    if (!texto) throw new Error('A IA não retornou nenhum conteúdo.');
+
+    let textoLimpo = texto
+      .trim()
+      .replace(/^```json\s*/i, '')
+      .replace(/^```\s*/i, '')
+      .replace(/\s*```$/i, '')
+      .trim();
+
+    try {
+      return JSON.parse(textoLimpo);
+    } catch {
+      throw new Error('A IA retornou um formato inválido.');
+    }
+  };
+
+  const analisarConsumoComIA = async () => {
+    if (!litrosDiarios.trim()) {
+      Alert.alert('Atenção', 'Digite o consumo diário de água.');
       return;
     }
 
-    const semanal = diario * 7;
-    setResultado(`Consumo Semanal: ${semanal.toFixed(1)} Litros`);
+    const litros = parseFloat(litrosDiarios.replace(',', '.'));
 
-    let status = '';
-    if (semanal <= 700) {
-      status = 'Econômico 🌱';
-    } else if (semanal <= 1400) {
-      status = 'Moderado ⚠️';
-    } else {
-      status = 'Elevado 🚨';
+    if (isNaN(litros) || litros <= 0) {
+      Alert.alert('Atenção', 'Digite um número válido maior que zero.');
+      return;
     }
-    
-    setClassificacao(status);
-    
-    // Executa a resposta instantânea na tela
-    simularDicaIA(semanal, status);
+
+    if (
+      !OPENROUTER_API_KEY ||
+      OPENROUTER_API_KEY.includes('SUA_CHAVE') ||
+      OPENROUTER_API_KEY.includes(' ')
+    ) {
+      Alert.alert(
+        'API não configurada',
+        'Coloque sua chave do OpenRouter na variável OPENROUTER_API_KEY.'
+      );
+      return;
+    }
+
+    Keyboard.dismiss();
+    setCarregando(true);
+    setResultadoIA(null);
+
+    const prompt = `
+Você é a IA do aplicativo EcoMonitor IA.
+O usuário informou um consumo de ${litros} litros de água por dia.
+
+Faça uma análise simples.
+Retorne SOMENTE JSON válido nesta estrutura:
+
+{
+  "semanal": "1050 litros",
+  "classificacao": "Consumo moderado",
+  "cor": "#3F51B5",
+  "descricao": "Explicação curta do que o consumo significa.",
+  "dica": "Dica prática para economizar água."
+}
+
+Não coloque texto fora do JSON.
+`;
+
+    try {
+      const resposta = await fetch(
+        'https://openrouter.ai/api/v1/chat/completions',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${OPENROUTER_API_KEY}`,
+            'HTTP-Referer': 'https://snack.expo.dev',
+            'X-Title': 'EcoMonitor IA',
+          },
+          body: JSON.stringify({
+            model: MODEL,
+            messages: [{ role: 'user', content: prompt }],
+            response_format: { type: 'json_object' },
+            max_tokens: 400,
+            temperature: 0.3,
+          }),
+        }
+      );
+
+      const dados = await resposta.json();
+
+      if (!resposta.ok) {
+        throw new Error(
+          dados?.error?.message || `Erro HTTP ${resposta.status}`
+        );
+      }
+
+      const textoIA = dados?.choices?.[0]?.message?.content;
+      if (!textoIA) {
+        throw new Error('A IA não retornou resposta.');
+      }
+
+      const resultado = converterResposta(textoIA);
+
+      const resultadoFinal = {
+        litrosDiarios: litros,
+        semanal: resultado.semanal || `${litros * 7} litros`,
+        classificacao: resultado.classificacao || 'Consumo analisado',
+        cor: resultado.cor || '#3F51B5',
+        descricao:
+          resultado.descricao ||
+          'A IA analisou o consumo informado.',
+        dica: resultado.dica || 'Evite desperdícios de água.',
+      };
+
+      setResultadoIA(resultadoFinal);
+      await salvarNoHistorico(resultadoFinal);
+    } catch (erro) {
+      console.log('ERRO:', erro);
+      Alert.alert(
+        'Erro',
+        erro?.message || 'Não foi possível conectar ao OpenRouter.'
+      );
+    } finally {
+      setCarregando(false);
+    }
+  };
+
+  const novaAnalise = () => {
+    setResultadoIA(null);
+    setLitrosDiarios('');
+  };
+
+  const confirmarLimpar = () => {
+    Alert.alert('Limpar histórico', 'Apagar todas as análises?', [
+      { text: 'Cancelar', style: 'cancel' },
+      {
+        text: 'Apagar',
+        style: 'destructive',
+        onPress: limparHistorico,
+      },
+    ]);
+  };
+
+  const confirmarDeletar = (id) => {
+    Alert.alert('Excluir', 'Remover esta análise?', [
+      { text: 'Cancelar', style: 'cancel' },
+      {
+        text: 'Excluir',
+        style: 'destructive',
+        onPress: () => deletarAnalise(id),
+      },
+    ]);
+  };
+
+  const formatarData = (iso) => {
+    try {
+      return new Date(iso).toLocaleString('pt-BR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+      });
+    } catch {
+      return '';
+    }
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <Text style={styles.titulo}>Controle de Consumo de Água</Text>
-        
-        <TextInput 
-          style={styles.input} 
-          placeholder="Litros consumidos por dia" 
-          keyboardType="numeric" 
-          value={consumoDiario} 
-          onChangeText={setConsumoDiario} 
-        />
-        
-        <TouchableOpacity style={styles.botao} onPress={calcularConsumo} disabled={carregando}>
-          {carregando ? (
-            <ActivityIndicator color="#ffffff" />
-          ) : (
-            <Text style={styles.botaoTexto}>Calcular Semanal</Text>
-          )}
-        </TouchableOpacity>
+      <StatusBar barStyle="dark-content" backgroundColor="#F0F2F5" />
 
-        {resultado ? (
-          <View style={styles.painelResultado}>
-            <Text style={styles.textoResultado}>{resultado}</Text>
-            <Text style={styles.textoClassificacao}>Classificação: {classificacao}</Text>
-            
-            <View style={styles.linhaDivisoria} />
-            
-            <Text style={styles.tituloIA}> Insights do Assistente:</Text>
-            <Text style={styles.textoIA}>{dicaIA}</Text>
+      <ScrollView
+        contentContainerStyle={styles.scrollContent}
+        keyboardShouldPersistTaps="handled"
+      >
+        <View style={styles.header}>
+          <Text style={styles.title}>EcoMonitor IA</Text>
+          <Text style={styles.subtitle}>Monitore seu consumo de água</Text>
+        </View>
+
+        <View style={styles.card}>
+          <Text style={styles.label}>Consumo diário</Text>
+          <Text style={styles.description}>
+            Informe quantos litros de água são consumidos por dia.
+          </Text>
+
+          <TextInput
+            style={styles.input}
+            placeholder="Ex: 150"
+            placeholderTextColor="#999"
+            keyboardType="decimal-pad"
+            value={litrosDiarios}
+            onChangeText={setLitrosDiarios}
+            editable={!carregando}
+          />
+          <Text style={styles.unit}>litros por dia</Text>
+
+          <TouchableOpacity
+            style={[styles.button, carregando && styles.buttonDisabled]}
+            onPress={analisarConsumoComIA}
+            disabled={carregando}
+            activeOpacity={0.8}
+          >
+            {carregando ? (
+              <>
+                <ActivityIndicator color="#FFF" size="small" />
+                <Text style={styles.buttonText}>Analisando...</Text>
+              </>
+            ) : (
+              <Text style={styles.buttonText}>Analisar consumo</Text>
+            )}
+          </TouchableOpacity>
+        </View>
+
+        {resultadoIA && (
+          <View
+            style={[styles.resultCard, { borderLeftColor: resultadoIA.cor }]}
+          >
+            <Text style={styles.resultHeader}>RESULTADO DA IA</Text>
+            <Text style={[styles.resultTitle, { color: resultadoIA.cor }]}>
+              {resultadoIA.classificacao}
+            </Text>
+
+            <View style={styles.divider} />
+
+            <Text style={styles.resultLabel}>Consumo semanal</Text>
+            <Text style={styles.weeklyValue}>{resultadoIA.semanal}</Text>
+
+            <Text style={styles.resultLabel}> O que aconteceu</Text>
+            <Text style={styles.feedbackText}>{resultadoIA.descricao}</Text>
+
+            <Text style={styles.resultLabel}> Dica</Text>
+            <Text style={styles.feedbackText}>{resultadoIA.dica}</Text>
+
+            <TouchableOpacity style={styles.newButton} onPress={novaAnalise}>
+              <Text style={styles.newButtonText}>Nova análise</Text>
+            </TouchableOpacity>
           </View>
-        ) : null}
+        )}
+
+        <View style={styles.historicoHeader}>
+          <Text style={styles.historicoTitle}>Histórico</Text>
+          {historico.length > 0 && (
+            <TouchableOpacity onPress={confirmarLimpar}>
+              <Text style={styles.limparTexto}>Limpar</Text>
+            </TouchableOpacity>
+          )}
+        </View>
+
+        {historico.length === 0 ? (
+          <View style={styles.infoCard}>
+            <Text style={styles.infoText}>
+              Nenhuma análise salva ainda.
+            </Text>
+          </View>
+        ) : (
+          historico.map((item) => (
+            <View
+              key={item.id}
+              style={[styles.historicoCard, { borderLeftColor: item.cor }]}
+            >
+              <View style={styles.historicoTop}>
+                <Text style={[styles.historicoClass, { color: item.cor }]}>
+                  {item.classificacao}
+                </Text>
+                <TouchableOpacity onPress={() => confirmarDeletar(item.id)}>
+                  <Text style={styles.deletarTexto}>Excluir</Text>
+                </TouchableOpacity>
+              </View>
+
+              <Text style={styles.historicoLitros}>
+                {item.litrosDiarios} L/dia → {item.semanal}
+              </Text>
+
+              {item.descricao ? (
+                <Text style={styles.historicoDesc} numberOfLines={2}>
+                  {item.descricao}
+                </Text>
+              ) : null}
+
+              <Text style={styles.historicoData}>
+                {formatarData(item.criado_em)}
+              </Text>
+            </View>
+          ))
+        )}
+
+        <View style={styles.infoCard}>
+          <Text style={styles.infoTitle}> EcoMonitor IA</Text>
+          <Text style={styles.infoText}>
+            Histórico salvo no celular com AsyncStorage (funciona no Snack).
+          </Text>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, 
-  backgroundColor: '#000080' },
-  scrollContainer: { padding: 20,
-  justifyContent: 'center',
-  flexGrow: 1 },
-
-  titulo: { fontSize: 24,
-  fontWeight: 'bold',
-  marginBottom: 20, 
-  textAlign: 'center', 
-  color: '#aff' },
-
-  input: { backgroundColor: '#fff', 
-  padding: 15,
-  borderRadius: 8,
-  marginBottom: 15, 
-  borderWidth: 1, 
-  borderColor: '#cbd5e1', 
-  fontSize: 16 },
-
-  botao: { backgroundColor: '#C70300', 
-  padding: 15, 
-  borderRadius: 8, 
-  alignItems: 'center', 
-  minHeight: 55, 
-  justifyContent: 'center' },
-  botaoTexto: { color: '#aff', 
-  fontWeight: 'bold', 
-  fontSize: 16 },
-
-  painelResultado: { marginTop: 25, 
-  padding: 20,
-  backgroundColor: '#aff', 
-  borderRadius: 8,
-  elevation: 2,
-  shadowColor: '#000', 
-  shadowOpacity: 0.1, 
-  shadowRadius: 4, 
-  shadowOffset: { width: 0, 
-  height: 2 } },
-
-  textoResultado: { fontSize: 18, 
-  fontWeight: '600', 
-  color: '#333', 
-  textAlign: 'center' },
-
-  textoClassificacao: { fontSize: 18, 
-  fontWeight: 'bold', 
-  color: '#2b6cb0', 
-  marginTop: 10, 
-  textAlign: 'center' },
-  linhaDivisoria: { height: 1,
-  backgroundColor: '#e2e8f0', 
-  marginVertical: 15 },
-
-  tituloIA: { fontSize: 15,
-  fontWeight: 'bold',
-  color: '#2f855a', 
-  marginBottom: 6 },
-  textoIA: { fontSize: 15, 
-  color: '#4a5568', 
-  lineHeight: 22 }
+  container: { flex: 1, backgroundColor: '#F0F2F5' },
+  scrollContent: { padding: 20, paddingBottom: 40 },
+  header: { alignItems: 'center', marginTop: 20, marginBottom: 25 },
+  title: { fontSize: 28, fontWeight: '800', color: '#1A237E' },
+  subtitle: { marginTop: 6, fontSize: 14, color: '#777' },
+  card: {
+    backgroundColor: '#FFF',
+    borderRadius: 18,
+    padding: 20,
+    elevation: 4,
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+    shadowOffset: { width: 0, height: 2 },
+  },
+  label: { fontSize: 17, fontWeight: '700', color: '#222', marginBottom: 6 },
+  description: { fontSize: 14, color: '#777', marginBottom: 14, lineHeight: 20 },
+  input: {
+    borderWidth: 1.5,
+    borderColor: '#E0E0E0',
+    borderRadius: 12,
+    paddingHorizontal: 14,
+    paddingVertical: 14,
+    fontSize: 17,
+    backgroundColor: '#FAFAFA',
+    color: '#222',
+  },
+  unit: { fontSize: 12, color: '#888', marginTop: 4, marginBottom: 16 },
+  button: {
+    backgroundColor: '#3F51B5',
+    paddingVertical: 16,
+    borderRadius: 12,
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 10,
+  },
+  buttonDisabled: { opacity: 0.7 },
+  buttonText: { color: '#FFF', fontSize: 16, fontWeight: 'bold' },
+  resultCard: {
+    backgroundColor: '#FFF',
+    borderRadius: 14,
+    padding: 18,
+    marginTop: 22,
+    borderLeftWidth: 7,
+    elevation: 3,
+  },
+  resultHeader: { fontSize: 12, fontWeight: '700', color: '#888', marginBottom: 6 },
+  resultTitle: { fontSize: 20, fontWeight: '800' },
+  divider: { height: 1, backgroundColor: '#EEE', marginVertical: 14 },
+  resultLabel: { fontSize: 13, fontWeight: '700', color: '#666', marginTop: 8 },
+  weeklyValue: {
+    fontSize: 22,
+    fontWeight: '800',
+    color: '#1A237E',
+    marginTop: 4,
+    marginBottom: 12,
+  },
+  feedbackText: { marginTop: 6, fontSize: 15, lineHeight: 21, color: '#333' },
+  newButton: {
+    marginTop: 18,
+    paddingVertical: 12,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#3F51B5',
+    alignItems: 'center',
+  },
+  newButtonText: { color: '#3F51B5', fontWeight: '700', fontSize: 14 },
+  historicoHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 28,
+    marginBottom: 12,
+  },
+  historicoTitle: { fontSize: 17, fontWeight: '700', color: '#1A237E' },
+  limparTexto: { color: '#E53935', fontWeight: '600', fontSize: 14 },
+  historicoCard: {
+    backgroundColor: '#FFF',
+    borderRadius: 12,
+    padding: 14,
+    marginBottom: 10,
+    borderLeftWidth: 5,
+  },
+  historicoTop: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  historicoClass: { fontSize: 15, fontWeight: '700' },
+  deletarTexto: { color: '#E53935', fontSize: 13, fontWeight: '600' },
+  historicoLitros: { marginTop: 5, fontSize: 14, color: '#444', fontWeight: '600' },
+  historicoDesc: { marginTop: 5, fontSize: 13, color: '#666', lineHeight: 18 },
+  historicoData: { marginTop: 7, fontSize: 12, color: '#999' },
+  infoCard: {
+    marginTop: 18,
+    padding: 16,
+    backgroundColor: '#E8EAF6',
+    borderRadius: 14,
+  },
+  infoTitle: { fontSize: 15, fontWeight: '700', color: '#1A237E', marginBottom: 6 },
+  infoText: { fontSize: 13, lineHeight: 18, color: '#4A4A4A' },
 });
-
 
 **********************************************************************/
 
