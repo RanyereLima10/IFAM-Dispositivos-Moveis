@@ -1,3 +1,369 @@
+
+CODIGO DA AULA DIA 12/08/2026 INTEGRAÇÃO COM IA E BANCO DE DADOS
+import React, { useState } from 'react';
+import {
+  Text,
+  View,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  SafeAreaView,
+  ScrollView,
+  ActivityIndicator,
+  Keyboard,
+  Alert,
+} from 'react-native';
+
+export default function App() {
+  const [consumoDiario, setConsumoDiario] = useState('');
+  const [consumoSemanal, setConsumoSemanal] = useState(null);
+  const [classificacao, setClassificacao] = useState('');
+  const [corClassificacao, setCorClassificacao] = useState('#000');
+
+  const [relatorio, setRelatorio] = useState('');
+  const [carregando, setCarregando] = useState(false);
+  const [salvo, setSalvo] = useState(false);
+
+  // Simulação de geração de relatório (aqui você trocará pela chamada real ao backend/IA)
+  const gerarRelatorioIA = async (diario, semanal, classe) => {
+    setCarregando(true);
+    setRelatorio('');
+    setSalvo(false);
+
+    setTimeout(() => {
+      let analise = '';
+
+      if (classe === 'Econômico') {
+        analise =
+          `Parabéns! Seu consumo médio de ${diario} L/dia (${semanal} L/semana) é econômico e sustentável.\n\n` +
+          `• Dica 1: Continue monitorando rotina de banho e fechamentos de torneira.\n` +
+          `• Dica 2: Reaproveite água da máquina para limpeza externa.`;
+      } else if (classe === 'Moderado') {
+        analise =
+          `Bom, mas com espaço para melhoria: ${diario} L/dia (${semanal} L/semana).\n\n` +
+          `• Dica 1: Reduza o tempo de banho em 2 minutos.\n` +
+          `• Dica 2: Verifique torneiras e use balde para lavagem de carros.`;
+      } else {
+        analise =
+          `Atenção: consumo alto — ${diario} L/dia (${semanal} L/semana).\n\n` +
+          `• Dica 1: Inspecione vazamentos e substitua descargas antigas.\n` +
+          `• Dica 2: Evite mangueira; use vassoura e balde.`;
+      }
+
+      setRelatorio(analise);
+      setCarregando(false);
+    }, 1200);
+  };
+
+  const calcularEAnalisar = () => {
+    Keyboard.dismiss();
+    const diario = parseFloat(consumoDiario.replace(',', '.'));
+
+    if (isNaN(diario) || diario < 0) {
+      Alert.alert('Entrada inválida', 'Por favor, informe uma quantidade válida de litros.');
+      return;
+    }
+
+    const semanal = +(diario * 7).toFixed(1);
+    setConsumoSemanal(semanal);
+
+    let classe = '';
+    let cor = '#000';
+
+    if (diario <= 110) {
+      classe = 'Econômico';
+      cor = '#16a34a';
+    } else if (diario <= 200) {
+      classe = 'Moderado';
+      cor = '#f59e0b';
+    } else {
+      classe = 'Elevado';
+      cor = '#dc2626';
+    }
+
+    setClassificacao(classe);
+    setCorClassificacao(cor);
+
+    gerarRelatorioIA(diario, semanal, classe);
+  };
+
+  // Scaffold: função que salva o relatório no backend (substitua a URL pela do seu deploy)
+  const salvarRelatorio = async () => {
+    if (!relatorio || consumoSemanal == null) {
+      Alert.alert('Nada para salvar', 'Gere o relatório antes de salvar.');
+      return;
+    }
+
+    setCarregando(true);
+    try {
+      // Exemplo de payload que o backend espera:
+      const payload = {
+        diaria: consumoDiario,
+        semanal: consumoSemanal,
+        classificacao: classificacao,
+        relatorio: relatorio,
+        created_at: new Date().toISOString(),
+      };
+
+      // Troque para a URL real do seu backend quando disponível
+      const resp = await fetch('https://SEU_BACKEND.example.com/api/reports', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (!resp.ok) {
+        // Se não houver backend ainda, tratamos como "salvo localmente" (scaffold)
+        throw new Error('Backend indisponível — salvamento simulado localmente.');
+      }
+
+      setSalvo(true);
+      Alert.alert('Sucesso', 'Relatório salvo no servidor.');
+    } catch (err) {
+      // Scaffold: comportamento quando backend não está pronto
+      console.warn('salvarRelatorio:', err.message);
+      setSalvo(true);
+      Alert.alert(
+        'Salvo localmente',
+        'Servidor indisponível. O relatório foi marcado como salvo localmente (scaffold).'
+      );
+    } finally {
+      setCarregando(false);
+    }
+  };
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollContainer} keyboardShouldPersistTaps="handled">
+        <View style={styles.header}>
+          <Text style={styles.brand}>AquaSmart</Text>
+          <View style={styles.priceBadge}>
+            <Text style={styles.priceText}>PRO</Text>
+          </View>
+        </View>
+
+        <View style={styles.heroCard}>
+          <Text style={styles.heroTitle}>Transforme consumo em economia</Text>
+          <Text style={styles.heroSubtitle}>
+            Calcule seu consumo, receba um relatório prático e veja dicas imediatas para reduzir custos.
+          </Text>
+
+          <View style={styles.inputRow}>
+            <View style={styles.inputCard}>
+              <Text style={styles.label}>Consumo Diário</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Ex: 110"
+                keyboardType="numeric"
+                value={consumoDiario}
+                onChangeText={setConsumoDiario}
+                placeholderTextColor="#9ca3af"
+              />
+            </View>
+
+            <TouchableOpacity
+              style={[styles.ctaButton, carregando && { opacity: 0.7 }]}
+              onPress={calcularEAnalisar}
+              disabled={carregando}
+            >
+              {carregando ? (
+                <ActivityIndicator color="#fff" />
+              ) : (
+                <Text style={styles.ctaText}>Analisar</Text>
+              )}
+            </TouchableOpacity>
+          </View>
+
+          {/* Resultados */}
+          {consumoSemanal !== null && (
+            <View style={styles.results}>
+              <View style={styles.resultRow}>
+                <Text style={styles.resultLabel}>Consumo Semanal</Text>
+                <Text style={styles.resultValue}>{consumoSemanal} L</Text>
+              </View>
+
+              <View style={styles.resultRow}>
+                <Text style={styles.resultLabel}>Classificação</Text>
+                <Text style={[styles.resultValue, { color: corClassificacao }]}>{classificacao}</Text>
+              </View>
+
+              <View style={styles.relatorioCard}>
+                <Text style={styles.relatorioTitulo}>Relatório</Text>
+
+                {carregando ? (
+                  <ActivityIndicator size="large" color="#0ea5a4" style={{ marginVertical: 12 }} />
+                ) : (
+                  <Text style={styles.relatorioTexto}>{relatorio}</Text>
+                )}
+
+                <View style={styles.actionsRow}>
+                  <TouchableOpacity
+                    style={[styles.saveButton, salvo && styles.saveButtonSaved]}
+                    onPress={salvarRelatorio}
+                    disabled={carregando}
+                  >
+                    <Text style={styles.saveButtonText}>{salvo ? 'Salvo' : 'Salvar Relatório'}</Text>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity
+                    style={styles.shareButton}
+                    onPress={() => {
+                      Alert.alert('Compartilhar', 'Funcionalidade de compartilhar em futuro release.');
+                    }}
+                  >
+                    <Text style={styles.shareText}>Compartilhar</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </View>
+          )}
+        </View>
+
+        <View style={styles.footer}>
+          <Text style={styles.footerTitle}>Porque escolher AquaSmart?</Text>
+          <Text style={styles.footerText}>
+            Relatórios rápidos, dicas práticas e suporte para transformar consumo em economia real.
+          </Text>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: { flex: 1, backgroundColor: '#f8fafc' },
+  scrollContainer: { padding: 20, paddingTop: 28 },
+
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  brand: {
+    fontSize: 22,
+    fontWeight: '700',
+    color: '#0f172a',
+    flex: 1,
+  },
+  priceBadge: {
+    backgroundColor: '#06b6d4',
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    borderRadius: 999,
+  },
+  priceText: {
+    color: '#021124',
+    fontWeight: '700',
+  },
+
+  heroCard: {
+    backgroundColor: '#ffffff',
+    borderRadius: 14,
+    padding: 18,
+    elevation: 6,
+    shadowColor: '#0f172a',
+    shadowOpacity: 0.06,
+    shadowOffset: { width: 0, height: 6 },
+    shadowRadius: 12,
+  },
+  heroTitle: {
+    fontSize: 20,
+    fontWeight: '800',
+    color: '#0f172a',
+    marginBottom: 6,
+  },
+  heroSubtitle: {
+    fontSize: 13,
+    color: '#374151',
+    marginBottom: 14,
+  },
+
+  inputRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  inputCard: { flex: 1 },
+  label: {
+    fontSize: 12,
+    color: '#6b7280',
+    marginBottom: 6,
+    fontWeight: '600',
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#e6edf2',
+    backgroundColor: '#f8fafc',
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    borderRadius: 10,
+    fontSize: 16,
+    color: '#0f172a',
+  },
+
+  ctaButton: {
+    marginLeft: 12,
+    backgroundColor: '#0ea5a4',
+    paddingHorizontal: 14,
+    paddingVertical: 12,
+    borderRadius: 10,
+    justifyContent: 'center',
+  },
+  ctaText: { color: '#021124', fontWeight: '700' },
+
+  results: {
+    marginTop: 16,
+  },
+  resultRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: 6,
+  },
+  resultLabel: { color: '#6b7280', fontSize: 13, fontWeight: '600' },
+  resultValue: { fontSize: 15, fontWeight: '800', color: '#0f172a' },
+
+  relatorioCard: {
+    marginTop: 12,
+    backgroundColor: '#f1fdfb',
+    borderRadius: 10,
+    padding: 12,
+    borderLeftWidth: 4,
+    borderLeftColor: '#06b6d4',
+  },
+  relatorioTitulo: { fontWeight: '800', color: '#064e3b', marginBottom: 8 },
+  relatorioTexto: { color: '#064e3b', lineHeight: 20 },
+
+  actionsRow: {
+    flexDirection: 'row',
+    marginTop: 12,
+    justifyContent: 'space-between',
+  },
+  saveButton: {
+    backgroundColor: '#063f3a',
+    paddingVertical: 10,
+    paddingHorizontal: 14,
+    borderRadius: 10,
+  },
+  saveButtonSaved: { backgroundColor: '#065f46' },
+  saveButtonText: { color: '#fff', fontWeight: '700' },
+
+  shareButton: {
+    borderColor: '#06b6d4',
+    borderWidth: 1,
+    paddingVertical: 10,
+    paddingHorizontal: 14,
+    borderRadius: 10,
+  },
+  shareText: { color: '#06b6d4', fontWeight: '700' },
+
+  footer: { marginTop: 18, padding: 12 },
+  footerTitle: { fontWeight: '800', color: '#0f172a', marginBottom: 6 },
+  footerText: { color: '#6b7280' },
+});
+
+
+
+
+
 ************+***************************************************************
 INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
 DISCIPLINA: Dispositivos Móveis
