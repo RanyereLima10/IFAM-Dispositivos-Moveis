@@ -1339,7 +1339,7 @@ PROFESSOR: Ranyere Lima
 ALUNO(A): Rakely da Silva de Souza
 DADOS: 12 / 08 / 2026
 BIMESTRE: 3º Bimestre
-Descrição: Revisão
+Descrição: Revisão, Cadastro Inteligente de Usuários
 
 import React, { useState } from 'react';
 import {
@@ -1514,4 +1514,226 @@ const styles = StyleSheet.create({
   },
 });
 
+
+*********************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Rakely da Silva de Souza
+DADOS: 12 / 08 / 2026
+BIMESTRE: 3º Bimestre
+Descrição: Revisão, Calculadora de IMC
+
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  KeyboardAvoidingView,
+  Platform,
+  Alert,
+} from 'react-native';
+
+export default function App() {
+  const [peso, setPeso] = useState('');
+  const [altura, setAltura] = useState('');
+  const [resultado, setResultado] = useState(null);
+
+  function calcularIMC() {
+    const pesoNumerico = parseFloat(peso.replace(',', '.'));
+    const alturaNumerica = parseFloat(altura.replace(',', '.'));
+
+    // Validação dos campos
+    if (!pesoNumerico || !alturaNumerica || pesoNumerico <= 0 || alturaNumerica <= 0) {
+      Alert.alert(
+        'Atenção',
+        'Digite um peso e uma altura válidos.'
+      );
+      return;
+    }
+
+    // Cálculo do IMC
+    const imc = pesoNumerico / (alturaNumerica * alturaNumerica);
+
+    // Classificação do IMC
+    let classificacao;
+
+    if (imc < 18.5) {
+      classificacao = 'Abaixo do peso';
+    } else if (imc < 25) {
+      classificacao = 'Peso normal';
+    } else if (imc < 30) {
+      classificacao = 'Sobrepeso';
+    } else if (imc < 35) {
+      classificacao = 'Obesidade grau I';
+    } else if (imc < 40) {
+      classificacao = 'Obesidade grau II';
+    } else {
+      classificacao = 'Obesidade grau III';
+    }
+
+    setResultado({
+      imc: imc.toFixed(2),
+      classificacao: classificacao,
+    });
+  }
+
+  return (
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+    >
+      <View style={styles.card}>
+        <Text style={styles.titulo}>Calculadora de IMC</Text>
+
+        <Text style={styles.subtitulo}>
+          Informe seus dados para calcular o Índice de Massa Corporal.
+        </Text>
+
+        <Text style={styles.label}>Peso (kg)</Text>
+
+        <TextInput
+          style={styles.input}
+          placeholder="Ex.: 60"
+          keyboardType="decimal-pad"
+          value={peso}
+          onChangeText={setPeso}
+        />
+
+        <Text style={styles.label}>Altura (m)</Text>
+
+        <TextInput
+          style={styles.input}
+          placeholder="Ex.: 1.65"
+          keyboardType="decimal-pad"
+          value={altura}
+          onChangeText={setAltura}
+        />
+
+        <TouchableOpacity
+          style={styles.botao}
+          onPress={calcularIMC}
+        >
+          <Text style={styles.textoBotao}>CALCULAR IMC</Text>
+        </TouchableOpacity>
+
+        {resultado && (
+          <View style={styles.resultado}>
+            <Text style={styles.tituloResultado}>Resultado</Text>
+
+            <Text style={styles.imc}>
+              IMC: {resultado.imc}
+            </Text>
+
+            <Text style={styles.classificacao}>
+              {resultado.classificacao}
+            </Text>
+          </View>
+        )}
+      </View>
+    </KeyboardAvoidingView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#EAF4F4',
+    justifyContent: 'center',
+    padding: 20,
+  },
+
+  card: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 20,
+    padding: 25,
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOpacity: 0.15,
+    shadowRadius: 8,
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+  },
+
+  titulo: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#176B87',
+    textAlign: 'center',
+    marginBottom: 10,
+  },
+
+  subtitulo: {
+    fontSize: 15,
+    color: '#666',
+    textAlign: 'center',
+    marginBottom: 25,
+  },
+
+  label: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 8,
+  },
+
+  input: {
+    height: 50,
+    borderWidth: 1,
+    borderColor: '#B8C8CC',
+    borderRadius: 10,
+    paddingHorizontal: 15,
+    fontSize: 16,
+    marginBottom: 18,
+    backgroundColor: '#FAFAFA',
+  },
+
+  botao: {
+    backgroundColor: '#176B87',
+    height: 52,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 5,
+  },
+
+  textoBotao: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+
+  resultado: {
+    marginTop: 25,
+    padding: 20,
+    backgroundColor: '#F0F8FA',
+    borderRadius: 12,
+    alignItems: 'center',
+  },
+
+  tituloResultado: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 8,
+  },
+
+  imc: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    color: '#176B87',
+    marginBottom: 5,
+  },
+
+  classificacao: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#333',
+    textAlign: 'center',
+  },
+});
 
