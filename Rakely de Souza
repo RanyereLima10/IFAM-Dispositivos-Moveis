@@ -1737,3 +1737,1237 @@ const styles = StyleSheet.create({
   },
 });
 
+
+*********************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Rakely da Silva de Souza
+DADOS: 12 / 08 / 2026
+BIMESTRE: 3º Bimestre
+Descrição: Revisão, Conversor de temperatura
+
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  Alert,
+} from 'react-native';
+
+export default function App() {
+  const [celsius, setCelsius] = useState('');
+  const [fahrenheit, setFahrenheit] = useState('');
+
+  // Função responsável pela conversão
+  function converterTemperatura() {
+    const valor = parseFloat(celsius.replace(',', '.'));
+
+    // Validação do campo
+    if (isNaN(valor)) {
+      Alert.alert(
+        'Atenção',
+        'Digite uma temperatura válida em Celsius.'
+      );
+      return;
+    }
+
+    // Fórmula: F = (C × 9/5) + 32
+    const resultado = (valor * 9) / 5 + 32;
+
+    setFahrenheit(resultado.toFixed(2));
+  }
+
+  // Função responsável por limpar os campos
+  function limparCampos() {
+    setCelsius('');
+    setFahrenheit('');
+  }
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.card}>
+        <Text style={styles.titulo}>
+          Conversor de Temperatura
+        </Text>
+
+        <Text style={styles.subtitulo}>
+          Converta temperaturas de Celsius para Fahrenheit
+        </Text>
+
+        <Text style={styles.label}>
+          Temperatura em Celsius (°C)
+        </Text>
+
+        <TextInput
+          style={styles.input}
+          placeholder="Ex.: 25"
+          keyboardType="decimal-pad"
+          value={celsius}
+          onChangeText={setCelsius}
+        />
+
+        <TouchableOpacity
+          style={styles.botao}
+          onPress={converterTemperatura}
+        >
+          <Text style={styles.textoBotao}>
+            CONVERTER
+          </Text>
+        </TouchableOpacity>
+
+        {fahrenheit !== '' && (
+          <View style={styles.resultado}>
+            <Text style={styles.labelResultado}>
+              Resultado:
+            </Text>
+
+            <Text style={styles.temperatura}>
+              {fahrenheit} °F
+            </Text>
+          </View>
+        )}
+
+        <TouchableOpacity
+          style={styles.botaoLimpar}
+          onPress={limparCampos}
+        >
+          <Text style={styles.textoBotaoLimpar}>
+            LIMPAR
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#EAF4F4',
+    justifyContent: 'center',
+    padding: 20,
+  },
+
+  card: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 20,
+    padding: 25,
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOpacity: 0.15,
+    shadowRadius: 8,
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+  },
+
+  titulo: {
+    fontSize: 27,
+    fontWeight: 'bold',
+    color: '#176B87',
+    textAlign: 'center',
+    marginBottom: 10,
+  },
+
+  subtitulo: {
+    fontSize: 15,
+    color: '#666',
+    textAlign: 'center',
+    marginBottom: 25,
+  },
+
+  label: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 8,
+  },
+
+  input: {
+    height: 50,
+    borderWidth: 1,
+    borderColor: '#B8C8CC',
+    borderRadius: 10,
+    paddingHorizontal: 15,
+    fontSize: 16,
+    marginBottom: 18,
+    backgroundColor: '#FAFAFA',
+  },
+
+  botao: {
+    backgroundColor: '#176B87',
+    height: 52,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 5,
+  },
+
+  textoBotao: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+
+  resultado: {
+    marginTop: 25,
+    padding: 20,
+    backgroundColor: '#F0F8FA',
+    borderRadius: 12,
+    alignItems: 'center',
+  },
+
+  labelResultado: {
+    fontSize: 16,
+    color: '#555',
+    marginBottom: 5,
+  },
+
+  temperatura: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#176B87',
+  },
+
+  botaoLimpar: {
+    marginTop: 15,
+    height: 50,
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: '#176B87',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  textoBotaoLimpar: {
+    color: '#176B87',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+});
+
+
+*********************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Rakely da Silva de Souza
+DADOS: 12 / 08 / 2026
+BIMESTRE: 3º Bimestre
+Descrição: Revisão,  Sistema de Login
+
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  Alert,
+} from 'react-native';
+
+export default function App() {
+  const [usuario, setUsuario] = useState('');
+  const [senha, setSenha] = useState('');
+
+  // Função responsável por verificar o login
+  function entrar() {
+    if (usuario === 'admin' && senha === '1234') {
+      Alert.alert(
+        'Acesso autorizado',
+        'Bem-vindo, admin!'
+      );
+    } else {
+      Alert.alert(
+        'Acesso negado',
+        'Usuário ou senha incorretos.'
+      );
+    }
+  }
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.card}>
+
+        <Text style={styles.titulo}>
+          Acesso ao Sistema
+        </Text>
+
+        <Text style={styles.subtitulo}>
+          Informe seus dados para entrar
+        </Text>
+
+        <Text style={styles.label}>
+          Usuário
+        </Text>
+
+        <TextInput
+          style={styles.input}
+          placeholder="Digite seu usuário"
+          value={usuario}
+          onChangeText={setUsuario}
+          autoCapitalize="none"
+        />
+
+        <Text style={styles.label}>
+          Senha
+        </Text>
+
+        <TextInput
+          style={styles.input}
+          placeholder="Digite sua senha"
+          value={senha}
+          onChangeText={setSenha}
+          secureTextEntry
+        />
+
+        <TouchableOpacity
+          style={styles.botao}
+          onPress={entrar}
+        >
+          <Text style={styles.textoBotao}>
+            ENTRAR
+          </Text>
+        </TouchableOpacity>
+
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#EAF4F4',
+    justifyContent: 'center',
+    padding: 20,
+  },
+
+  card: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 20,
+    padding: 25,
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOpacity: 0.15,
+    shadowRadius: 8,
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+  },
+
+  titulo: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#176B87',
+    textAlign: 'center',
+    marginBottom: 10,
+  },
+
+  subtitulo: {
+    fontSize: 15,
+    color: '#666',
+    textAlign: 'center',
+    marginBottom: 25,
+  },
+
+  label: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 8,
+  },
+
+  input: {
+    height: 50,
+    borderWidth: 1,
+    borderColor: '#B8C8CC',
+    borderRadius: 10,
+    paddingHorizontal: 15,
+    fontSize: 16,
+    marginBottom: 18,
+    backgroundColor: '#FAFAFA',
+  },
+
+  botao: {
+    backgroundColor: '#176B87',
+    height: 52,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 5,
+  },
+
+  textoBotao: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+});
+
+*********************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Rakely da Silva de Souza
+DADOS: 12 / 08 / 2026
+BIMESTRE: 3º Bimestre
+Descrição: Revisão, Simulador de Caixa Eletrônico
+
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  Alert,
+} from 'react-native';
+
+export default function App() {
+  const [valor, setValor] = useState('');
+
+  function verificarSaque() {
+    const valorNumerico = parseFloat(valor.replace(',', '.'));
+
+    if (isNaN(valorNumerico) || valorNumerico <= 0) {
+      Alert.alert('Valor inválido', 'Digite um valor válido.');
+      return;
+    }
+
+    if (valorNumerico % 10 === 0) {
+      Alert.alert('Saque autorizado', 'O valor pode ser sacado.');
+    } else {
+      Alert.alert(
+        'Valor inválido',
+        'O valor do saque deve ser múltiplo de R$ 10.'
+      );
+    }
+  }
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.card}>
+        <Text style={styles.titulo}>Caixa Eletrônico</Text>
+
+        <Text style={styles.label}>Valor do saque</Text>
+
+        <TextInput
+          style={styles.input}
+          placeholder="Ex.: 100"
+          keyboardType="numeric"
+          value={valor}
+          onChangeText={setValor}
+        />
+
+        <TouchableOpacity
+          style={styles.botao}
+          onPress={verificarSaque}
+        >
+          <Text style={styles.textoBotao}>VERIFICAR SAQUE</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#EAF4F4',
+    justifyContent: 'center',
+    padding: 20,
+  },
+
+  card: {
+    backgroundColor: '#FFF',
+    borderRadius: 20,
+    padding: 25,
+    elevation: 5,
+  },
+
+  titulo: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#176B87',
+    textAlign: 'center',
+    marginBottom: 25,
+  },
+
+  label: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 8,
+  },
+
+  input: {
+    height: 50,
+    borderWidth: 1,
+    borderColor: '#B8C8CC',
+    borderRadius: 10,
+    paddingHorizontal: 15,
+    fontSize: 16,
+    marginBottom: 20,
+  },
+
+  botao: {
+    backgroundColor: '#176B87',
+    height: 52,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  textoBotao: {
+    color: '#FFF',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+});
+
+*********************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Rakely da Silva de Souza
+DADOS: 12 / 08 / 2026
+BIMESTRE: 3º Bimestre
+Descrição: Revisão, Aplicativo de Lista de Compras
+
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  FlatList,
+  StyleSheet,
+} from 'react-native';
+
+export default function App() {
+  const [produto, setProduto] = useState('');
+  const [lista, setLista] = useState([]);
+
+  function adicionarProduto() {
+    if (produto.trim() === '') {
+      return;
+    }
+
+    setLista([...lista, produto.trim()]);
+    setProduto('');
+  }
+
+  function limparLista() {
+    setLista([]);
+  }
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.card}>
+        <Text style={styles.titulo}>Lista de Compras</Text>
+
+        <TextInput
+          style={styles.input}
+          placeholder="Digite um produto"
+          value={produto}
+          onChangeText={setProduto}
+        />
+
+        <TouchableOpacity
+          style={styles.botao}
+          onPress={adicionarProduto}
+        >
+          <Text style={styles.textoBotao}>ADICIONAR PRODUTO</Text>
+        </TouchableOpacity>
+
+        <Text style={styles.subtitulo}>
+          Produtos cadastrados:
+        </Text>
+
+        <FlatList
+          data={lista}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item, index }) => (
+            <View style={styles.item}>
+              <Text style={styles.textoItem}>
+                {index + 1}. {item}
+              </Text>
+            </View>
+          )}
+          ListEmptyComponent={
+            <Text style={styles.vazio}>
+              Nenhum produto cadastrado.
+            </Text>
+          }
+        />
+
+        <TouchableOpacity
+          style={styles.botaoLimpar}
+          onPress={limparLista}
+        >
+          <Text style={styles.textoLimpar}>LIMPAR LISTA</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#EAF4F4',
+    padding: 20,
+    justifyContent: 'center',
+  },
+
+  card: {
+    backgroundColor: '#FFF',
+    borderRadius: 20,
+    padding: 25,
+    maxHeight: '90%',
+    elevation: 5,
+  },
+
+  titulo: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#176B87',
+    textAlign: 'center',
+    marginBottom: 20,
+  },
+
+  input: {
+    height: 50,
+    borderWidth: 1,
+    borderColor: '#B8C8CC',
+    borderRadius: 10,
+    paddingHorizontal: 15,
+    marginBottom: 15,
+  },
+
+  botao: {
+    backgroundColor: '#176B87',
+    height: 50,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  textoBotao: {
+    color: '#FFF',
+    fontWeight: 'bold',
+  },
+
+  subtitulo: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginTop: 25,
+    marginBottom: 10,
+  },
+
+  item: {
+    backgroundColor: '#F0F8FA',
+    padding: 14,
+    borderRadius: 8,
+    marginBottom: 8,
+  },
+
+  textoItem: {
+    fontSize: 16,
+  },
+
+  vazio: {
+    textAlign: 'center',
+    color: '#777',
+    margin: 15,
+  },
+
+  botaoLimpar: {
+    marginTop: 15,
+    height: 50,
+    borderWidth: 2,
+    borderColor: '#176B87',
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  textoLimpar: {
+    color: '#176B87',
+    fontWeight: 'bold',
+  },
+});
+
+
+*********************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Rakely da Silva de Souza
+DADOS: 12 / 08 / 2026
+BIMESTRE: 3º Bimestre
+Descrição: Revisão, Contador de Cliques
+
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+} from 'react-native';
+
+export default function App() {
+  const [cliques, setCliques] = useState(0);
+
+  function contarClique() {
+    setCliques(cliques + 1);
+  }
+
+  function reiniciar() {
+    setCliques(0);
+  }
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.card}>
+        <Text style={styles.titulo}>Contador de Cliques</Text>
+
+        <Text style={styles.contador}>
+          {cliques}
+        </Text>
+
+        <Text style={styles.label}>
+          cliques realizados
+        </Text>
+
+        <TouchableOpacity
+          style={styles.botao}
+          onPress={contarClique}
+        >
+          <Text style={styles.textoBotao}>CLIQUE AQUI</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.botaoReiniciar}
+          onPress={reiniciar}
+        >
+          <Text style={styles.textoReiniciar}>
+            REINICIAR CONTADOR
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#EAF4F4',
+    justifyContent: 'center',
+    padding: 20,
+  },
+
+  card: {
+    backgroundColor: '#FFF',
+    borderRadius: 20,
+    padding: 30,
+    alignItems: 'center',
+    elevation: 5,
+  },
+
+  titulo: {
+    fontSize: 27,
+    fontWeight: 'bold',
+    color: '#176B87',
+    marginBottom: 25,
+    textAlign: 'center',
+  },
+
+  contador: {
+    fontSize: 60,
+    fontWeight: 'bold',
+    color: '#176B87',
+  },
+
+  label: {
+    fontSize: 16,
+    color: '#666',
+    marginBottom: 25,
+  },
+
+  botao: {
+    width: '100%',
+    height: 52,
+    backgroundColor: '#176B87',
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  textoBotao: {
+    color: '#FFF',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+
+  botaoReiniciar: {
+    width: '100%',
+    height: 50,
+    borderWidth: 2,
+    borderColor: '#176B87',
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 15,
+  },
+
+  textoReiniciar: {
+    color: '#176B87',
+    fontWeight: 'bold',
+  },
+});
+
+*********************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Rakely da Silva de Souza
+DADOS: 12 / 08 / 2026
+BIMESTRE: 3º Bimestre
+Descrição: Revisão, Escolha de Plano de Internet
+
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+} from 'react-native';
+
+export default function App() {
+  const [planoSelecionado, setPlanoSelecionado] = useState('');
+  const [resultado, setResultado] = useState(null);
+
+  const planos = {
+    Básico: {
+      valor: 'R$ 49,90',
+      beneficios: '100 Mbps, Wi-Fi e suporte online.',
+    },
+
+    Intermediário: {
+      valor: 'R$ 79,90',
+      beneficios: '300 Mbps, Wi-Fi e suporte prioritário.',
+    },
+
+    Premium: {
+      valor: 'R$ 119,90',
+      beneficios: '600 Mbps, Wi-Fi e suporte exclusivo.',
+    },
+  };
+
+  function contratarPlano() {
+    if (planoSelecionado === '') {
+      return;
+    }
+
+    setResultado({
+      nome: planoSelecionado,
+      valor: planos[planoSelecionado].valor,
+      beneficios: planos[planoSelecionado].beneficios,
+    });
+  }
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.card}>
+        <Text style={styles.titulo}>
+          Planos de Internet
+        </Text>
+
+        <Text style={styles.subtitulo}>
+          Escolha seu plano:
+        </Text>
+
+        {Object.keys(planos).map((plano) => (
+          <TouchableOpacity
+            key={plano}
+            style={[
+              styles.opcao,
+              planoSelecionado === plano &&
+                styles.opcaoSelecionada,
+            ]}
+            onPress={() => setPlanoSelecionado(plano)}
+          >
+            <Text
+              style={[
+                styles.textoOpcao,
+                planoSelecionado === plano &&
+                  styles.textoSelecionado,
+              ]}
+            >
+              {plano}
+            </Text>
+          </TouchableOpacity>
+        ))}
+
+        <TouchableOpacity
+          style={styles.botao}
+          onPress={contratarPlano}
+        >
+          <Text style={styles.textoBotao}>
+            VER PLANO
+          </Text>
+        </TouchableOpacity>
+
+        {resultado && (
+          <View style={styles.resultado}>
+            <Text style={styles.nomePlano}>
+              {resultado.nome}
+            </Text>
+
+            <Text style={styles.valor}>
+              {resultado.valor} / mês
+            </Text>
+
+            <Text style={styles.beneficios}>
+              {resultado.beneficios}
+            </Text>
+          </View>
+        )}
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#EAF4F4',
+    justifyContent: 'center',
+    padding: 20,
+  },
+
+  card: {
+    backgroundColor: '#FFF',
+    borderRadius: 20,
+    padding: 25,
+    elevation: 5,
+  },
+
+  titulo: {
+    fontSize: 27,
+    fontWeight: 'bold',
+    color: '#176B87',
+    textAlign: 'center',
+    marginBottom: 10,
+  },
+
+  subtitulo: {
+    fontSize: 16,
+    marginBottom: 15,
+    color: '#555',
+  },
+
+  opcao: {
+    height: 50,
+    borderWidth: 1,
+    borderColor: '#B8C8CC',
+    borderRadius: 10,
+    justifyContent: 'center',
+    paddingHorizontal: 15,
+    marginBottom: 10,
+  },
+
+  opcaoSelecionada: {
+    backgroundColor: '#176B87',
+  },
+
+  textoOpcao: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#333',
+  },
+
+  textoSelecionado: {
+    color: '#FFF',
+  },
+
+  botao: {
+    backgroundColor: '#176B87',
+    height: 52,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 10,
+  },
+
+  textoBotao: {
+    color: '#FFF',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+
+  resultado: {
+    marginTop: 20,
+    backgroundColor: '#F0F8FA',
+    borderRadius: 12,
+    padding: 20,
+    alignItems: 'center',
+  },
+
+  nomePlano: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#176B87',
+  },
+
+  valor: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginTop: 8,
+  },
+
+  beneficios: {
+    textAlign: 'center',
+    marginTop: 8,
+    color: '#555',
+  },
+});
+
+*********************************************************************
+INSTITUTO FEDERAL DO AMAZONAS – IFAM CAMPUS IRANDUBA
+DISCIPLINA: Dispositivos Móveis
+PROFESSOR: Ranyere Lima
+ALUNO(A): Rakely da Silva de Souza
+DADOS: 12 / 08 / 2026
+BIMESTRE: 3º Bimestre
+Descrição: Revisão, Aplicativo de Controle Escolar
+
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  Alert,
+} from 'react-native';
+
+export default function App() {
+  const [nota1, setNota1] = useState('');
+  const [nota2, setNota2] = useState('');
+  const [nota3, setNota3] = useState('');
+  const [resultado, setResultado] = useState(null);
+
+  function calcularMedia() {
+    const n1 = parseFloat(nota1.replace(',', '.'));
+    const n2 = parseFloat(nota2.replace(',', '.'));
+    const n3 = parseFloat(nota3.replace(',', '.'));
+
+    if (
+      isNaN(n1) ||
+      isNaN(n2) ||
+      isNaN(n3) ||
+      n1 < 0 ||
+      n2 < 0 ||
+      n3 < 0 ||
+      n1 > 10 ||
+      n2 > 10 ||
+      n3 > 10
+    ) {
+      Alert.alert(
+        'Atenção',
+        'Digite três notas válidas entre 0 e 10.'
+      );
+      return;
+    }
+
+    const media = (n1 + n2 + n3) / 3;
+
+    let situacao;
+
+    if (media >= 7) {
+      situacao = 'Aprovado';
+    } else if (media >= 5) {
+      situacao = 'Recuperação';
+    } else {
+      situacao = 'Reprovado';
+    }
+
+    setResultado({
+      media: media.toFixed(2),
+      situacao: situacao,
+    });
+  }
+
+  function limparCampos() {
+    setNota1('');
+    setNota2('');
+    setNota3('');
+    setResultado(null);
+  }
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.card}>
+        <Text style={styles.titulo}>
+          Controle Escolar
+        </Text>
+
+        <Text style={styles.subtitulo}>
+          Digite as três notas do aluno
+        </Text>
+
+        <TextInput
+          style={styles.input}
+          placeholder="Nota 1"
+          keyboardType="decimal-pad"
+          value={nota1}
+          onChangeText={setNota1}
+        />
+
+        <TextInput
+          style={styles.input}
+          placeholder="Nota 2"
+          keyboardType="decimal-pad"
+          value={nota2}
+          onChangeText={setNota2}
+        />
+
+        <TextInput
+          style={styles.input}
+          placeholder="Nota 3"
+          keyboardType="decimal-pad"
+          value={nota3}
+          onChangeText={setNota3}
+        />
+
+        <TouchableOpacity
+          style={styles.botao}
+          onPress={calcularMedia}
+        >
+          <Text style={styles.textoBotao}>
+            CALCULAR MÉDIA
+          </Text>
+        </TouchableOpacity>
+
+        {resultado && (
+          <View style={styles.resultado}>
+            <Text style={styles.media}>
+              Média: {resultado.media}
+            </Text>
+
+            <Text style={styles.situacao}>
+              Situação: {resultado.situacao}
+            </Text>
+          </View>
+        )}
+
+        <TouchableOpacity
+          style={styles.botaoLimpar}
+          onPress={limparCampos}
+        >
+          <Text style={styles.textoLimpar}>
+            LIMPAR CAMPOS
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#EAF4F4',
+    justifyContent: 'center',
+    padding: 20,
+  },
+
+  card: {
+    backgroundColor: '#FFF',
+    borderRadius: 20,
+    padding: 25,
+    elevation: 5,
+  },
+
+  titulo: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#176B87',
+    textAlign: 'center',
+    marginBottom: 10,
+  },
+
+  subtitulo: {
+    textAlign: 'center',
+    color: '#666',
+    marginBottom: 20,
+  },
+
+  input: {
+    height: 50,
+    borderWidth: 1,
+    borderColor: '#B8C8CC',
+    borderRadius: 10,
+    paddingHorizontal: 15,
+    fontSize: 16,
+    marginBottom: 12,
+  },
+
+  botao: {
+    backgroundColor: '#176B87',
+    height: 52,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 5,
+  },
+
+  textoBotao: {
+    color: '#FFF',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+
+  resultado: {
+    marginTop: 20,
+    backgroundColor: '#F0F8FA',
+    borderRadius: 12,
+    padding: 20,
+    alignItems: 'center',
+  },
+
+  media: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#176B87',
+  },
+
+  situacao: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginTop: 8,
+  },
+
+  botaoLimpar: {
+    height: 50,
+    borderWidth: 2,
+    borderColor: '#176B87',
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 15,
+  },
+
+  textoLimpar: {
+    color: '#176B87',
+    fontWeight: 'bold',
+  },
+});
